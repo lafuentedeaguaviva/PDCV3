@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>Modern Teacher Dashboard</title><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "primary": "#3b82f6", "secondary": "#1e40af", "accent": "#60a5fa", "background-light": "#f8fafc", "card-light": "rgba(255, 255, 255, 0.8)" }, fontFamily: { "display": ["Outfit", "sans-serif"] }, borderRadius: { "DEFAULT": "1rem", "lg": "1.5rem", "xl": "2rem", "full": "9999px" }, }, }, }</script><style>.glass-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.4); box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07); }.bento-gradient-1 { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); }.bento-gradient-2 { background: linear-gradient(135deg, #3b82f6 0%, #93c5fd 100%); }.glow-blue { box-shadow: 0 0 20px rgba(59, 130, 246, 0.2); }.glow-teal { box-shadow: 0 0 20px rgba(30, 58, 138, 0.2); }.glow-lime { box-shadow: 0 0 20px rgba(96, 165, 250, 0.2); }</style></head>
+<body class="font-display bg-slate-50 text-slate-900 min-h-screen">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="w-24 lg:w-72 flex-shrink-0 flex flex-col border-r p-6 transition-all duration-300 bg-slate-900"><div class="flex items-center gap-3 mb-12 px-2"><div class="size-12 bento-gradient-1 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-blue-900/30"><span class="material-symbols-rounded text-3xl">lightbulb</span></div><span class="font-black text-2xl hidden lg:block tracking-tight bg-clip-text text-transparent from-sky-600 to-teal-600 text-white">EduNext</span></div><nav class="flex-1 space-y-3"><a class="flex items-center gap-4 px-4 py-4 rounded-2xl bento-gradient-1 text-white shadow-xl shadow-blue-900/20" href="#"><span class="material-symbols-rounded">grid_view</span><span class="font-bold hidden lg:block">Dashboard</span></a><a class="flex items-center gap-4 px-4 py-4 rounded-2xl hover:shadow-sm transition-all text-slate-300 hover:bg-white/10" href="#"><span class="material-symbols-rounded">auto_stories</span><span class="font-bold hidden lg:block">Mis Clases</span></a><a class="flex items-center gap-4 px-4 py-4 rounded-2xl hover:shadow-sm transition-all text-slate-300 hover:bg-white/10" href="#"><span class="material-symbols-rounded">task</span><span class="font-bold hidden lg:block">PDC Manager</span></a><a class="flex items-center gap-4 px-4 py-4 rounded-2xl hover:shadow-sm transition-all text-slate-300 hover:bg-white/10" href="#"><span class="material-symbols-rounded">auto_awesome</span><span class="font-bold hidden lg:block">IA Assist</span></a></nav><div class="mt-auto"><div class="p-4 rounded-2xl flex items-center gap-3 cursor-pointer hover:scale-105 transition-transform bg-white/5 border border-white/10"><img alt="Profile" class="size-10 rounded-full object-cover ring-2 ring-blue-500/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtMzzw0MwuYAeJzSGiBxdRUZ4-oGMeZFppnIFcyLw4JI91OPy7GfOfcSG_ZsV4UsQnz1LTLyld93FU5bq25jbS3k7qSlJOYY_IT3N8fZ7HRaC8Ka_t9yLwyv0BIXXxUjWpKHprCTQVcH0FKFg2MT4uhlomMpBa_ZmlrP3ZwKCBJwTC6hTXkdg7GfbGwSq2mUZmmqhLrDaCcq-_3Hb6gPRzAcYFUddAInX4UjOFxgxKE_mM6tMjj2-lHZQ5kVkN4Zn0nBN0P1KxzjPq"/><div class="hidden lg:block overflow-hidden"><p class="text-sm font-black truncate text-white">Elena Ruiz</p><p class="text-[10px] font-bold uppercase tracking-widest text-blue-400">Pro Tier</p></div></div></div></aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col overflow-hidden">
+<!-- Top Header -->
+<header class="h-20 flex items-center justify-between px-10 bg-white/30 backdrop-blur-xl border-b border-white/20 sticky top-0 z-50"><div class="flex items-center gap-6"><div class="relative group"><span class="material-symbols-rounded absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 transition-colors group-focus-within:text-sky-500">search</span><input class="bg-white/50 border-none rounded-2xl py-3 pl-12 pr-6 text-sm w-80 focus:ring-4 placeholder:font-medium transition-all focus:ring-sky-500/10" placeholder="Buscar lo que sea..." type="text"/></div></div><div class="flex items-center gap-4"><button class="size-12 rounded-2xl flex items-center justify-center bg-white shadow-sm text-slate-500 hover:text-purple-600 transition-colors"><span class="material-symbols-rounded group-focus-within:text-sky-500">notifications</span></button><button class="bento-gradient-1 text-white px-6 py-3 rounded-2xl font-bold flex items-center gap-2 shadow-lg hover:scale-105 transition-all shadow-blue-800/30"><span class="material-symbols-rounded group-focus-within:text-sky-500">add_circle</span><span>Nuevo Plan</span></button></div></header>
+<!-- Content Scroll Area -->
+<div class="flex-1 overflow-y-auto p-8 space-y-8">
+<!-- Welcome Banner -->
+<section class="relative overflow-hidden rounded-3xl bento-gradient-1 text-white p-10 min-h-[240px] flex items-center shadow-2xl shadow-blue-900/20"><div class="relative z-10 max-w-2xl"><div class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold mb-6 border border-white/20"><span class="animate-bounce">✨</span> ¡Tu progreso vuela esta semana!</div><h1 class="text-4xl md:text-5xl font-black tracking-tight mb-4 leading-tight">¡Hola de nuevo, Elena! 💡</h1><p class="text-white/80 text-lg font-medium mb-8 max-w-lg">Tienes <span class="text-white font-black underline underline-offset-4 decoration-blue-300">3 desafíos</span> esperando revisión. ¡Tus alumnos están on fire!</p><div class="flex gap-4"><button class="bg-white px-8 py-3.5 rounded-2xl font-black text-sm shadow-xl hover:bg-slate-50 transition-colors text-blue-900">REVISAR AHORA</button><button class="bg-white/10 backdrop-blur-md text-white px-8 py-3.5 rounded-2xl font-black text-sm border border-white/30 hover:bg-white/20 transition-colors">VER MÉTRICAS</button></div></div><div class="absolute -right-20 -top-20 size-80 bg-white/10 rounded-full blur-3xl animate-pulse"></div><div class="absolute right-12 bottom-0 h-4/5 hidden lg:block opacity-20 pointer-events-none"><span class="material-symbols-rounded text-[200px]">auto_awesome</span></div></section>
+<!-- Stats Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+<div class="glass p-6 rounded-xl flex flex-col justify-between shadow-sm">
+<span class="text-slate-500 text-xs font-bold uppercase tracking-wider">Créditos Disponibles</span>
+<div class="flex items-baseline gap-2 mt-2">
+<span class="text-3xl font-black text-primary tracking-tight">120</span>
+<span class="text-xs text-green-500 font-bold">+12%</span>
+</div>
+<div class="h-1 bg-slate-100 dark:bg-slate-800 rounded-full mt-4 overflow-hidden">
+<div class="h-full bg-primary w-3/4 rounded-full"></div>
+</div>
+</div>
+<!-- PDC Status Summary -->
+<div class="glass p-4 rounded-xl flex items-center gap-4 shadow-sm">
+<div class="size-12 rounded-xl bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center text-amber-600 bg-blue-50 text-blue-500">
+<span class="material-symbols-outlined">edit_note</span>
+</div>
+<div>
+<p class="text-2xl font-black">4</p>
+<p class="text-xs text-slate-500 font-medium">Borradores</p>
+</div>
+</div>
+<div class="glass p-4 rounded-xl flex items-center gap-4 shadow-sm">
+<div class="size-12 rounded-xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600">
+<span class="material-symbols-outlined">visibility</span>
+</div>
+<div>
+<p class="text-2xl font-black">2</p>
+<p class="text-xs text-slate-500 font-medium">En Revisión</p>
+</div>
+</div>
+<div class="glass p-4 rounded-xl flex items-center gap-4 shadow-sm">
+<div class="size-12 rounded-xl bg-rose-100 dark:bg-rose-900/30 flex items-center justify-center text-rose-600 bg-sky-100 text-sky-600">
+<span class="material-symbols-outlined">error_outline</span>
+</div>
+<div>
+<p class="text-2xl font-black">1</p>
+<p class="text-xs text-slate-500 font-medium">Observados</p>
+</div>
+</div>
+<div class="glass p-4 rounded-xl flex items-center gap-4 shadow-sm border-l-4 border-l-blue-600">
+<div class="size-12 rounded-xl bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-green-600 bg-blue-100 text-blue-600">
+<span class="material-symbols-outlined">verified</span>
+</div>
+<div>
+<p class="text-2xl font-black">15</p>
+<p class="text-xs text-slate-500 font-medium">Aprobados</p>
+</div>
+</div>
+</div>
+<!-- Main Grid: Work Areas + Sidebar info -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Left: Work Areas -->
+<div class="lg:col-span-2 space-y-6"><div class="flex items-center justify-between px-2"><h3 class="text-2xl font-black tracking-tight text-slate-800">Mis Mundos <span class="text-slate-400 text-base font-medium ml-2">(Areas de Trabajo)</span></h3><button class="font-black text-sm hover:underline">EXPLORAR TODO</button></div><div class="grid grid-cols-1 md:grid-cols-2 gap-8"><!-- Card 1 --><div class="group glass-card p-8 rounded-[2.5rem] hover:shadow-2xl transition-all duration-500 hover:-rotate-1"><div class="flex justify-between items-start mb-8"><div class="size-16 bg-indigo-50 rounded-2xl flex items-center justify-center text-4xl transform group-hover:scale-110 transition-transform">🧮</div><div class="relative size-16"><svg class="size-full -rotate-90" viewbox="0 0 36 36"><circle class="stroke-slate-100" cx="18" cy="18" fill="none" r="16" stroke-width="4"></circle><circle class="stroke-indigo-500" cx="18" cy="18" fill="none" r="16" stroke-dasharray="100" stroke-dashoffset="25" stroke-linecap="round" stroke-width="4"></circle></svg><div class="absolute inset-0 flex items-center justify-center"><span class="text-xs font-black">75%</span></div></div></div><h4 class="text-2xl font-black mb-1 text-slate-800">Matemáticas Pro</h4><p class="text-sm text-slate-400 font-bold mb-8 uppercase tracking-widest">10mo • Sección B</p><div class="flex items-center justify-between"><div class="flex -space-x-3"><div class="size-9 rounded-full border-4 border-white bg-slate-200"></div><div class="size-9 rounded-full border-4 border-white bg-slate-300"></div><div class="size-9 rounded-full border-4 border-white bento-gradient-1 flex items-center justify-center text-white text-[10px] font-black">+28</div></div><button class="bento-gradient-1 text-white px-6 py-3 rounded-2xl text-xs font-black shadow-lg opacity-0 group-hover:opacity-100 transition-all shadow-blue-500/20">IR AHORA</button></div></div><!-- Card 2 --><div class="group glass-card p-8 rounded-[2.5rem] hover:shadow-2xl transition-all duration-500 hover:rotate-1"><div class="flex justify-between items-start mb-8"><div class="size-16 bg-emerald-50 rounded-2xl flex items-center justify-center text-4xl transform group-hover:scale-110 transition-transform">🧪</div><div class="relative size-16"><svg class="size-full -rotate-90" viewbox="0 0 36 36"><circle class="stroke-slate-100" cx="18" cy="18" fill="none" r="16" stroke-width="4"></circle><circle class="stroke-emerald-500" cx="18" cy="18" fill="none" r="16" stroke-dasharray="100" stroke-dashoffset="60" stroke-linecap="round" stroke-width="4"></circle></svg><div class="absolute inset-0 flex items-center justify-center"><span class="text-xs font-black">40%</span></div></div></div><h4 class="text-2xl font-black mb-1 text-slate-800">Física Lab</h4><p class="text-sm text-slate-400 font-bold mb-8 uppercase tracking-widest">11vo • General</p><div class="flex items-center justify-between"><div class="flex -space-x-3"><div class="size-9 rounded-full border-4 border-white bg-slate-200"></div><div class="size-9 rounded-full border-4 border-white bg-slate-300"></div><div class="size-9 rounded-full border-4 border-white bento-gradient-2 flex items-center justify-center text-white text-[10px] font-black">+15</div></div><button class="bento-gradient-2 text-white px-6 py-3 rounded-2xl text-xs font-black shadow-lg shadow-cyan-500/20 opacity-0 group-hover:opacity-100 transition-all">IR AHORA</button></div></div></div><div class="glass-card p-8 rounded-[2.5rem]"><div class="flex items-center justify-between mb-6"><h3 class="font-black text-xl">Level Up Semanal 🏆</h3><div class="flex items-center gap-2 font-black"><span class="material-symbols-rounded">bolt</span> 82%</div></div><div class="relative w-full bg-slate-100 h-6 rounded-full overflow-hidden mb-4 p-1"><div class="h-full bento-gradient-2 rounded-full relative"><div class="absolute inset-0 bg-white/20 animate-pulse"></div></div></div><div class="flex justify-between items-center"><p class="text-xs text-slate-400 font-bold">Casi llegas a la meta de la temporada</p><div class="px-4 py-1.5 bg-cyan-100 rounded-full text-[10px] font-black uppercase">Faltan 18%</div></div></div></div>
+<!-- Right: Contextual Panel -->
+<div class="space-y-6">
+<!-- Mini Calendar Widget -->
+<div class="bg-white dark:bg-background-dark rounded-xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between mb-6">
+<h4 class="font-bold">Calendario Académico</h4>
+<span class="text-primary material-symbols-outlined cursor-pointer">calendar_today</span>
+</div>
+<div class="grid grid-cols-7 gap-2 text-center text-[10px] font-bold text-slate-400 mb-2">
+<div>D</div><div>L</div><div>M</div><div>X</div><div>J</div><div>V</div><div>S</div>
+</div>
+<div class="grid grid-cols-7 gap-1 text-center text-sm">
+<div class="py-1 text-slate-300">28</div>
+<div class="py-1 text-slate-300">29</div>
+<div class="py-1 text-slate-300">30</div>
+<div class="py-1 font-medium">1</div>
+<div class="py-1 font-medium">2</div>
+<div class="py-1 bg-primary text-white rounded-lg font-bold">3</div>
+<div class="py-1 font-medium">4</div>
+<!-- Rest of month simplified -->
+<div class="py-1 font-medium">5</div>
+<div class="py-1 font-medium">6</div>
+<div class="py-1 font-medium relative">7<span class="absolute bottom-1 left-1/2 -translate-x-1/2 size-1 bg-primary rounded-full"></span></div>
+<div class="py-1 font-medium">8</div>
+<div class="py-1 font-medium">9</div>
+<div class="py-1 font-medium">10</div>
+<div class="py-1 font-medium">11</div>
+</div>
+</div>
+<!-- Recent Activity -->
+<div class="space-y-4">
+<h4 class="font-bold px-2">Actividad Reciente</h4>
+<div class="space-y-3">
+<div class="flex gap-4 p-3 rounded-xl bg-white dark:bg-background-dark border border-slate-200 dark:border-slate-800 hover:border-primary/30 transition-colors">
+<div class="size-10 rounded-lg bg-green-50 dark:bg-green-900/20 flex items-center justify-center text-green-600 flex-shrink-0 bg-blue-50 text-blue-600">
+<span class="material-symbols-outlined text-xl">chat</span>
+</div>
+<div>
+<p class="text-sm font-bold">Nuevo comentario</p>
+<p class="text-xs text-slate-500">PDC Física - Coord. Académica</p>
+<p class="text-[10px] text-slate-400 mt-1">Hace 15 min</p>
+</div>
+</div>
+<div class="flex gap-4 p-3 rounded-xl bg-white dark:bg-background-dark border border-slate-200 dark:border-slate-800 hover:border-primary/30 transition-colors">
+<div class="size-10 rounded-lg bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-blue-600 flex-shrink-0 bg-sky-50 text-sky-600">
+<span class="material-symbols-outlined text-xl">payments</span>
+</div>
+<div>
+<p class="text-sm font-bold">Recarga de créditos</p>
+<p class="text-xs text-slate-500">Exitoso - +50 créditos</p>
+<p class="text-[10px] text-slate-400 mt-1">Hace 2 horas</p>
+</div>
+</div>
+<div class="flex gap-4 p-3 rounded-xl bg-white dark:bg-background-dark border border-slate-200 dark:border-slate-800 hover:border-primary/30 transition-colors">
+<div class="size-10 rounded-lg bg-amber-50 dark:bg-amber-900/20 flex items-center justify-center text-amber-600 flex-shrink-0 bg-indigo-50 text-indigo-600">
+<span class="material-symbols-outlined text-xl">assignment_late</span>
+</div>
+<div>
+<p class="text-sm font-bold">PDC Observado</p>
+<p class="text-xs text-slate-500">Matemáticas 10mo (Revisar)</p>
+<p class="text-[10px] text-slate-400 mt-1">Ayer, 4:30 PM</p>
+</div>
+</div>
+</div>
+<button class="w-full py-2 text-xs font-bold text-slate-500 transition-colors">Ver todo el historial</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

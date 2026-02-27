@@ -1,0 +1,149 @@
+﻿id;nombre;grado_id
+1101;Cosmos y Pensamiento;11
+1102;Comunidad y Sociedad;11
+1103;Vida Tierra Territorio;11
+1104;Ciencia Tecnología y Producción;11
+1201;Cosmos y Pensamiento;12
+1202;Comunidad y Sociedad;12
+1203;Vida Tierra Territorio;12
+1204;Ciencia Tecnología y Producción;12
+2101;Comunicación y Lenguaje;21
+2102;Ciencias Sociales;21
+2103;Artes Plásticas y Visuales;21
+2104;Educación Física y Deportes;21
+2105;Educación Musical;21
+2106;Matemática;21
+2107;Técnica Tecnológica;21
+2108;Ciencias Naturales;21
+2109;Valores Espiritualidad y Religiones;21
+2201;Comunicación y Lenguaje;22
+2202;Ciencias Sociales;22
+2203;Artes Plásticas y Visuales;22
+2204;Educación Física y Deportes;22
+2205;Educación Musical;22
+2206;Matemática;22
+2207;Técnica Tecnológica;22
+2208;Ciencias Naturales;22
+2209;Valores Espiritualidad y Religiones;22
+2301;Comunicación y Lenguaje;23
+2302;Ciencias Sociales;23
+2303;Artes Plásticas y Visuales;23
+2304;Educación Física y Deportes;23
+2305;Educación Musical;23
+2306;Matemática;23
+2307;Técnica Tecnológica;23
+2308;Ciencias Naturales;23
+2309;Valores Espiritualidad y Religiones;23
+2401;Comunicación y Lenguaje;24
+2402;Ciencias Sociales;24
+2403;Artes Plásticas y Visuales;24
+2404;Educación Física y Deportes;24
+2405;Educación Musical;24
+2406;Matemática;24
+2407;Técnica Tecnológica;24
+2408;Ciencias Naturales;24
+2409;Valores Espiritualidad y Religiones;24
+2501;Comunicación y Lenguaje;25
+2502;Ciencias Sociales;25
+2503;Artes Plásticas y Visuales;25
+2504;Educación Física y Deportes;25
+2505;Educación Musical;25
+2506;Matemática;25
+2507;Técnica Tecnológica;25
+2508;Ciencias Naturales;25
+2509;Valores Espiritualidad y Religiones;25
+2601;Comunicación y Lenguaje;26
+2602;Ciencias Sociales;26
+2603;Artes Plásticas y Visuales;26
+2604;Educación Física y Deportes;26
+2605;Educación Musical;26
+2606;Matemática;26
+2607;Técnica Tecnológica;26
+2608;Ciencias Naturales;26
+2609;Valores Espiritualidad y Religiones;26
+3101;Biología – Geografía;31
+3201;Biología – Geografía;32
+3301;Biología – Geografía;33
+3401;Biología – Geografía;34
+3501;Biología – Geografía;35
+3601;Biología – Geografía;36
+3302;Física;33
+3402;Física;34
+3502;Física;35
+3602;Física;36
+3303;Química;33
+3403;Química;34
+3503;Química;35
+3603;Química;36
+3104;Lenguaje y Comunicación;31
+3204;Lenguaje y Comunicación;32
+3304;Lenguaje y Comunicación;33
+3404;Lenguaje y Comunicación;34
+3504;Lenguaje y Comunicación;35
+3604;Lenguaje y Comunicación;36
+3105;Lengua Extranjera;31
+3205;Lengua Extranjera;32
+3305;Lengua Extranjera;33
+3405;Lengua Extranjera;34
+3505;Lengua Extranjera;35
+3605;Lengua Extranjera;36
+3106;Ciencias Sociales;31
+3206;Ciencias Sociales;32
+3306;Ciencias Sociales;33
+3406;Ciencias Sociales;34
+3506;Ciencias Sociales;35
+3606;Ciencias Sociales;36
+3107;Artes Plásticas y Visuales;31
+3207;Artes Plásticas y Visuales;32
+3307;Artes Plásticas y Visuales;33
+3407;Artes Plásticas y Visuales;34
+3507;Artes Plásticas y Visuales;35
+3607;Artes Plásticas y Visuales;36
+3108;Cosmovisiones Filosofía y Psicología;31
+3208;Cosmovisiones Filosofía y Psicología;32
+3308;Cosmovisiones Filosofía y Psicología;33
+3408;Cosmovisiones Filosofía y Psicología;34
+3508;Cosmovisiones Filosofía y Psicología;35
+3608;Cosmovisiones Filosofía y Psicología;36
+3109;Valores Espiritualidad y Religiones;31
+3209;Valores Espiritualidad y Religiones;32
+3309;Valores Espiritualidad y Religiones;33
+3409;Valores Espiritualidad y Religiones;34
+3509;Valores Espiritualidad y Religiones;35
+3609;Valores Espiritualidad y Religiones;36
+3110;Matemática;31
+3210;Matemática;32
+3310;Matemática;33
+3410;Matemática;34
+3510;Matemática;35
+3610;Matemática;36
+3111;Técnica Tecnológica General;31
+3211;Técnica Tecnológica General;32
+3311;Técnica Tecnológica General;33
+3112;Educación Musical;31
+3212;Educación Musical;32
+3312;Educación Musical;33
+3412;Educación Musical;34
+3512;Educación Musical;35
+3612;Educación Musical;36
+3113;Educación Física y Deportes;31
+3213;Educación Física y Deportes;32
+3313;Educación Física y Deportes;33
+3413;Educación Física y Deportes;34
+3513;Educación Física y Deportes;35
+3613;Educación Física y Deportes;36
+3414;Gastronomía;34
+3514;Gastronomía;35
+3614;Gastronomía;36
+3415;Textiles y Confecciones;34
+3515;Textiles y Confecciones;35
+3615;Textiles y Confecciones;36
+3416;Técnica Tecnológica Especializada - Sistemas;34
+3516;Técnica Tecnológica Especializada - Sistemas;35
+3616;Técnica Tecnológica Especializada - Sistemas;36
+3417;Técnica Tecnológica Especializada - Carpintería en Madera y Metal;34
+3517;Técnica Tecnológica Especializada - Carpintería en Madera y Metal;35
+3617;Técnica Tecnológica Especializada - Carpintería en Madera y Metal;36
+3418;Mecánica Automotriz;34
+3518;Mecánica Automotriz;35
+3618;Mecánica Automotriz;36

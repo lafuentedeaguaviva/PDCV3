@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+@layer theme {
+  :root {
+    --background: #f8fafc;
+    --foreground: #0f172a;
+    
+    /* EduPlan Pro Tokens */
+    --color-primary: #3b82f6;
+    --color-primary-600: #2563eb;
+    --color-primary-700: #1d4ed8;
+    --color-secondary: #475569;
+    --color-accent: #6366f1;
+    --color-success: #10b981;
+    --color-warning: #f59e0b;
+    --color-danger: #ef4444;
+    
+    --color-card: rgba(255, 255, 255, 0.8);
+    --color-border: rgba(226, 232, 240, 0.8);
+    
+    --radius-sm: 0.5rem;
+    --radius-default: 1rem;
+    --radius-lg: 1.5rem;
+    --radius-xl: 2rem;
+    
+    --shadow-soft: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+    --shadow-medium: 0 10px 30px -4px rgba(0, 0, 0, 0.08);
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--color-primary);
+  --color-primary-600: var(--color-primary-600);
+  --color-primary-700: var(--color-primary-700);
+  --color-secondary: var(--color-secondary);
+  --color-accent: var(--color-accent);
+  --color-success: var(--color-success);
+  --color-warning: var(--color-warning);
+  --color-danger: var(--color-danger);
+  
+  --font-display: "Outfit", sans-serif;
+  
+  --radius-sm: var(--radius-sm);
+  --radius-default: var(--radius-default);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  
+  --shadow-soft: var(--shadow-soft);
+  --shadow-medium: var(--shadow-medium);
+}
+
+@layer utilities {
+  .glass-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .glass-surface {
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+
+  .bento-gradient-1 {
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+  }
+
+  .bento-gradient-2 {
+    background: linear-gradient(135deg, #3b82f6 0%, #93c5fd 100%);
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-display);
+}
