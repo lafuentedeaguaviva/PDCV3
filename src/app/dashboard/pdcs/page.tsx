@@ -8,9 +8,11 @@ import { PdcCard } from '@/components/ui/pdc-card';
 import { Skeleton } from '@/components/ui/atoms';
 import { Feedback } from '@/components/ui/feedback';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { PDC } from '@/types';
 
 export default function PDCsPage() {
+    const router = useRouter();
     const [pdcs, setPdcs] = useState<PDC[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -53,6 +55,10 @@ export default function PDCsPage() {
             console.error('Error deleting PDC:', err);
             alert('No se pudo eliminar el plan. Intenta de nuevo.');
         }
+    };
+
+    const handleResume = (id: string) => {
+        router.push(`/dashboard/pdcs/new?id=${id}`);
     };
 
     // Early Return Pattern for Loading State
@@ -103,7 +109,12 @@ export default function PDCsPage() {
             ) : (
                 <div className="grid gap-4">
                     {pdcs.map(pdc => (
-                        <PdcCard key={pdc.id} pdc={pdc} onDelete={handleDelete} />
+                        <PdcCard
+                            key={pdc.id}
+                            pdc={pdc}
+                            onDelete={handleDelete}
+                            onResume={handleResume}
+                        />
                     ))}
                 </div>
             )}

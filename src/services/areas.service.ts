@@ -1,7 +1,16 @@
+/**
+ * Model: AreasService
+ * 
+ * Este servicio gestiona las Áreas de Trabajo, que representan la relación entre un
+ * Profesor, una Unidad Educativa y un Área de Conocimiento.
+ */
+
 import { supabase } from '@/lib/supabase';
 import { ServiceResponse, AreaTrabajo } from '@/types';
-export type { AreaTrabajo };
 
+/**
+ * Catálogos básicos para la configuración de áreas.
+ */
 export interface Catalogs {
     unidades: { id: number; nombre: string; }[];
     areas: { id: number; nombre: string; }[];
@@ -10,6 +19,11 @@ export interface Catalogs {
 }
 
 export const AreasService = {
+    /**
+     * Obtiene todas las áreas de trabajo asociadas a un profesor.
+     * @param {string} userId - ID del profesor (UUID de Auth).
+     * @returns {Promise<AreaTrabajo[]>} Lista de áreas con paralelos cargados.
+     */
     async getAreas(userId: string): Promise<AreaTrabajo[]> {
         const { data, error } = await supabase
             .from('areas_trabajo')
@@ -52,6 +66,10 @@ export const AreasService = {
         return areasWithParalelos as unknown as AreaTrabajo[];
     },
 
+    /**
+     * Obtiene los catálogos necesarios para configurar un área.
+     * @returns {Promise<Catalogs>} Objeto con listas de unidades, áreas, turnos y paralelos.
+     */
     async getCatalogs(): Promise<Catalogs> {
         const [unidades, areas, turnos, paralelos] = await Promise.all([
             supabase.from('unidades_educativas').select('id, nombre'),
@@ -68,6 +86,11 @@ export const AreasService = {
         };
     },
 
+    /**
+     * Crea una nueva área de trabajo para un profesor.
+     * @param {Object} data - Datos de creación.
+     * @returns {Promise<ServiceResponse<any>>} El área creada o el error.
+     */
     async createArea(data: {
         profesor_id: string;
         unidad_educativa_id: number;
@@ -112,6 +135,12 @@ export const AreasService = {
         return { data: area, error: null, success: true };
     },
 
+    /**
+     * Actualiza la configuración de un área de trabajo existente.
+     * @param {string} id - ID del área.
+     * @param {Object} data - Nuevos datos.
+     * @returns {Promise<ServiceResponse<any>>} El área actualizada o el error.
+     */
     async updateArea(id: string, data: {
         unidad_educativa_id: number;
         area_conocimiento_id: number;
@@ -163,6 +192,11 @@ export const AreasService = {
         return { data: { id, ...data }, error: null, success: true };
     },
 
+    /**
+     * Elimina un área de trabajo permanentemente.
+     * @param {string} id - ID del área.
+     * @returns {Promise<ServiceResponse<any>>} Estado de éxito.
+     */
     async deleteArea(id: string): Promise<ServiceResponse<any>> {
         const { data, error } = await supabase
             .from('areas_trabajo')
@@ -173,6 +207,11 @@ export const AreasService = {
         return { data, error, success: !error };
     },
 
+    /**
+     * Obtiene los detalles de un área específica por su ID.
+     * @param {string} id - ID del área de trabajo.
+     * @returns {Promise<AreaTrabajo | null>} El área con sus paralelos o null si no se encuentra.
+     */
     async getAreaById(id: string): Promise<AreaTrabajo | null> {
         const { data, error } = await supabase
             .from('areas_trabajo')

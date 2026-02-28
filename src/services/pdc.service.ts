@@ -1,12 +1,27 @@
+/**
+ * Model: PdcService
+ * 
+ * Este servicio gestiona la Planificación de Desarrollo Curricular (PDC).
+ * Incluye la gestión del cronograma global, cronograma por área y la asignación
+ * de contenidos a semanas específicas.
+ */
+
 import { supabase } from '@/lib/supabase';
 import {
     PlanificacionGeneral,
     PlanificacionSemanal,
     PDC,
+    PDCMaster,
     ServiceResponse
 } from '@/types';
 
 export const PdcService = {
+    /**
+     * Obtiene el cronograma general (feriados, eventos) para una gestión y trimestre.
+     * @param {number} gestion - Año de la gestión.
+     * @param {number} trimestre - Número de trimestre (1, 2 o 3).
+     * @returns {Promise<PlanificacionGeneral[]>} Lista de eventos semanales.
+     */
     async getGlobalSchedule(gestion: number, trimestre: number): Promise<PlanificacionGeneral[]> {
         const { data, error } = await supabase
             .from('planificacion_semanal_general')
@@ -23,6 +38,13 @@ export const PdcService = {
         return data as PlanificacionGeneral[];
     },
 
+    /**
+     * Obtiene la planificación semanal específica para un área de trabajo.
+     * @param {string} areaId - ID del área de trabajo.
+     * @param {number} gestion - Año.
+     * @param {number} trimestre - Trimestre (1, 2, 3).
+     * @returns {Promise<PlanificacionSemanal[]>} Lista de semanas con sus contenidos asociados.
+     */
     async getAreaSchedule(areaId: string, gestion: number, trimestre: number): Promise<PlanificacionSemanal[]> {
         const { data, error } = await supabase
             .from('planificacion_semanal')
@@ -51,6 +73,11 @@ export const PdcService = {
         return data as unknown as PlanificacionSemanal[];
     },
 
+    /**
+     * Crea un conjunto de semanas de planificación para un área.
+     * @param {Partial<PlanificacionSemanal>[]} weeks - Datos de las semanas a insertar.
+     * @returns {Promise<ServiceResponse<PlanificacionSemanal[]>>} Resultado de la inserción.
+     */
     async createAreaSchedule(weeks: Partial<PlanificacionSemanal>[]): Promise<ServiceResponse<PlanificacionSemanal[]>> {
         const { data, error } = await supabase
             .from('planificacion_semanal')
@@ -60,6 +87,11 @@ export const PdcService = {
         return { data, error, success: !error };
     },
 
+    /**
+     * Asocia un contenido de usuario a una semana de planificación específica.
+     * @param {string} planId - ID de la semana de planificación.
+     * @param {number} contentId - ID del contenido del usuario.
+     */
     async assignContentToWeek(planId: string, contentId: number): Promise<ServiceResponse<any>> {
         const { data, error } = await supabase
             .from('semana_contenido')
@@ -111,6 +143,11 @@ export const PdcService = {
         return { data, error, success: !error };
     },
 
+    /**
+     * Actualiza las observaciones generales de una semana.
+     * @param {string} planId - ID del plan semanal.
+     * @param {string} observaciones - Texto de las observaciones.
+     */
     async updateWeekObservations(planId: string, observaciones: string): Promise<ServiceResponse<any>> {
         const { data, error } = await supabase
             .from('planificacion_semanal')
@@ -121,45 +158,112 @@ export const PdcService = {
         return { data, error, success: !error };
     },
 
-    async getPDCs(userId: string): Promise<PDC[]> {
-        const { data, error } = await supabase
-            .from('planificacion_semanal')
-            .select(`
-                *,
-                area_trabajo:areas_trabajo (
-                    id,
-                    profesor_id,
-                    unidad_educativa:unidades_educativas (nombre),
-                    area_conocimiento:areas_conocimiento (nombre)
-                ),
-                semana_contenido (
-                    id,
-                    estado,
-                    contenido_usuario:contenidos_usuario (
-                        id,
-                        titulo,
-                        padre_id
-                    )
-                )
-            `)
-            .eq('area_trabajo.profesor_id', userId)
-            .order('created_at', { ascending: false });
+    /**
+     * Crea un nuevo Plan de Desarrollo Curricular (Maestro).
+     * @param {Partial<PDCMaster>} data - Datos iniciales del PDC.
+     * @returns {Promise<ServiceResponse<PDCMaster>>} El PDC creado.
+     */
+    async createPdcMaster(data: Partial<PDCMaster>): Promise<ServiceResponse<PDCMaster>> {
+        const { data: pdc, error } = await supabase
+            .from('pdcs')
+            .insert({
+                ...data,
+                gestion: data.gestion || new Date().getFullYear(),
+                estado: 'Pendiente'
+            })
+            .select()
+            .single();
 
-        if (error) {
-            console.error('Error fetching PDCs:', error);
-            return [];
-        }
-        return data as unknown as PDC[];
+        return { data: pdc as PDCMaster, error, success: !error };
     },
 
-    async deletePDC(id: string): Promise<ServiceResponse<any>> {
+    /**
+     * Vincula múltiples áreas de trabajo a un PDC.
+     * @param {string} pdcId - ID del PDC Maestro.
+     * @param {string[]} areaIds - Listado de IDs de áreas de trabajo.
+     */
+    async associateAreasToPdc(pdcId: string, areaIds: string[]): Promise<ServiceResponse<any>> {
         const { data, error } = await supabase
-            .from('planificacion_semanal')
-            .delete()
-            .eq('id', id)
+            .from('areas_trabajo')
+            .update({ pdc_id: pdcId })
+            .in('id', areaIds)
             .select();
 
         return { data, error, success: !error };
+    },
+
+    /**
+     * Actualiza los datos de un PDC Maestro.
+     */
+    async updatePdcMaster(pdcId: string, data: Partial<PDCMaster>): Promise<ServiceResponse<PDCMaster>> {
+        const { data: pdc, error } = await supabase
+            .from('pdcs')
+            .update(data)
+            .eq('id', pdcId)
+            .select()
+            .single();
+
+        return { data: pdc as PDCMaster, error, success: !error };
+    },
+
+    async getPDCs(userId: string): Promise<PDCMaster[]> {
+        const { data, error } = await supabase
+            .from('pdcs')
+            .select(`
+                *,
+                areas_trabajo!areas_trabajo_pdc_id_fkey (
+                    id,
+                    unidad_educativa:unidades_educativas (id, nombre),
+                    area_conocimiento:areas_conocimiento (id, nombre),
+                    turno:turnos (id, nombre)
+                )
+            `)
+            .eq('docente_id', userId)
+            .order('created_at', { ascending: false });
+
+        if (error) {
+            console.error('Error fetching PDCs:', error.message, error.details, error.hint);
+            return [];
+        }
+        return data as unknown as PDCMaster[];
+    },
+
+    /**
+     * Elimina un PDC Maestro y limpia todas sus asociaciones.
+     * @param {string} id - ID del PDC Maestro.
+     */
+    async deletePDC(id: string): Promise<ServiceResponse<any>> {
+        try {
+            // 1. Desvincular áreas de trabajo (poner pdc_id a null)
+            const { error: unlinkError } = await supabase
+                .from('areas_trabajo')
+                .update({ pdc_id: null })
+                .eq('pdc_id', id);
+
+            if (unlinkError) throw unlinkError;
+
+            // 2. Eliminar planificación semanal asociada
+            const { error: planningsError } = await supabase
+                .from('planificacion_semanal')
+                .delete()
+                .eq('pdc_id', id);
+
+            if (planningsError) throw planningsError;
+
+            // 3. Eliminar el registro maestro del PDC
+            const { data, error: masterError } = await supabase
+                .from('pdcs')
+                .delete()
+                .eq('id', id)
+                .select();
+
+            if (masterError) throw masterError;
+
+            return { data, error: null, success: true };
+        } catch (error) {
+            console.error('PdcService Error [deletePDC]:', error);
+            return { data: null, error, success: false };
+        }
     },
 
     async deleteAreaSchedule(areaId: string, gestion: number, trimestre: number): Promise<ServiceResponse<any>> {

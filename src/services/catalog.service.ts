@@ -1,7 +1,16 @@
 import { supabase } from '@/lib/supabase';
 import { ServiceResponse } from '@/types';
 
+/**
+ * Model: CatalogService
+ * 
+ * Proporciona acceso a catálogos estáticos y dinámicos del sistema,
+ * como niveles, grados, áreas, turnos, paralelos y geografía (deptos/distritos).
+ */
 export const CatalogService = {
+    /**
+     * Obtiene la lista de niveles educativos.
+     */
     async getNiveles(): Promise<any[]> {
         const { data, error } = await supabase
             .from('niveles')
@@ -14,6 +23,10 @@ export const CatalogService = {
         return data || [];
     },
 
+    /**
+     * Obtiene los grados asociados a un nivel educativo.
+     * @param {number} nivelId - ID del nivel.
+     */
     async getGrados(nivelId: number): Promise<any[]> {
         const { data, error } = await supabase
             .from('grados')
@@ -27,6 +40,10 @@ export const CatalogService = {
         return data || [];
     },
 
+    /**
+     * Obtiene las áreas de conocimiento de un grado específico.
+     * @param {number} gradoId - ID del grado.
+     */
     async getAreasByGrado(gradoId: number): Promise<any[]> {
         const { data, error } = await supabase
             .from('areas_conocimiento')
@@ -89,6 +106,10 @@ export const CatalogService = {
         return data || [];
     },
 
+    /**
+     * Obtiene las unidades educativas, opcionalmente filtradas por distrito.
+     * @param {number} distritoId - ID del distrito (opcional).
+     */
     async getUnidades(distritoId?: number): Promise<any[]> {
         let query = supabase
             .from('unidades_educativas')

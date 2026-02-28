@@ -1,5 +1,8 @@
 import { supabase } from '@/lib/supabase';
 
+/**
+ * Representa el perfil completo de un profesor en el sistema.
+ */
 export interface UserProfile {
     id: string;
     email: string;
@@ -13,7 +16,17 @@ export interface UserProfile {
     estado_completitud?: boolean;
 }
 
+/**
+ * Model: ProfileService
+ * 
+ * Gestiona los datos del perfil del profesor y sus roles asociados.
+ */
 export const ProfileService = {
+    /**
+     * Recupera el perfil completo del usuario, incluyendo sus roles.
+     * @param {string} userId - UUID del usuario.
+     * @returns {Promise<UserProfile | null>} Objeto de perfil o null si no se encuentra.
+     */
     async getProfile(userId: string): Promise<UserProfile | null> {
         try {
             // 1. Get Profile Data from 'public' schema
@@ -56,6 +69,12 @@ export const ProfileService = {
         }
     },
 
+    /**
+     * Actualiza el perfil del usuario. Realiza un 'upsert' basado en el ID.
+     * @param {string} userId - UUID del usuario.
+     * @param {Partial<UserProfile>} updates - Campos a actualizar.
+     * @returns {Promise<{ success: boolean; error?: string }>} Resultado de la operación.
+     */
     async updateProfile(userId: string, updates: Partial<UserProfile>): Promise<{ success: boolean; error?: string }> {
         try {
             const { error } = await supabase

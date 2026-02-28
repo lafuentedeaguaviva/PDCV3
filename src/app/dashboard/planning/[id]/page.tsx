@@ -1,113 +1,41 @@
 'use client';
 
-import { useEffect, useState, use } from 'react';
+/**
+ * View: AreaPlanningPage
+ * 
+ * Interfaz principal para la planificación semanal de un área específica.
+ * Delega la gestión del estado y la lógica de negocio al controlador usePlanningController.
+ */
+
+import { use, Suspense } from 'react';
 import { useRouter } from 'next/navigation';
-import { AreasService, AreaTrabajo } from '@/services/areas.service';
-import { LibraryService, UserContent } from '@/services/library.service';
-import { PdcService } from '@/services/pdc.service';
-import { PlanificacionSemanal, PlanificacionGeneral } from '@/types';
 import { Button } from '@/components/ui/button';
 import { ScheduleConfigModal } from '@/components/planning/ScheduleConfigModal';
 import { PlanningSplitView } from '@/components/planning/PlanningSplitView';
+import { usePlanningController } from '@/hooks/usePlanningController';
 
-export default function AreaPlanningPage({ params }: { params: Promise<{ id: string }> }) {
-    const { id } = use(params);
+interface Props {
+    params: Promise<{ id: string }>;
+}
+
+function PlanningContent({ id }: { id: string }) {
     const router = useRouter();
+    const controller = usePlanningController(id);
 
-    const [area, setArea] = useState<AreaTrabajo | null>(null);
-    const [userContents, setUserContents] = useState<UserContent[]>([]);
-    const [areaSchedule, setAreaSchedule] = useState<PlanificacionSemanal[]>([]);
-    const [globalSchedule, setGlobalSchedule] = useState<PlanificacionGeneral[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [showConfig, setShowConfig] = useState(false);
-    const [currentTrimestre, setCurrentTrimestre] = useState(1);
-    const [gestion] = useState(new Date().getFullYear());
-
-    const [plannedContentIds, setPlannedContentIds] = useState<Set<number>>(new Set());
-
-    useEffect(() => {
-        loadData();
-    }, [id, currentTrimestre]);
-
-    const refreshScheduleOnly = async () => {
-        const [scheduleData, plannedIds] = await Promise.all([
-            PdcService.getAreaSchedule(id, gestion, currentTrimestre),
-            PdcService.getAllPlannedContents(id, gestion)
-        ]);
-        setAreaSchedule(scheduleData);
-        setPlannedContentIds(new Set(plannedIds));
-    };
-
-    const loadData = async (isInitial = true) => {
-        if (isInitial) setLoading(true);
-        try {
-            // Cargar datos básicos solo si es la carga inicial o si no existen
-            let areaData = area;
-            if (isInitial || !area) {
-                areaData = await AreasService.getAreaById(id);
-                setArea(areaData);
-            }
-
-            if (areaData) {
-                const [userData, scheduleData, globalData, plannedIds] = await Promise.all([
-                    LibraryService.getUserContents(id),
-                    PdcService.getAreaSchedule(id, gestion, currentTrimestre),
-                    PdcService.getGlobalSchedule(gestion, currentTrimestre),
-                    PdcService.getAllPlannedContents(id, gestion)
-                ]);
-
-                setUserContents(userData);
-                setGlobalSchedule(globalData);
-                setPlannedContentIds(new Set(plannedIds));
-
-                // Si no hay cronograma local pero sí global, copiarlo automáticamente
-                if (scheduleData.length === 0 && globalData.length > 0) {
-                    const newWeeks = globalData.map((gw: any) => ({
-                        area_trabajo_id: id,
-                        gestion,
-                        trimestre: currentTrimestre,
-                        mes: gw.mes,
-                        semana: gw.semana,
-                        fecha_inicio_trimestre: gw.fecha_inicio_trimestre,
-                        fecha_fin_trimestre: gw.fecha_fin_trimestre
-                    }));
-
-                    const result = await PdcService.createAreaSchedule(newWeeks);
-                    if (result.success) {
-                        const updatedSchedule = await PdcService.getAreaSchedule(id, gestion, currentTrimestre);
-                        setAreaSchedule(updatedSchedule);
-                    } else {
-                        setAreaSchedule([]);
-                    }
-                } else {
-                    setAreaSchedule(scheduleData);
-                }
-            }
-        } catch (error) {
-            console.error('Error loading planning data:', error);
-        } finally {
-            if (isInitial) setLoading(false);
-        }
-    };
-
-    const handleConfigSuccess = () => {
-        setShowConfig(false);
-        loadData(false); // Refrescar sin mostrar el loader grande
-    };
+    const {
+        area,
+        userContents,
+        areaSchedule,
+        globalSchedule,
+        loading,
+        showConfig,
+        currentTrimestre,
+        gestion,
+        plannedContentIds
+    } = controller;
 
     if (loading) {
-        return (
-            <div className="p-8">
-                <div className="animate-pulse space-y-4">
-                    <div className="h-8 w-64 bg-slate-200 rounded"></div>
-                    <div className="h-4 w-48 bg-slate-100 rounded"></div>
-                    <div className="grid grid-cols-2 gap-8 mt-12">
-                        <div className="h-96 bg-slate-50 rounded-3xl border border-slate-100"></div>
-                        <div className="h-96 bg-slate-50 rounded-3xl border border-slate-100"></div>
-                    </div>
-                </div>
-            </div>
-        );
+        return <PlanningSkeleton />;
     }
 
     if (!area) {
@@ -151,7 +79,7 @@ export default function AreaPlanningPage({ params }: { params: Promise<{ id: str
                             {[1, 2, 3].map((t) => (
                                 <button
                                     key={t}
-                                    onClick={() => setCurrentTrimestre(t)}
+                                    onClick={() => controller.setCurrentTrimestre(t)}
                                     className={`px-4 py-1.5 rounded-lg text-xs font-black transition-all ${currentTrimestre === t
                                         ? 'bg-white text-blue-600 shadow-sm'
                                         : 'text-slate-400 hover:text-slate-600'
@@ -164,7 +92,7 @@ export default function AreaPlanningPage({ params }: { params: Promise<{ id: str
                         <Button
                             variant="outline"
                             className="h-10 rounded-xl font-black text-xs uppercase tracking-widest border-slate-200"
-                            onClick={() => setShowConfig(true)}
+                            onClick={() => controller.setShowConfig(true)}
                         >
                             <span className="material-symbols-rounded text-sm mr-2">settings</span>
                             Ajustar Cronograma
@@ -179,29 +107,15 @@ export default function AreaPlanningPage({ params }: { params: Promise<{ id: str
                         area={area}
                         userContents={userContents}
                         areaSchedule={areaSchedule}
-                        setAreaSchedule={setAreaSchedule}
+                        setAreaSchedule={controller.setAreaSchedule}
                         plannedContentIds={plannedContentIds}
-                        onRefresh={refreshScheduleOnly}
+                        onRefresh={controller.refreshScheduleOnly}
+                        handleAssign={controller.handleAssign}
+                        handleRemoveAssignment={controller.handleRemoveAssignment}
+                        isProcessing={controller.isProcessing}
                     />
                 ) : (
-                    <div className="h-full flex flex-col items-center justify-center text-center space-y-6">
-                        <div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center">
-                            <span className="material-symbols-rounded text-4xl text-slate-300">calendar_today</span>
-                        </div>
-                        <div>
-                            <h2 className="text-2xl font-black text-slate-900 mb-2">Sin cronograma disponible</h2>
-                            <p className="text-slate-400 max-w-sm mx-auto font-medium">
-                                No se ha definido un calendario global para este trimestre o ha ocurrido un error al cargar los datos.
-                            </p>
-                        </div>
-                        <Button
-                            variant="outline"
-                            onClick={() => setShowConfig(true)}
-                            className="h-12 px-8 rounded-2xl font-black"
-                        >
-                            Configuración Manual
-                        </Button>
-                    </div>
+                    <EmptySchedulePlaceholder onShowConfig={() => controller.setShowConfig(true)} />
                 )}
             </div>
 
@@ -211,10 +125,58 @@ export default function AreaPlanningPage({ params }: { params: Promise<{ id: str
                     gestion={gestion}
                     trimestre={currentTrimestre}
                     globalSchedule={globalSchedule}
-                    onClose={() => setShowConfig(false)}
-                    onSuccess={handleConfigSuccess}
+                    onClose={() => controller.setShowConfig(false)}
+                    onSuccess={controller.handleConfigSuccess}
                 />
             )}
+        </div>
+    );
+}
+
+export default function AreaPlanningPage({ params }: Props) {
+    const { id } = use(params);
+    return (
+        <Suspense fallback={<PlanningSkeleton />}>
+            <PlanningContent id={id} />
+        </Suspense>
+    );
+}
+
+// Sub-componentes Atómicos para mejorar legibilidad
+function PlanningSkeleton() {
+    return (
+        <div className="p-8">
+            <div className="animate-pulse space-y-4">
+                <div className="h-8 w-64 bg-slate-200 rounded"></div>
+                <div className="h-4 w-48 bg-slate-100 rounded"></div>
+                <div className="grid grid-cols-2 gap-8 mt-12">
+                    <div className="h-96 bg-slate-50 rounded-3xl border border-slate-100"></div>
+                    <div className="h-96 bg-slate-50 rounded-3xl border border-slate-100"></div>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+function EmptySchedulePlaceholder({ onShowConfig }: { onShowConfig: () => void }) {
+    return (
+        <div className="h-[60vh] flex flex-col items-center justify-center text-center space-y-6">
+            <div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center">
+                <span className="material-symbols-rounded text-4xl text-slate-300">calendar_today</span>
+            </div>
+            <div>
+                <h2 className="text-2xl font-black text-slate-900 mb-2">Sin cronograma disponible</h2>
+                <p className="text-slate-400 max-w-sm mx-auto font-medium">
+                    No se ha definido un calendario global para este trimestre o ha ocurrido un error al cargar los datos.
+                </p>
+            </div>
+            <Button
+                variant="outline"
+                onClick={onShowConfig}
+                className="h-12 px-8 rounded-2xl font-black"
+            >
+                Configuración Manual
+            </Button>
         </div>
     );
 }

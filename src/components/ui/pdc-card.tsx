@@ -7,52 +7,64 @@ import { Button } from './button';
 interface PdcCardProps {
     pdc: PDC;
     onDelete: (id: string) => void;
+    onResume?: (id: string) => void;
 }
 
-export function PdcCard({ pdc, onDelete }: PdcCardProps) {
-    const mainContent = pdc.semana_contenido?.[0];
-    const firstContentTitle = mainContent?.contenido_usuario?.titulo || 'Plan Mensual';
-    const startDate = new Date(pdc.fecha_inicio_trimestre);
+export function PdcCard({ pdc, onDelete, onResume }: PdcCardProps) {
+    // Usar fecha_inicio del PDC maestro, con fallback a created_at o fecha actual
+    const rawDate = pdc.fecha_inicio || pdc.created_at || new Date().toISOString();
+    const startDate = new Date(rawDate);
+
+    // Validar si la fecha es válida para evitar RangeError
+    const isValidDate = !isNaN(startDate.getTime());
+
+    const areas = pdc.areas_trabajo || [];
+    const firstArea = areas[0];
+    const displayTitle = `PDC ${pdc.trimestre}° Trimestre - Mes ${pdc.mes}`;
 
     return (
         <Card className="flex flex-col md:flex-row gap-6 items-center hover:shadow-medium">
             {/* Date Badge */}
-            <div className="flex flex-col items-center justify-center bg-blue-50 text-blue-700 w-20 h-20 rounded-xl shrink-0">
-                <span className="text-xs font-bold uppercase">{format(startDate, 'MMM', { locale: es })}</span>
-                <span className="text-2xl font-bold">{format(startDate, 'dd', { locale: es })}</span>
-                <span className="text-xs opacity-70">{pdc.gestion}</span>
+            <div className={`flex flex-col items-center justify-center w-20 h-20 rounded-xl shrink-0 ${isValidDate ? 'bg-blue-50 text-blue-700' : 'bg-slate-100 text-slate-400'}`}>
+                {isValidDate ? (
+                    <>
+                        <span className="text-xs font-bold uppercase">{format(startDate, 'MMM', { locale: es })}</span>
+                        <span className="text-2xl font-bold">{format(startDate, 'dd', { locale: es })}</span>
+                    </>
+                ) : (
+                    <span className="material-symbols-rounded text-2xl">event_busy</span>
+                )}
+                <span className="text-[10px] font-black opacity-70 mt-1">{pdc.gestion}</span>
             </div>
 
             {/* Info */}
             <div className="flex-1 w-full text-center md:text-left">
                 <div className="flex flex-wrap gap-2 mb-2 justify-center md:justify-start">
                     <Badge variant="default">
-                        {pdc.area_trabajo?.unidad_educativa?.nombre || 'S/UE'}
+                        {firstArea?.unidad_educativa?.nombre || 'Verificando...'}
                     </Badge>
                     <Badge variant="indigo">
-                        {pdc.area_trabajo?.area_conocimiento?.nombre || 'S/Área'}
+                        {firstArea?.area_conocimiento?.nombre || 'Verificando...'}
                     </Badge>
-                    {mainContent && (
-                        <Badge
-                            variant={
-                                mainContent.estado === 'completado'
-                                    ? 'success'
-                                    : mainContent.estado === 'planificado'
-                                        ? 'indigo'
-                                        : 'warning'
-                            }
-                        >
-                            {mainContent.estado}
-                        </Badge>
-                    )}
+                    <Badge
+                        variant={
+                            pdc.estado === 'Verificado'
+                                ? 'success'
+                                : pdc.estado === 'Pendiente'
+                                    ? 'warning'
+                                    : 'error'
+                        }
+                    >
+                        {pdc.estado}
+                    </Badge>
                 </div>
                 <h3 className="text-lg font-bold text-slate-900 mb-1">
-                    {firstContentTitle}
+                    {displayTitle}
                 </h3>
                 <p className="text-sm text-slate-500 line-clamp-1">
-                    {pdc.semana_contenido && pdc.semana_contenido.length > 1
-                        ? `Y ${pdc.semana_contenido.length - 1} contenidos más`
-                        : 'Sin temas adicionales'}
+                    {areas.length > 1
+                        ? `Afecta a ${areas.length} áreas vinculadas`
+                        : `${firstArea?.turno?.nombre || 'Turno no especificado'}`}
                 </p>
             </div>
 
@@ -60,6 +72,15 @@ export function PdcCard({ pdc, onDelete }: PdcCardProps) {
             <div className="flex gap-1">
                 <Button variant="ghost" size="sm" className="size-9 p-0 text-slate-400 hover:text-primary" title="Ver PDF">
                     <span className="material-symbols-rounded">picture_as_pdf</span>
+                </Button>
+                <Button
+                    variant="ghost"
+                    size="sm"
+                    className="size-9 p-0 text-slate-400 hover:text-indigo-600"
+                    title="Editar / Continuar"
+                    onClick={() => onResume?.(pdc.id)}
+                >
+                    <span className="material-symbols-rounded">edit_square</span>
                 </Button>
                 <Button variant="ghost" size="sm" className="size-9 p-0 text-slate-400 hover:text-indigo-600" title="Duplicar">
                     <span className="material-symbols-rounded">content_copy</span>

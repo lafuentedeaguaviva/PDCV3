@@ -1,11 +1,14 @@
 'use client';
 
+/**
+ * View: PlanningSplitView
+ * 
+ * Componente de interfaz que permite la asignación de contenidos a semanas mediante
+ * drag-and-drop o clics. Delega las acciones persistentes al controlador.
+ */
+
 import { useState, useMemo } from 'react';
-import { AreaTrabajo } from '@/services/areas.service';
-import { UserContent } from '@/services/library.service';
-import { PdcService } from '@/services/pdc.service';
-import { PlanificacionSemanal, SemanaContenido } from '@/types';
-import { Button } from '@/components/ui/button';
+import { AreaTrabajo, UserContent, PlanificacionSemanal, SemanaContenido } from '@/types';
 
 interface Props {
     area: AreaTrabajo;
@@ -14,11 +17,20 @@ interface Props {
     setAreaSchedule: React.Dispatch<React.SetStateAction<PlanificacionSemanal[]>>;
     plannedContentIds: Set<number>;
     onRefresh: () => void;
+    handleAssign: (planId: string, contentId: number) => void;
+    handleRemoveAssignment: (planId: string, contentId: number) => void;
+    isProcessing: string | null;
 }
 
-export function PlanningSplitView({ area, userContents, areaSchedule, setAreaSchedule, plannedContentIds, onRefresh }: Props) {
+export function PlanningSplitView({
+    userContents,
+    areaSchedule,
+    plannedContentIds,
+    handleAssign,
+    handleRemoveAssignment,
+    isProcessing
+}: Props) {
     const [selectedContentId, setSelectedContentId] = useState<number | null>(null);
-    const [isProcessing, setIsProcessing] = useState<string | null>(null);
     const [expandedMonths, setExpandedMonths] = useState<Set<number>>(new Set(areaSchedule.map(w => w.mes)));
     const [dragOverWeekId, setDragOverWeekId] = useState<string | null>(null);
 
@@ -42,162 +54,38 @@ export function PlanningSplitView({ area, userContents, areaSchedule, setAreaSch
         setDragOverWeekId(weekId);
     };
 
-    const handleDrop = async (e: React.DragEvent, weekId: string) => {
+    const handleDrop = (e: React.DragEvent, weekId: string) => {
         e.preventDefault();
         setDragOverWeekId(null);
-        const contentId = parseInt(e.dataTransfer.getData('contentId'));
-        if (contentId) {
+        const contentIdStr = e.dataTransfer.getData('contentId');
+        if (contentIdStr) {
+            const contentId = parseInt(contentIdStr);
             setSelectedContentId(contentId);
             handleAssign(weekId, contentId);
+            setSelectedContentId(null); // Clear selection after direct assign
         }
     };
 
-    const monthNames = [
-        'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-        'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
-    ];
+    const onAssignClick = (weekId: string) => {
+        if (selectedContentId) {
+            handleAssign(weekId, selectedContentId);
+            setSelectedContentId(null);
+        }
+    };
 
-    // Filtrar contenidos ya planificados
+    // Filtrar contenidos ya planificados (Lógica de vista)
     const themes = useMemo(() => {
         return userContents.filter(theme => {
-            // Solo procesar temas raíz
             if (theme.padre_id) return false;
-
             const isThemePlanned = plannedContentIds.has(theme.id);
             const subthemes = userContents.filter(c => c.padre_id === theme.id);
             const hasUnplannedSubthemes = subthemes.some(s => !plannedContentIds.has(s.id));
-
-            // El tema debe seguir apareciendo si NO ha sido planificado O si aún tiene subtemas por planificar
             return !isThemePlanned || hasUnplannedSubthemes;
         });
     }, [userContents, plannedContentIds]);
 
     const getSubthemes = (parentId: number) =>
         userContents.filter(c => c.padre_id === parentId && !plannedContentIds.has(c.id));
-
-    const handleAssign = async (planId: string, contentIdOverride?: number) => {
-        const contentId = contentIdOverride || selectedContentId;
-        if (!contentId) return;
-
-        // Identificar jerarquía
-        const selectedContent = userContents.find(c => c.id === contentId);
-        if (!selectedContent) return;
-
-        const idsToAssign: number[] = [contentId];
-        const contentItemsToUpdate: { id: number; titulo: string }[] = [{ id: contentId, titulo: selectedContent.titulo }];
-
-        if (!selectedContent.padre_id) {
-            // Es un TEMA: incluir todos sus SUBTEMAS
-            const subthemes = getSubthemes(contentId);
-            subthemes.forEach(sub => {
-                idsToAssign.push(sub.id);
-                contentItemsToUpdate.push({ id: sub.id, titulo: sub.titulo });
-            });
-        } else {
-            // Es un SUBTEMA: incluir su TEMA PADRE
-            const parentTheme = themes.find(t => t.id === selectedContent.padre_id);
-            if (parentTheme) {
-                idsToAssign.push(parentTheme.id);
-                contentItemsToUpdate.push({ id: parentTheme.id, titulo: parentTheme.titulo });
-            }
-        }
-
-        // Optimistic Update: Add all identified items to local state immediately
-        setAreaSchedule(prev => prev.map(week => {
-            if (week.id === planId) {
-                const existingIds = new Set(week.semana_contenido?.map(sc => sc.contenido_usuario_id) || []);
-                const newItems = contentItemsToUpdate
-                    .filter(item => !existingIds.has(item.id))
-                    .map(item => ({
-                        id: `temp-${item.id}-${Date.now()}`,
-                        contenido_usuario_id: item.id,
-                        estado: 'planificado',
-                        contenido_usuario: {
-                            titulo: item.titulo,
-                            padre_id: userContents.find(c => c.id === item.id)?.padre_id || null
-                        } as any
-                    } as SemanaContenido));
-
-                if (newItems.length === 0) return week;
-
-                return {
-                    ...week,
-                    semana_contenido: [
-                        ...(week.semana_contenido || []),
-                        ...newItems
-                    ]
-                };
-            }
-            return week;
-        }));
-
-        setIsProcessing(planId);
-        try {
-            const result = await PdcService.assignMultipleContentsToWeek(planId, idsToAssign);
-            if (!result.success) {
-                // Rollback if failed
-                onRefresh();
-                alert('No se pudieron asignar algunos contenidos.');
-            } else {
-                // Silently refresh to get real IDs and sync
-                onRefresh();
-            }
-        } catch (error) {
-            console.error('Assignment error:', error);
-            onRefresh();
-        } finally {
-            setIsProcessing(null);
-            setSelectedContentId(null);
-        }
-    };
-
-    const handleRemoveAssignment = async (planId: string, contentId: number) => {
-        // Identificar si es un padre y buscar hijos asignados a ESTA semana
-        const week = areaSchedule.find(w => w.id === planId);
-        const contentToRemove = userContents.find(c => c.id === contentId);
-
-        const idsToRemove: number[] = [contentId];
-
-        if (week && contentToRemove && !contentToRemove.padre_id) {
-            // Es un TEMA: buscar sus SUBTEMAS que estén en esta misma semana
-            const assignedSubthemeIds = week.semana_contenido
-                ?.filter(sc => {
-                    const subContent = userContents.find(uc => uc.id === sc.contenido_usuario_id);
-                    return subContent?.padre_id === contentId;
-                })
-                .map(sc => sc.contenido_usuario_id) || [];
-
-            idsToRemove.push(...assignedSubthemeIds);
-        }
-
-        // Optimistic Remove: Remove all identified IDs
-        setAreaSchedule(prev => prev.map(w => {
-            if (w.id === planId) {
-                return {
-                    ...w,
-                    semana_contenido: w.semana_contenido?.filter(sc => !idsToRemove.includes(sc.contenido_usuario_id))
-                };
-            }
-            return w;
-        }));
-
-        setIsProcessing(`${planId}-${contentId}`);
-        try {
-            const result = await PdcService.removeMultipleContentsFromWeek(planId, idsToRemove);
-            if (!result.success) {
-                // Rollback
-                onRefresh();
-            } else {
-                // Silently sync
-                onRefresh();
-            }
-        } catch (error) {
-            console.error('Removal error:', error);
-            onRefresh();
-        } finally {
-            setIsProcessing(null);
-        }
-    };
 
     const toggleMonth = (mes: number) => {
         const next = new Set(expandedMonths);
@@ -355,7 +243,7 @@ export function PlanningSplitView({ area, userContents, areaSchedule, setAreaSch
                                                         ? 'border-blue-100 bg-blue-50/10 hover:border-blue-400 hover:shadow-lg cursor-pointer'
                                                         : 'border-slate-100 bg-white hover:border-slate-200'
                                                     }`}
-                                                onClick={() => selectedContentId && handleAssign(week.id)}
+                                                onClick={() => onAssignClick(week.id)}
                                             >
                                                 {isProcessing === week.id && (
                                                     <div className="absolute inset-0 bg-white/60 backdrop-blur-[1px] z-20 flex items-center justify-center">
@@ -385,18 +273,14 @@ export function PlanningSplitView({ area, userContents, areaSchedule, setAreaSch
                                                             ?.sort((a, b) => {
                                                                 const aParentId = a.contenido_usuario?.padre_id || a.contenido_usuario_id;
                                                                 const bParentId = b.contenido_usuario?.padre_id || b.contenido_usuario_id;
-
-                                                                // Si son de familias diferentes, mantener orden por ID de familia (agrupa familias)
                                                                 if (aParentId !== bParentId) return aParentId - bParentId;
-
-                                                                // Si son de la misma familia, el padre (padre_id null) va primero
                                                                 if (!a.contenido_usuario?.padre_id) return -1;
                                                                 if (!b.contenido_usuario?.padre_id) return 1;
-
                                                                 return 0;
                                                             })
                                                             .map(sc => {
                                                                 const isSubtheme = !!sc.contenido_usuario?.padre_id;
+                                                                const currentProcessingId = `${week.id}-${sc.contenido_usuario_id}`;
                                                                 return (
                                                                     <div
                                                                         key={sc.id}
@@ -418,7 +302,7 @@ export function PlanningSplitView({ area, userContents, areaSchedule, setAreaSch
                                                                             }}
                                                                             className="p-0.5 hover:text-red-500 text-slate-300 transition-colors"
                                                                         >
-                                                                            {isProcessing === `${week.id}-${sc.contenido_usuario_id}` ? (
+                                                                            {isProcessing === currentProcessingId ? (
                                                                                 <span className="material-symbols-rounded text-[10px] animate-spin">sync</span>
                                                                             ) : (
                                                                                 <span className="material-symbols-rounded text-sm">cancel</span>

@@ -1,39 +1,18 @@
+/**
+ * Model: LibraryService
+ * 
+ * Este servicio actúa como la capa de acceso a datos (Model) para la Biblioteca de contenidos.
+ * Se encarga de las consultas a Supabase y la lógica de persistencia de contenidos base y de usuario.
+ */
+
 import { supabase } from '@/lib/supabase';
-import { ServiceResponse } from '@/types';
-
-export interface ContentItem {
-    id: number;
-    titulo: string;
-    padre_id?: number | null;
-    orden: number;
-    descripcion?: string;
-    trimestre?: string;
-    area_conocimiento?: {
-        id: number;
-        nombre: string;
-        grado?: {
-            id: number;
-            nombre: string;
-            nivel?: { id: number; nombre: string }
-        }
-    };
-    is_base: boolean;
-}
-
-export interface UserContent {
-    id: number;
-    propietario_id: string;
-    area_trabajo_id: string;
-    origen_base_id?: number | null;
-    padre_id?: number | null;
-    titulo: string;
-    orden: number;
-    trimestre?: string;
-    created_at: string;
-    updated_at: string;
-}
+import { ServiceResponse, ContentItem, UserContent } from '@/types';
 
 export const LibraryService = {
+    /**
+     * Obtiene el siguiente ID secuencial para un contenido de usuario.
+     * @returns {Promise<number>} El próximo ID disponible.
+     */
     async getNextUserContentId(): Promise<number> {
         const { data, error } = await supabase
             .from('contenidos_usuario')
@@ -52,6 +31,12 @@ export const LibraryService = {
         return (id || 0) + 1;
     },
 
+    /**
+     * Busca contenidos base filtrando por texto y área de conocimiento opcional.
+     * @param {string} query - Término de búsqueda.
+     * @param {number} areaConocimientoId - ID opcional del área de conocimiento.
+     * @returns {Promise<ContentItem[]>} Lista de contenidos encontrados.
+     */
     async searchContents(query: string = '', areaConocimientoId?: number): Promise<ContentItem[]> {
         let queryBuilder = supabase
             .from('contenidos_base')
@@ -92,6 +77,11 @@ export const LibraryService = {
         })) as ContentItem[];
     },
 
+    /**
+     * Obtiene los contenidos base asociados a un área de conocimiento específica.
+     * @param {number} areaConocimientoId - ID del área de conocimiento.
+     * @returns {Promise<ContentItem[]>} Lista de contenidos base.
+     */
     async getBaseContentsByArea(areaConocimientoId: number): Promise<ContentItem[]> {
         const { data, error } = await supabase
             .from('contenidos_base')
@@ -125,6 +115,11 @@ export const LibraryService = {
         })) as ContentItem[];
     },
 
+    /**
+     * Obtiene los contenidos personalizados de un usuario para un área de trabajo.
+     * @param {string} areaTrabajoId - ID del área de trabajo.
+     * @returns {Promise<UserContent[]>} Lista de contenidos del usuario.
+     */
     async getUserContents(areaTrabajoId: string): Promise<UserContent[]> {
         const { data, error } = await supabase
             .from('contenidos_usuario')
@@ -140,6 +135,13 @@ export const LibraryService = {
         return data as UserContent[];
     },
 
+    /**
+     * Copia un contenido base al repositorio personalizado del usuario.
+     * Preserva la jerarquía si el padre ya existe en el repositorio del usuario. 
+     * @param {number} baseContentId - ID del contenido base.
+     * @param {string} areaTrabajoId - ID del área de trabajo destino.
+     * @returns {Promise<ServiceResponse<any>>} Respuesta del servicio.
+     */
     async copyContentToUser(baseContentId: number, areaTrabajoId: string): Promise<ServiceResponse<any>> {
         const { data: { session } } = await supabase.auth.getSession();
         if (!session?.user) return { success: false, data: null, error: 'No authenticated session' };
