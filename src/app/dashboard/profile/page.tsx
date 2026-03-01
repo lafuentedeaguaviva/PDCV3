@@ -5,6 +5,7 @@ import { ProfileService, UserProfile } from '@/services/profile.service';
 import { AuthService } from '@/services/auth.service';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { PageHeader } from '@/components/ui/page-header';
 
 export default function ProfilePage() {
     const [profile, setProfile] = useState<UserProfile | null>(null);
@@ -118,12 +119,13 @@ export default function ProfilePage() {
     }
 
     return (
-        <div className="max-w-3xl mx-auto p-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
-            {/* Header */}
-            <div className="mb-10 text-center">
-                <h1 className="text-3xl font-black text-slate-800 tracking-tight mb-2">Mi Perfil</h1>
-                <p className="text-slate-500 font-medium">Personaliza tu información para tus documentos.</p>
-            </div>
+        <div className="max-w-4xl mx-auto p-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
+            <PageHeader
+                title="Mi Perfil"
+                subtitle="Personaliza tu información para tus documentos."
+                icon="account_circle"
+                className="mb-10"
+            />
 
             {/* Main Card */}
             <div className="bg-white rounded-[2rem] shadow-xl shadow-slate-200/50 overflow-hidden border border-slate-100">

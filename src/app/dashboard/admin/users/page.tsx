@@ -3,8 +3,8 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { AdminService } from '@/services/admin.service';
+import { Card, Badge } from '@/components/ui/atoms';
+import { useAdminController } from '@/hooks/useAdminController';
 
 interface User {
     id: string;
@@ -17,87 +17,89 @@ interface User {
 
 export default function AdminUsersPage() {
     const router = useRouter();
-    const [users, setUsers] = useState<User[]>([]);
-    const [allRoles, setAllRoles] = useState<string[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [searchTerm, setSearchTerm] = useState('');
+    const {
+        users,
+        roles: allRoles,
+        loading,
+        saving,
+        error: controllerError,
+        checkAccess,
+        loadUsersData,
+        saveUserRoles
+    } = useAdminController();
 
-    // Edit Roles State
+    const [searchTerm, setSearchTerm] = useState('');
     const [currentUser, setCurrentUser] = useState<User | null>(null);
     const [selectedRoles, setSelectedRoles] = useState<string[]>([]);
     const [showModal, setShowModal] = useState(false);
-    const [saving, setSaving] = useState(false);
 
     useEffect(() => {
-        loadData();
+        const init = async () => {
+            const hasAccess = await checkAccess();
+            if (hasAccess) {
+                loadUsersData();
+            }
+        };
+        init();
     }, []);
-
-    const loadData = async () => {
-        setLoading(true);
-        const [usersRes, rolesRes] = await Promise.all([
-            AdminService.getUsers(),
-            AdminService.getRoles()
-        ]);
-
-        if (usersRes.data) setUsers(usersRes.data);
-        if (rolesRes.data) setAllRoles(rolesRes.data);
-        setLoading(false);
-    };
 
     const openEditRoles = (user: User) => {
         setCurrentUser(user);
-        setSelectedRoles([...user.roles]);
+        setSelectedRoles([...(user.roles || [])]);
         setShowModal(true);
     };
 
     const toggleRole = (role: string) => {
-        if (selectedRoles.includes(role)) {
-            setSelectedRoles(selectedRoles.filter(r => r !== role));
-        } else {
-            setSelectedRoles([...selectedRoles, role]);
-        }
+        setSelectedRoles(prev =>
+            prev.includes(role)
+                ? prev.filter(r => r !== role)
+                : [...prev, role]
+        );
     };
 
     const handleSaveRoles = async () => {
         if (!currentUser) return;
-        setSaving(true);
-        try {
-            await AdminService.updateUserRoles(currentUser.id, selectedRoles);
+        const success = await saveUserRoles(currentUser.id, selectedRoles);
+        if (success) {
             setShowModal(false);
-            loadData();
-        } catch (error) {
-            console.error('Error saving roles:', error);
-            alert('Error al guardar roles');
-        } finally {
-            setSaving(false);
+            loadUsersData();
         }
     };
 
-    const filteredUsers = users.filter(u =>
+    const filteredUsers = (users as User[]).filter(u =>
         (u.nombres?.toLowerCase() || '').includes(searchTerm.toLowerCase()) ||
         (u.apellidos?.toLowerCase() || '').includes(searchTerm.toLowerCase()) ||
         (u.email?.toLowerCase() || '').includes(searchTerm.toLowerCase())
     );
 
+    if (loading && users.length === 0) {
+        return (
+            <div className="flex flex-col items-center justify-center py-20 gap-4">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+                <p className="text-slate-500 font-medium animate-pulse">Cargando usuarios...</p>
+            </div>
+        );
+    }
+
     return (
-        <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div>
-                    <div className="flex items-center gap-2 mb-1">
-                        <button onClick={() => router.back()} className="p-1 hover:bg-slate-100 rounded-full transition-colors">
+                    <div className="flex items-center gap-3 mb-1">
+                        <button onClick={() => router.back()} className="p-2 hover:bg-slate-100 rounded-full transition-all hover:scale-110">
                             <span className="material-symbols-rounded text-slate-500">arrow_back</span>
                         </button>
-                        <h1 className="text-2xl font-black text-slate-800 tracking-tight">Gestión de Usuarios</h1>
+                        <h1 className="text-3xl font-black text-slate-900 tracking-tight">Gestión de Usuarios</h1>
                     </div>
-                    <p className="text-slate-500 font-medium ml-9">Administra accesos y permisos del sistema.</p>
+                    <p className="text-slate-500 font-medium ml-12">Administra accesos, permisos y roles del sistema.</p>
                 </div>
-                <div className="flex items-center gap-3">
-                    <div className="relative">
-                        <span className="material-symbols-rounded absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+                <div className="flex items-center gap-4">
+                    <div className="relative group/search">
+                        <span className="material-symbols-rounded absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm group-focus-within/search:text-primary transition-colors">search</span>
                         <input
                             type="text"
-                            placeholder="Buscar por nombre o email..."
-                            className="pl-9 pr-4 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all w-full md:w-80"
+                            placeholder="Buscar docente o email..."
+                            className="pl-10 pr-4 py-2.5 rounded-xl border border-border bg-white text-sm focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all w-full md:w-80 outline-none"
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
@@ -105,70 +107,72 @@ export default function AdminUsersPage() {
                 </div>
             </div>
 
-            {loading ? (
-                <div className="text-center py-20">
-                    <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-slate-900 mx-auto"></div>
-                </div>
-            ) : (
-                <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+            {controllerError && (
+                <Card className="bg-danger/5 border-danger/20 p-4">
+                    <div className="flex items-center gap-3 text-danger">
+                        <span className="material-symbols-rounded">error</span>
+                        <p className="font-bold text-sm">{controllerError}</p>
+                    </div>
+                </Card>
+            )}
+
+            <Card className="p-0 overflow-hidden border-border shadow-soft">
+                <div className="overflow-x-auto">
                     <table className="w-full text-left border-collapse">
                         <thead>
-                            <tr className="bg-slate-50 border-b border-slate-100 text-xs uppercase text-slate-500 font-bold tracking-wider">
-                                <th className="p-4">Usuario</th>
-                                <th className="p-4">Email</th>
-                                <th className="p-4">Roles</th>
-                                <th className="p-4 text-right">Acciones</th>
+                            <tr className="bg-slate-50/50 border-b border-border text-[10px] uppercase text-slate-400 font-black tracking-widest">
+                                <th className="p-5">Usuario / Docente</th>
+                                <th className="p-5">Email</th>
+                                <th className="p-5">Roles Asignados</th>
+                                <th className="p-5 text-right">Acciones</th>
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-slate-100">
+                        <tbody className="divide-y divide-border">
                             {filteredUsers.length === 0 ? (
                                 <tr>
-                                    <td colSpan={4} className="p-8 text-center text-slate-500 font-medium">
-                                        No se encontraron usuarios
+                                    <td colSpan={4} className="p-12 text-center text-slate-400">
+                                        No se encontraron usuarios que coincidan con la búsqueda.
                                     </td>
                                 </tr>
                             ) : (
                                 filteredUsers.map((user) => (
                                     <tr key={user.id} className="hover:bg-slate-50/50 transition-colors group">
-                                        <td className="p-4">
-                                            <div className="flex items-center gap-3">
-                                                <div className="size-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 font-bold text-xs">
+                                        <td className="p-5">
+                                            <div className="flex items-center gap-4">
+                                                <div className="size-10 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-500 font-black text-xs shadow-inner">
                                                     {user.nombres?.[0]}{user.apellidos?.[0]}
                                                 </div>
                                                 <div>
-                                                    <p className="font-bold text-slate-800 text-sm">{user.nombres} {user.apellidos}</p>
-                                                    <p className="text-xs text-slate-400">Registrado el {new Date(user.created_at).toLocaleDateString()}</p>
+                                                    <p className="font-bold text-slate-900 group-hover:text-primary transition-colors">{user.nombres} {user.apellidos}</p>
+                                                    <p className="text-[10px] text-slate-400 font-medium uppercase tracking-tighter">Miembro desde {new Date(user.created_at).toLocaleDateString()}</p>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td className="p-4 text-sm text-slate-600 font-mono">
-                                            {user.email}
+                                        <td className="p-5">
+                                            <span className="text-sm font-medium text-slate-600 bg-slate-50 px-2 py-1 rounded-lg border border-slate-100">{user.email}</span>
                                         </td>
-                                        <td className="p-4">
-                                            <div className="flex flex-wrap gap-1">
+                                        <td className="p-5">
+                                            <div className="flex flex-wrap gap-1.5">
                                                 {user.roles && user.roles.length > 0 ? (
                                                     user.roles.map(role => (
-                                                        <span key={role} className={`text-xs px-2 py-0.5 rounded-full font-bold border ${role === 'Administrador'
-                                                                ? 'bg-purple-100 text-purple-700 border-purple-200'
-                                                                : 'bg-blue-50 text-blue-600 border-blue-100'
-                                                            }`}>
+                                                        <Badge key={role} variant={role === 'Administrador' ? 'accent' : 'default'}>
                                                             {role}
-                                                        </span>
+                                                        </Badge>
                                                     ))
                                                 ) : (
-                                                    <span className="text-xs text-slate-400 italic">Sin roles</span>
+                                                    <span className="text-xs text-slate-300 italic">Sin roles asignados</span>
                                                 )}
                                             </div>
                                         </td>
-                                        <td className="p-4 text-right">
+                                        <td className="p-5 text-right">
                                             <Button
                                                 variant="outline"
                                                 size="sm"
                                                 onClick={() => openEditRoles(user)}
-                                                className="opacity-0 group-hover:opacity-100 transition-opacity"
+                                                className="opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0"
                                             >
-                                                <span className="material-symbols-rounded text-base mr-1">shield_person</span>
-                                                Roles
+                                                <span className="material-symbols-rounded text-base mr-1.5">shield_person</span>
+                                                Gestionar
                                             </Button>
                                         </td>
                                     </tr>
@@ -177,62 +181,72 @@ export default function AdminUsersPage() {
                         </tbody>
                     </table>
                 </div>
-            )}
+            </Card>
 
             {/* Modal Edit Roles */}
             {showModal && currentUser && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm animate-in fade-in duration-200">
-                    <div className="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden animate-in zoom-in-95 duration-200">
-                        <div className="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
-                            <h3 className="text-lg font-bold text-slate-800">
-                                Gestionar Roles
-                            </h3>
-                            <button onClick={() => setShowModal(false)} className="text-slate-400 hover:text-slate-600">
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-md animate-in fade-in duration-300">
+                    <Card className="w-full max-w-md p-0 overflow-hidden animate-in zoom-in-95 duration-300 shadow-2xl">
+                        <div className="p-6 border-b border-border flex justify-between items-center bg-slate-50/50">
+                            <div>
+                                <h3 className="text-xl font-black text-slate-900">Configurar Permisos</h3>
+                                <p className="text-xs text-slate-500 font-medium">Asigna o remueve roles de acceso.</p>
+                            </div>
+                            <button onClick={() => setShowModal(false)} className="size-8 flex items-center justify-center rounded-full hover:bg-slate-200 text-slate-400 transition-colors">
                                 <span className="material-symbols-rounded">close</span>
                             </button>
                         </div>
                         <div className="p-6">
-                            <p className="text-sm text-slate-500 mb-4">
-                                Asignando roles para <span className="font-bold text-slate-800">{currentUser.nombres} {currentUser.apellidos}</span>
-                            </p>
+                            <div className="flex items-center gap-3 p-4 bg-primary/5 rounded-2xl border border-primary/10 mb-6">
+                                <div className="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">
+                                    {currentUser.nombres?.[0]}
+                                </div>
+                                <div>
+                                    <p className="text-sm font-bold text-slate-900">{currentUser.nombres} {currentUser.apellidos}</p>
+                                    <p className="text-xs text-slate-500">{currentUser.email}</p>
+                                </div>
+                            </div>
 
-                            <div className="space-y-2">
+                            <div className="space-y-2.5">
+                                <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">Roles disponibles</label>
                                 {allRoles.map(role => {
                                     const isSelected = selectedRoles.includes(role);
                                     return (
                                         <div
                                             key={role}
                                             onClick={() => toggleRole(role)}
-                                            className={`flex items-center justify-between p-3 rounded-xl border cursor-pointer transition-all ${isSelected
-                                                    ? 'bg-blue-50 border-blue-200 shadow-sm'
-                                                    : 'bg-white border-slate-200 hover:border-blue-200 hover:bg-slate-50'
+                                            className={`flex items-center justify-between p-4 rounded-xl border-2 cursor-pointer transition-all duration-200 ${isSelected
+                                                ? 'bg-primary/5 border-primary shadow-sm'
+                                                : 'bg-white border-slate-100 hover:border-slate-200 hover:bg-slate-50'
                                                 }`}
                                         >
-                                            <div className="flex items-center gap-3">
-                                                <div className={`size-5 rounded border flex items-center justify-center ${isSelected ? 'bg-blue-500 border-blue-500' : 'border-slate-300'
+                                            <div className="flex items-center gap-4">
+                                                <div className={`size-5 rounded-lg border-2 flex items-center justify-center transition-all ${isSelected ? 'bg-primary border-primary rotate-0' : 'border-slate-200 rotate-45'
                                                     }`}>
-                                                    {isSelected && <span className="material-symbols-rounded text-white text-sm font-bold">check</span>}
+                                                    {isSelected && <span className="material-symbols-rounded text-white text-[10px] font-black">check</span>}
                                                 </div>
-                                                <span className={`font-medium ${isSelected ? 'text-blue-700' : 'text-slate-700'}`}>{role}</span>
+                                                <span className={`font-bold text-sm ${isSelected ? 'text-primary' : 'text-slate-600'}`}>{role}</span>
                                             </div>
+                                            {isSelected && <Badge variant="accent">Activo</Badge>}
                                         </div>
                                     );
                                 })}
                             </div>
 
-                            <div className="pt-6 flex justify-end gap-3">
-                                <button
+                            <div className="pt-8 flex justify-end gap-3">
+                                <Button
+                                    variant="ghost"
                                     onClick={() => setShowModal(false)}
-                                    className="px-4 py-2 text-sm font-bold text-slate-500 hover:bg-slate-100 rounded-xl transition-colors"
+                                    className="px-6"
                                 >
                                     Cancelar
-                                </button>
-                                <Button onClick={handleSaveRoles} isLoading={saving}>
-                                    Guardar Cambios
+                                </Button>
+                                <Button onClick={handleSaveRoles} isLoading={saving} className="px-8 shadow-blue-500/20">
+                                    Actualizar Permisos
                                 </Button>
                             </div>
                         </div>
-                    </div>
+                    </Card>
                 </div>
             )}
         </div>

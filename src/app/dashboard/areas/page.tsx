@@ -9,10 +9,11 @@ import { CatalogService } from '@/services/catalog.service';
 import { AuthService } from '@/services/auth.service';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { PageHeader } from '@/components/ui/page-header';
 
 // Simple Icons
 const IconSchool = () => <span className="material-symbols-rounded">school</span>;
-const IconAdd = () => <span className="material-symbols-rounded">add</span>;
+const IconAdd = () => <span className="material-symbols-rounded text-xl">add</span>;
 const IconDelete = () => <span className="material-symbols-rounded text-red-500 hover:text-red-700">delete</span>;
 const IconSchedule = () => <span className="material-symbols-rounded text-sm">schedule</span>;
 const IconGroup = () => <span className="material-symbols-rounded text-sm">group</span>;
@@ -278,19 +279,20 @@ export default function WorkAreasPage() {
 
     return (
         <div className="p-6 space-y-8 animate-in fade-in duration-500">
-            <div className="flex justify-between items-center">
-                <div>
-                    <h1 className="text-2xl font-bold text-slate-900 flex items-center gap-2">
-                        <span className="p-2 bg-blue-100 text-blue-600 rounded-lg"><IconSchool /></span>
-                        Áreas de Trabajo
-                    </h1>
-                    <p className="text-slate-500 mt-1">Gestiona tus clases, materias y paralelos asignados.</p>
-                </div>
-                <Button onClick={() => { resetForm(); setShowModal(true); }} className="bg-blue-600 hover:bg-blue-700 gap-2">
-                    <IconAdd />
-                    Nueva Clase
-                </Button>
-            </div>
+            <PageHeader
+                title="Áreas de Trabajo"
+                subtitle="Gestiona tus clases, materias y paralelos asignados."
+                icon="school"
+                actions={
+                    <Button
+                        onClick={() => { resetForm(); setShowModal(true); }}
+                        className="bg-blue-600 hover:bg-blue-700 h-12 px-6 rounded-2xl shadow-lg shadow-blue-500/20 gap-2"
+                    >
+                        <IconAdd />
+                        <span className="font-bold">Nueva Clase</span>
+                    </Button>
+                }
+            />
 
             {/* List Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

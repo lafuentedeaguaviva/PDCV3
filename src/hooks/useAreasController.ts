@@ -7,7 +7,7 @@
  * Maneja la sincronización entre los contenidos base oficiales y los contenidos editables del usuario.
  */
 
-import { useState, useEffect, use } from 'react';
+import { useState, useEffect, use, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { AreasService } from '@/services/areas.service';
 import { LibraryService } from '@/services/library.service';
@@ -48,6 +48,21 @@ export function useAreasController(params: Promise<{ id: string }>) {
         }
     }, [editingContentId]);
 
+    // --- Selectores (Computed State) ---
+    const rootBaseThemes = useMemo(() =>
+        baseContents.filter((c: ContentItem) => !c.padre_id),
+        [baseContents]);
+
+    const getBaseSubthemes = (parentId: number) =>
+        baseContents.filter((c: ContentItem) => c.padre_id === parentId);
+
+    const userThemes = useMemo(() =>
+        userContents.filter((c: UserContent) => !c.padre_id || !userContents.find((t: UserContent) => t.id === c.padre_id)),
+        [userContents]);
+
+    const getUserSubthemes = (parentId: number) =>
+        userContents.filter((c: UserContent) => c.padre_id === parentId);
+
     // --- Acciones de Orquestación ---
 
     const loadData = async () => {
@@ -55,7 +70,7 @@ export function useAreasController(params: Promise<{ id: string }>) {
         try {
             const areaData = await AreasService.getAreaById(id);
             if (areaData) {
-                setArea(areaData as any);
+                setArea(areaData);
                 const [baseData, userData] = await Promise.all([
                     LibraryService.getBaseContentsByArea(areaData.area_conocimiento.id),
                     LibraryService.getUserContents(id)
@@ -126,7 +141,7 @@ export function useAreasController(params: Promise<{ id: string }>) {
         try {
             const result = await LibraryService.updateUserContent(contentId, { titulo: editingTitle });
             if (result.success) {
-                setUserContents(prev => prev.map(c => Number(c.id) == Number(contentId) ? {
+                setUserContents((prev: UserContent[]) => prev.map((c: UserContent) => c.id === contentId ? {
                     ...c,
                     titulo: editingTitle,
                     updated_at: new Date().toISOString()
@@ -189,10 +204,10 @@ export function useAreasController(params: Promise<{ id: string }>) {
 
     const reorderContent = async (content: UserContent, direction: 'up' | 'down') => {
         const siblings = userContents
-            .filter(c => c.padre_id === content.padre_id)
-            .sort((a, b) => a.orden - b.orden);
+            .filter((c: UserContent) => c.padre_id === content.padre_id)
+            .sort((a: UserContent, b: UserContent) => a.orden - b.orden);
 
-        const currentIndex = siblings.findIndex(s => s.id === content.id);
+        const currentIndex = siblings.findIndex((s: UserContent) => s.id === content.id);
         const targetIndex = direction === 'up' ? currentIndex - 1 : currentIndex + 1;
 
         if (targetIndex >= 0 && targetIndex < siblings.length) {
@@ -209,7 +224,7 @@ export function useAreasController(params: Promise<{ id: string }>) {
         if (!confirm('¿Estás seguro de eliminar este contenido personalizado?')) return;
         const success = await LibraryService.deleteUserContent(contentId);
         if (success) {
-            setUserContents(userContents.filter(c => Number(c.id) !== Number(contentId)));
+            setUserContents(userContents.filter((c: UserContent) => c.id !== contentId));
         }
     };
 
@@ -248,6 +263,8 @@ export function useAreasController(params: Promise<{ id: string }>) {
         area,
         baseContents,
         userContents,
+        rootBaseThemes,
+        userThemes,
 
         // UI State
         loading,
@@ -268,6 +285,8 @@ export function useAreasController(params: Promise<{ id: string }>) {
         setIsAddingNew,
 
         // Actions
+        getBaseSubthemes,
+        getUserSubthemes,
         handleCopyManual,
         handleCopyAllOfficial,
         updateContent,

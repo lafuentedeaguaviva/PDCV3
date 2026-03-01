@@ -59,7 +59,7 @@ export function usePlanningController(areaId: string) {
 
                 // Lógica de Negocio: Autocopia del cronograma global si el local está vacío
                 if (scheduleData.length === 0 && globalData.length > 0) {
-                    const newWeeks = globalData.map((gw: any) => ({
+                    const newWeeks = globalData.map((gw: PlanificacionGeneral) => ({
                         area_trabajo_id: areaId,
                         gestion,
                         trimestre: currentTrimestre,
@@ -97,20 +97,20 @@ export function usePlanningController(areaId: string) {
     };
 
     const handleAssign = async (planId: string, contentId: number) => {
-        const selectedContent = userContents.find(c => c.id === contentId);
+        const selectedContent = userContents.find((c: UserContent) => c.id === contentId);
         if (!selectedContent) return;
 
         const idsToAssign: number[] = [contentId];
         const contentItemsToUpdate: { id: number; titulo: string }[] = [{ id: contentId, titulo: selectedContent.titulo }];
 
         if (!selectedContent.padre_id) {
-            const subthemes = userContents.filter(c => c.padre_id === contentId && !plannedContentIds.has(c.id));
-            subthemes.forEach(sub => {
+            const subthemes = userContents.filter((c: UserContent) => c.padre_id === contentId && !plannedContentIds.has(c.id));
+            subthemes.forEach((sub: UserContent) => {
                 idsToAssign.push(sub.id);
                 contentItemsToUpdate.push({ id: sub.id, titulo: sub.titulo });
             });
         } else {
-            const parentTheme = userContents.find(t => t.id === selectedContent.padre_id && !t.padre_id);
+            const parentTheme = userContents.find((t: UserContent) => t.id === selectedContent.padre_id && !t.padre_id);
             if (parentTheme) {
                 idsToAssign.push(parentTheme.id);
                 contentItemsToUpdate.push({ id: parentTheme.id, titulo: parentTheme.titulo });
@@ -118,9 +118,9 @@ export function usePlanningController(areaId: string) {
         }
 
         // Optimistic Update
-        setAreaSchedule(prev => prev.map(week => {
+        setAreaSchedule((prev: PlanificacionSemanal[]) => prev.map((week: PlanificacionSemanal) => {
             if (week.id === planId) {
-                const existingIds = new Set(week.semana_contenido?.map(sc => sc.contenido_usuario_id) || []);
+                const existingIds = new Set(week.semana_contenido?.map((sc): number => sc.contenido_usuario_id) || []);
                 const newItems = contentItemsToUpdate
                     .filter(item => !existingIds.has(item.id))
                     .map(item => ({
@@ -129,8 +129,8 @@ export function usePlanningController(areaId: string) {
                         estado: 'planificado' as const,
                         contenido_usuario: {
                             titulo: item.titulo,
-                            padre_id: userContents.find(c => c.id === item.id)?.padre_id || null
-                        } as any
+                            padre_id: userContents.find((c: UserContent) => c.id === item.id)?.padre_id || null
+                        } as UserContent
                     }));
 
                 if (newItems.length === 0) return week;
@@ -160,26 +160,26 @@ export function usePlanningController(areaId: string) {
     };
 
     const handleRemoveAssignment = async (planId: string, contentId: number) => {
-        const week = areaSchedule.find(w => w.id === planId);
-        const contentToRemove = userContents.find(c => c.id === contentId);
+        const week = areaSchedule.find((w: PlanificacionSemanal) => w.id === planId);
+        const contentToRemove = userContents.find((c: UserContent) => c.id === contentId);
         const idsToRemove: number[] = [contentId];
 
         if (week && contentToRemove && !contentToRemove.padre_id) {
             const assignedSubthemeIds = week.semana_contenido
-                ?.filter(sc => {
-                    const subContent = userContents.find(uc => uc.id === sc.contenido_usuario_id);
+                ?.filter((sc) => {
+                    const subContent = userContents.find((uc: UserContent) => uc.id === sc.contenido_usuario_id);
                     return subContent?.padre_id === contentId;
                 })
-                .map(sc => sc.contenido_usuario_id) || [];
+                .map((sc) => sc.contenido_usuario_id) || [];
             idsToRemove.push(...assignedSubthemeIds);
         }
 
         // Optimistic Remove
-        setAreaSchedule(prev => prev.map(w => {
+        setAreaSchedule((prev: PlanificacionSemanal[]) => prev.map((w: PlanificacionSemanal) => {
             if (w.id === planId) {
                 return {
                     ...w,
-                    semana_contenido: w.semana_contenido?.filter(sc => !idsToRemove.includes(sc.contenido_usuario_id))
+                    semana_contenido: w.semana_contenido?.filter((sc: { contenido_usuario_id: number }) => !idsToRemove.includes(sc.contenido_usuario_id))
                 };
             }
             return w;

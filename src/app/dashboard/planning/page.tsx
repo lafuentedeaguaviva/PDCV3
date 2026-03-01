@@ -10,6 +10,7 @@
 import { useRouter } from 'next/navigation';
 import { usePlanningDeskController } from '@/hooks/usePlanningDeskController';
 import { AreaTrabajo } from '@/types';
+import { PageHeader } from '@/components/ui/page-header';
 
 export default function PlanningPage() {
     const router = useRouter();
@@ -21,21 +22,16 @@ export default function PlanningPage() {
 
     return (
         <div className="p-8 max-w-[1400px] mx-auto space-y-10 animate-in fade-in duration-700">
-            {/* Header Section */}
-            <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-slate-100 pb-8 gap-4">
-                <div>
-                    <h1 className="text-3xl font-black text-slate-900 flex items-center gap-3">
-                        <span className="p-3 bg-blue-600 text-white rounded-2xl shadow-lg shadow-blue-200 material-symbols-rounded">inbox</span>
-                        Mi Escritorio
-                    </h1>
-                    <p className="text-slate-500 font-medium mt-2">Bandeja de entrada: Selecciona una de tus clases para empezar a planificar.</p>
-                </div>
-                <div className="flex items-center gap-4">
-                    <span className="text-[10px] font-black text-blue-600 bg-blue-50 px-4 py-1.5 rounded-full uppercase tracking-[0.1em] border border-blue-100">
+            <PageHeader
+                title="Mi Escritorio"
+                subtitle="Bandeja de entrada: Selecciona una de tus clases para empezar a planificar."
+                icon="inbox"
+                actions={
+                    <span className="text-[10px] font-black text-blue-600 bg-blue-50 px-4 py-2 rounded-full uppercase tracking-[0.1em] border border-blue-100">
                         Gestión Escolar {gestion}
                     </span>
-                </div>
-            </div>
+                }
+            />
 
             {/* Selection Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">

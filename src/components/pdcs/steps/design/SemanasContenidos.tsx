@@ -34,15 +34,15 @@ export function SemanasContenidos({
             {hasWeeks && (
                 <div className="lg:col-span-2 space-y-1">
                     <div className="flex flex-col gap-1 px-1">
-                        <label className="text-[8px] font-black text-slate-300 uppercase tracking-tighter px-1 mb-1 block">
+                        <label className="text-xs font-black text-slate-400 uppercase tracking-[0.2em] px-1 mb-2 block">
                             Semanas
                         </label>
                         {sortedWeekKeys.map(weekNumStr => (
                             <button
                                 key={weekNumStr}
                                 onClick={() => setActiveWeek(Number(weekNumStr))}
-                                className={`w-full px-2 py-1.5 rounded-lg font-black text-[9px] tracking-tight transition-all text-left border relative overflow-hidden flex items-center gap-1.5 ${activeWeek === Number(weekNumStr)
-                                    ? `bg-slate-950 text-white border-${levelColor} shadow-sm`
+                                className={`w-full px-3 py-2 rounded-xl font-black text-xs tracking-tight transition-all text-left border-2 relative overflow-hidden flex items-center gap-2 ${activeWeek === Number(weekNumStr)
+                                    ? `bg-blue-600 text-white border-${levelColor} shadow-lg scale-[1.05] z-10`
                                     : 'bg-white text-slate-400 border-slate-50 hover:border-slate-100 opacity-80 shadow-none'
                                     }`}
                             >
@@ -52,14 +52,14 @@ export function SemanasContenidos({
                         ))}
                     </div>
 
-                    <div className="flex gap-1 pt-2 border-t border-slate-50 mx-1">
+                    <div className="flex gap-2 pt-3 border-t border-slate-100 mx-1">
                         <div className="flex-1 text-center">
-                            <span className="text-[7px] font-black text-slate-300 uppercase block tracking-tighter leading-none">Ini</span>
-                            <span className={`text-[8px] font-black text-${levelColor}`}>{new Date(pdcDates.inicio + 'T00:00:00').toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit' })}</span>
+                            <span className="text-[10px] font-black text-slate-300 uppercase block tracking-widest leading-none mb-1">Ini</span>
+                            <span className={`text-[11px] font-black text-${levelColor}`}>{new Date(pdcDates.inicio + 'T00:00:00').toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit' })}</span>
                         </div>
                         <div className="flex-1 text-center">
-                            <span className="text-[7px] font-black text-slate-300 uppercase block tracking-tighter leading-none">Fin</span>
-                            <span className="text-[8px] font-black text-emerald-600">{new Date(pdcDates.fin + 'T00:00:00').toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit' })}</span>
+                            <span className="text-[10px] font-black text-slate-300 uppercase block tracking-widest leading-none mb-1">Fin</span>
+                            <span className="text-[11px] font-black text-emerald-600">{new Date(pdcDates.fin + 'T00:00:00').toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit' })}</span>
                         </div>
                     </div>
                 </div>
@@ -69,14 +69,14 @@ export function SemanasContenidos({
                 {hasWeeks ? (
                     <div className="bg-white rounded-xl border border-slate-100 shadow-sm p-3 space-y-4 relative overflow-hidden min-h-[450px]">
                         {/* Compact Header */}
-                        <div className="flex items-center gap-2 pb-2 border-b border-slate-50">
-                            <div className={`size-6 bg-${levelColor} text-white rounded-lg flex items-center justify-center font-black text-[10px] shadow-sm`}>
+                        <div className="flex items-center gap-4 pb-3 border-b border-slate-100">
+                            <div className={`size-8 bg-${levelColor} text-white rounded-xl flex items-center justify-center font-black text-xs shadow-lg`}>
                                 {activeWeek}
                             </div>
                             <div className="flex flex-col">
-                                <h3 className="text-xs font-black text-slate-800 tracking-tight leading-none uppercase">Contenidos de la Semana {activeWeek}</h3>
-                                <span className="text-[7px] font-black text-slate-400 uppercase tracking-widest mt-0.5">
-                                    {weekContentsMap[activeWeek]?.length || 0} Elementos
+                                <h3 className="text-sm font-black text-slate-800 tracking-tight leading-none uppercase">Contenidos de la Semana {activeWeek}</h3>
+                                <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] mt-1.5">
+                                    {weekContentsMap[activeWeek]?.length || 0} Elementos Planificados
                                 </span>
                             </div>
                         </div>
@@ -97,22 +97,21 @@ export function SemanasContenidos({
 
                                     return (
                                         <div key={content.id} className="space-y-1">
-                                            <div className={`p-2 rounded-lg border transition-all flex items-center gap-2 group/item ${isCovered ? 'bg-emerald-50/30 border-emerald-100/30' : `bg-white border-slate-50 hover:border-slate-100 shadow-sm`
+                                            <div className={`p-4 rounded-xl border-2 transition-all flex items-center gap-4 group/item ${isCovered ? 'bg-emerald-50/50 border-emerald-100/50' : `bg-white border-slate-100 hover:border-${levelColor}/30 shadow-sm`
                                                 }`}>
-                                                <div className={`size-5 rounded flex items-center justify-center shrink-0 ${isTheme ? 'bg-slate-900 text-white' : 'bg-slate-100 text-slate-400'}`}>
-                                                    <span className="material-symbols-rounded text-xs">{isTheme ? 'folder_open' : 'description'}</span>
+                                                <div className={`size-8 rounded-lg flex items-center justify-center shrink-0 ${isTheme ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20' : 'bg-slate-100 text-slate-400'}`}>
+                                                    <span className="material-symbols-rounded text-lg">{isTheme ? 'folder_open' : 'description'}</span>
                                                 </div>
-
                                                 <div className="flex-1 min-w-0">
-                                                    <div className="flex items-center gap-1.5">
-                                                        <span className={`text-[6px] font-black uppercase tracking-tighter ${isCovered ? 'text-emerald-500' : `text-${levelColor}/70`}`}>
-                                                            {isTheme ? 'TEMA' : 'CONTENIDO'}
+                                                    <div className="flex items-center gap-2 mb-0.5">
+                                                        <span className={`text-[10px] font-black uppercase tracking-[0.2em] ${isCovered ? 'text-emerald-500' : `text-${levelColor}`}`}>
+                                                            {isTheme ? 'TEMA CENTRAL' : 'CONTENIDO'}
                                                         </span>
                                                         {isCovered && (
-                                                            <span className="bg-emerald-100/50 text-emerald-600 text-[6px] font-black px-1 rounded-full uppercase tracking-tighter">OK</span>
+                                                            <span className="bg-emerald-100 text-emerald-600 text-[9px] font-black px-2 py-0.5 rounded-full uppercase tracking-widest">Planificado</span>
                                                         )}
                                                     </div>
-                                                    <h4 className={`text-[10px] font-bold tracking-tight leading-tight truncate ${isCovered ? 'text-emerald-900/80' : 'text-slate-700'}`}>
+                                                    <h4 className={`text-sm font-black tracking-tight leading-tight truncate ${isCovered ? 'text-emerald-900/80' : 'text-slate-900'}`}>
                                                         {content.titulo}
                                                     </h4>
                                                 </div>
@@ -127,16 +126,16 @@ export function SemanasContenidos({
                                                     {subthemes.map(sub => {
                                                         const isSubCovered = learningObjectives.some(obj => obj.contentIds.includes(sub.id));
                                                         return (
-                                                            <div key={sub.id} className={`p-1.5 rounded-md border transition-all flex items-center gap-2 ${isSubCovered ? 'bg-emerald-50/20 border-emerald-50' : 'bg-white/50 border-slate-50/50 hover:border-slate-100'
+                                                            <div key={sub.id} className={`p-2.5 rounded-xl border-2 transition-all flex items-center gap-3 ${isSubCovered ? 'bg-emerald-50/20 border-emerald-50' : 'bg-white/50 border-slate-100 hover:border-slate-300'
                                                                 }`}>
-                                                                <div className="h-1.5 w-1.5 border-l border-b border-slate-200 rounded-bl-sm shrink-0 -mt-1"></div>
+                                                                <div className="h-2 w-2 border-l-2 border-b-2 border-slate-200 rounded-bl-md shrink-0 -mt-1"></div>
                                                                 <div className="flex-1 min-w-0">
-                                                                    <p className={`text-[9px] font-bold truncate ${isSubCovered ? 'text-emerald-700/70' : 'text-slate-500'}`}>
+                                                                    <p className={`text-xs font-bold truncate ${isSubCovered ? 'text-emerald-700/70' : 'text-slate-600'}`}>
                                                                         {sub.titulo}
                                                                     </p>
                                                                 </div>
                                                                 {isSubCovered && (
-                                                                    <span className="material-symbols-rounded text-emerald-500 text-[8px]">check_circle</span>
+                                                                    <span className="material-symbols-rounded text-emerald-500 text-sm">verified</span>
                                                                 )}
                                                             </div>
                                                         );
@@ -150,11 +149,11 @@ export function SemanasContenidos({
                         </div>
                     </div>
                 ) : (
-                    <div className="py-24 text-center bg-slate-50 rounded-2xl border-2 border-dashed border-slate-200">
-                        <div className="size-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
-                            <span className="material-symbols-rounded text-2xl text-slate-200">event_busy</span>
+                    <div className="py-24 text-center bg-slate-50 rounded-3xl border-2 border-dashed border-slate-200">
+                        <div className="size-20 bg-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl rotate-3">
+                            <span className="material-symbols-rounded text-4xl text-slate-200">event_busy</span>
                         </div>
-                        <h3 className="text-sm font-black text-slate-400">SIN PLANIFICACIÓN SEMANAL</h3>
+                        <h3 className="text-base font-black text-slate-400 uppercase tracking-widest">SIN PLANIFICACIÓN SEMANAL</h3>
                     </div>
                 )}
             </div>

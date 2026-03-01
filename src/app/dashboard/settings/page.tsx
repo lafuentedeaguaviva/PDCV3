@@ -1,17 +1,16 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
+import { PageHeader } from '@/components/ui/page-header';
 
 export default function SettingsPage() {
     return (
         <div className="max-w-3xl mx-auto p-6 space-y-8 animate-in fade-in duration-500">
-            <div>
-                <h1 className="text-2xl font-bold text-slate-900 flex items-center gap-2">
-                    <span className="p-2 bg-slate-100 text-slate-600 rounded-lg material-symbols-rounded">settings</span>
-                    Configuración
-                </h1>
-                <p className="text-slate-500 border-b border-slate-200 pb-6 mt-2">Personaliza tu experiencia en EduPlan Pro.</p>
-            </div>
+            <PageHeader
+                title="Configuración"
+                subtitle="Personaliza tu experiencia en EduPlan Pro."
+                icon="settings"
+            />
 
             {/* Preferences */}
             <section className="space-y-4">

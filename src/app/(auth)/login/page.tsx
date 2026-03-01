@@ -1,114 +1,89 @@
 'use client';
 
-import { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { AuthService } from '@/services/auth.service';
+import { useLoginController } from '@/hooks/useLoginController';
+import { Feedback } from '@/components/ui/feedback';
 
 export default function LoginPage() {
-    const router = useRouter();
-    const [loading, setLoading] = useState(false);
-    const [formData, setFormData] = useState({
-        email: '',
-        password: ''
-    });
-    const [error, setError] = useState('');
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-        });
-    };
-
-    const handleLogin = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setLoading(true);
-        setError('');
-
-        try {
-            const { data, error } = await AuthService.signIn(formData.email, formData.password);
-
-            if (error) {
-                setError('Credenciales incorrectas o error de conexión.');
-                console.error(error);
-            } else if (data.user) {
-                // Check profile completion
-                const { data: profile } = await AuthService.getProfile(data.user.id);
-
-                // If profile is missing OR incomplete, redirect to profile page
-                if (!profile || !profile.estado_completitud) {
-                    router.push('/dashboard/profile');
-                } else {
-                    router.push('/dashboard');
-                }
-            }
-        } catch (err) {
-            setError('Ocurrió un error inesperado.');
-            console.error(err);
-        } finally {
-            setLoading(false);
-        }
-    };
+    const {
+        formData,
+        loading,
+        feedback,
+        handleInputChange,
+        handleLogin,
+        hideFeedback
+    } = useLoginController();
 
     return (
-        <div className="glass-card p-8 rounded-[2rem] animate-in fade-in zoom-in duration-500 max-w-sm w-full mx-auto">
-            <div className="text-center mb-8">
-                <h1 className="text-2xl font-black text-slate-800 mb-2">Bienvenido de nuevo</h1>
-                <p className="text-slate-500 text-sm font-medium">Ingresa para continuar planificando</p>
-            </div>
-
-            {error && (
-                <div className="bg-red-50 text-red-600 p-3 rounded-lg text-sm mb-4 text-center border border-red-100">
-                    {error}
-                </div>
-            )}
-
-            <form onSubmit={handleLogin} className="space-y-5">
-                <Input
-                    label="Email"
-                    name="email"
-                    type="email"
-                    placeholder="tu@email.com"
-                    icon="mail"
-                    required
-                    value={formData.email}
-                    onChange={handleChange}
-                />
-
-                <div className="space-y-1.5">
-                    <Input
-                        label="Contraseña"
-                        name="password"
-                        type="password"
-                        placeholder="••••••••"
-                        icon="lock"
-                        required
-                        value={formData.password}
-                        onChange={handleChange}
+        <div className="min-h-screen flex items-center justify-center bg-slate-50 p-6">
+            <div className="w-full max-w-sm">
+                {feedback.isOpen ? (
+                    <Feedback
+                        variant={feedback.type}
+                        title={feedback.title}
+                        description={feedback.description}
+                        onClose={hideFeedback}
+                        className="shadow-2xl bg-white border border-slate-100"
                     />
-                    <div className="flex justify-end">
-                        <Link href="/forgot-password" className="text-xs font-bold text-blue-500 hover:text-blue-600 transition-colors">
-                            ¿Olvidaste tu contraseña?
-                        </Link>
+                ) : (
+                    <div className="glass-card p-10 rounded-[40px] animate-in fade-in zoom-in duration-500 shadow-2xl border-white/20">
+                        <div className="text-center mb-10">
+                            <div className="bg-primary/10 w-16 h-16 rounded-3xl flex items-center justify-center mx-auto mb-6 text-primary">
+                                <span className="material-symbols-rounded text-3xl">lock_open</span>
+                            </div>
+                            <h1 className="text-3xl font-black text-slate-800 mb-2 tracking-tight">Bienvenido</h1>
+                            <p className="text-slate-500 text-sm font-medium">Ingresa para continuar planificando</p>
+                        </div>
+
+                        <form onSubmit={handleLogin} className="space-y-6">
+                            <Input
+                                label="Correo Electrónico"
+                                name="email"
+                                type="email"
+                                icon="mail"
+                                required
+                                value={formData.email}
+                                onChange={handleInputChange}
+                                className="rounded-2xl"
+                            />
+
+                            <div className="space-y-1">
+                                <Input
+                                    label="Contraseña"
+                                    name="password"
+                                    type="password"
+                                    icon="key"
+                                    required
+                                    value={formData.password}
+                                    onChange={handleInputChange}
+                                    className="rounded-2xl"
+                                />
+                                <div className="text-right">
+                                    <Link href="/forgot-password" className="text-[10px] font-black uppercase tracking-widest text-primary hover:opacity-70 transition-all">
+                                        ¿Olvidaste tu contraseña?
+                                    </Link>
+                                </div>
+                            </div>
+
+                            <Button type="submit" isLoading={loading} className="w-full h-14 rounded-2xl shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all">
+                                <span className="font-black uppercase tracking-widest text-xs">Entrar al Sistema</span>
+                                <span className="material-symbols-rounded text-xl ml-2">arrow_forward</span>
+                            </Button>
+                        </form>
+
+                        <div className="mt-10 pt-8 border-t border-slate-100 text-center">
+                            <p className="text-sm font-medium text-slate-500 mb-2">
+                                ¿No tienes una cuenta?
+                            </p>
+                            <Link href="/register" className="text-primary font-black hover:opacity-80 transition-all uppercase tracking-wider text-xs">
+                                Regístrate gratis aquí
+                            </Link>
+                        </div>
                     </div>
-                </div>
-
-                <Button type="submit" isLoading={loading} className="w-full mt-2">
-                    <span>Iniciar Sesión</span>
-                    <span className="material-symbols-rounded text-lg ml-2">arrow_forward</span>
-                </Button>
-            </form>
-
-            <div className="mt-8 pt-6 border-t border-slate-100 text-center">
-                <p className="text-sm font-medium text-slate-500">
-                    ¿No tienes una cuenta? {' '}
-                    <Link href="/register" className="text-blue-600 font-bold hover:underline">
-                        Regístrate gratis
-                    </Link>
-                </p>
+                )}
             </div>
         </div>
     );

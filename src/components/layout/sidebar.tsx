@@ -6,16 +6,12 @@ import { AuthService } from '@/services/auth.service';
 import { ProfileService } from '@/services/profile.service';
 import { useEffect, useState } from 'react';
 import { useSidebar } from '@/contexts/SidebarContext';
-
-// Inline utility for now if not exists
-function classNames(...classes: (string | undefined | null | false)[]) {
-    return classes.filter(Boolean).join(' ');
-}
+import { cn } from '@/lib/utils';
 
 const MENU_ITEMS = [
     { icon: 'inbox', label: 'Mi Escritorio', href: '/dashboard' },
     { icon: 'school', label: 'Áreas de Trabajo', href: '/dashboard/areas' },
-    { icon: 'library_books', label: 'Banco de Contenidos', href: '/dashboard/library' },
+    { icon: 'collections_bookmark', label: 'Banco de Contenidos', href: '/dashboard/library' },
     { icon: 'calendar_month', label: 'Planificación', href: '/dashboard/planning' },
     { icon: 'edit_document', label: 'Mis PDC', href: '/dashboard/pdcs' },
 ];
@@ -47,12 +43,12 @@ export function Sidebar() {
     };
 
     return (
-        <aside className={classNames(
+        <aside className={cn(
             "fixed left-0 top-0 h-screen bg-slate-900 border-r border-slate-800 hidden md:flex flex-col z-40 transition-all duration-300",
             isCollapsed ? "w-20" : "w-64"
         )}>
             {/* Brand & Toggle */}
-            <div className={classNames(
+            <div className={cn(
                 "h-16 flex items-center border-b border-slate-800 transition-all duration-300",
                 isCollapsed ? "px-4 justify-center" : "px-6 justify-between"
             )}>
@@ -100,7 +96,7 @@ export function Sidebar() {
                             key={item.href}
                             href={item.href}
                             title={isCollapsed ? item.label : undefined}
-                            className={classNames(
+                            className={cn(
                                 'flex items-center gap-3 rounded-xl transition-all duration-200 group',
                                 isCollapsed ? 'p-2.5 justify-center' : 'px-3 py-2',
                                 isActive
@@ -108,7 +104,7 @@ export function Sidebar() {
                                     : 'text-slate-400 font-medium hover:bg-slate-800 hover:text-white'
                             )}
                         >
-                            <span className={classNames(
+                            <span className={cn(
                                 'material-symbols-rounded text-xl transition-colors shrink-0',
                                 isActive ? 'text-blue-400' : 'text-slate-500 group-hover:text-slate-300'
                             )}>
@@ -124,7 +120,7 @@ export function Sidebar() {
                         <Link
                             href="/dashboard/admin"
                             title={isCollapsed ? "Panel Admin" : undefined}
-                            className={classNames(
+                            className={cn(
                                 'flex items-center gap-3 rounded-xl transition-all duration-200 group mt-2',
                                 isCollapsed ? 'p-2.5 justify-center' : 'px-3 py-2',
                                 pathname === '/dashboard/admin'
@@ -132,7 +128,7 @@ export function Sidebar() {
                                     : 'text-slate-400 font-medium hover:bg-slate-800 hover:text-white'
                             )}
                         >
-                            <span className={classNames(
+                            <span className={cn(
                                 'material-symbols-rounded text-xl transition-colors shrink-0',
                                 pathname === '/dashboard/admin' ? 'text-purple-400' : 'text-slate-500 group-hover:text-slate-300'
                             )}>
@@ -143,7 +139,7 @@ export function Sidebar() {
                         <Link
                             href="/dashboard/admin/schedule"
                             title={isCollapsed ? "Cronograma Global" : undefined}
-                            className={classNames(
+                            className={cn(
                                 'flex items-center gap-3 rounded-xl transition-all duration-200 group mt-1',
                                 isCollapsed ? 'p-2.5 justify-center' : 'px-3 py-2',
                                 pathname === '/dashboard/admin/schedule'
@@ -151,7 +147,7 @@ export function Sidebar() {
                                     : 'text-slate-400 font-medium hover:bg-slate-800 hover:text-white'
                             )}
                         >
-                            <span className={classNames(
+                            <span className={cn(
                                 'material-symbols-rounded text-xl transition-colors shrink-0',
                                 pathname === '/dashboard/admin/schedule' ? 'text-orange-400' : 'text-slate-500 group-hover:text-slate-300'
                             )}>
@@ -166,7 +162,7 @@ export function Sidebar() {
             {/* User Footer - Profile Button */}
             <div className="p-3 border-t border-slate-800">
                 <Link href="/dashboard/profile">
-                    <div className={classNames(
+                    <div className={cn(
                         "bg-slate-800/50 hover:bg-slate-800 rounded-xl transition-all cursor-pointer group border border-slate-700/50 hover:border-slate-700 flex items-center",
                         isCollapsed ? "p-2 justify-center" : "p-3 gap-3"
                     )}>

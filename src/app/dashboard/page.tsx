@@ -1,16 +1,15 @@
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { PageHeader } from '@/components/ui/page-header';
 
 export default function DashboardPage() {
     return (
         <div className="space-y-8 animate-in fade-in duration-500">
             {/* Welcome Header */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                <div>
-                    <h1 className="text-2xl md:text-3xl font-black text-slate-900">Hola, Profesor Juan 👋</h1>
-                    <p className="text-slate-500 font-medium">Aquí está el resumen de tu actividad curricular.</p>
-                </div>
-            </div>
+            <PageHeader
+                title={<>Hola, <span className="text-blue-600">Profesor Juan</span> 👋</>}
+                subtitle="Aquí está el resumen de tu actividad curricular."
+            />
 
             {/* Stats Grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

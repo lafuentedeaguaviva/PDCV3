@@ -10,6 +10,7 @@ import { Feedback } from '@/components/ui/feedback';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { PDC } from '@/types';
+import { PageHeader } from '@/components/ui/page-header';
 
 export default function PDCsPage() {
     const router = useRouter();
@@ -76,24 +77,19 @@ export default function PDCsPage() {
 
     return (
         <div className="p-6 space-y-8 animate-in fade-in duration-500">
-            {/* Header Section */}
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-                <div>
-                    <h1 className="text-2xl font-bold text-slate-900 flex items-center gap-2">
-                        <span className="p-2 bg-slate-100 text-slate-600 rounded-lg material-symbols-rounded">history_edu</span>
-                        Mis PDC (Historial)
-                    </h1>
-                    <p className="text-slate-500 mt-1">Consulta y gestiona todos tus planes de desarrollo curricular creados.</p>
-                </div>
-                <div className="flex gap-3">
+            <PageHeader
+                title="Mis PDC (Historial)"
+                subtitle="Consulta y gestiona todos tus planes de desarrollo curricular creados."
+                icon="history_edu"
+                actions={
                     <Link href="/dashboard/pdcs/new">
-                        <Button className="gap-2 px-6">
-                            <span className="material-symbols-rounded">add</span>
-                            Nuevo PDC
+                        <Button className="bg-blue-600 hover:bg-blue-700 h-12 px-6 rounded-2xl shadow-lg shadow-blue-500/20 gap-2">
+                            <span className="material-symbols-rounded text-xl">add</span>
+                            <span className="font-bold">Nuevo PDC</span>
                         </Button>
                     </Link>
-                </div>
-            </div>
+                }
+            />
 
             {/* Empty State vs Content */}
             {pdcs.length === 0 ? (

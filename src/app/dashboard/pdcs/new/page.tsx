@@ -66,16 +66,16 @@ function NewPdcContent() {
 
                         <div className="flex flex-col gap-2">
                             <div className="flex items-center gap-4">
-                                <span className="px-3 py-1 bg-slate-950 text-white text-[9px] font-black rounded-full uppercase tracking-[0.2em] shadow-lg shadow-slate-900/20 border border-white/10">
+                                <span className="px-3 py-1 bg-blue-600 text-white text-xs font-black rounded-full uppercase tracking-[0.2em] shadow-lg shadow-blue-500/20 border border-white/10">
                                     {step === 3 ? `FASE ${pdcStep} DE 7` : `FASE ${step} DE 3`}
                                 </span>
-                                <h1 className="text-xl md:text-2xl font-black text-slate-950 tracking-tighter leading-none uppercase italic">
+                                <h1 className="text-xl md:text-2xl font-black text-blue-950 tracking-tighter leading-none uppercase">
                                     {getStepName().includes(':') ? getStepName().split(':')[1].trim() : getStepName()}
                                 </h1>
                             </div>
                             <div className="flex items-center gap-3 px-1">
                                 <div className="h-1 w-12 bg-gradient-to-r from-blue-600 to-cyan-400 rounded-full shadow-sm"></div>
-                                <p className="text-[11px] font-black text-slate-400 uppercase tracking-[0.4em]">Asistente de Planificación PDC</p>
+                                <p className="text-xs font-black text-slate-400 uppercase tracking-[0.4em]">Asistente de Planificación PDC</p>
                             </div>
                         </div>
                     </div>
@@ -92,7 +92,7 @@ function NewPdcContent() {
                                         <button
                                             key={areaId}
                                             onClick={() => jumpToArea(idx)}
-                                            className={`px-5 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all flex items-center gap-2 relative overflow-hidden group/area ${isActive
+                                            className={`px-5 py-2 rounded-xl text-xs font-black uppercase tracking-widest transition-all flex items-center gap-2 relative overflow-hidden group/area ${isActive
                                                 ? 'bg-white text-blue-600 shadow-md ring-1 ring-blue-50 scale-105 z-10'
                                                 : 'text-slate-400 hover:text-slate-600 hover:bg-white/40'
                                                 }`}
@@ -126,7 +126,7 @@ function NewPdcContent() {
                             </div>
                             <div className="flex items-center gap-2">
                                 <span className="size-1.5 bg-blue-500 rounded-full animate-pulse"></span>
-                                <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em]">Progreso Global</span>
+                                <span className="text-xs font-black text-slate-400 uppercase tracking-[0.3em]">Progreso Global</span>
                             </div>
                         </div>
                     </div>
@@ -175,7 +175,7 @@ function NewPdcContent() {
             {/* Floating Footer Navigation */}
             <div className="fixed bottom-6 left-0 right-0 z-50 pointer-events-none">
                 <div className="max-w-4xl mx-auto px-6 w-full pointer-events-auto">
-                    <div className="bg-slate-950/90 backdrop-blur-3xl border border-white/10 p-4 rounded-2xl shadow-[0_20px_40px_-12px_rgba(0,0,0,0.5)] flex items-center justify-between gap-6 overflow-hidden relative group/footer ring-1 ring-white/5">
+                    <div className="bg-blue-900/95 backdrop-blur-3xl border border-white/10 p-4 rounded-2xl shadow-[0_20px_40px_-12px_rgba(0,0,0,0.5)] flex items-center justify-between gap-6 overflow-hidden relative group/footer ring-1 ring-white/5">
                         {/* Progress Bar for Step 3 sub-steps */}
                         {step === 3 && (
                             <div className="absolute top-0 left-0 right-0 h-1.5 bg-white/5 overflow-hidden">
@@ -193,7 +193,7 @@ function NewPdcContent() {
                                 </span>
                             </div>
                             <div className="flex flex-col">
-                                <span className="text-[8px] font-black text-slate-500 uppercase tracking-[0.2em]">Próximo Objetivo</span>
+                                <span className="text-xs font-black text-slate-400 uppercase tracking-[0.2em]">Próximo Objetivo</span>
                                 <span className="text-white font-black text-sm whitespace-nowrap overflow-hidden text-ellipsis max-w-[200px] md:max-w-none tracking-tight">
                                     {step === 1 ? 'Vincular Áreas y Modalidad' :
                                         step === 2 ? 'Configurar Cronograma' :
@@ -207,7 +207,7 @@ function NewPdcContent() {
                             <Button
                                 onClick={handleNext}
                                 disabled={saving}
-                                className="h-12 px-8 bg-white text-slate-950 hover:bg-slate-50 font-black rounded-xl gap-3 shadow-xl transition-all active:scale-95 group/btn disabled:opacity-50 text-sm border-b-2 border-slate-200"
+                                className="h-12 px-8 bg-white text-blue-900 hover:bg-slate-50 font-black rounded-xl gap-3 shadow-xl transition-all active:scale-95 group/btn disabled:opacity-50 text-sm border-b-2 border-slate-200"
                             >
                                 {saving ? (
                                     <div className="size-4 border-2 border-slate-900 border-t-transparent rounded-full animate-spin"></div>
@@ -217,7 +217,7 @@ function NewPdcContent() {
                                             {step === 3 && pdcStep === 7 && currentAreaIndex === selectedAreas.length - 1 ? 'FINALIZAR' :
                                                 step === 3 && pdcStep === 7 ? 'SIGUIENTE ÁREA' : 'CONTINUAR'}
                                         </span>
-                                        <div className="size-8 bg-slate-950 text-white rounded-lg flex items-center justify-center group-hover/btn:translate-x-1 transition-transform">
+                                        <div className="size-8 bg-blue-600 text-white rounded-lg flex items-center justify-center group-hover/btn:translate-x-1 transition-transform">
                                             <span className="material-symbols-rounded text-sm font-bold">arrow_forward</span>
                                         </div>
                                     </>

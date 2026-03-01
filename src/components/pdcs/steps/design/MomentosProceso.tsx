@@ -138,7 +138,7 @@ export function MomentosProceso({
             {/* Selector de Semanas */}
             {hasWeeks && (
                 <div className="lg:col-span-1 space-y-1">
-                    <label className="text-[8px] font-black text-slate-300 uppercase tracking-tighter px-2 mb-1 block">
+                    <label className="text-xs font-black text-slate-400 uppercase tracking-[0.2em] px-2 mb-2 block">
                         Semanas
                     </label>
                     <div className="flex flex-col gap-1 px-1">
@@ -146,12 +146,12 @@ export function MomentosProceso({
                             <button
                                 key={weekNumStr}
                                 onClick={() => setActiveWeek(Number(weekNumStr))}
-                                className={`w-full px-2 py-1.5 rounded-lg font-black text-[9px] tracking-tight transition-all text-center border relative overflow-hidden flex flex-col items-center gap-0.5 ${activeWeek === Number(weekNumStr)
-                                    ? `bg-slate-950 text-white border-${levelColor} shadow-sm`
+                                className={`w-full px-3 py-2 rounded-xl font-black text-xs tracking-tight transition-all text-center border-2 relative overflow-hidden flex flex-col items-center gap-1 ${activeWeek === Number(weekNumStr)
+                                    ? `bg-blue-600 text-white border-${levelColor} shadow-lg scale-[1.05] z-10`
                                     : 'bg-white text-slate-400 border-slate-50 hover:border-slate-100 opacity-80 shadow-none'
                                     }`}
                             >
-                                <span className={`size-1 rounded-full ${activeWeek === Number(weekNumStr) ? `bg-${levelColor} animate-pulse` : 'bg-slate-100'}`}></span>
+                                <span className={`size-1.5 rounded-full ${activeWeek === Number(weekNumStr) ? `bg-${levelColor} animate-pulse shadow-[0_0_8px_rgba(255,255,255,0.5)]` : 'bg-slate-100'}`}></span>
                                 S{weekNumStr}
                             </button>
                         ))}
@@ -173,10 +173,10 @@ export function MomentosProceso({
                                         : 'text-slate-400 hover:text-slate-600 hover:bg-slate-100/50'
                                         }`}
                                 >
-                                    <div className={`size-5 rounded flex items-center justify-center ${activeTab === m.id ? `bg-${m.color}/10 text-${m.color}` : 'bg-slate-100 text-slate-400'}`}>
-                                        <span className="material-symbols-rounded text-[16px]">{m.icon}</span>
+                                    <div className={`size-6 rounded-lg flex items-center justify-center shadow-sm ${activeTab === m.id ? `bg-${m.color}/10 text-${m.color}` : 'bg-slate-100 text-slate-400'}`}>
+                                        <span className="material-symbols-rounded text-lg">{m.icon}</span>
                                     </div>
-                                    <span className={`text-[8px] font-black uppercase tracking-tight ${activeTab === m.id ? 'opacity-100' : 'opacity-60'}`}>
+                                    <span className={`text-[10px] font-black uppercase tracking-widest ${activeTab === m.id ? 'opacity-100' : 'opacity-60'}`}>
                                         {m.label}
                                     </span>
                                 </button>
@@ -188,24 +188,24 @@ export function MomentosProceso({
                             <div className={`absolute top-0 right-0 size-[200px] bg-gradient-to-br from-${levelColor}/10 via-transparent to-transparent rounded-full blur-3xl -mr-32 -mt-32 opacity-70 pointer-events-none`}></div>
 
                             {/* Contents & Active Week Header - Ultra Compact */}
-                            <div className="flex items-center justify-between gap-4 relative z-10 bg-slate-50/50 p-2 rounded-lg border border-slate-100/50">
-                                <div className="flex items-center gap-2">
-                                    <span className={`text-[8px] font-black uppercase text-white bg-slate-950 px-2 py-0.5 rounded-full`}>
-                                        S{activeWeek}
+                            <div className="flex items-center justify-between gap-4 relative z-10 bg-slate-100/30 p-2.5 rounded-xl border border-slate-200/50 backdrop-blur-sm">
+                                <div className="flex items-center gap-3">
+                                    <span className={`text-[10px] font-black uppercase text-white bg-blue-600 px-3 py-1 rounded-full shadow-lg shadow-blue-500/20`}>
+                                        Semana {activeWeek}
                                     </span>
-                                    <label className={`text-[9px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2 opacity-70`}>
-                                        Temas:
+                                    <label className={`text-xs font-black text-slate-500 uppercase tracking-[0.2em] flex items-center gap-2 opacity-80`}>
+                                        Temas Centrales:
                                     </label>
-                                    <div className="flex flex-wrap gap-1">
+                                    <div className="flex flex-wrap gap-2">
                                         {weekContentsMap[activeWeek]?.map((c, i) => (
-                                            <span key={i} className="text-[9px] font-bold text-slate-600 uppercase bg-white border border-slate-200/50 px-1.5 py-0.5 rounded shadow-sm max-w-[120px] truncate">
+                                            <span key={i} className="text-xs font-black text-slate-700 uppercase bg-white border border-slate-200 px-2 py-0.5 rounded-lg shadow-sm max-w-[150px] truncate italic">
                                                 {c.titulo}
                                             </span>
                                         ))}
                                     </div>
                                 </div>
-                                <div className={`px-2 py-0.5 rounded-full bg-${levelColor}/10 border border-${levelColor}/10`}>
-                                    <span className={`text-[8px] font-black uppercase text-${levelColor}`}>Modo Edición</span>
+                                <div className={`px-3 py-1 rounded-full bg-${levelColor}/10 border border-${levelColor}/20`}>
+                                    <span className={`text-[10px] font-black uppercase text-${levelColor} tracking-widest`}>Modo Edición Activo</span>
                                 </div>
                             </div>
 
@@ -215,8 +215,8 @@ export function MomentosProceso({
                                         {/* Columna Izquierda: Biblioteca */}
                                         <div className="lg:col-span-3 flex flex-col space-y-2 overflow-hidden">
                                             <div className="flex items-center justify-between px-1">
-                                                <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Biblioteca</span>
-                                                <span className="text-[8px] font-bold text-slate-300">{library.length} técnicas</span>
+                                                <span className="text-xs font-black text-slate-400 uppercase tracking-widest">Biblioteca</span>
+                                                <span className="text-[10px] font-bold text-slate-400 bg-slate-100 px-2 py-0.5 rounded-full">{library.length} técnicas</span>
                                             </div>
                                             <div className="flex-1 overflow-y-auto pr-0.5 space-y-0">
                                                 {library.length === 0 ? (
@@ -228,11 +228,11 @@ export function MomentosProceso({
                                                 ) : Object.entries(groupedLibrary).map(([proposito, items]) => (
                                                     <div key={proposito} className="mb-2">
                                                         {/* Separador estilo Word por Propósito */}
-                                                        <div className="flex items-center gap-2 px-1 py-1.5 sticky top-0 bg-white/90 backdrop-blur-sm z-10 border-b border-slate-100">
-                                                            <div className="h-px flex-shrink-0 w-1 bg-rose-400 rounded-full"></div>
-                                                            <span className="text-[8px] font-black text-rose-500 uppercase tracking-widest whitespace-nowrap">{proposito}</span>
+                                                        <div className="flex items-center gap-2 px-1 py-2 sticky top-0 bg-white/95 backdrop-blur-sm z-10 border-b border-slate-100">
+                                                            <div className="h-1.5 flex-shrink-0 w-1.5 bg-rose-500 rounded-full shadow-[0_0_8px_rgba(244,63,94,0.4)]"></div>
+                                                            <span className="text-[10px] font-black text-rose-600 uppercase tracking-[0.2em] whitespace-nowrap">{proposito}</span>
                                                             <div className="h-px flex-1 bg-slate-100"></div>
-                                                            <span className="text-[7px] font-bold text-slate-300">{items.length}</span>
+                                                            <span className="text-[9px] font-black text-slate-300">{items.length}</span>
                                                         </div>
                                                         {/* Lista de técnicas sin acordeón */}
                                                         <div className="space-y-px pt-0.5">
@@ -248,20 +248,22 @@ export function MomentosProceso({
                                                                         }`}
                                                                 >
                                                                     <div className="flex items-center justify-between gap-1">
-                                                                        <span className={`text-[10px] font-bold leading-tight ${selectedLibraryItem?.id === item.id ? 'text-rose-700' : 'text-slate-600'
+                                                                        <span className={`text-xs font-black leading-tight ${selectedLibraryItem?.id === item.id ? 'text-rose-700' : 'text-slate-700'
                                                                             }`}>
                                                                             {item.tecnica}
                                                                         </span>
-                                                                        <span className={`material-symbols-rounded text-[12px] flex-shrink-0 transition-opacity ${selectedLibraryItem?.id === item.id ? 'opacity-100 text-rose-400' : 'opacity-0 group-hover:opacity-50 text-slate-300'
+                                                                        <span className={`material-symbols-rounded text-base flex-shrink-0 transition-opacity ${selectedLibraryItem?.id === item.id ? 'opacity-100 text-rose-500' : 'opacity-0 group-hover:opacity-50 text-slate-300'
                                                                             }`}>east</span>
                                                                     </div>
                                                                     {selectedLibraryItem?.id === item.id && (
-                                                                        <div className="mt-1 animate-in fade-in slide-in-from-top-1 duration-200">
-                                                                            <p className="text-[8px] text-slate-400 leading-relaxed">{item.descripcion_concreta}</p>
+                                                                        <div className="mt-2 animate-in fade-in slide-in-from-top-1 duration-200">
+                                                                            <p className="text-[10px] text-slate-500 font-medium leading-relaxed">"{item.descripcion_concreta}"</p>
                                                                             {item.preguntas_generales && (
-                                                                                <p className="text-[7px] text-rose-400 italic mt-1 leading-relaxed line-clamp-2">{item.preguntas_generales}</p>
+                                                                                <div className="mt-2 p-2 bg-rose-50/50 rounded-lg border border-rose-100/50">
+                                                                                    <p className="text-[10px] text-rose-600 font-bold leading-relaxed">{item.preguntas_generales}</p>
+                                                                                </div>
                                                                             )}
-                                                                            <span className="text-[7px] font-black text-slate-300 uppercase block mt-1">↑ doble clic para copiar al editor</span>
+                                                                            <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mt-2">↑ doble clic para insertar</span>
                                                                         </div>
                                                                     )}
                                                                 </div>
@@ -276,54 +278,54 @@ export function MomentosProceso({
                                         <div className="lg:col-span-6 flex flex-col space-y-3 bg-slate-50/50 p-3 rounded-xl border border-slate-100">
                                             <div className="flex items-center justify-between">
                                                 <div className="flex items-center gap-2">
-                                                    <div className={`size-3 rounded-full bg-rose-500 shadow-sm shadow-rose-200 animate-pulse`}></div>
-                                                    <span className="text-[10px] font-black text-slate-800 uppercase tracking-widest">Panel de Edición</span>
+                                                    <div className={`size-3.5 rounded-full bg-rose-500 shadow-[0_0_12px_rgba(244,63,94,0.5)] animate-pulse`}></div>
+                                                    <span className="text-xs font-black text-slate-800 uppercase tracking-[0.2em]">Panel de Edición Técnica</span>
                                                 </div>
                                                 {editingItem.id && (
-                                                    <button onClick={() => setEditingItem({ tecnica: '', detalle: '', preguntas: '' })} className="text-[8px] font-black text-rose-500 uppercase hover:underline">Cancelar Edición</button>
+                                                    <button onClick={() => setEditingItem({ tecnica: '', detalle: '', preguntas: '' })} className="text-[10px] font-black text-rose-500 uppercase hover:underline tracking-widest">Cancelar Edición</button>
                                                 )}
                                             </div>
 
                                             <div className="flex flex-col space-y-3 flex-1 overflow-y-auto pr-1">
-                                                <div className="space-y-1">
-                                                    <label className="text-[9px] font-black text-slate-400 uppercase px-1">Técnica Seleccionada</label>
+                                                <div className="space-y-1.5">
+                                                    <label className="text-xs font-black text-slate-400 uppercase tracking-widest px-1">Título de la Técnica</label>
                                                     <input
                                                         type="text"
                                                         value={editingItem.tecnica}
                                                         onChange={(e) => setEditingItem(prev => ({ ...prev, tecnica: e.target.value }))}
-                                                        className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-[11px] font-bold text-slate-800 focus:border-rose-300 focus:ring-2 focus:ring-rose-100 outline-none transition-all shadow-sm"
+                                                        className="w-full bg-white border-2 border-slate-100 rounded-xl px-4 py-3 text-sm font-black text-slate-800 focus:border-rose-400 focus:ring-0 outline-none transition-all shadow-sm"
                                                         placeholder="Nombre de la técnica..."
                                                     />
                                                 </div>
 
-                                                <div className="space-y-1 flex-1 flex flex-col">
-                                                    <label className="text-[9px] font-black text-slate-400 uppercase px-1">Detallar la Técnica</label>
+                                                <div className="space-y-1.5 flex-1 flex flex-col">
+                                                    <label className="text-xs font-black text-slate-400 uppercase tracking-widest px-1">Desarrollo Metodológico</label>
                                                     <textarea
                                                         value={editingItem.detalle}
                                                         onChange={(e) => setEditingItem(prev => ({ ...prev, detalle: e.target.value }))}
-                                                        className="w-full flex-1 bg-white border border-slate-200 rounded-lg px-3 py-2 text-[11px] font-medium text-slate-700 focus:border-rose-300 focus:ring-2 focus:ring-rose-100 outline-none transition-all resize-none shadow-sm min-h-[120px]"
-                                                        placeholder="Describe cómo aplicarás esta técnica..."
+                                                        className="w-full flex-1 bg-white border-2 border-slate-100 rounded-xl px-4 py-3 text-sm font-bold text-slate-700 focus:border-rose-400 focus:ring-0 outline-none transition-all resize-none shadow-sm min-h-[150px] leading-relaxed"
+                                                        placeholder="Describe detalladamente cómo aplicarás esta técnica en el aula..."
                                                     />
                                                 </div>
 
-                                                <div className="space-y-1">
-                                                    <label className="text-[9px] font-black text-slate-400 uppercase px-1">Preguntas Generales (Comodín)</label>
+                                                <div className="space-y-1.5">
+                                                    <label className="text-xs font-black text-slate-400 uppercase tracking-widest px-1">Preguntas de Reflexión / Dinamización</label>
                                                     <textarea
                                                         value={editingItem.preguntas}
                                                         onChange={(e) => setEditingItem(prev => ({ ...prev, preguntas: e.target.value }))}
-                                                        className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-[11px] font-medium text-slate-600 focus:border-rose-300 focus:ring-2 focus:ring-rose-100 outline-none transition-all resize-none shadow-sm h-[80px]"
-                                                        placeholder="Preguntas para dinamizar..."
+                                                        className="w-full bg-white border-2 border-slate-100 rounded-xl px-4 py-3 text-sm font-bold text-slate-600 focus:border-rose-400 focus:ring-0 outline-none transition-all resize-none shadow-sm h-[100px]"
+                                                        placeholder="Preguntas para guiar el proceso..."
                                                     />
                                                 </div>
 
                                                 <button
                                                     onClick={handleSavePractica}
-                                                    className={`w-full py-2.5 rounded-xl font-black text-[11px] uppercase tracking-widest transition-all shadow-lg flex items-center justify-center gap-2 ${editingItem.tecnica
-                                                        ? 'bg-slate-950 text-white hover:bg-black shadow-slate-200 active:scale-95'
+                                                    className={`w-full py-4 rounded-xl font-black text-xs uppercase tracking-[0.2em] transition-all shadow-xl flex items-center justify-center gap-3 ${editingItem.tecnica
+                                                        ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-blue-200 active:scale-[0.98]'
                                                         : 'bg-slate-100 text-slate-300 cursor-not-allowed shadow-none'}`}
                                                 >
-                                                    <span className="material-symbols-rounded text-[18px]">save</span>
-                                                    {editingItem.id ? 'Actualizar Práctica' : 'Guardar en la Semana'}
+                                                    <span className="material-symbols-rounded text-xl">save_as</span>
+                                                    {editingItem.id ? 'ACTUALIZAR ACTIVIDAD' : 'GUARDAR EN PLANIFICACIÓN'}
                                                 </button>
                                             </div>
                                         </div>
@@ -331,62 +333,62 @@ export function MomentosProceso({
                                         {/* Columna Derecha: Resumen Guardado */}
                                         <div className="lg:col-span-3 flex flex-col space-y-2 overflow-hidden">
                                             <div className="flex items-center justify-between px-1">
-                                                <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Prácticas Guardadas</span>
-                                                <span className={`text-[8px] font-black text-white px-1.5 py-0.5 rounded bg-rose-500`}>S{activeWeek}</span>
+                                                <span className="text-xs font-black text-slate-400 uppercase tracking-widest">Actividades Guardadas</span>
+                                                <span className={`text-xs font-black text-white px-2 py-0.5 rounded-full bg-rose-500 shadow-lg shadow-rose-200`}>S{activeWeek}</span>
                                             </div>
-                                            <div className="flex-1 overflow-y-auto pr-1 space-y-2 custom-scrollbar">
+                                            <div className="flex-1 overflow-y-auto pr-1 space-y-3 custom-scrollbar">
                                                 {Array.isArray(currentDesign.momentos.practica) && currentDesign.momentos.practica.length > 0 ? (
                                                     currentDesign.momentos.practica.map((p, idx) => (
-                                                        <div key={p.id || idx} className="bg-white border border-rose-100 rounded-xl p-3 shadow-sm shadow-rose-50/50 hover:shadow-md transition-all relative group border-l-4 border-l-rose-500">
-                                                            <div className="flex items-start justify-between gap-2 mb-1.5">
-                                                                <h4 className="text-[10px] font-black text-slate-900 uppercase leading-none pr-12">{p.tecnica}</h4>
-                                                                <div className="flex items-center gap-1 absolute top-2 right-2">
+                                                        <div key={p.id || idx} className="bg-white border-2 border-rose-100 rounded-2xl p-4 shadow-xl shadow-rose-50/50 hover:shadow-rose-100/50 transition-all relative group border-l-[6px] border-l-rose-500">
+                                                            <div className="flex items-start justify-between gap-2 mb-2">
+                                                                <h4 className="text-sm font-black text-slate-900 uppercase leading-tight pr-12">{p.tecnica}</h4>
+                                                                <div className="flex items-center gap-1.5 absolute top-3 right-3">
                                                                     <button
                                                                         onClick={() => setEditingItem(p)}
-                                                                        className="size-6 rounded-lg bg-slate-50 text-slate-400 hover:text-blue-500 hover:bg-blue-50 transition-all flex items-center justify-center"
+                                                                        className="size-8 rounded-xl bg-slate-50 text-slate-400 hover:text-blue-500 hover:bg-blue-50 hover:shadow-md transition-all flex items-center justify-center"
                                                                     >
-                                                                        <span className="material-symbols-rounded text-[14px]">edit</span>
+                                                                        <span className="material-symbols-rounded text-lg">edit</span>
                                                                     </button>
                                                                     <button
                                                                         onClick={() => handleDeletePractica(p.id)}
-                                                                        className="size-6 rounded-lg bg-slate-50 text-slate-400 hover:text-rose-500 hover:bg-rose-50 transition-all flex items-center justify-center"
+                                                                        className="size-8 rounded-xl bg-slate-50 text-slate-400 hover:text-rose-500 hover:bg-rose-50 hover:shadow-md transition-all flex items-center justify-center"
                                                                     >
-                                                                        <span className="material-symbols-rounded text-[14px]">delete</span>
+                                                                        <span className="material-symbols-rounded text-lg">delete</span>
                                                                     </button>
                                                                 </div>
                                                             </div>
-                                                            <p className="text-[10px] text-slate-600 leading-relaxed line-clamp-3 mb-2">{p.detalle}</p>
+                                                            <p className="text-sm text-slate-600 font-medium leading-relaxed line-clamp-4 mb-3">{p.detalle}</p>
                                                             {p.preguntas && (
-                                                                <div className="pt-2 border-t border-slate-50">
-                                                                    <span className="text-[8px] font-black text-slate-300 uppercase block mb-1">Preguntas:</span>
-                                                                    <p className="text-[9px] text-slate-500 italic line-clamp-2">{p.preguntas}</p>
+                                                                <div className="pt-3 border-t border-slate-100">
+                                                                    <span className="text-xs font-black text-slate-400 uppercase tracking-widest block mb-1.5">Preguntas Guía:</span>
+                                                                    <p className="text-xs text-slate-500 italic font-bold leading-relaxed">"{p.preguntas}"</p>
                                                                 </div>
                                                             )}
                                                         </div>
                                                     ))
                                                 ) : (
-                                                    <div className="h-40 flex flex-col items-center justify-center border-2 border-dashed border-slate-100 rounded-2xl bg-slate-50/30 p-4 text-center">
-                                                        <span className="material-symbols-rounded text-slate-200 text-3xl mb-2">inventory_2</span>
-                                                        <span className="text-[9px] font-bold text-slate-300 uppercase tracking-tighter">No hay actividades guardadas para esta semana</span>
+                                                    <div className="h-40 flex flex-col items-center justify-center border-2 border-dashed border-slate-100 rounded-3xl bg-slate-50/30 p-6 text-center">
+                                                        <span className="material-symbols-rounded text-slate-200 text-4xl mb-3">inventory_2</span>
+                                                        <span className="text-xs font-black text-slate-400 uppercase tracking-widest">No hay actividades para esta semana</span>
                                                     </div>
                                                 )}
                                             </div>
                                         </div>
                                     </div>
                                 ) : (
-                                    <div className="flex-1 flex flex-col space-y-1.5">
-                                        <div className="flex items-center gap-2 px-1">
-                                            <div className={`size-2 rounded-full bg-${momentos.find(m => m.id === activeTab)?.color} shadow-sm animate-pulse`}></div>
-                                            <span className="text-[10px] font-black text-slate-800 uppercase tracking-widest">
-                                                {momentos.find(m => m.id === activeTab)?.label}
+                                    <div className="flex-1 flex flex-col space-y-2.5">
+                                        <div className="flex items-center gap-3 px-1">
+                                            <div className={`size-3 rounded-full bg-${momentos.find(m => m.id === activeTab)?.color} shadow-lg animate-pulse`}></div>
+                                            <span className="text-sm font-black text-slate-800 uppercase tracking-[0.2em]">
+                                                Redacción de {momentos.find(m => m.id === activeTab)?.label}
                                             </span>
                                             <div className="h-px flex-1 bg-slate-100"></div>
                                         </div>
                                         <textarea
                                             value={(currentDesign.momentos[activeTab as keyof typeof currentDesign.momentos] as string) || ''}
                                             onChange={(e) => handleUpdateMomento(activeTab, e.target.value)}
-                                            className="w-full flex-1 bg-slate-50/30 border border-transparent focus:border-slate-100 focus:bg-white rounded-lg p-3 text-[12px] font-medium text-slate-700 transition-all min-h-[350px] resize-none outline-none leading-relaxed placeholder:text-slate-300 shadow-sm"
-                                            placeholder={`Escribe aquí el contenido de ${momentos.find(m => m.id === activeTab)?.label}...`}
+                                            className="w-full flex-1 bg-slate-50/30 border-2 border-transparent focus:border-slate-200 focus:bg-white rounded-2xl p-6 text-sm font-bold text-slate-700 transition-all min-h-[400px] resize-none outline-none leading-relaxed placeholder:text-slate-300 shadow-inner"
+                                            placeholder={`Escribe aquí el contenido detallado de ${momentos.find(m => m.id === activeTab)?.label}...`}
                                         />
                                     </div>
                                 )}

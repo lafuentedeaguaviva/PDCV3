@@ -1,57 +1,61 @@
+import React from 'react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
-function cn(...inputs: ClassValue[]) {
+export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
 }
 
-interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
-    glass?: boolean;
+// --- Atomic Components ---
+
+interface CardProps extends React.PropsWithChildren {
+    className?: string;
+    onClick?: () => void;
 }
 
-export function Card({ className, glass, ...props }: CardProps) {
-    return (
-        <div
-            className={cn(
-                'rounded-2xl border border-slate-100 bg-white p-5 shadow-sm transition-all',
-                glass && 'glass-card',
-                className
-            )}
-            {...props}
-        />
-    );
+export const Card: React.FC<CardProps> = ({ children, className, onClick }) => (
+    <div
+        className={cn("bg-white rounded-[32px] border border-slate-100 shadow-sm transition-all", className)}
+        onClick={onClick}
+    >
+        {children}
+    </div>
+);
+
+interface BadgeProps extends React.PropsWithChildren {
+    variant?: 'default' | 'accent' | 'outline' | 'success' | 'warning' | 'error';
+    className?: string;
 }
 
-interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
-    variant?: 'default' | 'outline' | 'success' | 'warning' | 'error' | 'indigo';
-}
-
-export function Badge({ className, variant = 'default', ...props }: BadgeProps) {
-    const variants = {
+export const Badge: React.FC<BadgeProps> = ({
+    children,
+    variant = 'default',
+    className
+}) => {
+    const variants: Record<string, string> = {
         default: 'bg-slate-100 text-slate-600',
-        outline: 'border border-slate-200 text-slate-500',
-        success: 'bg-green-50 text-green-700',
-        warning: 'bg-amber-50 text-amber-700',
-        error: 'bg-red-50 text-red-700',
-        indigo: 'bg-indigo-50 text-indigo-700',
+        accent: 'bg-primary/10 text-primary',
+        outline: 'border border-slate-200 text-slate-400',
+        success: 'bg-emerald-50 text-emerald-600 border border-emerald-100',
+        warning: 'bg-amber-50 text-amber-600 border border-amber-100',
+        error: 'bg-rose-50 text-rose-600 border border-rose-100'
     };
 
     return (
-        <span
-            className={cn(
-                'inline-flex items-center rounded px-2 py-0.5 text-xs font-bold uppercase tracking-wide',
-                variants[variant],
-                className
-            )}
-            {...props}
-        />
+        <span className={cn(
+            "px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider inline-flex items-center justify-center",
+            variants[variant],
+            className
+        )}>
+            {children}
+        </span>
     );
-}
+};
 
 export function Skeleton({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
     return (
         <div
-            className={cn('animate-pulse rounded-md bg-slate-200', className)}
+            className={cn("animate-pulse rounded-md bg-slate-200/60", className)}
             {...props}
         />
     );

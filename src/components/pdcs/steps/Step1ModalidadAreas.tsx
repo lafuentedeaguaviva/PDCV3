@@ -29,8 +29,8 @@ export function Step1ModalidadAreas({
             <div className="xl:col-span-4 space-y-8">
                 <div className="space-y-2">
                     <div className="h-1 w-10 bg-blue-600 rounded-full shadow-sm shadow-blue-500/50"></div>
-                    <h3 className="text-xl font-black text-slate-950 tracking-tight">Modalidad del Plan</h3>
-                    <p className="text-slate-400 font-bold text-[9px] uppercase tracking-widest">Selecciona el tipo de PDC a generar</p>
+                    <h3 className="text-2xl font-black text-slate-950 tracking-tight uppercase">Modalidad del Plan</h3>
+                    <p className="text-slate-400 font-bold text-xs uppercase tracking-[0.2em]">Selecciona el tipo de PDC a generar</p>
                 </div>
 
                 <div className="grid gap-6">
@@ -47,7 +47,7 @@ export function Step1ModalidadAreas({
                                 <div className={`absolute inset-0 bg-gradient-to-br from-${type.color}/10 via-transparent to-${type.color}/5`}></div>
                             )}
 
-                            <div className={`size-12 rounded-xl flex items-center justify-center transition-all duration-500 shadow-lg group-hover:rotate-3 relative z-10 ${selectedType === type.id ? 'bg-slate-950 text-white scale-110' : 'bg-slate-100 text-slate-400 group-hover:bg-slate-200'
+                            <div className={`size-12 rounded-xl flex items-center justify-center transition-all duration-500 shadow-lg group-hover:rotate-3 relative z-10 ${selectedType === type.id ? 'bg-blue-600 text-white scale-110' : 'bg-slate-100 text-slate-400 group-hover:bg-slate-200'
                                 }`}>
                                 <span className="material-symbols-rounded text-xl font-bold">{type.icon}</span>
                             </div>
@@ -56,8 +56,8 @@ export function Step1ModalidadAreas({
                                 <span className={`text-base font-black block tracking-tight leading-none ${selectedType === type.id ? 'text-slate-950' : 'text-slate-500 group-hover:text-slate-900'}`}>
                                     PDC {type.name}
                                 </span>
-                                <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest mt-1 block opacity-70">
-                                    Configuración {type.name}
+                                <span className="text-[11px] font-black text-slate-400 uppercase tracking-widest mt-1.5 block opacity-70">
+                                    Nivel {type.name} Educativo
                                 </span>
                             </div>
 
@@ -74,9 +74,9 @@ export function Step1ModalidadAreas({
             {/* Right: Areas */}
             <div className="xl:col-span-8 space-y-8">
                 <div className="space-y-2">
-                    <div className="h-1 w-10 bg-slate-950 rounded-full shadow-sm shadow-slate-900/20"></div>
-                    <h3 className="text-xl font-black text-slate-950 tracking-tight">Áreas de Trabajo</h3>
-                    <p className="text-slate-400 font-bold text-[9px] uppercase tracking-widest">Selecciona una o más áreas para planificar</p>
+                    <div className="h-1 w-10 bg-blue-600 rounded-full shadow-sm shadow-blue-500/20"></div>
+                    <h3 className="text-2xl font-black text-slate-950 tracking-tight uppercase">Áreas de Trabajo</h3>
+                    <p className="text-slate-400 font-bold text-xs uppercase tracking-[0.2em]">Selecciona una o más áreas para planificar</p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -85,7 +85,7 @@ export function Step1ModalidadAreas({
                             key={area.id}
                             onClick={() => toggleAreaSelection(area.id)}
                             className={`p-6 rounded-2xl border-2 transition-all duration-500 cursor-pointer relative overflow-hidden group/area ${selectedAreas.includes(area.id)
-                                ? 'border-slate-950 bg-white shadow-xl shadow-slate-950/10 scale-[1.02] z-10'
+                                ? 'border-blue-600 bg-white shadow-xl shadow-blue-500/10 scale-[1.02] z-10'
                                 : 'border-slate-100 hover:border-slate-300 bg-white hover:shadow-lg hover:scale-[1.01]'
                                 }`}
                         >
@@ -95,12 +95,12 @@ export function Step1ModalidadAreas({
 
                             <div className="space-y-5 relative z-10">
                                 <div className="flex items-center justify-between">
-                                    <span className={`text-[9px] font-black px-3 py-1 rounded-full uppercase tracking-wider border transition-colors ${selectedAreas.includes(area.id) ? 'bg-slate-950 text-white border-transparent' : 'bg-slate-50 text-slate-500 border-slate-100'
+                                    <span className={`text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-wider border transition-colors ${selectedAreas.includes(area.id) ? 'bg-blue-600 text-white border-transparent' : 'bg-slate-50 text-slate-500 border-slate-100'
                                         }`}>
                                         {area.unidad_educativa?.nombre}
                                     </span>
                                     {selectedAreas.includes(area.id) && (
-                                        <div className="size-8 bg-slate-950 rounded-xl flex items-center justify-center text-white shadow-lg shadow-slate-900/40 animate-in zoom-in-50 duration-500">
+                                        <div className="size-8 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-blue-500/40 animate-in zoom-in-50 duration-500">
                                             <span className="material-symbols-rounded text-xl font-bold">done_all</span>
                                         </div>
                                     )}
@@ -110,8 +110,8 @@ export function Step1ModalidadAreas({
                                         {area.area_conocimiento?.nombre}
                                     </h3>
                                     <div className="flex items-center gap-2">
-                                        <div className="size-1 bg-blue-500 rounded-full"></div>
-                                        <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                                        <div className="size-1.5 bg-blue-500 rounded-full shadow-[0_0_8px_rgba(59,130,246,0.5)]"></div>
+                                        <p className="text-xs font-black text-slate-400 uppercase tracking-widest">
                                             {(area.area_conocimiento as any).grado?.nombre} <span className="mx-1 text-slate-200">/</span> {area.turno?.nombre}
                                         </p>
                                     </div>

@@ -43,7 +43,7 @@ export function PdcCard({ pdc, onDelete, onResume }: PdcCardProps) {
                     <Badge variant="default">
                         {firstArea?.unidad_educativa?.nombre || 'Verificando...'}
                     </Badge>
-                    <Badge variant="indigo">
+                    <Badge variant="accent">
                         {firstArea?.area_conocimiento?.nombre || 'Verificando...'}
                     </Badge>
                     <Badge

@@ -135,4 +135,79 @@ export interface PDCMaster {
     areas_trabajo?: AreaTrabajo[];
 }
 
-export type PDC = PDCMaster; // Redefinimos PDC para apuntar a la nueva estructura maestra
+export type PDC = PDCMaster;
+
+// --- PDC Wizard & Design Structs ---
+
+export interface CatalogoVerbo {
+    id: number;
+    verbo: string;
+    tipo_verbo_id: number;
+    dominio?: string;
+    nivel_profundidad?: string;
+    niveles_educativos?: string[];
+}
+
+export interface CatalogoComplemento {
+    id: number;
+    complemento: string;
+    categoria: string;
+    subcategoria: string;
+    tipo_complemento_id: number;
+}
+
+export interface LearningObjective {
+    text: string;
+    contentIds: number[];
+}
+
+export interface MomentosFormativos {
+    practica: {
+        id: string | number;
+        tecnica: string;
+        detalle: string;
+        preguntas: string;
+    }[];
+    teoria: string;
+    produccion: string;
+    valoracion: string;
+    adaptaciones: string;
+    recursos: string;
+    fuentes: string;
+    herramientas: string;
+}
+
+export interface CriteriosEvaluacion {
+    ser: string;
+    saber: string;
+    hacer: string;
+    decidir: string;
+}
+
+export interface WeekDesign {
+    momentos: MomentosFormativos;
+    herramientas?: string;
+    criterios?: CriteriosEvaluacion;
+}
+
+export interface AreaDesignState {
+    learningObjectives: LearningObjective[];
+    generatorMode: 'auto' | 'manual';
+    currentObjective: {
+        verboIds: number[];
+        contentIds: number[];
+        complementId: number | null;
+        complement: string;
+        draft: string;
+        isManual: boolean;
+    };
+    manualObjective: {
+        quiero: string;
+        paraQue: string;
+        medire: string;
+    };
+    weekContentsMap: Record<number, UserContent[]>;
+    availableContents: UserContent[];
+    weekDesignState: Record<number, WeekDesign>;
+    finalProduct: string;
+}

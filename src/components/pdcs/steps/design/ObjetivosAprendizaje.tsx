@@ -81,22 +81,22 @@ export function ObjetivosAprendizaje({
                         <div className="flex bg-slate-100 p-1 rounded-xl">
                             <button
                                 onClick={() => setGeneratorMode('auto')}
-                                className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg font-black text-xs transition-all ${generatorMode === 'auto'
+                                className={`flex-1 flex items-center justify-center gap-3 py-3 rounded-lg font-black text-sm transition-all ${generatorMode === 'auto'
                                     ? 'bg-white text-blue-600 shadow-md scale-[1.02]'
                                     : 'text-slate-400 hover:text-slate-600'
                                     }`}
                             >
-                                <span className="material-symbols-rounded text-base">magic_button</span>
+                                <span className="material-symbols-rounded text-lg">magic_button</span>
                                 GENERADOR INTELIGENTE
                             </button>
                             <button
                                 onClick={() => setGeneratorMode('manual')}
-                                className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg font-black text-xs transition-all ${generatorMode === 'manual'
+                                className={`flex-1 flex items-center justify-center gap-3 py-3 rounded-lg font-black text-sm transition-all ${generatorMode === 'manual'
                                     ? 'bg-white text-indigo-600 shadow-md scale-[1.02]'
                                     : 'text-slate-400 hover:text-slate-600'
                                     }`}
                             >
-                                <span className="material-symbols-rounded text-base">edit_note</span>
+                                <span className="material-symbols-rounded text-lg">edit_note</span>
                                 MODO MANUAL
                             </button>
                         </div>
@@ -105,8 +105,8 @@ export function ObjetivosAprendizaje({
                             <div className="space-y-8 animate-in fade-in slide-in-from-left-4 duration-500">
                                 <div className="flex items-center justify-between">
                                     <div className="space-y-1">
-                                        <h3 className="text-xl font-black text-slate-900">Configuración Inteligente</h3>
-                                        <p className="text-slate-500 font-medium italic text-[11px]">Fórmula: Verbo + Contenidos + Complemento</p>
+                                        <h3 className="text-xl font-black text-slate-900 uppercase">Configuración de Objetivos</h3>
+                                        <p className="text-slate-500 font-bold text-xs tracking-wider">Fórmula: Verbo + Contenidos + Complemento</p>
                                     </div>
                                 </div>
 
@@ -114,14 +114,14 @@ export function ObjetivosAprendizaje({
                                 <div className="space-y-6 relative">
                                     <div className="flex items-center justify-between px-1">
                                         <div className="space-y-1">
-                                            <label className="text-[10px] font-black text-blue-600 uppercase tracking-widest">Paso 3.1: Selección de Verbos</label>
-                                            <p className="text-[9px] font-bold text-slate-400">Selecciona el verbo principal</p>
+                                            <label className="text-sm font-black text-blue-600 uppercase tracking-widest">Paso 3.1: Selección de Verbos</label>
+                                            <p className="text-xs font-bold text-slate-400">Selecciona el verbo principal</p>
                                         </div>
                                         <button
                                             onClick={() => setShowFilters(!showFilters)}
-                                            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border-2 transition-all font-black text-[9px] uppercase tracking-wider ${showFilters ? 'bg-blue-600 text-white border-blue-600 shadow-lg shadow-blue-100' : 'bg-white text-slate-500 border-slate-100 hover:border-slate-200'}`}
+                                            className={`flex items-center gap-2 px-4 py-2 rounded-lg border-2 transition-all font-black text-xs uppercase tracking-wider ${showFilters ? 'bg-blue-600 text-white border-blue-600 shadow-lg shadow-blue-100' : 'bg-white text-slate-500 border-slate-100 hover:border-slate-200'}`}
                                         >
-                                            <span className="material-symbols-rounded text-xs">{showFilters ? 'filter_list_off' : 'filter_list'}</span>
+                                            <span className="material-symbols-rounded text-sm">{showFilters ? 'filter_list_off' : 'filter_list'}</span>
                                             {showFilters ? 'Ocultar' : 'Filtros'}
                                         </button>
                                     </div>
@@ -134,7 +134,7 @@ export function ObjetivosAprendizaje({
                                                 <div className="flex flex-wrap gap-1.5">
                                                     <button
                                                         onClick={() => setVerbFilters((prev: any) => ({ ...prev, niveles: [] }))}
-                                                        className={`px-2.5 py-1 rounded-md text-[9px] font-black uppercase transition-all border-2 ${verbFilters.niveles.length === 0 ? 'bg-slate-900 text-white border-slate-900' : 'bg-white text-slate-500 border-slate-100'}`}
+                                                        className={`px-2.5 py-1 rounded-md text-[9px] font-black uppercase transition-all border-2 ${verbFilters.niveles.length === 0 ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-slate-500 border-slate-100'}`}
                                                     >
                                                         Todos
                                                     </button>
@@ -218,13 +218,13 @@ export function ObjetivosAprendizaje({
                                                                         return { ...prev, verboIds: newVerbos, isManual: false };
                                                                     });
                                                                 }}
-                                                                className={`px-4 py-2 rounded-xl font-black text-xs transition-all border-2 flex items-center gap-2 group ${currentObjective.verboIds.includes(v.id)
+                                                                className={`px-4 py-2.5 rounded-xl font-black text-sm transition-all border-2 flex items-center gap-3 group ${currentObjective.verboIds.includes(v.id)
                                                                     ? 'bg-blue-600 text-white border-blue-600 shadow-lg shadow-blue-100'
                                                                     : 'bg-white text-slate-700 border-slate-100 hover:border-blue-200 hover:bg-blue-50/10'
                                                                     }`}
                                                             >
                                                                 {v.verbo}
-                                                                <span className={`material-symbols-rounded text-base transition-transform ${currentObjective.verboIds.includes(v.id) ? 'translate-x-1' : 'opacity-0 scale-0'}`}>
+                                                                <span className={`material-symbols-rounded text-lg transition-transform ${currentObjective.verboIds.includes(v.id) ? 'translate-x-1' : 'opacity-0 scale-0'}`}>
                                                                     check_circle
                                                                 </span>
                                                             </button>
@@ -253,15 +253,15 @@ export function ObjetivosAprendizaje({
                                                     const activeVerb = hoveredVerb || catalogoVerbos.find(v => v.id === lastVerboId);
 
                                                     return activeVerb ? (
-                                                        <div className="bg-slate-900 p-5 rounded-2xl shadow-xl border border-white/10 relative overflow-hidden flex flex-col gap-4">
+                                                        <div className="bg-blue-900 p-5 rounded-2xl shadow-xl border border-white/10 relative overflow-hidden flex flex-col gap-4">
                                                             <div className="absolute top-0 right-0 w-24 h-24 bg-indigo-600/20 rounded-full -mr-12 -mt-12 blur-2xl"></div>
                                                             <div className="relative space-y-1">
-                                                                <span className="text-[8px] font-black text-indigo-400 uppercase tracking-widest block whitespace-nowrap overflow-hidden text-ellipsis">Definición y Nivel</span>
-                                                                <h4 className="text-xs font-black text-white uppercase tracking-tight">{activeVerb.verbo}</h4>
+                                                                <span className="text-[10px] font-black text-indigo-400 uppercase tracking-widest block whitespace-nowrap overflow-hidden text-ellipsis">Definición y Nivel</span>
+                                                                <h4 className="text-sm font-black text-white uppercase tracking-tight">{activeVerb.verbo}</h4>
                                                             </div>
                                                             <div className="bg-white/5 p-4 rounded-xl border border-white/10 space-y-2">
-                                                                <span className="text-[8px] font-black text-indigo-400 uppercase tracking-widest block">Significado Pedagógico</span>
-                                                                <p className="text-[10px] font-medium leading-relaxed text-slate-300 italic">
+                                                                <span className="text-[10px] font-black text-indigo-400 uppercase tracking-widest block">Significado Pedagógico</span>
+                                                                <p className="text-xs font-medium leading-relaxed text-slate-300">
                                                                     "{activeVerb.descripcion || 'Sin descripción disponible.'}"
                                                                 </p>
                                                             </div>
@@ -300,7 +300,7 @@ export function ObjetivosAprendizaje({
 
                                 {/* Contents */}
                                 <div className="space-y-4">
-                                    <label className="text-[10px] font-black text-blue-600 uppercase tracking-widest block px-1">Paso 3.2: Contenidos asociados</label>
+                                    <label className="text-sm font-black text-blue-600 uppercase tracking-widest block px-1">Paso 3.2: Contenidos asociados</label>
                                     <div className="max-h-[350px] overflow-y-auto pr-2 custom-scrollbar space-y-2">
                                         {availableContents.length > 0 ? (
                                             availableContents.filter(c => !c.padre_id).map(parent => {
@@ -343,7 +343,7 @@ export function ObjetivosAprendizaje({
                                                                             prev.includes(parent.id) ? prev.filter(id => id !== parent.id) : [...prev, parent.id]
                                                                         );
                                                                     }}
-                                                                    className={`size-10 rounded-xl flex items-center justify-center transition-all ${isExpanded ? 'bg-slate-900 text-white rotate-180' : 'bg-white text-slate-400 border border-slate-100'}`}
+                                                                    className={`size-10 rounded-xl flex items-center justify-center transition-all ${isExpanded ? 'bg-blue-600 text-white rotate-180' : 'bg-white text-slate-400 border border-slate-100'}`}
                                                                 >
                                                                     <span className="material-symbols-rounded">expand_more</span>
                                                                 </button>
@@ -423,9 +423,9 @@ export function ObjetivosAprendizaje({
 
                                         <div className="hidden lg:block sticky top-4">
                                             {hoveredComplement || currentObjective.complementId ? (
-                                                <div className="bg-slate-900 p-5 rounded-2xl text-white">
+                                                <div className="bg-blue-900 p-5 rounded-2xl text-white">
                                                     <h4 className="text-xs font-black uppercase text-blue-400">Información</h4>
-                                                    <p className="text-[10px] text-slate-300 italic mt-2">"{(hoveredComplement || catalogoComplementos.find(c => c.id === currentObjective.complementId)).complemento}"</p>
+                                                    <p className="text-[10px] text-slate-300 mt-2">"{(hoveredComplement || catalogoComplementos.find(c => c.id === currentObjective.complementId)).complemento}"</p>
                                                 </div>
                                             ) : (
                                                 <div className="bg-slate-50 p-6 rounded-2xl border-2 border-dashed border-slate-200 text-center py-14 opacity-60">
@@ -449,8 +449,8 @@ export function ObjetivosAprendizaje({
                                             <span className="material-symbols-rounded text-sm">psychology</span>
                                             REDACTAR CON AI
                                         </Button>
-                                        <button onClick={addStrategicObjective} className="bg-emerald-600 text-white rounded-lg px-5 py-2 font-black text-[10px] uppercase shadow-md shadow-emerald-100 transition-all hover:scale-105 active:scale-95">
-                                            Guardar
+                                        <button onClick={addStrategicObjective} className="bg-blue-600 text-white rounded-lg px-6 py-2.5 font-black text-xs uppercase shadow-md shadow-blue-100 transition-all hover:scale-105 active:scale-95">
+                                            Guardar Objetivo
                                         </button>
                                     </div>
                                 </div>
@@ -487,7 +487,7 @@ export function ObjetivosAprendizaje({
                                             setCurrentObjective((prev: any) => ({ ...prev, draft: text }));
                                             addStrategicObjective();
                                             setManualObjective({ quiero: '', paraQue: '', medire: '' });
-                                        }} className="flex-1 bg-slate-900 h-10 rounded-xl font-black text-xs">GUARDAR</Button>
+                                        }} className="flex-1 bg-blue-600 h-10 rounded-xl font-black text-xs">GUARDAR</Button>
                                     </div>
                                 </div>
                             </div>
@@ -498,7 +498,7 @@ export function ObjetivosAprendizaje({
                 {/* AI Results & Saved Objectives */}
                 <div className="space-y-6">
                     {aiOptions.length > 0 && (
-                        <div className="bg-slate-900 p-4 rounded-2xl text-white">
+                        <div className="bg-blue-900 p-4 rounded-2xl text-white">
                             <h4 className="font-black text-[10px] text-blue-200 uppercase mb-4 tracking-widest">Sugerencias AI</h4>
                             <div className="space-y-3">
                                 {aiOptions.map(opt => (
@@ -518,10 +518,10 @@ export function ObjetivosAprendizaje({
                         <h3 className="text-sm font-black text-slate-900">Objetivos Guardados ({learningObjectives.length})</h3>
                         <div className="space-y-2">
                             {learningObjectives.map((obj, i) => (
-                                <div key={i} className="bg-white p-3 rounded-lg border-2 border-slate-50 flex items-start gap-3">
-                                    <span className="size-5 bg-slate-900 text-white rounded flex items-center justify-center font-black text-[9px] shrink-0">{i + 1}</span>
+                                <div key={i} className="bg-white p-4 rounded-xl border-2 border-slate-100 flex items-start gap-4 shadow-sm">
+                                    <span className="size-6 bg-blue-600 text-white rounded-lg flex items-center justify-center font-black text-xs shrink-0">{i + 1}</span>
                                     <div className="flex-1 space-y-1 pt-0.5">
-                                        <p className="font-medium text-slate-700 text-[11px] leading-relaxed">{obj.text}</p>
+                                        <p className="font-bold text-slate-700 text-sm leading-relaxed">{obj.text}</p>
                                     </div>
                                 </div>
                             ))}

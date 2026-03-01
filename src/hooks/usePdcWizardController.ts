@@ -1,20 +1,22 @@
-'use client';
-
-/**
- * Controller: usePdcWizardController
- * 
- * Gestiona el estado y la lógica de negocio del Asistente de Creación de PDC.
- * Centraliza la navegación entre fases, la gestión de formularios complejos
- * y la comunicación con los servicios (Modelos).
- */
-
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { AreasService } from '@/services/areas.service';
 import { AuthService } from '@/services/auth.service';
 import { PdcService } from '@/services/pdc.service';
 import { supabase } from '@/lib/supabase';
-import { AreaTrabajo, PDCMaster } from '@/types';
+import { useFeedback } from './useFeedback';
+import {
+    AreaTrabajo,
+    PDCMaster,
+    CatalogoVerbo,
+    CatalogoComplemento,
+    LearningObjective,
+    UserContent,
+    WeekDesign,
+    AreaDesignState,
+    PlanificacionSemanal,
+    AreaConocimiento
+} from '@/types';
 
 export const PDC_TYPES = [
     { id: 1, name: 'Inicial', icon: 'child_care', color: 'rose-600', bgColor: 'bg-rose-50', textColor: 'text-rose-600', borderColor: 'border-rose-100', shadowColor: 'shadow-rose-500/10' },
@@ -27,61 +29,44 @@ export function usePdcWizardController() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const urlId = searchParams.get('id');
+    const { feedback, showError, showSuccess, hideFeedback } = useFeedback();
 
-    // --- Estado de Navegación ---
+    // --- Navigation & UI State ---
     const [step, setStep] = useState(1);
     const [pdcStep, setPdcStep] = useState(1);
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
     const [currentPdcId, setCurrentPdcId] = useState<string | null>(null);
     const [currentAreaIndex, setCurrentAreaIndex] = useState(0);
-    const [areasDesignState, setAreasDesignState] = useState<Record<string, any>>({});
+    const [areasDesignState, setAreasDesignState] = useState<Record<string, AreaDesignState>>({});
 
-    // --- Datos de Referencia (Contexto) ---
+    // --- Reference Data (Context) ---
     const [areas, setAreas] = useState<AreaTrabajo[]>([]);
     const [recentPdcs, setRecentPdcs] = useState<PDCMaster[]>([]);
-    const [userProfile, setUserProfile] = useState<any>(null);
+    const [userProfile, setUserProfile] = useState<{ nombre_completo: string } | null>(null);
     const [mainAreaDetails, setMainAreaDetails] = useState<AreaTrabajo | null>(null);
 
-    // --- Estado del Formulario: Fase 1 (Modalidad y Áreas) ---
+    // --- Form State: Phase 1 (Modality & Areas) ---
     const [selectedType, setSelectedType] = useState<number | null>(null);
     const [selectedAreas, setSelectedAreas] = useState<string[]>([]);
 
-    // --- Estado del Formulario: Fase 2 (Cronograma) ---
+    // --- Form State: Phase 2 (Schedule) ---
     const [selectedTrimestre, setSelectedTrimestre] = useState<number | null>(null);
     const [selectedMes, setSelectedMes] = useState<number | null>(null);
     const [pdcDates, setPdcDates] = useState({ inicio: '', fin: '' });
-    const [pdcWeeks, setPdcWeeks] = useState<any[]>([]);
+    const [pdcWeeks, setPdcWeeks] = useState<Partial<PlanificacionSemanal>[]>([]);
 
-    // --- Estado del Formulario: Fase 3 (Diseño PDC) ---
-    const [catalogoVerbos, setCatalogoVerbos] = useState<any[]>([]);
-    const [catalogoComplementos, setCatalogoComplementos] = useState<any[]>([]);
-    const [availableContents, setAvailableContents] = useState<any[]>([]);
-    const [learningObjectives, setLearningObjectives] = useState<any[]>([]);
-    const [weekContentsMap, setWeekContentsMap] = useState<Record<number, any[]>>({});
+    // --- Form State: Phase 3 (PDC Design) ---
+    const [catalogoVerbos, setCatalogoVerbos] = useState<CatalogoVerbo[]>([]);
+    const [catalogoComplementos, setCatalogoComplementos] = useState<CatalogoComplemento[]>([]);
+    const [availableContents, setAvailableContents] = useState<UserContent[]>([]);
+    const [learningObjectives, setLearningObjectives] = useState<LearningObjective[]>([]);
+    const [weekContentsMap, setWeekContentsMap] = useState<Record<number, UserContent[]>>({});
     const [objetivoNivel, setObjetivoNivel] = useState('');
-    const [weekDesignState, setWeekDesignState] = useState<Record<number, {
-        momentos: {
-            practica: { id: string | number; tecnica: string; detalle: string; preguntas: string }[];
-            teoria: string;
-            produccion: string;
-            valoracion: string;
-            adaptaciones: string;
-            recursos: string;
-            fuentes: string;
-            herramientas: string;
-        },
-        herramientas: string, // Mantener por compatibilidad de tipos con otras fases si aplica
-        criterios?: {
-            ser: string,
-            saber: string,
-            hacer: string,
-            decidir: string
-        }
-    }>>({});
+    const [weekDesignState, setWeekDesignState] = useState<Record<number, WeekDesign>>({});
     const [finalProductState, setFinalProductState] = useState('');
 
-    // Estado interno de Step 3 (Objetivos)
+    // Internal Step 3 State (Objectives Generator)
     const [currentObjective, setCurrentObjective] = useState({
         verboIds: [] as number[],
         contentIds: [] as number[],
@@ -90,7 +75,7 @@ export function usePdcWizardController() {
         draft: '',
         isManual: false
     });
-    const [aiOptions, setAiOptions] = useState<any[]>([]);
+    const [aiOptions, setAiOptions] = useState<{ id: number, title: string, description: string, style: string }[]>([]);
     const [manualObjective, setManualObjective] = useState({
         quiero: '',
         paraQue: '',
@@ -103,11 +88,11 @@ export function usePdcWizardController() {
         profundidad: '' as string
     });
     const [showFilters, setShowFilters] = useState(false);
-    const [hoveredVerb, setHoveredVerb] = useState<any | null>(null);
+    const [hoveredVerb, setHoveredVerb] = useState<CatalogoVerbo | null>(null);
     const [expandedTitles, setExpandedTitles] = useState<number[]>([]);
     const [selectedCompCategory, setSelectedCompCategory] = useState<string>('');
     const [complementSearch, setComplementSearch] = useState<string>('');
-    const [hoveredComplement, setHoveredComplement] = useState<any | null>(null);
+    const [hoveredComplement, setHoveredComplement] = useState<CatalogoComplemento | null>(null);
 
     // --- Ciclo de Vida ---
     useEffect(() => {
@@ -192,15 +177,15 @@ export function usePdcWizardController() {
                 .order('semana', { ascending: true });
 
             if (data && data.length > 0) {
-                const mappedData = data.map(w => ({
+                const mappedData = data.map((w: any) => ({
                     ...w,
                     fecha_inicio: w.fecha_inicio_trimestre || '',
                     fecha_fin: w.fecha_fin_trimestre || ''
                 }));
                 setPdcWeeks(mappedData);
 
-                const startDates = mappedData.filter(w => w.fecha_inicio).map(w => w.fecha_inicio);
-                const endDates = mappedData.filter(w => w.fecha_fin).map(w => w.fecha_fin);
+                const startDates = mappedData.filter((w: any) => w.fecha_inicio).map((w: any) => w.fecha_inicio);
+                const endDates = mappedData.filter((w: any) => w.fecha_fin).map((w: any) => w.fecha_fin);
 
                 if (startDates.length > 0 && endDates.length > 0) {
                     setPdcDates({
@@ -280,7 +265,7 @@ export function usePdcWizardController() {
                     .in('planificacion_semanal_id', headerIds);
 
                 if (weekContents && weekContents.length > 0) {
-                    const contentIds = Array.from(new Set(weekContents.map(wc => wc.contenido_usuario_id)));
+                    const contentIds = Array.from(new Set(weekContents.map((wc: any) => wc.contenido_usuario_id)));
                     const { data: contents } = await supabase
                         .from('contenidos_usuario')
                         .select('*')
@@ -290,12 +275,12 @@ export function usePdcWizardController() {
 
                     if (contents) {
                         setAvailableContents(contents);
-                        const grouped: Record<number, any[]> = {};
-                        planningHeaders.forEach(header => {
+                        const grouped: Record<number, UserContent[]> = {};
+                        planningHeaders.forEach((header: any) => {
                             const semanalContents = weekContents
-                                .filter(wc => wc.planificacion_semanal_id === header.id)
-                                .map(wc => contents.find(c => Number(c.id) == Number(wc.contenido_usuario_id)))
-                                .filter(Boolean);
+                                .filter((wc: any) => wc.planificacion_semanal_id === header.id)
+                                .map((wc: any) => contents.find((c: UserContent) => Number(c.id) == Number(wc.contenido_usuario_id)))
+                                .filter((c): c is UserContent => !!c);
                             grouped[header.semana] = semanalContents;
                         });
                         setWeekContentsMap(grouped);
@@ -333,15 +318,15 @@ export function usePdcWizardController() {
 
     const synthesizeObjective = () => {
         const selectedVerbs = catalogoVerbos
-            .filter(v => currentObjective.verboIds.includes(v.id))
-            .map(v => v.verbo);
+            .filter((v: CatalogoVerbo) => currentObjective.verboIds.includes(v.id))
+            .map((v: CatalogoVerbo) => v.verbo);
 
         const selectedContents = availableContents
-            .filter(c => currentObjective.contentIds.includes(c.id))
-            .map(c => c.titulo || '');
+            .filter((c: UserContent) => currentObjective.contentIds.includes(c.id))
+            .map((c: UserContent) => c.titulo || '');
 
         const complementText = currentObjective.complement ||
-            (currentObjective.complementId ? catalogoComplementos.find(c => c.id === currentObjective.complementId)?.complemento : '');
+            (currentObjective.complementId ? catalogoComplementos.find((c: CatalogoComplemento) => c.id === currentObjective.complementId)?.complemento : '');
 
         if (selectedVerbs.length === 0) {
             setCurrentObjective(prev => ({ ...prev, draft: '' }));
@@ -360,16 +345,16 @@ export function usePdcWizardController() {
 
     const generateAIObjective = () => {
         const selectedVerbs = catalogoVerbos
-            .filter(v => currentObjective.verboIds.includes(v.id))
-            .map(v => v.verbo)
+            .filter((v: CatalogoVerbo) => currentObjective.verboIds.includes(v.id))
+            .map((v: CatalogoVerbo) => v.verbo)
             .join(' y ');
 
         const selectedContentsArr = availableContents
-            .filter(c => currentObjective.contentIds.includes(c.id))
-            .map(c => c.titulo.toLowerCase());
+            .filter((c: UserContent) => currentObjective.contentIds.includes(c.id))
+            .map((c: UserContent) => c.titulo.toLowerCase());
 
         const selectedContents = selectedContentsArr.join(', ');
-        const catalogComplement = catalogoComplementos.find(c => c.id === currentObjective.complementId)?.complemento || '';
+        const catalogComplement = catalogoComplementos.find((c: CatalogoComplemento) => c.id === currentObjective.complementId)?.complemento || '';
         const finalComplement = catalogComplement || currentObjective.complement;
 
         if (!selectedVerbs || selectedContentsArr.length === 0) return;
@@ -518,19 +503,19 @@ export function usePdcWizardController() {
     };
 
     // --- Helpers de UI ---
-    const sortedVerbos = [...catalogoVerbos].filter(v => {
+    const sortedVerbos = [...catalogoVerbos].filter((v: CatalogoVerbo) => {
         if (verbFilters.niveles.length > 0) {
             if (!v.niveles_educativos) return false;
-            if (!verbFilters.niveles.some(n => v.niveles_educativos.includes(n))) return false;
+            if (!verbFilters.niveles.some((n: string) => v.niveles_educativos?.includes(n))) return false;
         }
         if (verbFilters.dominio && v.dominio !== verbFilters.dominio) return false;
         if (verbFilters.profundidad && v.nivel_profundidad !== verbFilters.profundidad) return false;
         return true;
     }).sort((a, b) => a.verbo.localeCompare(b.verbo));
 
-    const complementCategories = Array.from(new Set(catalogoComplementos.map(c => c.categoria)));
+    const complementCategories = Array.from(new Set(catalogoComplementos.map((c: CatalogoComplemento) => c.categoria)));
 
-    const filteredComplementos = catalogoComplementos.filter(c => {
+    const filteredComplementos = catalogoComplementos.filter((c: CatalogoComplemento) => {
         if (selectedCompCategory && c.categoria !== selectedCompCategory) return false;
         if (complementSearch) {
             const search = complementSearch.toLowerCase();
@@ -580,13 +565,13 @@ export function usePdcWizardController() {
     };
 
     const addWeek = () => {
-        const lastWeek = pdcWeeks.length > 0 ? pdcWeeks[pdcWeeks.length - 1] : { semana: 0 };
-        const newWeekNumber = lastWeek.semana + 1;
+        const lastWeek = pdcWeeks.length > 0 ? pdcWeeks[pdcWeeks.length - 1] : null;
+        const newWeekNumber = (lastWeek?.semana || 0) + 1;
         setPdcWeeks(prev => [...prev, {
             id: `temp-${Date.now()}`,
             semana: newWeekNumber,
-            mes: selectedMes,
-            trimestre: selectedTrimestre,
+            mes: selectedMes ?? undefined,
+            trimestre: selectedTrimestre ?? undefined,
             gestion: new Date().getFullYear(),
             fecha_inicio: '',
             fecha_fin: ''
@@ -595,7 +580,7 @@ export function usePdcWizardController() {
 
     const removeLastWeek = () => {
         if (pdcWeeks.length > 1) {
-            setPdcWeeks(prev => prev.slice(0, -1));
+            setPdcWeeks((prev: Partial<PlanificacionSemanal>[]) => prev.slice(0, -1));
         }
     };
 
@@ -604,10 +589,10 @@ export function usePdcWizardController() {
     };
 
     const toggleNivelFilter = (nivel: string) => {
-        setVerbFilters(prev => ({
+        setVerbFilters((prev: any) => ({
             ...prev,
             niveles: prev.niveles.includes(nivel)
-                ? prev.niveles.filter(n => n !== nivel)
+                ? prev.niveles.filter((n: string) => n !== nivel)
                 : [...prev.niveles, nivel]
         }));
     };
@@ -624,9 +609,9 @@ export function usePdcWizardController() {
     const handleStepNext = () => handleNext();
     const handleStepBack = () => handleBack();
 
-    const filteredAreas = areas.filter(area => {
+    const filteredAreas = areas.filter((area: AreaTrabajo) => {
         if (!selectedType) return true;
-        const nivelNombre = (area.area_conocimiento as any).grado?.nivel?.nombre?.toLowerCase() || '';
+        const nivelNombre = (area.area_conocimiento as AreaConocimiento).grado?.nivel?.nombre?.toLowerCase() || '';
         if (selectedType === 1) return nivelNombre.includes('inicial');
         if (selectedType === 2) return nivelNombre.includes('primaria');
         if (selectedType === 3) return nivelNombre.includes('secundaria');

@@ -13,8 +13,10 @@ import { LibraryService } from '@/services/library.service';
 import { AreasService } from '@/services/areas.service';
 import { AuthService } from '@/services/auth.service';
 import { ContentItem, AreaTrabajo } from '@/types';
+import { useFeedback } from './useFeedback';
 
 export function useLibraryController() {
+    const { feedback, showError, hideFeedback } = useFeedback();
     const router = useRouter();
     const searchParams = useSearchParams();
     const urlAreaId = searchParams.get('areaId');
@@ -44,10 +46,10 @@ export function useLibraryController() {
             const { data: { session } } = await AuthService.getSession();
             if (session?.user) {
                 const userAreas = await AreasService.getAreas(session.user.id);
-                setAreas(userAreas as any); // Cast temporal mientras se alinean tipos
+                setAreas(userAreas);
             }
         } catch (error) {
-            console.error('Controller Error [loadUserContext]:', error);
+            showError('Error al cargar el contexto del usuario.', error);
         }
     };
 
@@ -63,7 +65,7 @@ export function useLibraryController() {
             );
             setResults(data);
         } catch (error) {
-            console.error('Controller Error [executeSearch]:', error);
+            showError('Error al realizar la búsqueda de contenidos.', error);
         } finally {
             setIsSearching(false);
         }
@@ -98,13 +100,16 @@ export function useLibraryController() {
      */
     const useContentInWorkArea = async (baseContentId: number) => {
         if (!selectedAreaId) {
-            alert('Por favor, selecciona una clase (contexto activo) primero para usar este contenido.');
+            showError('Por favor, selecciona una clase (contexto activo) primero para usar este contenido.');
             window.scrollTo({ top: 0, behavior: 'smooth' });
             return;
         }
 
         const activeArea = areas.find(a => String(a.area_conocimiento.id) === String(selectedAreaId));
-        if (!activeArea) return;
+        if (!activeArea) {
+            showError('El área de trabajo seleccionada no es válida.');
+            return;
+        }
 
         setIsSearching(true);
         try {
@@ -112,10 +117,10 @@ export function useLibraryController() {
             if (result.success) {
                 router.push(`/dashboard/areas/${activeArea.id}`);
             } else {
-                alert('Error al copiar contenido: ' + (result.error?.message || result.error));
+                showError('Error al copiar contenido: ' + (result.error?.message || result.error));
             }
         } catch (error) {
-            console.error('Controller Error [useContentInWorkArea]:', error);
+            showError('Error al usar el contenido en el área de trabajo.', error);
         } finally {
             setIsSearching(false);
         }
@@ -132,12 +137,14 @@ export function useLibraryController() {
         isSearching,
         areas,
         selectedAreaId,
+        feedback,
 
         // Handlers
         handleQueryChange,
         handleSearchSubmit,
         toggleAreaSelection,
         useContentInWorkArea,
-        navigateToArea
+        navigateToArea,
+        hideFeedback
     };
 }

@@ -1,20 +1,21 @@
 'use client';
 
-import { Suspense, useEffect, useRef } from 'react';
+import React, { Suspense, useEffect, useRef } from 'react';
 import { useAreasController } from '@/hooks/useAreasController';
 import { Button } from '@/components/ui/button';
-import { ContentItem, UserContent } from '@/types';
+import { Card, Badge, Skeleton } from '@/components/ui/atoms';
+import { UserContent } from '@/types';
 
 export default function AreaDashboardPage({ params }: { params: Promise<{ id: string }> }) {
     const {
         area,
-        baseContents,
-        userContents,
+        rootBaseThemes,
+        userThemes,
         loading,
         copyingId,
         isCopyingAll,
         isSaving,
-        error,
+        error: controllerError,
         expandedThemes,
         expandedUserThemes,
         editingContentId,
@@ -24,6 +25,8 @@ export default function AreaDashboardPage({ params }: { params: Promise<{ id: st
         setEditingTitle,
         setNewTitle,
         setIsAddingNew,
+        getBaseSubthemes,
+        getUserSubthemes,
         handleCopyManual,
         handleCopyAllOfficial,
         updateContent,
@@ -38,8 +41,6 @@ export default function AreaDashboardPage({ params }: { params: Promise<{ id: st
         goBack
     } = useAreasController(params);
 
-    const editRef = useRef<HTMLDivElement>(null);
-
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
             const target = event.target as HTMLElement;
@@ -53,14 +54,25 @@ export default function AreaDashboardPage({ params }: { params: Promise<{ id: st
 
     if (loading) {
         return (
-            <div className="p-8">
-                <div className="animate-pulse space-y-4">
-                    <div className="h-8 w-64 bg-slate-200 rounded"></div>
-                    <div className="h-4 w-48 bg-slate-100 rounded"></div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
-                        {[1, 2, 3, 4].map(i => (
-                            <div key={i} className="h-40 bg-slate-50 rounded-2xl border border-slate-100"></div>
-                        ))}
+            <div className="p-8 space-y-8">
+                <div className="flex justify-between items-center">
+                    <div className="space-y-3">
+                        <Skeleton className="h-4 w-32" />
+                        <Skeleton className="h-10 w-64" />
+                        <Skeleton className="h-4 w-96" />
+                    </div>
+                    <div className="flex gap-4">
+                        <Skeleton className="h-11 w-32 rounded-xl" />
+                        <Skeleton className="h-11 w-40 rounded-xl" />
+                    </div>
+                </div>
+                <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-8">
+                    <div className="space-y-4">
+                        {[1, 2, 3].map(i => <Skeleton key={i} className="h-20 w-full rounded-2xl" />)}
+                    </div>
+                    <div className="hidden lg:block w-px h-full bg-slate-100 mx-auto" />
+                    <div className="space-y-4">
+                        {[1, 2, 3].map(i => <Skeleton key={i} className="h-20 w-full rounded-2xl" />)}
                     </div>
                 </div>
             </div>
@@ -69,257 +81,300 @@ export default function AreaDashboardPage({ params }: { params: Promise<{ id: st
 
     if (!area) {
         return (
-            <div className="p-12 text-center">
-                <h2 className="text-xl font-bold text-slate-800">Área de trabajo no encontrada</h2>
-                <Button variant="ghost" onClick={goBack} className="mt-4">
-                    Volver
+            <div className="p-12 text-center animate-in fade-in duration-500">
+                <div className="size-20 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <span className="material-symbols-rounded text-slate-300 text-4xl">search_off</span>
+                </div>
+                <h2 className="text-2xl font-black text-slate-800 tracking-tight">Área de trabajo no encontrada</h2>
+                <p className="text-slate-500 mt-2 mb-8">El recurso que buscas no existe o no tienes permisos para verlo.</p>
+                <Button variant="outline" onClick={goBack} className="px-8">
+                    Volver al Dashboard
                 </Button>
             </div>
         );
     }
 
-    // Organization helpers for the view
-    const rootBaseThemes = baseContents.filter(c => !c.padre_id);
-    const getBaseSubthemes = (parentId: number) => baseContents.filter(c => c.padre_id === parentId);
-
-    const userThemes = userContents.filter(c => !c.padre_id || !userContents.find(t => t.id == c.padre_id));
-    const getUserSubthemes = (parentId: number) => userContents.filter(c => c.padre_id == parentId);
-
     return (
-        <div className="space-y-8 animate-in fade-in duration-700">
+        <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
             {/* Header */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                <div className="space-y-1">
-                    <div className="flex items-center gap-2 mb-2">
-                        <button onClick={goBack} className="p-1.5 hover:bg-slate-100 rounded-full transition-colors">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                <div className="space-y-2">
+                    <div className="flex items-center gap-3 mb-1">
+                        <button onClick={goBack} className="p-2 hover:bg-slate-100 rounded-full transition-all hover:scale-110">
                             <span className="material-symbols-rounded text-slate-500">arrow_back</span>
                         </button>
-                        <span className="text-xs font-black text-blue-600 bg-blue-50 px-2.5 py-1 rounded-lg uppercase tracking-wider">
+                        <Badge variant="accent" className="font-black">
                             {area.unidad_educativa.nombre}
-                        </span>
+                        </Badge>
                     </div>
-                    <h1 className="text-3xl font-black text-slate-900 tracking-tight ml-1">
+                    <h1 className="text-4xl font-black text-slate-900 tracking-tighter ml-1">
                         {area.area_conocimiento.nombre}
                     </h1>
-                    <div className="flex items-center gap-2 text-slate-500 font-medium text-sm ml-1">
-                        <span className="material-symbols-rounded text-base text-slate-400">school</span>
-                        <span>{area.area_conocimiento.grado?.nombre} • {area.area_conocimiento.grado?.nivel?.nombre}</span>
-                        <span className="mx-1 opacity-30">|</span>
-                        <span className="material-symbols-rounded text-base text-slate-400">schedule</span>
-                        <span>{area.turno.nombre}</span>
-                        <span className="mx-1 opacity-30">|</span>
-                        <span className="material-symbols-rounded text-base text-slate-400">group</span>
-                        <div className="flex gap-1">
-                            {area.paralelos.map(p => (
-                                <span key={p.id} className="bg-slate-100 px-1.5 rounded text-slate-800 font-bold">
-                                    {p.nombre}
-                                </span>
-                            ))}
+                    <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-slate-500 font-bold text-xs ml-1 uppercase tracking-wider">
+                        <div className="flex items-center gap-1.5 bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200/50">
+                            <span className="material-symbols-rounded text-lg text-primary">school</span>
+                            <span>{area.area_conocimiento.grado?.nombre} • {area.area_conocimiento.grado?.nivel?.nombre}</span>
+                        </div>
+                        <div className="flex items-center gap-1.5 bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200/50">
+                            <span className="material-symbols-rounded text-lg text-primary">schedule</span>
+                            <span>{area.turno.nombre}</span>
+                        </div>
+                        <div className="flex items-center gap-1.5 bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200/50">
+                            <span className="material-symbols-rounded text-lg text-primary">group</span>
+                            <div className="flex gap-1">
+                                {area.paralelos.map(p => (
+                                    <span key={p.id} className="text-slate-900 underline decoration-primary decoration-2 underline-offset-2">
+                                        {p.nombre}
+                                    </span>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div className="flex gap-3">
-                    <Button variant="outline" className="w-auto px-6 h-11 border-slate-200 cursor-default">
-                        <span className="material-symbols-rounded text-base mr-2">settings</span>
-                        Configurar
+                    <Button variant="outline" className="px-6 h-12 shadow-sm">
+                        <span className="material-symbols-rounded text-xl mr-2">settings</span>
+                        Configuración
                     </Button>
-                    <Button className="w-auto px-8 h-11 bg-blue-600 shadow-blue-500/20 cursor-default">
-                        <span className="material-symbols-rounded text-base mr-2">auto_awesome</span>
-                        Planificar con IA
+                    <Button className="px-8 h-12 shadow-xl shadow-primary/20">
+                        <span className="material-symbols-rounded text-xl mr-2">auto_awesome</span>
+                        Planificación Inteligente
                     </Button>
                 </div>
             </div>
+
+            {controllerError && (
+                <Card className="bg-danger/5 border-danger/20 p-4 animate-in shake duration-500">
+                    <div className="flex items-center gap-3 text-danger">
+                        <span className="material-symbols-rounded">error</span>
+                        <p className="font-bold text-sm">{controllerError}</p>
+                    </div>
+                </Card>
+            )}
 
             <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-8 items-start">
                 {/* Contenidos Base Accordion */}
                 <div className="space-y-6">
                     <div className="flex items-center justify-between border-b border-slate-100 pb-4">
-                        <h2 className="text-xl font-black text-slate-800 flex items-center gap-2">
-                            <span className="material-symbols-rounded text-blue-500">verified</span>
-                            Contenidos Base Oficiales
+                        <h2 className="text-xl font-black text-slate-800 flex items-center gap-3">
+                            <div className="size-8 rounded-xl bg-primary/10 flex items-center justify-center">
+                                <span className="material-symbols-rounded text-primary text-xl">verified</span>
+                            </div>
+                            Currículo Base Oficinal
                         </h2>
                     </div>
 
                     <Button
+                        variant="secondary"
                         onClick={handleCopyAllOfficial}
                         disabled={isCopyingAll || rootBaseThemes.length === 0}
-                        className="lg:hidden w-full h-12 bg-white border border-slate-200 text-blue-600 rounded-2xl flex items-center justify-center gap-2 hover:bg-slate-50 transition-all font-black text-sm"
+                        className="lg:hidden w-full h-14 rounded-2xl flex items-center justify-center gap-3 font-black text-sm uppercase tracking-widest transition-all active:scale-95"
                     >
                         {isCopyingAll ? (
-                            <div className="w-5 h-5 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+                            <div className="w-5 h-5 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
                         ) : (
                             <>
                                 <span className="material-symbols-rounded">double_arrow</span>
-                                COPIAR TODO AL PLANIFICADOR
+                                Sincronizar Todo al Planificador
                             </>
                         )}
                     </Button>
 
-                    <div className="space-y-3">
+                    <div className="space-y-4">
                         {rootBaseThemes.map(theme => {
                             const isExpanded = expandedThemes.has(theme.id);
                             const subthemes = getBaseSubthemes(theme.id);
 
                             return (
-                                <div key={theme.id} className="bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden transition-all hover:border-blue-100">
+                                <Card key={theme.id} className="p-0 overflow-hidden border-slate-100 hover:border-primary/20 transition-all duration-300 group/card shadow-soft">
                                     <div
                                         onClick={() => toggleBaseTheme(theme.id)}
-                                        className="p-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors"
+                                        className="p-5 flex items-center justify-between cursor-pointer hover:bg-slate-50/50 transition-colors"
                                     >
                                         <div className="flex items-center gap-4">
-                                            <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${isExpanded ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-400'}`}>
-                                                <span className="text-xs font-black">{theme.orden}</span>
+                                            <div className={`size-10 rounded-2xl flex items-center justify-center transition-all shadow-inner font-black text-sm ${isExpanded ? 'bg-primary text-white scale-110 rotate-3' : 'bg-slate-100 text-slate-400'}`}>
+                                                {theme.orden}
                                             </div>
-                                            <h3 className="font-bold text-slate-900">
-                                                {theme.titulo}
+                                            <div>
+                                                <h3 className="font-black text-slate-900 group-hover/card:text-primary transition-colors">
+                                                    {theme.titulo}
+                                                </h3>
                                                 {theme.trimestre && (
-                                                    <span className="ml-2 text-slate-400 text-xs font-normal italic">
-                                                        ({theme.trimestre})
-                                                    </span>
+                                                    <Badge variant="default" className="mt-1 lowercase bg-slate-100 text-slate-500 border-none px-2 py-0">
+                                                        {theme.trimestre}
+                                                    </Badge>
                                                 )}
-                                            </h3>
+                                            </div>
                                         </div>
-                                        <span className={`material-symbols-rounded transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}>
+                                        <span className={`material-symbols-rounded size-8 flex items-center justify-center rounded-full hover:bg-slate-100 text-slate-400 transition-all duration-300 ${isExpanded ? 'rotate-180 text-primary' : ''}`}>
                                             expand_more
                                         </span>
                                     </div>
 
                                     {isExpanded && (
-                                        <div className="px-5 pb-5 pt-1 space-y-2 border-t border-slate-50 bg-slate-50/30">
+                                        <div className="px-5 pb-5 pt-1 space-y-2.5 border-t border-slate-50 bg-slate-50/20">
                                             {subthemes.length > 0 ? subthemes.map(sub => (
-                                                <div key={sub.id} className="bg-white p-4 rounded-2xl border border-slate-100 flex items-center justify-between group">
-                                                    <div className="flex items-center gap-3">
-                                                        <span className="text-[10px] font-black text-slate-300 w-5">{theme.orden}.{sub.orden}</span>
-                                                        <span className="text-sm font-medium text-slate-700">{sub.titulo}</span>
+                                                <div key={sub.id} className="bg-white p-4 rounded-2xl border border-slate-100 flex items-center justify-between group/sub transition-all hover:shadow-md hover:-translate-y-0.5">
+                                                    <div className="flex items-center gap-4">
+                                                        <span className="text-[10px] font-black text-slate-300 bg-slate-50 size-6 flex items-center justify-center rounded-lg">{theme.orden}.{sub.orden}</span>
+                                                        <span className="text-sm font-bold text-slate-700">{sub.titulo}</span>
                                                     </div>
                                                     <button
                                                         onClick={() => handleCopyManual(sub.id)}
                                                         disabled={copyingId === sub.id}
-                                                        className="p-2 text-blue-600 hover:bg-blue-50 rounded-xl transition-all opacity-0 group-hover:opacity-100 disabled:opacity-50"
+                                                        className="size-10 flex items-center justify-center text-primary hover:bg-primary/10 rounded-xl transition-all opacity-0 group-hover/sub:opacity-100 disabled:opacity-50"
                                                         title="Copiar a mis contenidos"
                                                     >
                                                         {copyingId === sub.id ? (
-                                                            <div className="w-5 h-5 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+                                                            <div className="w-5 h-5 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
                                                         ) : (
                                                             <span className="material-symbols-rounded text-xl">content_copy</span>
                                                         )}
                                                     </button>
                                                 </div>
                                             )) : (
-                                                <div className="flex justify-between items-center bg-white p-4 rounded-2xl border border-slate-100">
-                                                    <span className="text-sm text-slate-400 italic">No hay subtemas definidos.</span>
-                                                    <button
+                                                <div className="flex justify-between items-center bg-white p-5 rounded-2xl border-2 border-dashed border-slate-100">
+                                                    <p className="text-sm text-slate-400 font-medium italic">No hay subtemas definidos para esta unidad.</p>
+                                                    <Button
+                                                        variant="ghost"
+                                                        size="sm"
                                                         onClick={() => handleCopyManual(theme.id)}
-                                                        className="p-2 text-blue-600 hover:bg-blue-50 rounded-xl transition-all"
-                                                        title="Copiar este tema"
+                                                        className="text-primary"
                                                     >
-                                                        <span className="material-symbols-rounded text-xl">content_copy</span>
-                                                    </button>
+                                                        <span className="material-symbols-rounded text-xl mr-2">content_copy</span>
+                                                        Copiar Tema
+                                                    </Button>
                                                 </div>
                                             )}
                                         </div>
                                     )}
-                                </div>
+                                </Card>
                             );
                         })}
                     </div>
                 </div>
 
                 <div className="hidden lg:flex flex-col items-center justify-center pt-24 sticky top-10">
-                    <div className="w-px h-20 bg-gradient-to-b from-transparent via-slate-200 to-transparent"></div>
+                    <div className="w-px h-24 bg-gradient-to-b from-transparent via-slate-200 to-transparent"></div>
                     <button
                         onClick={handleCopyAllOfficial}
                         disabled={isCopyingAll || rootBaseThemes.length === 0}
-                        className="my-6 w-12 h-12 rounded-full bg-white border border-slate-200 shadow-xl shadow-blue-500/10 flex items-center justify-center text-blue-600 hover:scale-110 hover:border-blue-500 transition-all group disabled:opacity-50 disabled:scale-100"
+                        className="my-8 size-14 rounded-3xl bg-white border-2 border-slate-100 shadow-2xl shadow-primary/10 flex items-center justify-center text-primary hover:scale-110 hover:border-primary transition-all duration-500 group disabled:opacity-50 disabled:scale-100"
+                        title="Sincronizar todo el currículo base"
                     >
                         {isCopyingAll ? (
-                            <div className="w-5 h-5 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+                            <div className="w-6 h-6 border-3 border-primary border-t-transparent rounded-full animate-spin"></div>
                         ) : (
-                            <span className="material-symbols-rounded text-2xl group-hover:rotate-180 transition-transform duration-500">double_arrow</span>
+                            <span className="material-symbols-rounded text-3xl group-hover:rotate-180 transition-transform duration-700">double_arrow</span>
                         )}
                     </button>
-                    <div className="w-px h-20 bg-gradient-to-b from-transparent via-slate-200 to-transparent"></div>
+                    <div className="w-px h-24 bg-gradient-to-b from-transparent via-slate-200 to-transparent"></div>
                 </div>
 
+                {/* Contenidos de Usuario */}
                 <div className="space-y-6">
                     <div className="flex items-center justify-between border-b border-slate-100 pb-4">
-                        <h2 className="text-xl font-black text-slate-800 flex items-center gap-2">
-                            <span className="material-symbols-rounded text-blue-500">edit_note</span>
-                            Mis Contenidos Editables
+                        <h2 className="text-xl font-black text-slate-800 flex items-center gap-3">
+                            <div className="size-8 rounded-xl bg-primary/10 flex items-center justify-center">
+                                <span className="material-symbols-rounded text-primary text-xl">edit_note</span>
+                            </div>
+                            Plan de Desarrollo Curricular
                         </h2>
                         <div className="flex items-center gap-3">
-                            <span className="px-3 py-1 bg-slate-50 text-slate-500 rounded-full text-[10px] font-black uppercase tracking-widest border border-slate-100">
-                                {userContents.length} PERSONALIZADOS
-                            </span>
+                            <Badge variant="default" className="font-black bg-slate-100 text-slate-500 border-none">
+                                {userThemes.length} TEMAS
+                            </Badge>
                             <button
                                 onClick={() => setIsAddingNew(true)}
-                                className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center hover:bg-blue-700 transition-all shadow-lg shadow-blue-500/20"
+                                className="size-10 rounded-2xl bg-primary text-white flex items-center justify-center hover:bg-primary-dark transition-all shadow-lg shadow-primary/20 hover:scale-110 active:scale-95"
+                                title="Agregar nuevo tema personalizado"
                             >
-                                <span className="material-symbols-rounded text-base">add</span>
+                                <span className="material-symbols-rounded text-2xl font-black">add</span>
                             </button>
                         </div>
                     </div>
 
                     <div className="space-y-4">
                         {isAddingNew && (
-                            <div className="editor-container bg-white rounded-3xl border-2 border-dashed border-blue-200 p-5 animate-in zoom-in-95 duration-200">
-                                <div className="space-y-3">
+                            <Card className="editor-container border-2 border-dashed border-primary/30 bg-primary/5 p-6 animate-in zoom-in-95 duration-300">
+                                <div className="space-y-4">
                                     <div className="flex items-center justify-between">
-                                        <h4 className="text-xs font-black text-blue-600 uppercase tracking-widest">Nuevo Tema / Contenido</h4>
-                                        <button onClick={() => setIsAddingNew(false)} className="text-slate-300 hover:text-slate-500">
+                                        <h4 className="text-[10px] font-black text-primary uppercase tracking-widest">Crear Nuevo Título / Contenido</h4>
+                                        <button onClick={() => setIsAddingNew(false)} className="size-8 flex items-center justify-center rounded-full hover:bg-white text-slate-400 transition-colors">
                                             <span className="material-symbols-rounded text-base">close</span>
                                         </button>
                                     </div>
                                     <input
                                         autoFocus
-                                        className="w-full bg-slate-50 border-b-2 border-blue-500 px-3 py-2 rounded-t-xl font-bold text-slate-900 focus:outline-none"
+                                        className="w-full bg-transparent border-b-2 border-primary px-0 py-2 font-black text-xl text-slate-900 focus:outline-none placeholder:text-slate-300 transition-all"
                                         value={newTitle}
-                                        placeholder="Escribe el título aquí..."
+                                        placeholder="Título del nuevo tema..."
                                         onChange={(e) => setNewTitle(e.target.value)}
                                         onKeyDown={(e) => e.key === 'Enter' && createNewTheme(newTitle)}
-                                        onBlur={() => !newTitle.trim() && setIsAddingNew(false)}
                                     />
-                                    {isSaving === 'new' && <p className="text-[10px] text-blue-500 font-bold uppercase animate-pulse">Guardando...</p>}
-                                </div>
-                            </div>
-                        )}
-
-                        {userThemes.map((theme, idx) => {
-                            const subthemes = getUserSubthemes(theme.id);
-                            const hasSubthemes = subthemes.length > 0;
-                            const isExpanded = expandedUserThemes.has(theme.id);
-
-                            return (
-                                <div key={theme.id} className="bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden transition-all hover:border-blue-100 group">
-                                    <div
-                                        onClick={() => hasSubthemes && toggleUserTheme(theme.id)}
-                                        className="p-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors"
-                                    >
-                                        <div className="flex items-center gap-4 flex-1">
-                                            <div className={`w-8 h-8 shrink-0 flex items-center justify-center rounded-full font-black text-xs ${isExpanded ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-400'}`}>
-                                                {idx + 1}
-                                            </div>
-                                            <div className="flex-1">
-                                                {renderContentItem(theme, false, true)}
-                                            </div>
-                                        </div>
-                                        {hasSubthemes && <span className={`material-symbols-rounded transition-transform ${isExpanded ? 'rotate-180' : ''}`}>expand_more</span>}
-                                    </div>
-
-                                    {hasSubthemes && isExpanded && (
-                                        <div className="px-5 pb-5 pt-1 space-y-2 border-t border-slate-50 bg-slate-50/30">
-                                            {subthemes.map((sub, sidx) => (
-                                                <div key={sub.id} className="bg-white p-4 rounded-2xl border border-slate-100 flex items-center justify-between">
-                                                    <span className="text-[10px] font-black text-slate-300 w-5">{idx + 1}.{sidx + 1}</span>
-                                                    <div className="flex-1">{renderContentItem(sub, true)}</div>
-                                                </div>
-                                            ))}
+                                    {isSaving === 'new' && (
+                                        <div className="flex items-center gap-2 text-[10px] text-primary font-black uppercase tracking-widest animate-pulse">
+                                            <span className="material-symbols-rounded text-base animate-spin">sync</span>
+                                            Guardando cambios...
                                         </div>
                                     )}
                                 </div>
-                            );
-                        })}
+                            </Card>
+                        )}
+
+                        {userThemes.length === 0 && !isAddingNew ? (
+                            <div className="p-16 text-center border-2 border-dashed border-slate-100 rounded-[32px] bg-slate-50/30">
+                                <div className="size-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm">
+                                    <span className="material-symbols-rounded text-slate-200 text-4xl">inventory_2</span>
+                                </div>
+                                <h3 className="text-lg font-black text-slate-400">Sin contenidos aún</h3>
+                                <p className="text-sm text-slate-400 mt-1 mb-8 max-w-[240px] mx-auto">Copia del currículo base o crea tus propios temas personalizados.</p>
+                                <Button onClick={() => setIsAddingNew(true)} variant="outline" className="px-8">
+                                    ¡Comenzar a escribir!
+                                </Button>
+                            </div>
+                        ) : (
+                            userThemes.map((theme, idx) => {
+                                const subthemes = getUserSubthemes(theme.id);
+                                const hasSubthemes = subthemes.length > 0;
+                                const isExpanded = expandedUserThemes.has(theme.id);
+
+                                return (
+                                    <Card key={theme.id} className="p-0 overflow-hidden border-slate-100 hover:border-primary/20 shadow-soft transition-all group/user">
+                                        <div
+                                            onClick={() => hasSubthemes && toggleUserTheme(theme.id)}
+                                            className="p-5 flex items-center justify-between cursor-pointer hover:bg-slate-50/50 transition-colors"
+                                        >
+                                            <div className="flex items-center gap-4 flex-1">
+                                                <div className={`size-10 flex items-center justify-center rounded-2xl font-black text-sm transition-all shadow-inner ${isExpanded ? 'bg-primary text-white scale-110' : 'bg-slate-100 text-slate-400'}`}>
+                                                    {idx + 1}
+                                                </div>
+                                                <div className="flex-1">
+                                                    {renderContentItem(theme, false, true)}
+                                                </div>
+                                            </div>
+                                            {hasSubthemes && (
+                                                <span className={`material-symbols-rounded size-8 flex items-center justify-center rounded-full hover:bg-slate-100 text-slate-400 transition-all ${isExpanded ? 'rotate-180 text-primary' : ''}`}>
+                                                    expand_more
+                                                </span>
+                                            )}
+                                        </div>
+
+                                        {hasSubthemes && isExpanded && (
+                                            <div className="px-5 pb-5 pt-1 space-y-2.5 border-t border-slate-50 bg-slate-50/20">
+                                                {subthemes.map((sub, sidx) => (
+                                                    <div key={sub.id} className="bg-white p-4 rounded-2xl border border-slate-100 flex items-center justify-between group/sub transition-all hover:shadow-md">
+                                                        <span className="text-[10px] font-black text-slate-300 bg-slate-50 size-6 flex items-center justify-center rounded-lg">{idx + 1}.{sidx + 1}</span>
+                                                        <div className="flex-1 ml-4">{renderContentItem(sub, true)}</div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </Card>
+                                );
+                            })
+                        )}
                     </div>
                 </div>
             </div>
@@ -334,27 +389,31 @@ export default function AreaDashboardPage({ params }: { params: Promise<{ id: st
                     <div className="editor-container flex-1" onClick={e => e.stopPropagation()}>
                         <input
                             autoFocus
-                            className="w-full bg-slate-50 border-b-2 border-blue-500 px-0 py-1 font-bold text-slate-900 focus:outline-none"
+                            className="w-full bg-transparent border-b-2 border-primary px-0 py-1 font-black text-slate-900 focus:outline-none animate-in fade-in slide-in-from-left-2 duration-300"
                             value={editingTitle}
                             onChange={(e) => setEditingTitle(e.target.value)}
                             onKeyDown={(e) => e.key === 'Enter' && updateContent(content.id)}
                         />
+                        <div className="flex justify-end gap-2 mt-2">
+                            <button onClick={cancelEditing} className="text-[10px] font-black text-slate-400 uppercase tracking-widest hover:text-danger p-1">Cancelar</button>
+                            <button onClick={() => updateContent(content.id)} className="text-[10px] font-black text-primary uppercase tracking-widest hover:underline p-1">Guardar (Enter)</button>
+                        </div>
                     </div>
                 ) : (
                     <div className="flex items-center gap-4 flex-1">
-                        <h3 className={`${isSub ? 'text-sm font-medium' : 'text-base font-bold'} text-slate-800`}>
+                        <h3 className={`${isSub ? 'text-sm font-bold' : 'text-base font-black'} text-slate-800 transition-colors group-hover/item:text-primary`}>
                             {content.titulo}
                         </h3>
                     </div>
                 )}
 
                 {!isEditing && (
-                    <div className="flex gap-1 opacity-0 group-hover/item:opacity-100 transition-all" onClick={e => e.stopPropagation()}>
-                        <button onClick={() => reorderContent(content, 'up')} className="p-1.5 text-slate-300 hover:text-blue-500"><span className="material-symbols-rounded text-base">arrow_upward</span></button>
-                        <button onClick={() => reorderContent(content, 'down')} className="p-1.5 text-slate-300 hover:text-blue-500"><span className="material-symbols-rounded text-base">arrow_downward</span></button>
-                        {isHeader && <button onClick={() => createNewSubtheme(content.id)} className="p-1.5 text-slate-300 hover:text-green-600"><span className="material-symbols-rounded text-lg">add_box</span></button>}
-                        <button onClick={() => startEditing(content)} className="p-1.5 text-slate-300 hover:text-blue-600"><span className="material-symbols-rounded text-lg">edit</span></button>
-                        <button onClick={() => deleteContent(content.id)} className="p-1.5 text-slate-300 hover:text-red-500"><span className="material-symbols-rounded text-lg">delete</span></button>
+                    <div className="flex gap-1 opacity-0 group-hover/item:opacity-100 transition-all scale-95 group-hover/item:scale-100" onClick={e => e.stopPropagation()}>
+                        <button onClick={() => reorderContent(content, 'up')} className="size-8 flex items-center justify-center text-slate-300 hover:text-primary hover:bg-slate-100 rounded-lg transition-all" title="Subir"><span className="material-symbols-rounded text-lg">arrow_upward</span></button>
+                        <button onClick={() => reorderContent(content, 'down')} className="size-8 flex items-center justify-center text-slate-300 hover:text-primary hover:bg-slate-100 rounded-lg transition-all" title="Bajar"><span className="material-symbols-rounded text-lg">arrow_downward</span></button>
+                        {isHeader && <button onClick={() => createNewSubtheme(content.id)} className="size-8 flex items-center justify-center text-slate-300 hover:text-green-600 hover:bg-green-50 rounded-lg transition-all" title="Agregar Subtema"><span className="material-symbols-rounded text-xl">add_box</span></button>}
+                        <button onClick={() => startEditing(content)} className="size-8 flex items-center justify-center text-slate-300 hover:text-primary hover:bg-slate-100 rounded-lg transition-all" title="Editar"><span className="material-symbols-rounded text-xl">edit</span></button>
+                        <button onClick={() => deleteContent(content.id)} className="size-8 flex items-center justify-center text-slate-300 hover:text-danger hover:bg-danger/10 rounded-lg transition-all" title="Eliminar"><span className="material-symbols-rounded text-xl">delete</span></button>
                     </div>
                 )}
             </div>
