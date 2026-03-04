@@ -33,10 +33,10 @@ export function usePdcWizardController() {
 
     // --- Navigation & UI State ---
     const [step, setStep] = useState(1);
-    const [pdcStep, setPdcStep] = useState(1);
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
     const [currentPdcId, setCurrentPdcId] = useState<string | null>(null);
+    const [pdcName, setPdcName] = useState('');
     const [currentAreaIndex, setCurrentAreaIndex] = useState(0);
     const [areasDesignState, setAreasDesignState] = useState<Record<string, AreaDesignState>>({});
 
@@ -65,6 +65,8 @@ export function usePdcWizardController() {
     const [objetivoNivel, setObjetivoNivel] = useState('');
     const [weekDesignState, setWeekDesignState] = useState<Record<number, WeekDesign>>({});
     const [finalProductState, setFinalProductState] = useState('');
+    const [periodsPerWeek, setPeriodsPerWeek] = useState<number>(0);
+    const [weeklyHours, setWeeklyHours] = useState<number>(0);
 
     // Internal Step 3 State (Objectives Generator)
     const [currentObjective, setCurrentObjective] = useState({
@@ -121,8 +123,8 @@ export function usePdcWizardController() {
     }, [step, selectedTrimestre, selectedMes]);
 
     useEffect(() => {
-        if (step === 3 && selectedAreas.length > 0) {
-            loadStep3Data();
+        if (step >= 4 && selectedAreas.length > 0) {
+            loadStep3Data(); // Ahora Step 3 data es para pasos 4-10
         }
     }, [step, currentAreaIndex, selectedAreas]);
 
@@ -391,80 +393,91 @@ export function usePdcWizardController() {
     // --- Navegación ---
 
     const handleNext = async () => {
-        if (step === 1 && selectedType && selectedAreas.length > 0) {
-            // Avanzar localmente, registraremos en el Paso 2 con los datos completos
-            setStep(2);
-        } else if (step === 2 && selectedTrimestre && selectedMes) {
+        if (step === 1) {
+            if (selectedType && selectedAreas.length > 0) setStep(2);
+        } else if (step === 2) {
+            if (selectedTrimestre && selectedMes) {
+                // Generar nombre por defecto basado en los requerimientos del usuario:
+                // Primera palabra del área + Mes + Trimestre + Gestión
+                // Concatenar los nombres de TODAS las áreas seleccionadas
+                const allAreaNames = selectedAreas
+                    .map(areaId => areas.find(a => a.id === areaId)?.area_conocimiento?.nombre)
+                    .filter(Boolean)
+                    .join(' / ') || 'PDC';
+                const currentYear = new Date().getFullYear();
+                const generatedName = `PDC ${allAreaNames.toUpperCase()} - MES ${selectedMes} - TRIM ${selectedTrimestre} - ${currentYear}`;
+                if (!pdcName) setPdcName(generatedName);
+
+                setStep(3);
+            }
+        } else if (step === 3) {
             setSaving(true);
             try {
-                const { data: { session } } = await AuthService.getSession();
-                if (!session?.user) throw new Error('No hay sesión activa');
+                const { data: user } = await supabase.auth.getUser();
+                if (!user.user) throw new Error('No auth user');
 
                 let pdcId = currentPdcId;
-                const pdcData = {
-                    docente_id: session.user.id,
-                    tipo_pdc_id: selectedType!,
-                    gestion: new Date().getFullYear(),
-                    trimestre: selectedTrimestre,
-                    mes: selectedMes,
-                    fecha_inicio: pdcDates.inicio || undefined,
-                    fecha_fin: pdcDates.fin || undefined,
-                    estado: 'Pendiente' as const
+                const currentYear = new Date().getFullYear();
+                const pdcData: Partial<PDCMaster> = {
+                    docente_id: user.user.id,
+                    tipo_pdc_id: selectedType || 2, // Default to Primaria if null
+                    gestion: currentYear,
+                    trimestre: selectedTrimestre || 1,
+                    mes: selectedMes || 1,
+                    fecha_inicio: pdcDates.inicio,
+                    fecha_fin: pdcDates.fin,
+                    estado: 'Pendiente',
+                    nombre_pdc: pdcName || 'Nuevo PDC'
                 };
 
                 if (!pdcId) {
-                    // 1. Crear el PDC Maestro con la información completa
                     const result = await PdcService.createPdcMaster(pdcData);
                     if (result.error) throw result.error;
                     pdcId = result.data?.id || null;
                     if (!pdcId) throw new Error('No se recibió ID del PDC creado');
                     setCurrentPdcId(pdcId);
                 } else {
-                    // 2. Actualizar si ya existe
                     const result = await PdcService.updatePdcMaster(pdcId, pdcData);
                     if (result.error) throw result.error;
                 }
 
-                // 3. Vincular áreas
                 if (pdcId) {
                     const result = await PdcService.associateAreasToPdc(pdcId, selectedAreas);
                     if (result.error) throw result.error;
 
                     const details = await AreasService.getAreaById(selectedAreas[0]);
                     setMainAreaDetails(details);
-                    loadStep3Data();
-                    setStep(3);
-                    setPdcStep(1);
+                    setStep(4);
                 }
             } catch (error: any) {
-                console.error('Persistence Error [Step 2 Details]:', {
-                    message: error.message,
-                    details: error.details,
-                    hint: error.hint,
-                    code: error.code
-                });
-                alert(`Error: ${error.message || 'No se pudo registrar el PDC.'}`);
+                console.error('Persistence Error [Step 3]:', error);
+                alert(`Error: ${error.message || 'No se pudo crear el PDC.'}`);
             } finally {
                 setSaving(false);
             }
-        } else if (step === 3) {
-            const isLastSubStep = pdcStep === 7;
+        } else if (step >= 4 && step < 10) {
+            if (step === 4 && selectedType === 3) loadObjetivoNivel();
+
+            // Validación especial para el paso 6: todos los contenidos deben estar cubiertos
+            if (step === 6) {
+                const usedContentIds = new Set(learningObjectives.flatMap(obj => obj.contentIds));
+                const uncoveredContents = availableContents.filter(c => !usedContentIds.has(c.id));
+                if (uncoveredContents.length > 0) {
+                    const names = uncoveredContents.map(c => `• ${c.titulo}`).join('\n');
+                    alert(`Todos los contenidos deben estar asociados a un objetivo guardado.\n\nContenidos pendientes:\n${names}`);
+                    return;
+                }
+            }
+
+            setStep(step + 1);
+
+        } else if (step === 10) {
             const isLastArea = currentAreaIndex === selectedAreas.length - 1;
-
-            if (pdcStep === 1) {
-                if (selectedType === 3) loadObjetivoNivel();
-                setPdcStep(2);
-            } else if (!isLastSubStep) {
-                setPdcStep(pdcStep + 1);
-            } else if (!isLastArea) {
-                // Guardar estado actual del área que dejamos
+            if (!isLastArea) {
                 saveCurrentAreaState();
-
-                // Avanzar al siguiente área
                 setCurrentAreaIndex(prev => prev + 1);
-                setPdcStep(1);
+                setStep(4); // Volver al inicio del ciclo de diseño para la siguiente área
             } else {
-                // Finalizar PDC
                 alert('PDC Completado con éxito');
                 router.push('/dashboard/pdcs');
             }
@@ -472,23 +485,21 @@ export function usePdcWizardController() {
     };
 
     const handleBack = () => {
-        if (step === 3) {
-            if (pdcStep > 1) {
-                setPdcStep(pdcStep - 1);
-            } else if (currentAreaIndex > 0) {
-                // Guardar estado actual antes de volver
+        if (step > 4) {
+            setStep(step - 1);
+        } else if (step === 4) {
+            if (currentAreaIndex > 0) {
                 saveCurrentAreaState();
-
-                // Volver al área anterior
                 setCurrentAreaIndex(prev => prev - 1);
-                setPdcStep(7); // Ir al último paso del área anterior
+                setStep(10); // Ir al último paso del área anterior
             } else {
-                setStep(2);
+                setStep(3);
             }
-            return;
+        } else if (step > 1) {
+            setStep(step - 1);
+        } else {
+            router.back();
         }
-        if (step > 1) setStep(step - 1);
-        else router.back();
     };
 
     const toggleAreaSelection = (id: string) => {
@@ -547,8 +558,7 @@ export function usePdcWizardController() {
             }
 
             loadStep3Data();
-            setStep(3);
-            setPdcStep(1);
+            setStep(4); // Iniciar en el primer paso de diseño
         } catch (error) {
             console.error('Controller Error [resumePdc]:', error);
             alert('No se pudo reanudar el PDC.');
@@ -561,7 +571,10 @@ export function usePdcWizardController() {
         if (index === currentAreaIndex) return;
         saveCurrentAreaState();
         setCurrentAreaIndex(index);
-        setPdcStep(pdcStep); // Mantenemos el mismo sub-paso para facilitar edición masiva
+        // Si ya estamos en la fase de diseño (step >= 4), mantenemos el paso relativo
+        if (step >= 4) {
+            // No resetear step, solo cambiar de área
+        }
     };
 
     const addWeek = () => {
@@ -619,27 +632,24 @@ export function usePdcWizardController() {
     });
 
     const getStepName = () => {
-        if (step === 1) return 'Modalidad y Áreas';
-        if (step === 2) return 'Cronograma y Fechas';
-        if (step === 3) {
-            const pdcSteps: Record<number, string> = {
-                1: 'Paso 1: Datos Referenciales',
-                2: 'Paso 2: Objetivo Holístico de Nivel',
-                3: 'Paso 3: Objetivos de Aprendizaje',
-                4: 'Paso 4: Semanas y Contenidos',
-                5: 'Paso 5: Momentos del proceso formativo',
-                6: 'Paso 6: Criterios de Evaluación',
-                7: 'Paso 7: Producto de la Fase/Etapa',
-            };
-            return `${pdcSteps[pdcStep] || 'Diseño del PDC'}`;
-        }
-        return 'Asistente';
+        const steps: Record<number, string> = {
+            1: 'Modalidad y Áreas',
+            2: 'Cronograma y Fechas',
+            3: 'Confirmación y Nombre',
+            4: 'Datos Referenciales',
+            5: 'Objetivo Holístico de Nivel',
+            6: 'Objetivos de Aprendizaje',
+            7: 'Semanas y Contenidos',
+            8: 'Momentos del proceso formativo',
+            9: 'Periodos y Carga Horaria',
+            10: 'Finalización para Revisión IA',
+        };
+        return steps[step] || 'Asistente';
     };
 
     return {
         // Estado
         step,
-        pdcStep,
         loading,
         saving,
         currentPdcId,
@@ -678,6 +688,9 @@ export function usePdcWizardController() {
         recentPdcs,
         weekDesignState,
         finalProductState,
+        pdcName,
+        periodsPerWeek,
+        weeklyHours,
 
         // Setters
         setSelectedType,
@@ -699,6 +712,9 @@ export function usePdcWizardController() {
         setHoveredComplement,
         setWeekDesignState,
         setFinalProductState,
+        setPdcName,
+        setPeriodsPerWeek,
+        setWeeklyHours,
 
         // Acciones
         handleNext: handleStepNext,
@@ -707,7 +723,7 @@ export function usePdcWizardController() {
         generateAIObjective,
         addStrategicObjective,
         getStepName,
-        getTotalSteps: () => 7,
+        getTotalSteps: () => 10,
         addWeek,
         removeLastWeek,
         handlePdcDatesChange,

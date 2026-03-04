@@ -104,29 +104,37 @@ export default function AdminDashboardPage() {
             {/* Catalog Management */}
             <div>
                 <h2 className="text-xl font-bold text-slate-800 mb-4">Gestión de Catálogos</h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                     <Link href="/dashboard/admin/units" className="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-md hover:border-blue-200 transition-all group">
                         <div className="size-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                             <span className="material-symbols-rounded text-2xl">school</span>
                         </div>
-                        <h3 className="font-bold text-slate-800 mb-1 group-hover:text-blue-600 transition-colors">Unidades Educativas</h3>
-                        <p className="text-sm text-slate-500">Gestionar escuelas, códigos SIE y distritos.</p>
+                        <h3 className="font-bold text-slate-800 mb-1 group-hover:text-blue-600 transition-colors text-sm">Unidades Educativas</h3>
+                        <p className="text-[11px] text-slate-500">Gestionar escuelas, códigos SIE y distritos.</p>
                     </Link>
 
                     <Link href="/dashboard/admin/users" className="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-md hover:border-purple-200 transition-all group">
                         <div className="size-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                             <span className="material-symbols-rounded text-2xl">lock_person</span>
                         </div>
-                        <h3 className="font-bold text-slate-800 mb-1 group-hover:text-purple-600 transition-colors">Roles y Permisos</h3>
-                        <p className="text-sm text-slate-500">Administrar usuarios y asignar roles.</p>
+                        <h3 className="font-bold text-slate-800 mb-1 group-hover:text-purple-600 transition-colors text-sm">Roles y Permisos</h3>
+                        <p className="text-[11px] text-slate-500">Administrar usuarios y asignar roles.</p>
                     </Link>
 
                     <Link href="/dashboard/admin/schedule" className="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-md hover:border-orange-200 transition-all group">
                         <div className="size-12 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                             <span className="material-symbols-rounded text-2xl">calendar_view_week</span>
                         </div>
-                        <h3 className="font-bold text-slate-800 mb-1 group-hover:text-orange-600 transition-colors">Cronograma Global</h3>
-                        <p className="text-sm text-slate-500">Configurar fechas de trimestres y semanas lectivas.</p>
+                        <h3 className="font-bold text-slate-800 mb-1 group-hover:text-orange-600 transition-colors text-sm">Cronograma Global</h3>
+                        <p className="text-[11px] text-slate-500">Configurar fechas de trimestres y semanas lectivas.</p>
+                    </Link>
+
+                    <Link href="/dashboard/admin/library" className="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-md hover:border-indigo-200 transition-all group font-black">
+                        <div className="size-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <span className="material-symbols-rounded text-2xl">library_books</span>
+                        </div>
+                        <h3 className="font-bold text-slate-800 mb-1 group-hover:text-indigo-600 transition-colors text-sm">Banco de Contenidos Global</h3>
+                        <p className="text-[11px] text-slate-500">Administrar y buscar en el repositorio base del sistema.</p>
                     </Link>
                 </div>
             </div>

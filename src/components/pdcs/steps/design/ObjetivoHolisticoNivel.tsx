@@ -3,14 +3,12 @@
 
 interface Props {
     objetivoNivel: string;
-    setObjetivoNivel: (val: string) => void;
     levelColor: string;
     levelText: string;
 }
 
 export function ObjetivoHolisticoNivel({
     objetivoNivel,
-    setObjetivoNivel,
     levelColor,
     levelText
 }: Props) {
@@ -35,12 +33,9 @@ export function ObjetivoHolisticoNivel({
                 <div className="space-y-4 relative z-10">
                     <label className={`text-[9px] font-black text-${levelColor} uppercase tracking-widest block px-2`}>Cuerpo del Objetivo Estratégico</label>
                     <div className="relative">
-                        <textarea
-                            value={objetivoNivel}
-                            onChange={(e) => setObjetivoNivel(e.target.value)}
-                            className={`w-full min-h-[150px] bg-slate-50/50 border-2 border-transparent focus:border-${levelColor}/20 focus:bg-white rounded-xl p-6 font-bold text-sm text-slate-700 shadow-inner transition-all leading-relaxed custom-scrollbar outline-none placeholder:text-slate-200`}
-                            placeholder="Cargando objetivo del nivel..."
-                        />
+                        <div className={`w-full min-h-[150px] bg-slate-50/50 border-2 border-slate-100 rounded-xl p-6 font-bold text-sm text-slate-700 shadow-inner leading-relaxed custom-scrollbar select-text`}>
+                            {objetivoNivel || <span className="text-slate-300">Cargando objetivo del nivel...</span>}
+                        </div>
                         <div className="absolute bottom-4 right-4 opacity-10 pointer-events-none">
                             <span className="material-symbols-rounded text-4xl">format_quote</span>
                         </div>

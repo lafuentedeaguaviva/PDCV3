@@ -102,21 +102,18 @@ function PlanningContent({ id }: { id: string }) {
             </div>
 
             <div className="max-w-[1600px] mx-auto min-h-[calc(100vh-120px)] pb-12">
-                {areaSchedule.length > 0 ? (
-                    <PlanningSplitView
-                        area={area}
-                        userContents={userContents}
-                        areaSchedule={areaSchedule}
-                        setAreaSchedule={controller.setAreaSchedule}
-                        plannedContentIds={plannedContentIds}
-                        onRefresh={controller.refreshScheduleOnly}
-                        handleAssign={controller.handleAssign}
-                        handleRemoveAssignment={controller.handleRemoveAssignment}
-                        isProcessing={controller.isProcessing}
-                    />
-                ) : (
-                    <EmptySchedulePlaceholder onShowConfig={() => controller.setShowConfig(true)} />
-                )}
+                <PlanningSplitView
+                    area={area}
+                    userContents={userContents}
+                    areaSchedule={areaSchedule}
+                    setAreaSchedule={controller.setAreaSchedule}
+                    plannedContentIds={plannedContentIds}
+                    onRefresh={controller.refreshScheduleOnly}
+                    handleAssign={controller.handleAssign}
+                    handleRemoveAssignment={controller.handleRemoveAssignment}
+                    isProcessing={controller.isProcessing}
+                    onShowConfig={() => controller.setShowConfig(true)}
+                />
             </div>
 
             {showConfig && (
@@ -158,25 +155,3 @@ function PlanningSkeleton() {
     );
 }
 
-function EmptySchedulePlaceholder({ onShowConfig }: { onShowConfig: () => void }) {
-    return (
-        <div className="h-[60vh] flex flex-col items-center justify-center text-center space-y-6">
-            <div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center">
-                <span className="material-symbols-rounded text-4xl text-slate-300">calendar_today</span>
-            </div>
-            <div>
-                <h2 className="text-2xl font-black text-slate-900 mb-2">Sin cronograma disponible</h2>
-                <p className="text-slate-400 max-w-sm mx-auto font-medium">
-                    No se ha definido un calendario global para este trimestre o ha ocurrido un error al cargar los datos.
-                </p>
-            </div>
-            <Button
-                variant="outline"
-                onClick={onShowConfig}
-                className="h-12 px-8 rounded-2xl font-black"
-            >
-                Configuración Manual
-            </Button>
-        </div>
-    );
-}

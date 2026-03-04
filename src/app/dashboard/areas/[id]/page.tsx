@@ -133,14 +133,6 @@ export default function AreaDashboardPage({ params }: { params: Promise<{ id: st
                 </div>
 
                 <div className="flex gap-3">
-                    <Button variant="outline" className="px-6 h-12 shadow-sm">
-                        <span className="material-symbols-rounded text-xl mr-2">settings</span>
-                        Configuración
-                    </Button>
-                    <Button className="px-8 h-12 shadow-xl shadow-primary/20">
-                        <span className="material-symbols-rounded text-xl mr-2">auto_awesome</span>
-                        Planificación Inteligente
-                    </Button>
                 </div>
             </div>
 

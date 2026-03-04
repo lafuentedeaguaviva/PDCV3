@@ -219,7 +219,7 @@ export const PdcService = {
                 )
             `)
             .eq('docente_id', userId)
-            .order('created_at', { ascending: false });
+            .order('updated_at', { ascending: false });
 
         if (error) {
             console.error('Error fetching PDCs:', error.message, error.details, error.hint);
@@ -240,31 +240,48 @@ export const PdcService = {
                 .update({ pdc_id: null })
                 .eq('pdc_id', id);
 
-            if (unlinkError) throw unlinkError;
+            if (unlinkError) {
+                throw new Error(`Error al desvincular áreas: ${unlinkError.message || unlinkError.details || JSON.stringify(unlinkError)}`);
+            }
 
-            // 2. Eliminar planificación semanal asociada
+            // 2. Eliminar cronograma del PDC (ON DELETE CASCADE, pero lo hacemos explícito)
+            const { error: cronogramaError } = await supabase
+                .from('pdc_cronograma')
+                .delete()
+                .eq('pdc_id', id);
+
+            if (cronogramaError) {
+                console.warn('PdcService Warning [deletePDC - pdc_cronograma]:', cronogramaError.message);
+            }
+
+            // 3. Eliminar planificación semanal asociada (puede no tener pdc_id, no es fatal)
             const { error: planningsError } = await supabase
                 .from('planificacion_semanal')
                 .delete()
                 .eq('pdc_id', id);
 
-            if (planningsError) throw planningsError;
+            if (planningsError) {
+                console.warn('PdcService Warning [deletePDC - planificacion_semanal]:', planningsError.message);
+            }
 
-            // 3. Eliminar el registro maestro del PDC
+            // 4. Eliminar el registro maestro del PDC
             const { data, error: masterError } = await supabase
                 .from('pdcs')
                 .delete()
                 .eq('id', id)
                 .select();
 
-            if (masterError) throw masterError;
+            if (masterError) {
+                throw new Error(`Error al eliminar PDC maestro: ${masterError.message || masterError.details || JSON.stringify(masterError)}`);
+            }
 
             return { data, error: null, success: true };
-        } catch (error) {
-            console.error('PdcService Error [deletePDC]:', error);
+        } catch (error: any) {
+            console.error('PdcService Error [deletePDC]:', error?.message || error);
             return { data: null, error, success: false };
         }
     },
+
 
     async deleteAreaSchedule(areaId: string, gestion: number, trimestre: number): Promise<ServiceResponse<any>> {
         const { data, error } = await supabase

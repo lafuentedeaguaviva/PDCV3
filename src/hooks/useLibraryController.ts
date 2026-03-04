@@ -12,6 +12,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { LibraryService } from '@/services/library.service';
 import { AreasService } from '@/services/areas.service';
 import { AuthService } from '@/services/auth.service';
+import { ProfileService } from '@/services/profile.service';
 import { ContentItem, AreaTrabajo } from '@/types';
 import { useFeedback } from './useFeedback';
 
@@ -27,6 +28,7 @@ export function useLibraryController() {
     const [isSearching, setIsSearching] = useState(false);
     const [areas, setAreas] = useState<AreaTrabajo[]>([]);
     const [selectedAreaId, setSelectedAreaId] = useState<string | null>(urlAreaId);
+    const [isAdmin, setIsAdmin] = useState(false);
 
     // --- Ciclo de Vida (Life Cycle) ---
     useEffect(() => {
@@ -45,8 +47,14 @@ export function useLibraryController() {
         try {
             const { data: { session } } = await AuthService.getSession();
             if (session?.user) {
-                const userAreas = await AreasService.getAreas(session.user.id);
+                const [userAreas, profile] = await Promise.all([
+                    AreasService.getAreas(session.user.id),
+                    ProfileService.getProfile(session.user.id)
+                ]);
                 setAreas(userAreas);
+                if (profile?.roles?.includes('Administrador')) {
+                    setIsAdmin(true);
+                }
             }
         } catch (error) {
             showError('Error al cargar el contexto del usuario.', error);
@@ -137,6 +145,7 @@ export function useLibraryController() {
         isSearching,
         areas,
         selectedAreaId,
+        isAdmin,
         feedback,
 
         // Handlers

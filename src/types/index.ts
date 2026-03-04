@@ -120,6 +120,7 @@ export interface PlanificacionSemanal {
 
 export interface PDCMaster {
     id: string;
+    nombre_pdc?: string;
     docente_id: string;
     tipo_pdc_id: number;
     estado: 'Pendiente' | 'Verificado' | 'Rechazado';
@@ -156,18 +157,29 @@ export interface CatalogoComplemento {
     tipo_complemento_id: number;
 }
 
+export interface TheoryLibraryItem {
+    id_teoria: number;
+    nombre_estrategia_teorica: string;
+    proposito?: string;
+    tipo?: string;
+    apto_para?: string;
+    descripcion_concreta?: string;
+    redactado: boolean;
+    ejemplo_inicial?: string;
+    ejemplo_primaria?: string;
+    ejemplo_secundaria?: string;
+    ejemplo_multigrado?: string;
+    created_at?: string;
+    updated_at?: string;
+}
+
 export interface LearningObjective {
     text: string;
     contentIds: number[];
 }
 
 export interface MomentosFormativos {
-    practica: {
-        id: string | number;
-        tecnica: string;
-        detalle: string;
-        preguntas: string;
-    }[];
+    practica: PracticaItem[];
     teoria: string;
     produccion: string;
     valoracion: string;
@@ -210,4 +222,123 @@ export interface AreaDesignState {
     availableContents: UserContent[];
     weekDesignState: Record<number, WeekDesign>;
     finalProduct: string;
+}
+
+// --- Planning Detail Interfaces (Phase 2 & 3) ---
+
+export interface BasePlanningDetail {
+    semana_contenido_id?: string; // Optional during wizard
+    created_at?: string;
+    updated_at?: string;
+}
+
+export interface PracticaItem extends BasePlanningDetail {
+    id_practica?: number | string;
+    nombre_practica: string;
+    proposito?: string;
+    tipo?: string;
+    apto_para?: string;
+    descripcion?: string; // Unified: name requested by user
+    redactado?: boolean;
+    preguntas?: string;
+    ejemplo_inicial?: string;
+    ejemplo_primaria?: string;
+    ejemplo_secundaria?: string;
+    ejemplo_multigrado?: string;
+
+    // Compatibility for legacy or temporary objects
+    detalle?: string;
+}
+
+export interface TeoriaItem extends BasePlanningDetail {
+    id_teoria?: number;
+    nombre_estrategia_teorica: string;
+    proposito?: string;
+    tipo?: string;
+    apto_para?: string;
+    descripcion_concreta?: string;
+    redactado?: boolean;
+    ejemplo_inicial?: string;
+    ejemplo_primaria?: string;
+    ejemplo_secundaria?: string;
+    ejemplo_multigrado?: string;
+}
+
+export interface ProductoItem extends BasePlanningDetail {
+    id_producto?: number;
+    nombre_producto: string;
+    descripcion_concreta?: string;
+    nivel?: string;
+    subnivel?: string;
+    tipo?: string;
+    redactado?: boolean;
+    instrumento?: string;
+    ejemplo_inicial?: string;
+    ejemplo_primaria?: string;
+    ejemplo_secundaria?: string;
+    ejemplo_multigrado?: string;
+}
+
+export interface ValoracionItem extends BasePlanningDetail {
+    id_valoracion?: number;
+    categoria?: string;
+    preguntas?: string;
+    redactado?: boolean;
+    instrumento?: string;
+    ejemplo_inicial?: string;
+    ejemplo_primaria?: string;
+    ejemplo_secundaria?: string;
+    ejemplo_multigrado?: string;
+}
+
+export interface RecursosItem extends BasePlanningDetail {
+    id_recursos?: number;
+    tipo?: string;
+    recursos?: string;
+    ejemplo?: string;
+}
+
+export interface SerItem extends BasePlanningDetail {
+    id_ser?: number;
+    categoria?: string;
+    subcategoria?: string;
+    nombre_ser: string;
+    descripcion?: string;
+    redactado?: boolean;
+    instrumento_sugerido?: string;
+    dificultad?: string;
+    ejemplo_inicial?: string;
+    ejemplo_primaria?: string;
+    ejemplo_secundaria?: string;
+    ejemplo_multigrado?: string;
+}
+
+export interface SaberItem extends BasePlanningDetail {
+    id_saber?: number;
+    nivel?: string;
+    subnivel?: string;
+    verbo_saber: string;
+    redactado?: boolean;
+    evidencia?: string;
+    instrumento_sugerido?: string;
+    dificultad?: string;
+    ejemplo_inicial?: string;
+    ejemplo_primaria?: string;
+    ejemplo_secundaria?: string;
+    ejemplo_multigrado?: string;
+}
+
+export interface HacerItem extends BasePlanningDetail {
+    id_hacer?: number;
+    nivel?: string;
+    subnivel?: string;
+    verbo: string;
+    redactado?: boolean;
+    producto?: string;
+    instrumentos_sugeridos?: string;
+    dificultad?: string;
+    ejemplo_inicial?: string;
+    ejemplo_primaria?: string;
+    ejemplo_secundaria?: string;
+    ejemplo_multigrado?: string;
 }

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { PracticasService, PracticaLibraryItem } from '@/services/practicas.service';
+import { PracticaItem } from '@/types';
 
 
 interface Props {
@@ -9,7 +10,7 @@ interface Props {
     weekContentsMap: Record<number, any[]>;
     weekDesignState: Record<number, {
         momentos: {
-            practica: { id: string | number; tecnica: string; detalle: string; preguntas: string }[];
+            practica: PracticaItem[];
             teoria: string;
             produccion: string;
             valoracion: string;
@@ -22,13 +23,21 @@ interface Props {
     }>;
     setWeekDesignState: (val: any) => void;
     levelColor: string;
+    selectedType?: number;
 }
+
+const EMPTY_EDITING_ITEM: PracticaItem = {
+    nombre_practica: '',
+    preguntas: '',
+    descripcion: ''
+};
 
 export function MomentosProceso({
     weekContentsMap,
     weekDesignState,
     setWeekDesignState,
-    levelColor
+    levelColor,
+    selectedType
 }: Props) {
     const [activeWeek, setActiveWeek] = useState<number>(
         Object.keys(weekContentsMap).length > 0 ? Number(Object.keys(weekContentsMap).sort((a, b) => Number(a) - Number(b))[0]) : 1
@@ -38,8 +47,9 @@ export function MomentosProceso({
     // Estados para la biblioteca de Prácticas
     const [library, setLibrary] = useState<PracticaLibraryItem[]>([]);
     const [selectedLibraryItem, setSelectedLibraryItem] = useState<PracticaLibraryItem | null>(null);
-    const [editingItem, setEditingItem] = useState<{ id?: string | number; tecnica: string; detalle: string; preguntas: string }>({ tecnica: '', detalle: '', preguntas: '' });
-    const [openPropositos, setOpenPropositos] = useState<Record<string, boolean>>({});
+    const [editingItem, setEditingItem] = useState<PracticaItem>(EMPTY_EDITING_ITEM);
+    const [selectedProposito, setSelectedProposito] = useState<string>('');
+    const [selectedTipo, setSelectedTipo] = useState<string>('');
 
     useEffect(() => {
         const loadLibrary = async () => {
@@ -66,7 +76,7 @@ export function MomentosProceso({
     const currentMomentos = (rawMomentos && typeof rawMomentos === 'object')
         ? rawMomentos
         : {
-            practica: typeof rawMomentos === 'string' && rawMomentos ? [{ id: 'legacy', tecnica: 'Planificación Anterior', detalle: rawMomentos, preguntas: '' }] : [],
+            practica: typeof rawMomentos === 'string' && rawMomentos ? [{ id_practica: 'legacy', nombre_practica: 'Planificación Anterior', descripcion: rawMomentos, preguntas: '' }] : [],
             teoria: '', produccion: '', valoracion: '', adaptaciones: '', recursos: '', fuentes: '', herramientas: ''
         };
 
@@ -95,42 +105,66 @@ export function MomentosProceso({
     };
 
     const handleSavePractica = () => {
-        if (!editingItem.tecnica) return;
+        if (!editingItem.nombre_practica) return;
 
         const currentPracticas = Array.isArray(currentDesign.momentos.practica) ? currentDesign.momentos.practica : [];
         let newPracticas;
 
-        if (editingItem.id !== undefined) {
-            newPracticas = currentPracticas.map(p => p.id === editingItem.id ? { ...editingItem } : p);
+        if (editingItem.id_practica !== undefined) {
+            newPracticas = currentPracticas.map(p => p.id_practica === editingItem.id_practica ? { ...editingItem } : p);
         } else {
-            newPracticas = [...currentPracticas, { ...editingItem, id: Date.now() }];
+            newPracticas = [...currentPracticas, { ...editingItem, id_practica: `temp-${Date.now()}` }];
         }
 
         handleUpdateMomento('practica', newPracticas);
-        setEditingItem({ tecnica: '', detalle: '', preguntas: '' });
+        setEditingItem(EMPTY_EDITING_ITEM);
         setSelectedLibraryItem(null);
     };
 
-    const handleDeletePractica = (id: string | number) => {
+    const handleDeletePractica = (id_practica: string | number) => {
         const currentPracticas = Array.isArray(currentDesign.momentos.practica) ? currentDesign.momentos.practica : [];
-        const newPracticas = currentPracticas.filter(p => p.id !== id);
+        const newPracticas = currentPracticas.filter(p => p.id_practica !== id_practica);
         handleUpdateMomento('practica', newPracticas);
+        if (editingItem.id_practica === id_practica) {
+            setEditingItem(EMPTY_EDITING_ITEM);
+        }
     };
 
     const handleLoadToEditor = (item: PracticaLibraryItem) => {
-        setEditingItem(prev => ({
-            ...prev,
-            tecnica: item.tecnica,
-            preguntas: item.preguntas_generales || ''
-        }));
-        setSelectedLibraryItem(item);
+        // Al cargar al editor, copiamos TODO de la biblioteca
+        // pero permitimos que el usuario edite nombre, descripción y preguntas
+        setEditingItem({
+            id_practica: undefined, // Nueva entrada basada en biblioteca
+            nombre_practica: item.nombre_practica,
+            descripcion: item.descripcion_concreta || '',
+            preguntas: item.preguntas || '',
+            proposito: item.proposito,
+            tipo: item.tipo,
+            apto_para: item.apto_para,
+            redactado: item.redactado,
+            ejemplo_inicial: item.ejemplo_inicial,
+            ejemplo_primaria: item.ejemplo_primaria,
+            ejemplo_secundaria: item.ejemplo_secundaria,
+            ejemplo_multigrado: item.ejemplo_multigrado
+        });
     };
 
     const groupedLibrary = library.reduce((acc, item) => {
-        if (!acc[item.proposito]) acc[item.proposito] = [];
-        acc[item.proposito].push(item);
+        if (!acc[item.proposito]) acc[item.proposito] = {};
+        if (!acc[item.proposito][item.tipo]) acc[item.proposito][item.tipo] = [];
+        acc[item.proposito][item.tipo].push(item);
         return acc;
-    }, {} as Record<string, PracticaLibraryItem[]>);
+    }, {} as Record<string, Record<string, PracticaLibraryItem[]>>);
+
+    const getExampleByLevel = (item: PracticaLibraryItem) => {
+        switch (selectedType) {
+            case 1: return item.ejemplo_inicial || 'Ejemplo no disponible para este nivel.';
+            case 2: return item.ejemplo_primaria || 'Ejemplo no disponible para este nivel.';
+            case 3: return item.ejemplo_secundaria || 'Ejemplo no disponible para este nivel.';
+            case 4: return item.ejemplo_multigrado || 'Ejemplo no disponible para este nivel.';
+            default: return item.ejemplo_primaria || item.descripcion_concreta;
+        }
+    };
 
     return (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-2 animate-in fade-in slide-in-from-right-8 duration-700 pt-2">
@@ -187,145 +221,178 @@ export function MomentosProceso({
                             {/* Radiant Color Glows */}
                             <div className={`absolute top-0 right-0 size-[200px] bg-gradient-to-br from-${levelColor}/10 via-transparent to-transparent rounded-full blur-3xl -mr-32 -mt-32 opacity-70 pointer-events-none`}></div>
 
-                            {/* Contents & Active Week Header - Ultra Compact */}
-                            <div className="flex items-center justify-between gap-4 relative z-10 bg-slate-100/30 p-2.5 rounded-xl border border-slate-200/50 backdrop-blur-sm">
-                                <div className="flex items-center gap-3">
-                                    <span className={`text-[10px] font-black uppercase text-white bg-blue-600 px-3 py-1 rounded-full shadow-lg shadow-blue-500/20`}>
-                                        Semana {activeWeek}
-                                    </span>
-                                    <label className={`text-xs font-black text-slate-500 uppercase tracking-[0.2em] flex items-center gap-2 opacity-80`}>
-                                        Temas Centrales:
-                                    </label>
-                                    <div className="flex flex-wrap gap-2">
-                                        {weekContentsMap[activeWeek]?.map((c, i) => (
-                                            <span key={i} className="text-xs font-black text-slate-700 uppercase bg-white border border-slate-200 px-2 py-0.5 rounded-lg shadow-sm max-w-[150px] truncate italic">
-                                                {c.titulo}
-                                            </span>
-                                        ))}
+                            <div className="flex flex-col gap-3 relative z-10 bg-slate-100/30 p-3 rounded-xl border border-slate-200/50 backdrop-blur-sm">
+                                <div className="flex items-center justify-between gap-4">
+                                    <div className="flex items-center gap-3">
+                                        <span className={`text-[10px] font-black uppercase text-white bg-blue-600 px-3 py-1 rounded-full shadow-lg shadow-blue-500/20`}>
+                                            Semana {activeWeek}
+                                        </span>
+                                        <div className="flex items-center gap-2">
+                                            {weekContentsMap[activeWeek]?.map((c, i) => (
+                                                <span key={i} className="text-[10px] font-black text-slate-700 uppercase bg-white border border-slate-200 px-2 py-0.5 rounded-lg shadow-sm truncate max-w-[120px] italic">
+                                                    {c.titulo}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    </div>
+                                    <div className={`px-3 py-1 rounded-full bg-blue-50 border border-blue-100`}>
+                                        <span className={`text-[10px] font-black uppercase text-blue-600 tracking-widest`}>Biblioteca de Prácticas</span>
                                     </div>
                                 </div>
-                                <div className={`px-3 py-1 rounded-full bg-${levelColor}/10 border border-${levelColor}/20`}>
-                                    <span className={`text-[10px] font-black uppercase text-${levelColor} tracking-widest`}>Modo Edición Activo</span>
-                                </div>
+
+                                {/* Selectores de Biblioteca (Top Bar) */}
+                                {activeTab === 'practica' && (
+                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-2 pt-1">
+                                        <select
+                                            value={selectedProposito}
+                                            onChange={(e) => { setSelectedProposito(e.target.value); setSelectedTipo(''); setSelectedLibraryItem(null); }}
+                                            className="bg-white border-2 border-slate-200 rounded-lg px-3 py-2 text-xs font-bold text-slate-700 outline-none focus:border-rose-400 transition-all"
+                                        >
+                                            <option value="">Seleccionar Propósito...</option>
+                                            {Object.keys(groupedLibrary).map(p => <option key={p} value={p}>{p}</option>)}
+                                        </select>
+
+                                        <select
+                                            value={selectedTipo}
+                                            disabled={!selectedProposito}
+                                            onChange={(e) => { setSelectedTipo(e.target.value); setSelectedLibraryItem(null); }}
+                                            className="bg-white border-2 border-slate-200 rounded-lg px-3 py-2 text-xs font-bold text-slate-700 outline-none focus:border-rose-400 transition-all disabled:opacity-50"
+                                        >
+                                            <option value="">Seleccionar Tipo...</option>
+                                            {selectedProposito && Object.keys(groupedLibrary[selectedProposito] || {}).map(t => <option key={t} value={t}>{t}</option>)}
+                                        </select>
+
+                                        <select
+                                            value={selectedLibraryItem?.id_practica || ''}
+                                            disabled={!selectedTipo}
+                                            onChange={(e) => {
+                                                const item = library.find(l => l.id_practica === Number(e.target.value));
+                                                if (item) setSelectedLibraryItem(item);
+                                            }}
+                                            className="bg-white border-2 border-slate-200 rounded-lg px-3 py-2 text-xs font-bold text-slate-700 outline-none focus:border-rose-400 transition-all disabled:opacity-50"
+                                        >
+                                            <option value="">Seleccionar Técnica...</option>
+                                            {selectedProposito && selectedTipo && groupedLibrary[selectedProposito][selectedTipo].map(item => (
+                                                <option key={item.id_practica} value={item.id_practica}>{item.nombre_practica}</option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                )}
                             </div>
 
                             <div className="relative z-10 flex-1 flex flex-col pt-1 overflow-hidden">
                                 {activeTab === 'practica' ? (
                                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 flex-1 overflow-hidden">
-                                        {/* Columna Izquierda: Biblioteca */}
-                                        <div className="lg:col-span-3 flex flex-col space-y-2 overflow-hidden">
-                                            <div className="flex items-center justify-between px-1">
-                                                <span className="text-xs font-black text-slate-400 uppercase tracking-widest">Biblioteca</span>
-                                                <span className="text-[10px] font-bold text-slate-400 bg-slate-100 px-2 py-0.5 rounded-full">{library.length} técnicas</span>
+                                        {/* Columna Izquierda: Detalle de Selección */}
+                                        <div className="lg:col-span-3 flex flex-col space-y-3 bg-white p-4 rounded-xl border border-slate-100 shadow-sm overflow-y-auto">
+                                            <div className="flex items-center justify-between">
+                                                <span className="text-xs font-black text-blue-600 uppercase tracking-widest">Detalle de Técnica</span>
+                                                <span className="material-symbols-rounded text-blue-400 text-lg">info</span>
                                             </div>
-                                            <div className="flex-1 overflow-y-auto pr-0.5 space-y-0">
-                                                {library.length === 0 ? (
-                                                    <div className="h-full flex flex-col items-center justify-center text-center p-4 gap-2 min-h-[180px]">
-                                                        <span className="material-symbols-rounded text-3xl text-slate-200">library_books</span>
-                                                        <p className="text-[9px] font-black text-slate-300 uppercase tracking-widest">Biblioteca vacía</p>
-                                                        <p className="text-[8px] text-slate-300 leading-relaxed max-w-[140px]">Ejecuta los archivos SQL en Supabase para cargar las técnicas.</p>
+
+                                            {selectedLibraryItem ? (
+                                                <div className="space-y-4 animate-in fade-in slide-in-from-left-2 duration-500">
+                                                    <div>
+                                                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-1">Nombre</label>
+                                                        <p className="text-xs font-black text-slate-800 leading-tight uppercase">{selectedLibraryItem.nombre_practica}</p>
                                                     </div>
-                                                ) : Object.entries(groupedLibrary).map(([proposito, items]) => (
-                                                    <div key={proposito} className="mb-2">
-                                                        {/* Separador estilo Word por Propósito */}
-                                                        <div className="flex items-center gap-2 px-1 py-2 sticky top-0 bg-white/95 backdrop-blur-sm z-10 border-b border-slate-100">
-                                                            <div className="h-1.5 flex-shrink-0 w-1.5 bg-rose-500 rounded-full shadow-[0_0_8px_rgba(244,63,94,0.4)]"></div>
-                                                            <span className="text-[10px] font-black text-rose-600 uppercase tracking-[0.2em] whitespace-nowrap">{proposito}</span>
-                                                            <div className="h-px flex-1 bg-slate-100"></div>
-                                                            <span className="text-[9px] font-black text-slate-300">{items.length}</span>
+
+                                                    <div>
+                                                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-1">Descripción</label>
+                                                        <p className="text-[11px] text-slate-600 font-medium leading-relaxed italic">"{selectedLibraryItem.descripcion_concreta}"</p>
+                                                    </div>
+
+                                                    {selectedLibraryItem.preguntas && (
+                                                        <div>
+                                                            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-1">Preguntas Guía</label>
+                                                            <div className="p-2 bg-slate-50 rounded-lg border border-slate-100">
+                                                                <p className="text-[11px] text-slate-500 font-bold leading-relaxed">{selectedLibraryItem.preguntas}</p>
+                                                            </div>
                                                         </div>
-                                                        {/* Lista de técnicas sin acordeón */}
-                                                        <div className="space-y-px pt-0.5">
-                                                            {items.map((item) => (
-                                                                <div
-                                                                    key={item.id}
-                                                                    onClick={() => setSelectedLibraryItem(item)}
-                                                                    onDoubleClick={() => handleLoadToEditor(item)}
-                                                                    title="Clic: ver detalle · Doble clic: enviar al editor"
-                                                                    className={`px-2 py-1.5 rounded-lg border cursor-pointer transition-all group select-none ${selectedLibraryItem?.id === item.id
-                                                                        ? 'bg-rose-50 border-rose-200 shadow-sm'
-                                                                        : 'border-transparent hover:bg-slate-50 hover:border-slate-100'
-                                                                        }`}
-                                                                >
-                                                                    <div className="flex items-center justify-between gap-1">
-                                                                        <span className={`text-xs font-black leading-tight ${selectedLibraryItem?.id === item.id ? 'text-rose-700' : 'text-slate-700'
-                                                                            }`}>
-                                                                            {item.tecnica}
-                                                                        </span>
-                                                                        <span className={`material-symbols-rounded text-base flex-shrink-0 transition-opacity ${selectedLibraryItem?.id === item.id ? 'opacity-100 text-rose-500' : 'opacity-0 group-hover:opacity-50 text-slate-300'
-                                                                            }`}>east</span>
-                                                                    </div>
-                                                                    {selectedLibraryItem?.id === item.id && (
-                                                                        <div className="mt-2 animate-in fade-in slide-in-from-top-1 duration-200">
-                                                                            <p className="text-[10px] text-slate-500 font-medium leading-relaxed">"{item.descripcion_concreta}"</p>
-                                                                            {item.preguntas_generales && (
-                                                                                <div className="mt-2 p-2 bg-rose-50/50 rounded-lg border border-rose-100/50">
-                                                                                    <p className="text-[10px] text-rose-600 font-bold leading-relaxed">{item.preguntas_generales}</p>
-                                                                                </div>
-                                                                            )}
-                                                                            <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mt-2">↑ doble clic para insertar</span>
-                                                                        </div>
-                                                                    )}
-                                                                </div>
-                                                            ))}
+                                                    )}
+
+                                                    {selectedLibraryItem.apto_para && (
+                                                        <div>
+                                                            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-1">Apto para</label>
+                                                            <span className="text-[10px] font-black bg-blue-50 text-blue-600 px-2 py-0.5 rounded-full uppercase">{selectedLibraryItem.apto_para}</span>
+                                                        </div>
+                                                    )}
+
+                                                    <div>
+                                                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-1">Ejemplo Sugerido</label>
+                                                        <div className="p-3 bg-rose-50/50 rounded-xl border border-rose-100/50 text-[11px] text-rose-700 font-medium leading-relaxed">
+                                                            {getExampleByLevel(selectedLibraryItem)}
                                                         </div>
                                                     </div>
-                                                ))}
-                                            </div>
+
+                                                    <button
+                                                        onClick={() => handleLoadToEditor(selectedLibraryItem)}
+                                                        className="w-full mt-4 py-3 rounded-xl bg-slate-900 text-white font-black text-[10px] uppercase tracking-[0.2em] shadow-lg hover:bg-slate-800 transition-all flex items-center justify-center gap-2"
+                                                    >
+                                                        <span className="material-symbols-rounded text-lg">add_circle</span>
+                                                        Llevar al Panel
+                                                    </button>
+                                                </div>
+                                            ) : (
+                                                <div className="h-full flex flex-col items-center justify-center text-center p-4 gap-3 opacity-40">
+                                                    <span className="material-symbols-rounded text-4xl text-slate-200">manage_search</span>
+                                                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-relaxed">Selecciona una técnica para ver sus detalles aquí</p>
+                                                </div>
+                                            )}
                                         </div>
 
-                                        {/* Columna Central: Editor */}
-                                        <div className="lg:col-span-6 flex flex-col space-y-3 bg-slate-50/50 p-3 rounded-xl border border-slate-100">
+                                        {/* Columna Central: Editor (Filtro por Propósito solicitado) */}
+                                        <div className="lg:col-span-6 flex flex-col space-y-3 bg-slate-50/50 p-4 rounded-xl border border-slate-100">
                                             <div className="flex items-center justify-between">
                                                 <div className="flex items-center gap-2">
-                                                    <div className={`size-3.5 rounded-full bg-rose-500 shadow-[0_0_12px_rgba(244,63,94,0.5)] animate-pulse`}></div>
-                                                    <span className="text-xs font-black text-slate-800 uppercase tracking-[0.2em]">Panel de Edición Técnica</span>
+                                                    <div className={`size-3.5 rounded-full bg-blue-600 shadow-[0_0_12px_rgba(37,99,235,0.4)] animate-pulse`}></div>
+                                                    <span className="text-xs font-black text-slate-800 uppercase tracking-[0.2em]">Configuración de Actividad</span>
                                                 </div>
-                                                {editingItem.id && (
-                                                    <button onClick={() => setEditingItem({ tecnica: '', detalle: '', preguntas: '' })} className="text-[10px] font-black text-rose-500 uppercase hover:underline tracking-widest">Cancelar Edición</button>
+                                                {editingItem.id_practica && (
+                                                    <button onClick={() => setEditingItem(EMPTY_EDITING_ITEM)} className="text-[10px] font-black text-rose-500 uppercase hover:underline tracking-widest">Cancelar Edición</button>
                                                 )}
                                             </div>
 
-                                            <div className="flex flex-col space-y-3 flex-1 overflow-y-auto pr-1">
+                                            <div className="flex flex-col space-y-4 flex-1 overflow-y-auto pr-1">
                                                 <div className="space-y-1.5">
-                                                    <label className="text-xs font-black text-slate-400 uppercase tracking-widest px-1">Título de la Técnica</label>
+                                                    <label className="text-xs font-black text-slate-400 uppercase tracking-widest px-1">Técnica Seleccionada</label>
                                                     <input
                                                         type="text"
-                                                        value={editingItem.tecnica}
-                                                        onChange={(e) => setEditingItem(prev => ({ ...prev, tecnica: e.target.value }))}
-                                                        className="w-full bg-white border-2 border-slate-100 rounded-xl px-4 py-3 text-sm font-black text-slate-800 focus:border-rose-400 focus:ring-0 outline-none transition-all shadow-sm"
-                                                        placeholder="Nombre de la técnica..."
+                                                        value={editingItem.nombre_practica}
+                                                        onChange={(e) => setEditingItem(prev => ({ ...prev, nombre_practica: e.target.value }))}
+                                                        className="w-full bg-white border-2 border-slate-200 rounded-xl px-4 py-3 text-sm font-black text-slate-800 focus:border-blue-400 focus:ring-0 outline-none transition-all shadow-sm"
+                                                        placeholder="Nombre de la actividad..."
                                                     />
                                                 </div>
 
                                                 <div className="space-y-1.5 flex-1 flex flex-col">
-                                                    <label className="text-xs font-black text-slate-400 uppercase tracking-widest px-1">Desarrollo Metodológico</label>
+                                                    <label className="text-xs font-black text-slate-400 uppercase tracking-widest px-1">Descripción</label>
                                                     <textarea
-                                                        value={editingItem.detalle}
-                                                        onChange={(e) => setEditingItem(prev => ({ ...prev, detalle: e.target.value }))}
-                                                        className="w-full flex-1 bg-white border-2 border-slate-100 rounded-xl px-4 py-3 text-sm font-bold text-slate-700 focus:border-rose-400 focus:ring-0 outline-none transition-all resize-none shadow-sm min-h-[150px] leading-relaxed"
-                                                        placeholder="Describe detalladamente cómo aplicarás esta técnica en el aula..."
+                                                        value={editingItem.descripcion}
+                                                        onChange={(e) => setEditingItem(prev => ({ ...prev, descripcion: e.target.value }))}
+                                                        className="w-full bg-white border-2 border-slate-200 rounded-xl px-4 py-3 text-xs font-bold text-slate-600 focus:border-blue-400 focus:ring-0 outline-none transition-all resize-none shadow-sm flex-1 min-h-[100px]"
+                                                        placeholder="Detalles adicionales..."
                                                     />
                                                 </div>
 
                                                 <div className="space-y-1.5">
-                                                    <label className="text-xs font-black text-slate-400 uppercase tracking-widest px-1">Preguntas de Reflexión / Dinamización</label>
+                                                    <label className="text-xs font-black text-slate-400 uppercase tracking-widest px-1">Preguntas de Reflexión</label>
                                                     <textarea
                                                         value={editingItem.preguntas}
                                                         onChange={(e) => setEditingItem(prev => ({ ...prev, preguntas: e.target.value }))}
-                                                        className="w-full bg-white border-2 border-slate-100 rounded-xl px-4 py-3 text-sm font-bold text-slate-600 focus:border-rose-400 focus:ring-0 outline-none transition-all resize-none shadow-sm h-[100px]"
-                                                        placeholder="Preguntas para guiar el proceso..."
+                                                        className="w-full bg-white border-2 border-slate-200 rounded-xl px-4 py-3 text-xs font-bold text-slate-600 focus:border-blue-400 focus:ring-0 outline-none transition-all resize-none shadow-sm min-h-[80px]"
+                                                        placeholder="Preguntas dinamizadoras..."
                                                     />
                                                 </div>
 
                                                 <button
                                                     onClick={handleSavePractica}
-                                                    className={`w-full py-4 rounded-xl font-black text-xs uppercase tracking-[0.2em] transition-all shadow-xl flex items-center justify-center gap-3 ${editingItem.tecnica
+                                                    className={`w-full py-4 rounded-xl font-black text-xs uppercase tracking-[0.2em] transition-all shadow-xl flex items-center justify-center gap-3 ${editingItem.nombre_practica
                                                         ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-blue-200 active:scale-[0.98]'
                                                         : 'bg-slate-100 text-slate-300 cursor-not-allowed shadow-none'}`}
                                                 >
-                                                    <span className="material-symbols-rounded text-xl">save_as</span>
-                                                    {editingItem.id ? 'ACTUALIZAR ACTIVIDAD' : 'GUARDAR EN PLANIFICACIÓN'}
+                                                    <span className="material-symbols-rounded text-xl">check_circle</span>
+                                                    {editingItem.id_practica ? 'ACTUALIZAR ACTIVIDAD' : 'GUARDAR EN PLANIFICACIÓN'}
                                                 </button>
                                             </div>
                                         </div>
@@ -339,9 +406,9 @@ export function MomentosProceso({
                                             <div className="flex-1 overflow-y-auto pr-1 space-y-3 custom-scrollbar">
                                                 {Array.isArray(currentDesign.momentos.practica) && currentDesign.momentos.practica.length > 0 ? (
                                                     currentDesign.momentos.practica.map((p, idx) => (
-                                                        <div key={p.id || idx} className="bg-white border-2 border-rose-100 rounded-2xl p-4 shadow-xl shadow-rose-50/50 hover:shadow-rose-100/50 transition-all relative group border-l-[6px] border-l-rose-500">
+                                                        <div key={p.id_practica || idx} className="bg-white border-2 border-rose-100 rounded-2xl p-4 shadow-xl shadow-rose-50/50 hover:shadow-rose-100/50 transition-all relative group border-l-[6px] border-l-rose-500">
                                                             <div className="flex items-start justify-between gap-2 mb-2">
-                                                                <h4 className="text-sm font-black text-slate-900 uppercase leading-tight pr-12">{p.tecnica}</h4>
+                                                                <h4 className="text-sm font-black text-slate-900 uppercase leading-tight pr-12">{p.nombre_practica}</h4>
                                                                 <div className="flex items-center gap-1.5 absolute top-3 right-3">
                                                                     <button
                                                                         onClick={() => setEditingItem(p)}
@@ -350,14 +417,14 @@ export function MomentosProceso({
                                                                         <span className="material-symbols-rounded text-lg">edit</span>
                                                                     </button>
                                                                     <button
-                                                                        onClick={() => handleDeletePractica(p.id)}
+                                                                        onClick={() => handleDeletePractica(p.id_practica!)}
                                                                         className="size-8 rounded-xl bg-slate-50 text-slate-400 hover:text-rose-500 hover:bg-rose-50 hover:shadow-md transition-all flex items-center justify-center"
                                                                     >
                                                                         <span className="material-symbols-rounded text-lg">delete</span>
                                                                     </button>
                                                                 </div>
                                                             </div>
-                                                            <p className="text-sm text-slate-600 font-medium leading-relaxed line-clamp-4 mb-3">{p.detalle}</p>
+                                                            <p className="text-sm text-slate-600 font-medium leading-relaxed line-clamp-4 mb-3">{p.descripcion || p.detalle}</p>
                                                             {p.preguntas && (
                                                                 <div className="pt-3 border-t border-slate-100">
                                                                     <span className="text-xs font-black text-slate-400 uppercase tracking-widest block mb-1.5">Preguntas Guía:</span>

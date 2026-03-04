@@ -1,8 +1,10 @@
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
+import { useState, useRef, useEffect } from 'react';
 import { PDC } from '@/types';
 import { Card, Badge } from './atoms';
 import { Button } from './button';
+import { PdcService } from '@/services/pdc.service';
 
 interface PdcCardProps {
     pdc: PDC;
@@ -11,16 +13,47 @@ interface PdcCardProps {
 }
 
 export function PdcCard({ pdc, onDelete, onResume }: PdcCardProps) {
-    // Usar fecha_inicio del PDC maestro, con fallback a created_at o fecha actual
-    const rawDate = pdc.fecha_inicio || pdc.created_at || new Date().toISOString();
+    const rawDate = pdc.updated_at || pdc.fecha_inicio || pdc.created_at || new Date().toISOString();
     const startDate = new Date(rawDate);
-
-    // Validar si la fecha es válida para evitar RangeError
     const isValidDate = !isNaN(startDate.getTime());
 
     const areas = pdc.areas_trabajo || [];
     const firstArea = areas[0];
-    const displayTitle = `PDC ${pdc.trimestre}° Trimestre - Mes ${pdc.mes}`;
+    const fallbackTitle = `PDC ${pdc.trimestre}° Trimestre - Mes ${pdc.mes}`;
+
+    const [isEditing, setIsEditing] = useState(false);
+    const [editedName, setEditedName] = useState(pdc.nombre_pdc || fallbackTitle);
+    const [displayName, setDisplayName] = useState(pdc.nombre_pdc || fallbackTitle);
+    const [saving, setSaving] = useState(false);
+    const inputRef = useRef<HTMLInputElement>(null);
+
+    useEffect(() => {
+        if (isEditing) inputRef.current?.focus();
+    }, [isEditing]);
+
+    const handleSave = async () => {
+        if (!editedName.trim()) return;
+        setSaving(true);
+        try {
+            await PdcService.updatePdcMaster(pdc.id, { nombre_pdc: editedName.trim() });
+            setDisplayName(editedName.trim());
+            setIsEditing(false);
+        } catch (e) {
+            console.error('Error updating nombre_pdc:', e);
+        } finally {
+            setSaving(false);
+        }
+    };
+
+    const handleCancel = () => {
+        setEditedName(displayName);
+        setIsEditing(false);
+    };
+
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+        if (e.key === 'Enter') handleSave();
+        if (e.key === 'Escape') handleCancel();
+    };
 
     return (
         <Card className="flex flex-col md:flex-row gap-6 items-center hover:shadow-medium">
@@ -58,9 +91,49 @@ export function PdcCard({ pdc, onDelete, onResume }: PdcCardProps) {
                         {pdc.estado}
                     </Badge>
                 </div>
-                <h3 className="text-lg font-bold text-slate-900 mb-1">
-                    {displayTitle}
-                </h3>
+
+                {/* Inline editable title */}
+                {isEditing ? (
+                    <div className="flex items-center gap-2 mt-1">
+                        <input
+                            ref={inputRef}
+                            value={editedName}
+                            onChange={(e) => setEditedName(e.target.value)}
+                            onKeyDown={handleKeyDown}
+                            className="flex-1 text-lg font-bold text-slate-900 border-b-2 border-blue-500 bg-transparent outline-none px-1 py-0.5 rounded-sm"
+                        />
+                        <button
+                            onClick={handleSave}
+                            disabled={saving}
+                            className="text-green-600 hover:text-green-700 disabled:opacity-50"
+                            title="Guardar nombre"
+                        >
+                            <span className="material-symbols-rounded text-xl">{saving ? 'hourglass_empty' : 'check_circle'}</span>
+                        </button>
+                        <button
+                            onClick={handleCancel}
+                            disabled={saving}
+                            className="text-slate-400 hover:text-slate-600"
+                            title="Cancelar"
+                        >
+                            <span className="material-symbols-rounded text-xl">cancel</span>
+                        </button>
+                    </div>
+                ) : (
+                    <div className="flex items-center gap-2 group/title">
+                        <h3 className="text-lg font-bold text-slate-900 mb-1">
+                            {displayName}
+                        </h3>
+                        <button
+                            onClick={() => setIsEditing(true)}
+                            className="opacity-0 group-hover/title:opacity-100 text-slate-300 hover:text-blue-500 transition-opacity"
+                            title="Editar nombre del PDC"
+                        >
+                            <span className="material-symbols-rounded text-base">edit</span>
+                        </button>
+                    </div>
+                )}
+
                 <p className="text-sm text-slate-500 line-clamp-1">
                     {areas.length > 1
                         ? `Afecta a ${areas.length} áreas vinculadas`
@@ -98,3 +171,5 @@ export function PdcCard({ pdc, onDelete, onResume }: PdcCardProps) {
         </Card>
     );
 }
+
+

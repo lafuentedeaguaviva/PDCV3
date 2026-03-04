@@ -11,7 +11,9 @@
 import { usePdcWizardController, PDC_TYPES } from '@/hooks/usePdcWizardController';
 import { Step1ModalidadAreas } from '@/components/pdcs/steps/Step1ModalidadAreas';
 import { Step2CronogramaFechas } from '@/components/pdcs/steps/Step2CronogramaFechas';
+import { Step3ConfirmationName } from '@/components/pdcs/steps/Step3ConfirmationName';
 import { StepDesignPhase } from '@/components/pdcs/steps/StepDesignPhase';
+import { PdcStepIndicator } from '@/components/pdcs/common/PdcStepIndicator';
 import { Button } from '@/components/ui/button';
 import { Suspense } from 'react';
 
@@ -19,7 +21,6 @@ function NewPdcContent() {
     const controller = usePdcWizardController();
     const {
         step,
-        pdcStep,
         loading,
         saving,
         handleNext,
@@ -31,7 +32,13 @@ function NewPdcContent() {
         mainAreaDetails,
         areasDesignState,
         jumpToArea,
-        areas
+        areas,
+        pdcName,
+        periodsPerWeek,
+        weeklyHours,
+        setPdcName,
+        setPeriodsPerWeek,
+        setWeeklyHours
     } = controller;
 
     if (loading) {
@@ -52,36 +59,58 @@ function NewPdcContent() {
     }
 
     return (
-        <div className="min-h-screen bg-slate-50 pb-32">
+        <div className="min-h-screen bg-slate-50 pb-20">
             {/* Header / Navigation */}
-            <div className="sticky top-0 z-50 bg-white/70 backdrop-blur-2xl border-b border-slate-200/60 px-8 py-3 min-h-[80px] flex items-center transition-all duration-300">
-                <div className="max-w-[1600px] mx-auto w-full flex items-center justify-between gap-12">
-                    <div className="flex items-center gap-10">
-                        <button
-                            onClick={handleBack}
-                            className="size-10 bg-white rounded-xl border-2 border-slate-100 flex items-center justify-center text-slate-400 shadow-sm transition-all hover:border-blue-500 hover:text-blue-600 hover:shadow-2xl hover:shadow-blue-500/10 active:scale-90 group"
-                        >
-                            <span className="material-symbols-rounded text-xl font-bold group-hover:-translate-x-1 transition-transform">arrow_back</span>
-                        </button>
+            <div className="sticky top-0 z-50 bg-white/70 backdrop-blur-2xl border-b border-slate-200/60 px-6 py-3 min-h-[80px] flex items-center transition-all duration-300">
+                <div className="max-w-[1700px] mx-auto w-full flex items-center justify-between gap-8">
+                    <div className="flex items-center gap-6">
+                        {/* Interactive Navigation Group */}
+                        <div className="flex items-center gap-4 bg-white/40 p-2 rounded-[2rem] border border-slate-200/50 shadow-sm backdrop-blur-xl group/nav hover:border-blue-200/50 transition-all duration-500">
+                            {step !== 4 && (
+                                <button
+                                    onClick={handleBack}
+                                    className="size-12 bg-white rounded-2xl border border-slate-100 flex items-center justify-center text-slate-400 shadow-sm transition-all hover:border-blue-500 hover:text-blue-600 hover:shadow-xl hover:shadow-blue-500/10 active:scale-95 group/back"
+                                    title="Volver"
+                                >
+                                    <span className="material-symbols-rounded text-2xl font-bold group-hover/back:-translate-x-1 transition-transform">arrow_back</span>
+                                </button>
+                            )}
 
-                        <div className="flex flex-col gap-2">
-                            <div className="flex items-center gap-4">
-                                <span className="px-3 py-1 bg-blue-600 text-white text-xs font-black rounded-full uppercase tracking-[0.2em] shadow-lg shadow-blue-500/20 border border-white/10">
-                                    {step === 3 ? `FASE ${pdcStep} DE 7` : `FASE ${step} DE 3`}
-                                </span>
-                                <h1 className="text-xl md:text-2xl font-black text-blue-950 tracking-tighter leading-none uppercase">
-                                    {getStepName().includes(':') ? getStepName().split(':')[1].trim() : getStepName()}
-                                </h1>
+                            <div className="flex flex-col gap-3 px-2">
+                                <div className="flex flex-col gap-0.5 min-w-[300px]">
+                                    <h1 className="text-lg font-black text-blue-950 tracking-tight leading-none uppercase truncate">
+                                        {getStepName().includes(':') ? getStepName().split(':')[1].trim() : getStepName()}
+                                    </h1>
+                                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em]">Asistente de Planificación PDC</p>
+                                </div>
+                                <PdcStepIndicator
+                                    currentStep={step}
+                                    totalSteps={10}
+                                    className="scale-90 origin-left"
+                                />
                             </div>
-                            <div className="flex items-center gap-3 px-1">
-                                <div className="h-1 w-12 bg-gradient-to-r from-blue-600 to-cyan-400 rounded-full shadow-sm"></div>
-                                <p className="text-xs font-black text-slate-400 uppercase tracking-[0.4em]">Asistente de Planificación PDC</p>
-                            </div>
+
+                            <Button
+                                onClick={handleNext}
+                                disabled={saving}
+                                className="h-12 px-8 bg-blue-600 text-white hover:bg-blue-700 font-black rounded-2xl gap-3 shadow-lg shadow-blue-500/20 transition-all active:scale-95 group/next disabled:opacity-50 text-[11px] uppercase tracking-widest border-b-2 border-blue-800"
+                            >
+                                {saving ? (
+                                    <div className="size-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                                ) : (
+                                    <>
+                                        <span className="italic">{step === 10 && currentAreaIndex === selectedAreas.length - 1 ? 'FINALIZAR' : 'Continuar'}</span>
+                                        <div className="size-8 bg-white/20 text-white rounded-lg flex items-center justify-center group-hover/next:translate-x-1 transition-transform">
+                                            <span className="material-symbols-rounded text-sm font-bold">arrow_forward</span>
+                                        </div>
+                                    </>
+                                )}
+                            </Button>
                         </div>
                     </div>
 
                     <div className="flex items-center gap-10">
-                        {step === 3 && selectedAreas.length > 1 && (
+                        {step >= 4 && selectedAreas.length > 1 && (
                             <div className="flex bg-slate-100/50 backdrop-blur-md p-1.5 rounded-2xl border border-slate-100 shadow-inner gap-1">
                                 {selectedAreas.map((areaId, idx) => {
                                     const areaData = areas.find(a => a.id === areaId);
@@ -112,14 +141,14 @@ function NewPdcContent() {
 
                         <div className="hidden xl:flex flex-col items-end gap-3 px-4">
                             <div className="flex gap-2.5">
-                                {[1, 2, 3].map((s) => (
+                                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((s) => (
                                     <div
                                         key={s}
                                         className={`h-1.5 rounded-full transition-all duration-700 ease-in-out shadow-sm ${step === s
-                                            ? 'w-16 bg-gradient-to-r from-slate-900 to-slate-700'
+                                            ? 'w-10 bg-gradient-to-r from-slate-900 to-slate-700'
                                             : step > s
-                                                ? 'w-6 bg-blue-500'
-                                                : 'w-6 bg-slate-200'
+                                                ? 'w-4 bg-blue-500'
+                                                : 'w-4 bg-slate-200'
                                             }`}
                                     />
                                 ))}
@@ -164,69 +193,77 @@ function NewPdcContent() {
                     )}
 
                     {step === 3 && (
+                        <Step3ConfirmationName
+                            pdcName={pdcName}
+                            setPdcName={setPdcName}
+                            selectedAreas={controller.selectedAreas}
+                            areas={controller.areas}
+                        />
+                    )}
+
+                    {step >= 4 && (
                         <StepDesignPhase
-                            pdcStep={pdcStep}
-                            controller={controller}
+                            step={step}
+                            levelColor={controller.selectedType === 1 ? 'rose-600' : controller.selectedType === 2 ? 'amber-500' : controller.selectedType === 3 ? 'indigo-600' : 'emerald-600'}
+                            pdcName={pdcName}
+                            // Pass all required props from controller
+                            selectedType={controller.selectedType}
+                            mainAreaDetails={controller.mainAreaDetails}
+                            userProfile={controller.userProfile}
+                            selectedTrimestre={controller.selectedTrimestre}
+                            pdcDates={controller.pdcDates}
+                            objetivoNivel={controller.objetivoNivel}
+                            setObjetivoNivel={controller.setObjetivoNivel}
+                            generatorMode={controller.generatorMode}
+                            setGeneratorMode={controller.setGeneratorMode}
+                            currentObjective={controller.currentObjective}
+                            setCurrentObjective={controller.setCurrentObjective}
+                            sortedVerbos={controller.sortedVerbos}
+                            hoveredVerb={controller.hoveredVerb}
+                            setHoveredVerb={controller.setHoveredVerb}
+                            verbFilters={controller.verbFilters}
+                            showFilters={controller.showFilters}
+                            setShowFilters={controller.setShowFilters}
+                            setVerbFilters={controller.setVerbFilters}
+                            catalogoVerbos={controller.catalogoVerbos}
+                            availableContents={controller.availableContents}
+                            expandedTitles={controller.expandedTitles}
+                            setExpandedTitles={controller.setExpandedTitles}
+                            learningObjectives={controller.learningObjectives}
+                            complementCategories={controller.complementCategories}
+                            selectedCompCategory={controller.selectedCompCategory}
+                            setSelectedCompCategory={controller.setSelectedCompCategory}
+                            complementSearch={controller.complementSearch}
+                            setComplementSearch={controller.setComplementSearch}
+                            filteredComplementos={controller.filteredComplementos}
+                            hoveredComplement={controller.hoveredComplement}
+                            setHoveredComplement={controller.setHoveredComplement}
+                            catalogoComplementos={controller.catalogoComplementos}
+                            addStrategicObjective={controller.addStrategicObjective}
+                            generateAIObjective={controller.generateAIObjective}
+                            manualObjective={controller.manualObjective}
+                            setManualObjective={controller.setManualObjective}
+                            improveManualWithAI={controller.improveManualWithAI}
+                            aiOptions={controller.aiOptions}
+                            pdcWeeks={controller.pdcWeeks}
+                            selectedMes={controller.selectedMes}
+                            weekContentsMap={controller.weekContentsMap}
+                            selectedAreas={controller.selectedAreas}
+                            currentAreaIndex={controller.currentAreaIndex}
+                            weekDesignState={controller.weekDesignState}
+                            setWeekDesignState={controller.setWeekDesignState}
+                            finalProductState={controller.finalProductState}
+                            setFinalProductState={controller.setFinalProductState}
+                            periodsPerWeek={periodsPerWeek}
+                            setPeriodsPerWeek={setPeriodsPerWeek}
+                            weeklyHours={weeklyHours}
+                            setWeeklyHours={setWeeklyHours}
+                            toggleNivelFilter={controller.toggleNivelFilter}
                         />
                     )}
                 </div>
             </main>
 
-            {/* Floating Footer Navigation */}
-            <div className="fixed bottom-6 left-0 right-0 z-50 pointer-events-none">
-                <div className="max-w-4xl mx-auto px-6 w-full pointer-events-auto">
-                    <div className="bg-blue-900/95 backdrop-blur-3xl border border-white/10 p-4 rounded-2xl shadow-[0_20px_40px_-12px_rgba(0,0,0,0.5)] flex items-center justify-between gap-6 overflow-hidden relative group/footer ring-1 ring-white/5">
-                        {/* Progress Bar for Step 3 sub-steps */}
-                        {step === 3 && (
-                            <div className="absolute top-0 left-0 right-0 h-1.5 bg-white/5 overflow-hidden">
-                                <div
-                                    className="h-full bg-gradient-to-r from-blue-600 via-cyan-400 to-indigo-500 transition-all duration-700 ease-out shadow-[0_0_20px_rgba(37,99,235,0.5)]"
-                                    style={{ width: `${(pdcStep / 7) * 100}%` }}
-                                />
-                            </div>
-                        )}
-
-                        <div className="flex-1 flex items-center gap-4 px-2">
-                            <div className="size-10 bg-white/5 rounded-xl flex items-center justify-center shrink-0 border border-white/10 group-hover/footer:scale-110 transition-transform duration-500 shadow-inner">
-                                <span className={`material-symbols-rounded text-xl ${step === 3 ? 'text-blue-400 animate-pulse' : 'text-emerald-400'}`}>
-                                    {step === 3 ? 'auto_awesome' : 'task_alt'}
-                                </span>
-                            </div>
-                            <div className="flex flex-col">
-                                <span className="text-xs font-black text-slate-400 uppercase tracking-[0.2em]">Próximo Objetivo</span>
-                                <span className="text-white font-black text-sm whitespace-nowrap overflow-hidden text-ellipsis max-w-[200px] md:max-w-none tracking-tight">
-                                    {step === 1 ? 'Vincular Áreas y Modalidad' :
-                                        step === 2 ? 'Configurar Cronograma' :
-                                            pdcStep === 7 && currentAreaIndex < selectedAreas.length - 1 ? 'Siguiente Materia' :
-                                                `Paso ${pdcStep + 1}: Continuar Diseño`}
-                                </span>
-                            </div>
-                        </div>
-
-                        <div className="flex items-center gap-3">
-                            <Button
-                                onClick={handleNext}
-                                disabled={saving}
-                                className="h-12 px-8 bg-white text-blue-900 hover:bg-slate-50 font-black rounded-xl gap-3 shadow-xl transition-all active:scale-95 group/btn disabled:opacity-50 text-sm border-b-2 border-slate-200"
-                            >
-                                {saving ? (
-                                    <div className="size-4 border-2 border-slate-900 border-t-transparent rounded-full animate-spin"></div>
-                                ) : (
-                                    <>
-                                        <span className="tracking-tight italic">
-                                            {step === 3 && pdcStep === 7 && currentAreaIndex === selectedAreas.length - 1 ? 'FINALIZAR' :
-                                                step === 3 && pdcStep === 7 ? 'SIGUIENTE ÁREA' : 'CONTINUAR'}
-                                        </span>
-                                        <div className="size-8 bg-blue-600 text-white rounded-lg flex items-center justify-center group-hover/btn:translate-x-1 transition-transform">
-                                            <span className="material-symbols-rounded text-sm font-bold">arrow_forward</span>
-                                        </div>
-                                    </>
-                                )}
-                            </Button>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     );
 }

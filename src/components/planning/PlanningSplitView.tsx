@@ -20,6 +20,7 @@ interface Props {
     handleAssign: (planId: string, contentId: number) => void;
     handleRemoveAssignment: (planId: string, contentId: number) => void;
     isProcessing: string | null;
+    onShowConfig?: () => void;
 }
 
 export function PlanningSplitView({
@@ -28,7 +29,8 @@ export function PlanningSplitView({
     plannedContentIds,
     handleAssign,
     handleRemoveAssignment,
-    isProcessing
+    isProcessing,
+    onShowConfig
 }: Props) {
     const [selectedContentId, setSelectedContentId] = useState<number | null>(null);
     const [expandedMonths, setExpandedMonths] = useState<Set<number>>(new Set(areaSchedule.map(w => w.mes)));
@@ -209,124 +211,146 @@ export function PlanningSplitView({
                     )}
                 </div>
 
-                <div className="p-6 space-y-6">
-                    {Object.entries(months).map(([mes, weeks]) => {
-                        const mId = parseInt(mes);
-                        const isExpanded = expandedMonths.has(mId);
+                <div className="p-6 space-y-6 flex-1 flex flex-col">
+                    {areaSchedule.length > 0 ? (
+                        Object.entries(months).map(([mes, weeks]) => {
+                            const mId = parseInt(mes);
+                            const isExpanded = expandedMonths.has(mId);
 
-                        return (
-                            <div key={mes} className="space-y-4">
-                                <div
-                                    onClick={() => toggleMonth(mId)}
-                                    className="flex items-center gap-3 cursor-pointer group"
-                                >
-                                    <div className="h-px flex-1 bg-slate-100"></div>
-                                    <div className={`px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-[0.2em] transition-all flex items-center gap-2 ${isExpanded ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-400 group-hover:text-slate-600'
-                                        }`}>
-                                        MES {mId}
-                                        <span className={`material-symbols-rounded text-sm transition-transform ${isExpanded ? 'rotate-180' : ''}`}>expand_more</span>
+                            return (
+                                <div key={mes} className="space-y-4">
+                                    <div
+                                        onClick={() => toggleMonth(mId)}
+                                        className="flex items-center gap-3 cursor-pointer group"
+                                    >
+                                        <div className="h-px flex-1 bg-slate-100"></div>
+                                        <div className={`px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-[0.2em] transition-all flex items-center gap-2 ${isExpanded ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-400 group-hover:text-slate-600'
+                                            }`}>
+                                            MES {mId}
+                                            <span className={`material-symbols-rounded text-sm transition-transform ${isExpanded ? 'rotate-180' : ''}`}>expand_more</span>
+                                        </div>
+                                        <div className="h-px flex-1 bg-slate-100"></div>
                                     </div>
-                                    <div className="h-px flex-1 bg-slate-100"></div>
-                                </div>
 
-                                {isExpanded && (
-                                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3">
-                                        {weeks.map(week => (
-                                            <div
-                                                key={week.id}
-                                                onDragOver={(e) => handleDragOver(e, week.id)}
-                                                onDragLeave={() => setDragOverWeekId(null)}
-                                                onDrop={(e) => handleDrop(e, week.id)}
-                                                className={`rounded-2xl border transition-all relative overflow-hidden flex flex-col ${dragOverWeekId === week.id || (selectedContentId && dragOverWeekId === null)
-                                                    ? 'border-blue-400 bg-blue-50/20 shadow-lg ring-2 ring-blue-500/20 shadow-blue-500/10'
-                                                    : selectedContentId
-                                                        ? 'border-blue-100 bg-blue-50/10 hover:border-blue-400 hover:shadow-lg cursor-pointer'
-                                                        : 'border-slate-100 bg-white hover:border-slate-200'
-                                                    }`}
-                                                onClick={() => onAssignClick(week.id)}
-                                            >
-                                                {isProcessing === week.id && (
-                                                    <div className="absolute inset-0 bg-white/60 backdrop-blur-[1px] z-20 flex items-center justify-center">
-                                                        <span className="material-symbols-rounded animate-spin text-blue-600">sync</span>
-                                                    </div>
-                                                )}
-
-                                                <div className="p-3 flex-1 space-y-2">
-                                                    <div className="flex items-center justify-between">
-                                                        <div className="flex items-center gap-2">
-                                                            <div className="w-6 h-6 rounded-lg bg-slate-100 flex items-center justify-center text-[10px] font-black text-slate-400 uppercase">
-                                                                S{week.semana}
-                                                            </div>
-                                                            <div className="text-[8px] font-black text-slate-300 uppercase tracking-tight">
-                                                                {week.fecha_inicio_trimestre.split('-').reverse().join('/')} AL {week.fecha_fin_trimestre.split('-').reverse().join('/')}
-                                                            </div>
+                                    {isExpanded && (
+                                        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3">
+                                            {weeks.map(week => (
+                                                <div
+                                                    key={week.id}
+                                                    onDragOver={(e) => handleDragOver(e, week.id)}
+                                                    onDragLeave={() => setDragOverWeekId(null)}
+                                                    onDrop={(e) => handleDrop(e, week.id)}
+                                                    className={`rounded-2xl border transition-all relative overflow-hidden flex flex-col ${dragOverWeekId === week.id || (selectedContentId && dragOverWeekId === null)
+                                                        ? 'border-blue-400 bg-blue-50/20 shadow-lg ring-2 ring-blue-500/20 shadow-blue-500/10'
+                                                        : selectedContentId
+                                                            ? 'border-blue-100 bg-blue-50/10 hover:border-blue-400 hover:shadow-lg cursor-pointer'
+                                                            : 'border-slate-100 bg-white hover:border-slate-200'
+                                                        }`}
+                                                    onClick={() => onAssignClick(week.id)}
+                                                >
+                                                    {isProcessing === week.id && (
+                                                        <div className="absolute inset-0 bg-white/60 backdrop-blur-[1px] z-20 flex items-center justify-center">
+                                                            <span className="material-symbols-rounded animate-spin text-blue-600">sync</span>
                                                         </div>
-                                                        {selectedContentId && (
-                                                            <div className="w-5 h-5 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center animate-bounce">
-                                                                <span className="material-symbols-rounded text-xs">add</span>
-                                                            </div>
-                                                        )}
-                                                    </div>
+                                                    )}
 
-                                                    <div className="space-y-1 min-h-[40px]">
-                                                        {week.semana_contenido
-                                                            ?.sort((a, b) => {
-                                                                const aParentId = a.contenido_usuario?.padre_id || a.contenido_usuario_id;
-                                                                const bParentId = b.contenido_usuario?.padre_id || b.contenido_usuario_id;
-                                                                if (aParentId !== bParentId) return aParentId - bParentId;
-                                                                if (!a.contenido_usuario?.padre_id) return -1;
-                                                                if (!b.contenido_usuario?.padre_id) return 1;
-                                                                return 0;
-                                                            })
-                                                            .map(sc => {
-                                                                const isSubtheme = !!sc.contenido_usuario?.padre_id;
-                                                                const currentProcessingId = `${week.id}-${sc.contenido_usuario_id}`;
-                                                                return (
-                                                                    <div
-                                                                        key={sc.id}
-                                                                        className={`group/item flex items-center justify-between gap-2 p-1.5 rounded-lg border transition-all shadow-sm ${isSubtheme
-                                                                            ? 'ml-6 pl-3 border-l-4 border-slate-200 bg-white hover:border-slate-300'
-                                                                            : 'bg-slate-100/50 border-slate-100 hover:border-blue-200 font-bold'
-                                                                            }`}
-                                                                    >
-                                                                        <div className="flex items-center gap-2 truncate">
-                                                                            {!isSubtheme && <div className="w-1.5 h-1.5 rounded-full bg-blue-500"></div>}
-                                                                            <span className={`truncate ${isSubtheme ? 'text-[9px] font-semibold text-slate-500' : 'text-[10px] text-slate-800'}`}>
-                                                                                {sc.contenido_usuario?.titulo}
-                                                                            </span>
-                                                                        </div>
-                                                                        <button
-                                                                            onClick={(e) => {
-                                                                                e.stopPropagation();
-                                                                                handleRemoveAssignment(week.id, sc.contenido_usuario_id);
-                                                                            }}
-                                                                            className="p-0.5 hover:text-red-500 text-slate-300 transition-colors"
+                                                    <div className="p-3 flex-1 space-y-2">
+                                                        <div className="flex items-center justify-between">
+                                                            <div className="flex items-center gap-2">
+                                                                <div className="w-6 h-6 rounded-lg bg-slate-100 flex items-center justify-center text-[10px] font-black text-slate-400 uppercase">
+                                                                    S{week.semana}
+                                                                </div>
+                                                                <div className="text-[8px] font-black text-slate-300 uppercase tracking-tight">
+                                                                    {week.fecha_inicio_trimestre?.split('-').reverse().join('/') || '...'} AL {week.fecha_fin_trimestre?.split('-').reverse().join('/') || '...'}
+                                                                </div>
+                                                            </div>
+                                                            {selectedContentId && (
+                                                                <div className="w-5 h-5 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center animate-bounce">
+                                                                    <span className="material-symbols-rounded text-xs">add</span>
+                                                                </div>
+                                                            )}
+                                                        </div>
+
+                                                        <div className="space-y-1 min-h-[40px]">
+                                                            {week.semana_contenido
+                                                                ?.sort((a, b) => {
+                                                                    const aParentId = a.contenido_usuario?.padre_id || a.contenido_usuario_id;
+                                                                    const bParentId = b.contenido_usuario?.padre_id || b.contenido_usuario_id;
+                                                                    if (aParentId !== bParentId) return aParentId - bParentId;
+                                                                    if (!a.contenido_usuario?.padre_id) return -1;
+                                                                    if (!b.contenido_usuario?.padre_id) return 1;
+                                                                    return 0;
+                                                                })
+                                                                .map(sc => {
+                                                                    const isSubtheme = !!sc.contenido_usuario?.padre_id;
+                                                                    const currentProcessingId = `${week.id}-${sc.contenido_usuario_id}`;
+                                                                    return (
+                                                                        <div
+                                                                            key={sc.id}
+                                                                            className={`group/item flex items-center justify-between gap-2 p-1.5 rounded-lg border transition-all shadow-sm ${isSubtheme
+                                                                                ? 'ml-6 pl-3 border-l-4 border-slate-200 bg-white hover:border-slate-300'
+                                                                                : 'bg-slate-100/50 border-slate-100 hover:border-blue-200 font-bold'
+                                                                                }`}
                                                                         >
-                                                                            {isProcessing === currentProcessingId ? (
-                                                                                <span className="material-symbols-rounded text-[10px] animate-spin">sync</span>
-                                                                            ) : (
-                                                                                <span className="material-symbols-rounded text-sm">cancel</span>
-                                                                            )}
-                                                                        </button>
-                                                                    </div>
-                                                                );
-                                                            })}
+                                                                            <div className="flex items-center gap-2 truncate">
+                                                                                {!isSubtheme && <div className="w-1.5 h-1.5 rounded-full bg-blue-500"></div>}
+                                                                                <span className={`truncate ${isSubtheme ? 'text-[9px] font-semibold text-slate-500' : 'text-[10px] text-slate-800'}`}>
+                                                                                    {sc.contenido_usuario?.titulo}
+                                                                                </span>
+                                                                            </div>
+                                                                            <button
+                                                                                onClick={(e) => {
+                                                                                    e.stopPropagation();
+                                                                                    handleRemoveAssignment(week.id, sc.contenido_usuario_id);
+                                                                                }}
+                                                                                className="p-0.5 hover:text-red-500 text-slate-300 transition-colors"
+                                                                            >
+                                                                                {isProcessing === currentProcessingId ? (
+                                                                                    <span className="material-symbols-rounded text-[10px] animate-spin">sync</span>
+                                                                                ) : (
+                                                                                    <span className="material-symbols-rounded text-sm">cancel</span>
+                                                                                )}
+                                                                            </button>
+                                                                        </div>
+                                                                    );
+                                                                })}
 
-                                                        {(!week.semana_contenido || week.semana_contenido.length === 0) && !selectedContentId && (
-                                                            <div className="flex flex-col items-center justify-center h-full py-2 opacity-20">
-                                                                <span className="material-symbols-rounded text-xl">event_available</span>
-                                                                <span className="text-[8px] font-black uppercase mt-0.5 text-center">Libre</span>
-                                                            </div>
-                                                        )}
+                                                            {(!week.semana_contenido || week.semana_contenido.length === 0) && !selectedContentId && (
+                                                                <div className="flex flex-col items-center justify-center h-full py-2 opacity-20">
+                                                                    <span className="material-symbols-rounded text-xl">event_available</span>
+                                                                    <span className="text-[8px] font-black uppercase mt-0.5 text-center">Libre</span>
+                                                                </div>
+                                                            )}
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                )}
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
+                            );
+                        })
+                    ) : (
+                        <div className="flex-1 flex flex-col items-center justify-center text-center space-y-6 py-20">
+                            <div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center">
+                                <span className="material-symbols-rounded text-4xl text-slate-300">calendar_today</span>
                             </div>
-                        );
-                    })}
+                            <div>
+                                <h2 className="text-2xl font-black text-slate-900 mb-2">Sin cronograma disponible</h2>
+                                <p className="text-slate-400 max-w-sm mx-auto font-medium">
+                                    No se ha definido un calendario global para este trimestre o ha ocurrido un error al cargar los datos.
+                                </p>
+                            </div>
+                            {onShowConfig && (
+                                <button
+                                    onClick={onShowConfig}
+                                    className="h-12 px-8 rounded-2xl font-black border-2 border-slate-100 hover:bg-slate-50 transition-all text-slate-600"
+                                >
+                                    Configuración Manual
+                                </button>
+                            )}
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

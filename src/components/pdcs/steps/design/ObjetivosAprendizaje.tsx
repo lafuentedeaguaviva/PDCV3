@@ -77,31 +77,8 @@ export function ObjetivosAprendizaje({
                 {/* Top: Generator Selector & Input Form */}
                 <div className="w-full space-y-8">
                     <div className="bg-white p-6 rounded-2xl border-2 border-slate-50 shadow-sm space-y-6">
-                        {/* Tabs Selector */}
-                        <div className="flex bg-slate-100 p-1 rounded-xl">
-                            <button
-                                onClick={() => setGeneratorMode('auto')}
-                                className={`flex-1 flex items-center justify-center gap-3 py-3 rounded-lg font-black text-sm transition-all ${generatorMode === 'auto'
-                                    ? 'bg-white text-blue-600 shadow-md scale-[1.02]'
-                                    : 'text-slate-400 hover:text-slate-600'
-                                    }`}
-                            >
-                                <span className="material-symbols-rounded text-lg">magic_button</span>
-                                GENERADOR INTELIGENTE
-                            </button>
-                            <button
-                                onClick={() => setGeneratorMode('manual')}
-                                className={`flex-1 flex items-center justify-center gap-3 py-3 rounded-lg font-black text-sm transition-all ${generatorMode === 'manual'
-                                    ? 'bg-white text-indigo-600 shadow-md scale-[1.02]'
-                                    : 'text-slate-400 hover:text-slate-600'
-                                    }`}
-                            >
-                                <span className="material-symbols-rounded text-lg">edit_note</span>
-                                MODO MANUAL
-                            </button>
-                        </div>
 
-                        {generatorMode === 'auto' ? (
+                        <div className="space-y-8 animate-in fade-in slide-in-from-left-4 duration-500">
                             <div className="space-y-8 animate-in fade-in slide-in-from-left-4 duration-500">
                                 <div className="flex items-center justify-between">
                                     <div className="space-y-1">
@@ -352,21 +329,12 @@ export function ObjetivosAprendizaje({
                                                         {isExpanded && children.length > 0 && (
                                                             <div className="pl-6 space-y-1.5 animate-in slide-in-from-top-4 duration-300 py-1">
                                                                 {children.map(child => {
-                                                                    const isChildSelected = currentObjective.contentIds.includes(child.id);
-                                                                    const isChildCovered = learningObjectives.some(obj => obj.contentIds.includes(child.id));
                                                                     return (
                                                                         <div
                                                                             key={child.id}
-                                                                            onClick={() => {
-                                                                                if (isChildCovered) return;
-                                                                                const ids = currentObjective.contentIds.includes(child.id)
-                                                                                    ? currentObjective.contentIds.filter((id: number) => id !== child.id)
-                                                                                    : [...currentObjective.contentIds, child.id];
-                                                                                setCurrentObjective((prev: any) => ({ ...prev, contentIds: ids }));
-                                                                            }}
-                                                                            className={`p-3 rounded-xl border-2 transition-all flex items-center gap-3 ${isChildCovered ? 'bg-emerald-50 opacity-60' : isChildSelected ? 'bg-indigo-50 border-indigo-200' : 'bg-white hover:border-slate-200'}`}
+                                                                            className="p-3 rounded-xl border-2 border-transparent bg-white flex items-center gap-3 cursor-default"
                                                                         >
-                                                                            <span className="text-[11px] font-bold">{child.titulo}</span>
+                                                                            <span className="text-[11px] font-bold text-slate-500">{child.titulo}</span>
                                                                         </div>
                                                                     );
                                                                 })}
@@ -444,54 +412,25 @@ export function ObjetivosAprendizaje({
                                         className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl p-4 text-[13px] font-bold min-h-[100px] focus:ring-2 focus:ring-blue-50 transition-all placeholder:text-slate-300"
                                         placeholder="El objetivo se construye automáticamente..."
                                     />
-                                    <div className="flex justify-end gap-3">
-                                        <Button onClick={generateAIObjective} className="bg-slate-900 text-white rounded-xl px-5 py-2 font-black flex gap-2 text-xs">
-                                            <span className="material-symbols-rounded text-sm">psychology</span>
-                                            REDACTAR CON AI
-                                        </Button>
-                                        <button onClick={addStrategicObjective} className="bg-blue-600 text-white rounded-lg px-6 py-2.5 font-black text-xs uppercase shadow-md shadow-blue-100 transition-all hover:scale-105 active:scale-95">
+                                    <div className="flex justify-end gap-3 items-center">
+                                        {currentObjective.contentIds.length === 0 && currentObjective.draft && (
+                                            <p className="text-[10px] text-amber-500 font-black uppercase tracking-wider flex items-center gap-1">
+                                                <span className="material-symbols-rounded text-sm">warning</span>
+                                                Selecciona al menos 1 contenido asociado
+                                            </p>
+                                        )}
+                                        <button
+                                            onClick={addStrategicObjective}
+                                            disabled={currentObjective.contentIds.length === 0 || !currentObjective.draft}
+                                            title={currentObjective.contentIds.length === 0 ? 'Debes seleccionar al menos un contenido asociado' : ''}
+                                            className="bg-blue-600 text-white rounded-lg px-6 py-2.5 font-black text-xs uppercase shadow-md shadow-blue-100 transition-all hover:scale-105 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100"
+                                        >
                                             Guardar Objetivo
                                         </button>
                                     </div>
                                 </div>
                             </div>
-                        ) : (
-                            <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-500">
-                                <div className="bg-slate-50 rounded-2xl p-6 space-y-6">
-                                    <div className="space-y-3">
-                                        <div className="bg-white p-4 rounded-xl border border-slate-100 shadow-sm flex items-center gap-3">
-                                            <span className="text-[10px] font-black text-blue-600 uppercase">Quiero</span>
-                                            <input
-                                                type="text"
-                                                value={manualObjective.quiero}
-                                                onChange={(e) => setManualObjective((prev: any) => ({ ...prev, quiero: e.target.value }))}
-                                                className="flex-1 bg-transparent border-0 font-bold focus:ring-0 text-sm"
-                                                placeholder="..."
-                                            />
-                                        </div>
-                                        <div className="bg-white p-4 rounded-xl border border-slate-100 shadow-sm flex items-center gap-3">
-                                            <span className="text-[10px] font-black text-blue-600 uppercase">para que</span>
-                                            <input
-                                                type="text"
-                                                value={manualObjective.paraQue}
-                                                onChange={(e) => setManualObjective((prev: any) => ({ ...prev, paraQue: e.target.value }))}
-                                                className="flex-1 bg-transparent border-0 font-bold focus:ring-0 text-sm"
-                                                placeholder="..."
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="flex gap-3">
-                                        <Button onClick={improveManualWithAI} className="flex-1 bg-indigo-600 h-10 rounded-xl font-black text-xs">MEJORAR CON AI</Button>
-                                        <Button onClick={() => {
-                                            const text = `Quiero ${manualObjective.quiero} para que ${manualObjective.paraQue}.`;
-                                            setCurrentObjective((prev: any) => ({ ...prev, draft: text }));
-                                            addStrategicObjective();
-                                            setManualObjective({ quiero: '', paraQue: '', medire: '' });
-                                        }} className="flex-1 bg-blue-600 h-10 rounded-xl font-black text-xs">GUARDAR</Button>
-                                    </div>
-                                </div>
-                            </div>
-                        )}
+                        </div>
                     </div>
                 </div>
 

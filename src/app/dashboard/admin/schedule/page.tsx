@@ -208,13 +208,13 @@ export default function AdminSchedulePage() {
                                                 <div className="flex items-center justify-between">
                                                     <span>Inicio:</span>
                                                     <span className="text-slate-900 font-bold">
-                                                        {week.fecha_inicio_trimestre.split('-').reverse().join('/')}
+                                                        {week.fecha_inicio_trimestre?.split('-').reverse().join('/') || 'N/A'}
                                                     </span>
                                                 </div>
                                                 <div className="flex items-center justify-between">
                                                     <span>Fin:</span>
                                                     <span className="text-slate-900 font-bold">
-                                                        {week.fecha_fin_trimestre.split('-').reverse().join('/')}
+                                                        {week.fecha_fin_trimestre?.split('-').reverse().join('/') || 'N/A'}
                                                     </span>
                                                 </div>
                                             </div>
@@ -310,7 +310,7 @@ export default function AdminSchedulePage() {
                                             </div>
                                             <div className="flex-1">
                                                 <div className="text-xs font-black text-slate-800 uppercase">Trimestre {pw.trimestre} - Semana {pw.semana}</div>
-                                                <div className="text-[9px] font-medium text-slate-400">Rango Global: {pw.fecha_inicio_trimestre.split('-').reverse().join('/')} al {pw.fecha_fin_trimestre.split('-').reverse().join('/')}</div>
+                                                <div className="text-[9px] font-medium text-slate-400">Rango Global: {pw.fecha_inicio_trimestre?.split('-').reverse().join('/') || '...'} al {pw.fecha_fin_trimestre?.split('-').reverse().join('/') || '...'}</div>
                                             </div>
                                         </div>
                                     ))}

@@ -2,6 +2,7 @@
 
 import { Sidebar } from '@/components/layout/sidebar';
 import { SidebarProvider, useSidebar } from '@/contexts/SidebarContext';
+import { ProfileProvider } from '@/contexts/ProfileContext';
 
 function DashboardContent({ children }: { children: React.ReactNode }) {
     const { isCollapsed } = useSidebar();
@@ -36,7 +37,9 @@ export default function DashboardLayout({
 }) {
     return (
         <SidebarProvider>
-            <DashboardContent>{children}</DashboardContent>
+            <ProfileProvider>
+                <DashboardContent>{children}</DashboardContent>
+            </ProfileProvider>
         </SidebarProvider>
     );
 }

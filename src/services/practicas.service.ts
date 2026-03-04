@@ -2,16 +2,18 @@ import { supabase } from '@/lib/supabase';
 import { ServiceResponse } from '@/types';
 
 export interface PracticaLibraryItem {
-    id: number;
+    id_practica: number;
     proposito: string;
     tipo: string;
-    tecnica: string;
+    nombre_practica: string;
     descripcion_concreta: string;
+    apto_para?: string;
+    redactado?: boolean;
+    preguntas: string;
     ejemplo_inicial: string;
     ejemplo_primaria: string;
     ejemplo_secundaria: string;
     ejemplo_multigrado: string;
-    preguntas_generales: string;
 }
 
 export const PracticasService = {

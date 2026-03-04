@@ -6,9 +6,10 @@ import { AuthService } from '@/services/auth.service';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { PageHeader } from '@/components/ui/page-header';
+import { useProfile } from '@/contexts/ProfileContext';
 
 export default function ProfilePage() {
-    const [profile, setProfile] = useState<UserProfile | null>(null);
+    const { profile: globalProfile, refetchProfile, loading: globalLoading } = useProfile();
     const [isLoading, setIsLoading] = useState(true);
     const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'success'>('idle');
 
@@ -21,55 +22,21 @@ export default function ProfilePage() {
     });
 
     useEffect(() => {
-        loadProfile();
-    }, []);
-
-    const loadProfile = async () => {
-        try {
-            // Safety timeout to prevent infinite loading
-            const timeout = setTimeout(() => setIsLoading(false), 5000);
-
-            const { data: { session } } = await AuthService.getSession();
-            if (session?.user) {
-                const data = await ProfileService.getProfile(session.user.id);
-
-                // If data exists, use it. If not, create default from session.
-                const profileData = data || {
-                    id: session.user.id,
-                    email: session.user.email || '',
-                    nombres: '',
-                    apellidos: '',
-                    titulo: '',
-                    celular: '',
-                    creditos: 0,
-                    roles: ['Profesor'],
-                    estado_completitud: false
-                };
-
-                setProfile(profileData as UserProfile);
-
-                setFormData({
-                    nombres: profileData.nombres || '',
-                    apellidos: profileData.apellidos || '',
-                    titulo: profileData.titulo || '',
-                    celular: profileData.celular || ''
-                });
-            } else {
-                // If no session, redirect to login
-                window.location.href = '/login';
-            }
-            clearTimeout(timeout);
-        } catch (error) {
-            console.error('Error loading profile:', error);
-        } finally {
+        if (globalProfile) {
+            setFormData({
+                nombres: globalProfile.nombres || '',
+                apellidos: globalProfile.apellidos || '',
+                titulo: globalProfile.titulo || '',
+                celular: globalProfile.celular || ''
+            });
             setIsLoading(false);
         }
-    };
+    }, [globalProfile]);
 
     const [errorMessage, setErrorMessage] = useState('');
 
     const handleSave = async () => {
-        if (!profile) return;
+        if (!globalProfile) return;
         setSaveStatus('saving');
         setErrorMessage('');
 
@@ -82,13 +49,16 @@ export default function ProfilePage() {
                 formData.celular?.trim()
             );
 
-            const { success, error } = await ProfileService.updateProfile(profile.id, {
+            const { success, error } = await ProfileService.updateProfile(globalProfile.id, {
                 ...formData,
-                email: profile.email, // Include email to satisfy NOT NULL constraint on upsert
+                email: globalProfile.email,
                 estado_completitud: isComplete
             });
 
             if (success) {
+                // Sync with global context immediately
+                await refetchProfile();
+
                 setSaveStatus('success');
                 // If complete, redirect to dashboard main view after a short delay
                 if (isComplete) {
@@ -97,7 +67,6 @@ export default function ProfilePage() {
                     }, 1000);
                 } else {
                     setTimeout(() => setSaveStatus('idle'), 2000);
-                    await loadProfile(); // Force await to ensure UI updates
                 }
             } else {
                 setSaveStatus('idle');
@@ -110,7 +79,7 @@ export default function ProfilePage() {
         }
     };
 
-    if (isLoading) {
+    if (isLoading || globalLoading) {
         return (
             <div className="flex items-center justify-center min-h-[50vh]">
                 <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-slate-900"></div>
@@ -141,7 +110,7 @@ export default function ProfilePage() {
                         <div className="relative group cursor-pointer">
                             <div className="h-32 w-32 rounded-full border-[6px] border-white bg-slate-100 shadow-lg overflow-hidden transition-transform transform group-hover:scale-105">
                                 <img
-                                    src={profile?.foto_url || `https://api.dicebear.com/9.x/avataaars/svg?seed=${formData.nombres || 'User'}`}
+                                    src={globalProfile?.foto_url || `https://api.dicebear.com/9.x/avataaars/svg?seed=${formData.nombres || 'User'}`}
                                     alt="Avatar"
                                     className="w-full h-full object-cover"
                                 />
@@ -157,7 +126,7 @@ export default function ProfilePage() {
                             </h2>
 
                             <div className="flex gap-2 justify-center mt-3">
-                                {profile?.roles?.map(role => (
+                                {globalProfile?.roles?.map((role: string) => (
                                     <span key={role} className="px-3 py-1 bg-indigo-50 text-indigo-600 text-[10px] font-black uppercase tracking-wider rounded-full border border-indigo-100">
                                         {role}
                                     </span>
@@ -178,7 +147,7 @@ export default function ProfilePage() {
                         <div className="space-y-2 col-span-full">
                             <label className="text-xs font-bold text-slate-500 uppercase tracking-wide ml-1">Email (No editable)</label>
                             <Input
-                                value={profile?.email || ''}
+                                value={globalProfile?.email || ''}
                                 readOnly
                                 disabled
                                 className="bg-slate-100 border-slate-200 text-slate-500 cursor-not-allowed h-11"

@@ -2,10 +2,9 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { AuthService } from '@/services/auth.service';
-import { ProfileService } from '@/services/profile.service';
 import { useEffect, useState } from 'react';
 import { useSidebar } from '@/contexts/SidebarContext';
+import { useProfile } from '@/contexts/ProfileContext';
 import { cn } from '@/lib/utils';
 
 const MENU_ITEMS = [
@@ -19,28 +18,10 @@ const MENU_ITEMS = [
 
 export function Sidebar() {
     const pathname = usePathname();
-    const [isAdmin, setIsAdmin] = useState(false);
     const { isCollapsed, toggleSidebar } = useSidebar();
+    const { profile, loading } = useProfile();
 
-    useEffect(() => {
-        checkAdminRole();
-    }, []);
-
-    const checkAdminRole = async () => {
-        try {
-            const { data, error } = await AuthService.getSession();
-            if (error) throw error;
-
-            if (data.session?.user) {
-                const profile = await ProfileService.getProfile(data.session.user.id);
-                if (profile?.roles?.includes('Administrador')) {
-                    setIsAdmin(true);
-                }
-            }
-        } catch (err) {
-            console.error('Sidebar auth check error:', err);
-        }
-    };
+    const isAdmin = profile?.roles?.includes('Administrador');
 
     return (
         <aside className={cn(
@@ -116,46 +97,25 @@ export function Sidebar() {
                 })}
 
                 {isAdmin && (
-                    <>
-                        <Link
-                            href="/dashboard/admin"
-                            title={isCollapsed ? "Panel Admin" : undefined}
-                            className={cn(
-                                'flex items-center gap-3 rounded-xl transition-all duration-200 group mt-2',
-                                isCollapsed ? 'p-2.5 justify-center' : 'px-3 py-2',
-                                pathname === '/dashboard/admin'
-                                    ? 'bg-purple-600/10 text-purple-400 font-bold'
-                                    : 'text-slate-400 font-medium hover:bg-slate-800 hover:text-white'
-                            )}
-                        >
-                            <span className={cn(
-                                'material-symbols-rounded text-xl transition-colors shrink-0',
-                                pathname === '/dashboard/admin' ? 'text-purple-400' : 'text-slate-500 group-hover:text-slate-300'
-                            )}>
-                                admin_panel_settings
-                            </span>
-                            {!isCollapsed && <span className="text-sm truncate">Panel Admin</span>}
-                        </Link>
-                        <Link
-                            href="/dashboard/admin/schedule"
-                            title={isCollapsed ? "Cronograma Global" : undefined}
-                            className={cn(
-                                'flex items-center gap-3 rounded-xl transition-all duration-200 group mt-1',
-                                isCollapsed ? 'p-2.5 justify-center' : 'px-3 py-2',
-                                pathname === '/dashboard/admin/schedule'
-                                    ? 'bg-orange-600/10 text-orange-400 font-bold'
-                                    : 'text-slate-400 font-medium hover:bg-slate-800 hover:text-white'
-                            )}
-                        >
-                            <span className={cn(
-                                'material-symbols-rounded text-xl transition-colors shrink-0',
-                                pathname === '/dashboard/admin/schedule' ? 'text-orange-400' : 'text-slate-500 group-hover:text-slate-300'
-                            )}>
-                                calendar_view_week
-                            </span>
-                            {!isCollapsed && <span className="text-sm truncate">Cronograma Global</span>}
-                        </Link>
-                    </>
+                    <Link
+                        href="/dashboard/admin"
+                        title={isCollapsed ? "Panel Admin" : undefined}
+                        className={cn(
+                            'flex items-center gap-3 rounded-xl transition-all duration-200 group mt-2',
+                            isCollapsed ? 'p-2.5 justify-center' : 'px-3 py-2',
+                            pathname === '/dashboard/admin'
+                                ? 'bg-purple-600/10 text-purple-400 font-bold'
+                                : 'text-slate-400 font-medium hover:bg-slate-800 hover:text-white'
+                        )}
+                    >
+                        <span className={cn(
+                            'material-symbols-rounded text-xl transition-colors shrink-0',
+                            pathname === '/dashboard/admin' ? 'text-purple-400' : 'text-slate-500 group-hover:text-slate-300'
+                        )}>
+                            admin_panel_settings
+                        </span>
+                        {!isCollapsed && <span className="text-sm truncate">Panel Admin</span>}
+                    </Link>
                 )}
             </nav>
 
@@ -167,15 +127,27 @@ export function Sidebar() {
                         isCollapsed ? "p-2 justify-center" : "p-3 gap-3"
                     )}>
                         <div className="size-9 rounded-full bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center overflow-hidden shrink-0 group-hover:scale-105 transition-transform">
-                            <img src="https://api.dicebear.com/9.x/avataaars/svg?seed=Juan" alt="Avatar" className="w-full h-full" />
+                            {loading ? (
+                                <div className="size-4 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
+                            ) : (
+                                <img
+                                    src={profile?.foto_url || `https://api.dicebear.com/9.x/avataaars/svg?seed=${profile?.nombres || 'User'}`}
+                                    alt="Avatar"
+                                    className="w-full h-full object-cover"
+                                />
+                            )}
                         </div>
                         {!isCollapsed && (
                             <>
                                 <div className="flex-1 min-w-0">
-                                    <p className="text-sm font-bold text-slate-200 truncate group-hover:text-white">Juan Pérez</p>
+                                    <p className="text-sm font-bold text-slate-200 truncate group-hover:text-white">
+                                        {loading ? 'Cargando...' : `${profile?.nombres || 'Usuario'} ${profile?.apellidos || ''}`}
+                                    </p>
                                     <div className="flex items-center gap-1.5">
                                         <span className="size-1.5 rounded-full bg-green-500 animate-pulse" />
-                                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wide group-hover:text-slate-300">Pro Tier</p>
+                                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wide group-hover:text-slate-300">
+                                            {profile?.roles?.[0] || 'Usuario'}
+                                        </p>
                                     </div>
                                 </div>
                                 <span className="material-symbols-rounded text-slate-500 group-hover:text-white text-lg">chevron_right</span>
