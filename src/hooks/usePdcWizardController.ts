@@ -158,6 +158,15 @@ export function usePdcWizardController() {
 
                 const pdcs = await PdcService.getPDCs(session.user.id);
                 setRecentPdcs(pdcs);
+
+                // Fetch static catalogs once
+                const [verbsRes, compsRes] = await Promise.all([
+                    supabase.from('catalogo_verbos').select('*').order('tipo_verbo_id').order('verbo'),
+                    supabase.from('catalogo_complementos').select('*').order('tipo_complemento_id').order('complemento')
+                ]);
+
+                if (verbsRes.data) setCatalogoVerbos(verbsRes.data);
+                if (compsRes.data) setCatalogoComplementos(compsRes.data);
             }
         } catch (error) {
             console.error('Controller Error [loadInitialData]:', error);
@@ -241,14 +250,6 @@ export function usePdcWizardController() {
             // Actualizar detalles del área actual para DataReferential
             const details = await AreasService.getAreaById(areaId);
             setMainAreaDetails(details);
-
-            const [verbsRes, compsRes] = await Promise.all([
-                supabase.from('catalogo_verbos').select('*').order('tipo_verbo_id').order('verbo'),
-                supabase.from('catalogo_complementos').select('*').order('tipo_complemento_id').order('complemento')
-            ]);
-
-            if (verbsRes.data) setCatalogoVerbos(verbsRes.data);
-            if (compsRes.data) setCatalogoComplementos(compsRes.data);
 
             const currentYear = new Date().getFullYear();
             const { data: planningHeaders } = await supabase
