@@ -479,8 +479,37 @@ export function usePdcWizardController() {
                 setCurrentAreaIndex(prev => prev + 1);
                 setStep(4); // Volver al inicio del ciclo de diseño para la siguiente área
             } else {
-                alert('PDC Completado con éxito');
-                router.push('/dashboard/pdcs');
+                setSaving(true);
+                try {
+                    // Recopilar todos los objetivos de todas las áreas más el área actual
+                    let allObjectives: LearningObjective[] = [...learningObjectives];
+                    Object.values(areasDesignState).forEach(state => {
+                        if (state.learningObjectives && state.learningObjectives.length > 0) {
+                            allObjectives = [...allObjectives, ...state.learningObjectives];
+                        }
+                    });
+
+                    // Remover duplicados en caso de que el usuario haya vuelto hacia atrás
+                    const uniqueObjectivesMap = new Map();
+                    allObjectives.forEach(obj => {
+                        // usamos el texto como llave principal para evitar duplicidad
+                        uniqueObjectivesMap.set(obj.text, obj);
+                    });
+                    const finalObjectives = Array.from(uniqueObjectivesMap.values());
+
+                    if (currentPdcId) {
+                        const result = await PdcService.saveStrategicObjectives(currentPdcId, finalObjectives);
+                        if (result.error) throw result.error;
+                    }
+
+                    alert('PDC Completado con éxito');
+                    router.push('/dashboard/pdcs');
+                } catch (error: any) {
+                    console.error('Persistence Error [Step 10]:', error);
+                    alert(`Error guardando objetivos estratégicos: ${error.message || 'Error desconocido'}`);
+                } finally {
+                    setSaving(false);
+                }
             }
         }
     };

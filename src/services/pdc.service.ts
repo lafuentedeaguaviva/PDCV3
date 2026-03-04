@@ -244,15 +244,7 @@ export const PdcService = {
                 throw new Error(`Error al desvincular áreas: ${unlinkError.message || unlinkError.details || JSON.stringify(unlinkError)}`);
             }
 
-            // 2. Eliminar cronograma del PDC (ON DELETE CASCADE, pero lo hacemos explícito)
-            const { error: cronogramaError } = await supabase
-                .from('pdc_cronograma')
-                .delete()
-                .eq('pdc_id', id);
-
-            if (cronogramaError) {
-                console.warn('PdcService Warning [deletePDC - pdc_cronograma]:', cronogramaError.message);
-            }
+            // 2. La tabla pdc_cronograma fue eliminada, ya no es necesario limpiarla aquí
 
             // 3. Eliminar planificación semanal asociada (puede no tener pdc_id, no es fatal)
             const { error: planningsError } = await supabase
@@ -319,6 +311,70 @@ export const PdcService = {
         });
 
         return Array.from(ids);
+    },
+
+    /**
+     * Guarda los objetivos estratégicos asociados a un PDC Maestro.
+     * @param {string} pdcId - ID del PDC Maestro.
+     * @param {LearningObjective[]} objectives - Lista de objetivos de aprendizaje generados/creados.
+     */
+    async saveStrategicObjectives(pdcId: string, objectives: import('@/types').LearningObjective[]): Promise<ServiceResponse<any>> {
+        try {
+            // 1. Limpiar objetivos anteriores asociados al PDC
+            const { error: deleteError } = await supabase
+                .from('objetivo_estrategico')
+                .delete()
+                .eq('pdc_id', pdcId);
+
+            if (deleteError) throw deleteError;
+
+            if (!objectives || objectives.length === 0) {
+                return { data: null, error: null, success: true };
+            }
+
+            // 2. Insertar nuevos objetivos y recuperar sus IDs
+            const insertData = objectives.map(obj => ({
+                pdc_id: pdcId,
+                descripcion: obj.text
+            }));
+
+            const { data: insertedObj, error: insertError } = await supabase
+                .from('objetivo_estrategico')
+                .insert(insertData)
+                .select();
+
+            if (insertError) throw insertError;
+            if (!insertedObj) return { data: null, error: null, success: true };
+
+            // 3. Insertar las relaciones con contenidos_usuario
+            const relaciones: { objetivo_estrategico_id: string, contenido_usuario_id: number }[] = [];
+            for (let i = 0; i < objectives.length; i++) {
+                const targetId = insertedObj[i].id;
+                const contentIds = objectives[i].contentIds;
+
+                if (contentIds && contentIds.length > 0) {
+                    contentIds.forEach(contentId => {
+                        relaciones.push({
+                            objetivo_estrategico_id: targetId,
+                            contenido_usuario_id: contentId
+                        });
+                    });
+                }
+            }
+
+            if (relaciones.length > 0) {
+                const { error: relError } = await supabase
+                    .from('objetivo_estrategico_contenido')
+                    .insert(relaciones);
+
+                if (relError) throw relError;
+            }
+
+            return { data: insertedObj, error: null, success: true };
+        } catch (error: any) {
+            console.error('PdcService Error [saveStrategicObjectives]:', error?.message || error);
+            return { data: null, error, success: false };
+        }
     }
 };
 
