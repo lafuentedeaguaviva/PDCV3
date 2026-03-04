@@ -461,7 +461,8 @@ export function usePdcWizardController() {
             // Validación especial para el paso 6: todos los contenidos deben estar cubiertos
             if (step === 6) {
                 const usedContentIds = new Set(learningObjectives.flatMap(obj => obj.contentIds));
-                const uncoveredContents = availableContents.filter(c => !usedContentIds.has(c.id));
+                const parentContents = availableContents.filter(c => !c.padre_id);
+                const uncoveredContents = parentContents.filter(c => !usedContentIds.has(c.id));
                 if (uncoveredContents.length > 0) {
                     const names = uncoveredContents.map(c => `• ${c.titulo}`).join('\n');
                     alert(`Todos los contenidos deben estar asociados a un objetivo guardado.\n\nContenidos pendientes:\n${names}`);
