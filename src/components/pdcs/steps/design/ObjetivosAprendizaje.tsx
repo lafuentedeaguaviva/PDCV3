@@ -30,6 +30,7 @@ interface Props {
     setHoveredComplement: (v: any | null) => void;
     catalogoComplementos: any[];
     addStrategicObjective: () => void;
+    removeStrategicObjective: (index: number) => void;
     generateAIObjective: () => void;
     manualObjective: any;
     setManualObjective: (val: any) => void;
@@ -65,6 +66,7 @@ export function ObjetivosAprendizaje({
     setHoveredComplement,
     catalogoComplementos,
     addStrategicObjective,
+    removeStrategicObjective,
     generateAIObjective,
     manualObjective,
     setManualObjective,
@@ -457,11 +459,18 @@ export function ObjetivosAprendizaje({
                         <h3 className="text-sm font-black text-slate-900">Objetivos Guardados ({learningObjectives.length})</h3>
                         <div className="space-y-2">
                             {learningObjectives.map((obj, i) => (
-                                <div key={i} className="bg-white p-4 rounded-xl border-2 border-slate-100 flex items-start gap-4 shadow-sm">
-                                    <span className="size-6 bg-blue-600 text-white rounded-lg flex items-center justify-center font-black text-xs shrink-0">{i + 1}</span>
+                                <div key={i} className="bg-white p-4 rounded-xl border-2 border-slate-100 flex items-start gap-4 shadow-sm group/obj hover:border-slate-200 transition-all">
+                                    <span className="size-6 bg-blue-600 text-white rounded-lg flex items-center justify-center font-black text-xs shrink-0 mt-0.5">{i + 1}</span>
                                     <div className="flex-1 space-y-1 pt-0.5">
                                         <p className="font-bold text-slate-700 text-sm leading-relaxed">{obj.text}</p>
                                     </div>
+                                    <button
+                                        onClick={() => removeStrategicObjective(i)}
+                                        title="Eliminar objetivo"
+                                        className="shrink-0 size-7 rounded-lg flex items-center justify-center text-slate-200 hover:text-red-500 hover:bg-red-50 border border-transparent hover:border-red-100 transition-all opacity-0 group-hover/obj:opacity-100"
+                                    >
+                                        <span className="material-symbols-rounded text-base">delete</span>
+                                    </button>
                                 </div>
                             ))}
                         </div>

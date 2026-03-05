@@ -375,6 +375,35 @@ export const PdcService = {
             console.error('PdcService Error [saveStrategicObjectives]:', error?.message || error);
             return { data: null, error, success: false };
         }
+    },
+
+    /**
+     * Carga los objetivos estratégicos de un PDC junto con sus contenidos asociados.
+     * Se usa al reanudar un PDC para repoblar el estado en memoria del wizard.
+     * @param {string} pdcId - ID del PDC Maestro.
+     */
+    async getStrategicObjectives(pdcId: string): Promise<import('@/types').LearningObjective[]> {
+        const { data, error } = await supabase
+            .from('objetivo_estrategico')
+            .select(`
+                id,
+                descripcion,
+                objetivo_estrategico_contenido (
+                    contenido_usuario_id
+                )
+            `)
+            .eq('pdc_id', pdcId)
+            .order('created_at', { ascending: true });
+
+        if (error) {
+            console.error('PdcService Error [getStrategicObjectives]:', error);
+            return [];
+        }
+
+        return (data || []).map((row: any) => ({
+            text: row.descripcion,
+            contentIds: (row.objetivo_estrategico_contenido || []).map((rel: any) => rel.contenido_usuario_id)
+        }));
     }
 };
 

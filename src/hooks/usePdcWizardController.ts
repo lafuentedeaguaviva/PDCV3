@@ -111,7 +111,9 @@ export function usePdcWizardController() {
     }, [loading, urlId, recentPdcs]);
 
     useEffect(() => {
-        if (selectedType) {
+        // Solo resetear áreas al cambiar de tipo si estamos en el paso de selección (paso 1).
+        // Durante resumePdc, step ya es 4 cuando selectedType cambia, por lo que no se borran.
+        if (selectedType && step === 1) {
             setSelectedAreas([]);
         }
     }, [selectedType]);
@@ -123,10 +125,13 @@ export function usePdcWizardController() {
     }, [step, selectedTrimestre, selectedMes]);
 
     useEffect(() => {
-        if (step >= 4 && selectedAreas.length > 0) {
-            loadStep3Data(); // Ahora Step 3 data es para pasos 4-10
+        // Solo cargar datos al ENTRAR al paso 4 o al cambiar de área/mes/trimestre.
+        // Pasamos los valores explícitamente para evitar closures stale.
+        if (step === 4 && selectedAreas.length > 0 && selectedTrimestre && selectedMes) {
+            const areaId = selectedAreas[currentAreaIndex];
+            if (areaId) loadStep3Data(areaId, selectedTrimestre, selectedMes);
         }
-    }, [step, currentAreaIndex, selectedAreas]);
+    }, [step, currentAreaIndex, selectedAreas, selectedTrimestre, selectedMes]);
 
     useEffect(() => {
         if (!currentObjective.isManual) {
@@ -229,8 +234,9 @@ export function usePdcWizardController() {
         }));
     };
 
-    const loadStep3Data = async () => {
-        const areaId = selectedAreas[currentAreaIndex];
+    // Carga contenidos y semanas para el área/trimestre/mes dados.
+    // Recibe parámetros explícitos para evitar closures stale de los estados de React.
+    const loadStep3Data = async (areaId: string, trimestre: number, mes: number) => {
         if (!areaId) return;
 
         // Si ya tenemos el estado en memoria para esta área, lo restauramos primero para "Vibe" instantáneo
@@ -252,13 +258,15 @@ export function usePdcWizardController() {
             setMainAreaDetails(details);
 
             const currentYear = new Date().getFullYear();
+
             const { data: planningHeaders } = await supabase
                 .from('planificacion_semanal')
                 .select('id, semana')
                 .eq('area_trabajo_id', areaId)
-                .eq('trimestre', selectedTrimestre)
-                .eq('mes', selectedMes)
+                .eq('trimestre', trimestre)
+                .eq('mes', mes)
                 .eq('gestion', currentYear);
+
 
             if (planningHeaders && planningHeaders.length > 0) {
                 const headerIds = planningHeaders.map(h => h.id);
@@ -304,12 +312,21 @@ export function usePdcWizardController() {
         }
     };
 
-    const loadObjetivoNivel = async () => {
+    // Mapeo de selectedType (PDC_TYPES) → nombre del nivel en la tabla niveles
+    const TIPO_TO_NIVEL_NOMBRE: Record<number, string> = {
+        1: 'Inicial',
+        2: 'Primaria',
+        3: 'Secundaria',
+        4: 'Primaria' // Multigrado usa Primaria como fallback
+    };
+
+    const loadObjetivoNivel = async (tipoPdc: number) => {
         try {
+            const nivelNombre = TIPO_TO_NIVEL_NOMBRE[tipoPdc] ?? 'Primaria';
             const { data } = await supabase
                 .from('niveles')
                 .select('objetivo_holistico')
-                .eq('id', 3) // Secundaria
+                .eq('nombre', nivelNombre)
                 .single();
             if (data?.objetivo_holistico) setObjetivoNivel(data.objetivo_holistico);
         } catch (error) {
@@ -375,12 +392,18 @@ export function usePdcWizardController() {
         setCurrentObjective(prev => ({ ...prev, draft: options[0].description + '.', isManual: false }));
     };
 
-    const addStrategicObjective = () => {
+    const addStrategicObjective = async () => {
         if (!currentObjective.draft) return;
-        setLearningObjectives(prev => [...prev, {
+
+        const newObjective: LearningObjective = {
             text: currentObjective.draft,
             contentIds: currentObjective.contentIds
-        }]);
+        };
+
+        // 1. Actualizar estado en memoria inmediatamente (optimistic update)
+        setLearningObjectives(prev => [...prev, newObjective]);
+
+        // 2. Resetear el generador
         setCurrentObjective({
             verboIds: [],
             contentIds: [],
@@ -389,6 +412,55 @@ export function usePdcWizardController() {
             draft: '',
             isManual: false
         });
+
+        // 3. Persistir en BD si el PDC ya fue creado
+        if (currentPdcId) {
+            try {
+                const { data: inserted, error } = await supabase
+                    .from('objetivo_estrategico')
+                    .insert({ pdc_id: currentPdcId, descripcion: newObjective.text })
+                    .select()
+                    .single();
+
+                if (error) {
+                    console.error('Error al guardar objetivo estratégico:', error);
+                    return;
+                }
+
+                // 4. Guardar relación con contenidos si existen
+                if (inserted && newObjective.contentIds && newObjective.contentIds.length > 0) {
+                    const relaciones = newObjective.contentIds.map(contentId => ({
+                        objetivo_estrategico_id: inserted.id,
+                        contenido_usuario_id: contentId
+                    }));
+                    await supabase.from('objetivo_estrategico_contenido').insert(relaciones);
+                }
+            } catch (error) {
+                console.error('Controller Error [addStrategicObjective]:', error);
+            }
+        }
+    };
+
+    // Elimina un objetivo guardado por índice, tanto del estado como de la BD.
+    const removeStrategicObjective = async (index: number) => {
+        const objectiveToRemove = learningObjectives[index];
+        if (!objectiveToRemove) return;
+
+        // 1. Optimistic update: eliminar del estado inmediatamente
+        setLearningObjectives(prev => prev.filter((_, i) => i !== index));
+
+        // 2. Persistir en BD si el PDC ya tiene ID
+        if (currentPdcId) {
+            try {
+                await supabase
+                    .from('objetivo_estrategico')
+                    .delete()
+                    .eq('pdc_id', currentPdcId)
+                    .eq('descripcion', objectiveToRemove.text);
+            } catch (error) {
+                console.error('Controller Error [removeStrategicObjective]:', error);
+            }
+        }
     };
 
     // --- Navegación ---
@@ -457,7 +529,7 @@ export function usePdcWizardController() {
                 setSaving(false);
             }
         } else if (step >= 4 && step < 10) {
-            if (step === 4 && selectedType === 3) loadObjetivoNivel();
+            if (step === 4 && selectedType) loadObjetivoNivel(selectedType);
 
             // Validación especial para el paso 6: todos los contenidos deben estar cubiertos
             if (step === 6) {
@@ -579,6 +651,12 @@ export function usePdcWizardController() {
                 fin: pdc.fecha_fin || ''
             });
 
+            // Cargar objetivos estratégicos guardados en BD para repoblar el estado en memoria
+            const savedObjectives = await PdcService.getStrategicObjectives(pdc.id);
+            if (savedObjectives.length > 0) {
+                setLearningObjectives(savedObjectives);
+            }
+
             // Mapear áreas vinculadas si existen
             if (pdc.areas_trabajo && pdc.areas_trabajo.length > 0) {
                 const areaIds = pdc.areas_trabajo.map(a => a.id);
@@ -586,9 +664,16 @@ export function usePdcWizardController() {
 
                 const details = await AreasService.getAreaById(areaIds[0]);
                 setMainAreaDetails(details);
+
+                // Llamar con parámetros explícitos para evitar el problema de closures stale.
+                // En este punto sabemos exactamente qué área, trimestre y mes usar.
+                const trimestre = pdc.trimestre || 1;
+                const mes = pdc.mes || 1;
+                await loadStep3Data(areaIds[0], trimestre, mes);
             }
 
-            loadStep3Data();
+            // No llamamos loadStep3Data() desde el useEffect en este caso porque ya la
+            // invocamos directamente arriba con los valores correctos.
             setStep(4); // Iniciar en el primer paso de diseño
         } catch (error) {
             console.error('Controller Error [resumePdc]:', error);
@@ -597,6 +682,7 @@ export function usePdcWizardController() {
             setSaving(false);
         }
     };
+
 
     const jumpToArea = (index: number) => {
         if (index === currentAreaIndex) return;
@@ -753,6 +839,7 @@ export function usePdcWizardController() {
         toggleAreaSelection,
         generateAIObjective,
         addStrategicObjective,
+        removeStrategicObjective,
         getStepName,
         getTotalSteps: () => 10,
         addWeek,

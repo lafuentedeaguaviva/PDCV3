@@ -240,6 +240,7 @@ function NewPdcContent() {
                             setHoveredComplement={controller.setHoveredComplement}
                             catalogoComplementos={controller.catalogoComplementos}
                             addStrategicObjective={controller.addStrategicObjective}
+                            removeStrategicObjective={controller.removeStrategicObjective}
                             generateAIObjective={controller.generateAIObjective}
                             manualObjective={controller.manualObjective}
                             setManualObjective={controller.setManualObjective}

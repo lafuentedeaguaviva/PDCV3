@@ -75,19 +75,15 @@ export function PlanningSplitView({
         }
     };
 
-    // Filtrar contenidos ya planificados (Lógica de vista)
+    // Mostrar todos los temas y subtemas, incluyendo los ya planificados.
+    // Los subtemas pueden asignarse a múltiples semanas; el guard de duplicado
+    // en la misma semana se maneja en handleAssign mediante existingIds.
     const themes = useMemo(() => {
-        return userContents.filter(theme => {
-            if (theme.padre_id) return false;
-            const isThemePlanned = plannedContentIds.has(theme.id);
-            const subthemes = userContents.filter(c => c.padre_id === theme.id);
-            const hasUnplannedSubthemes = subthemes.some(s => !plannedContentIds.has(s.id));
-            return !isThemePlanned || hasUnplannedSubthemes;
-        });
-    }, [userContents, plannedContentIds]);
+        return userContents.filter(theme => !theme.padre_id);
+    }, [userContents]);
 
     const getSubthemes = (parentId: number) =>
-        userContents.filter(c => c.padre_id === parentId && !plannedContentIds.has(c.id));
+        userContents.filter(c => c.padre_id === parentId);
 
     const toggleMonth = (mes: number) => {
         const next = new Set(expandedMonths);
@@ -154,34 +150,42 @@ export function PlanningSplitView({
                             </div>
 
                             <div className="ml-4 space-y-1 border-l-2 border-slate-100 pl-3">
-                                {getSubthemes(theme.id).map(sub => (
-                                    <div
-                                        key={sub.id}
-                                        draggable
-                                        onDragStart={(e) => handleDragStart(e, sub.id)}
-                                        onClick={() => setSelectedContentId(selectedContentId === sub.id ? null : sub.id)}
-                                        className={`p-3 rounded-xl border transition-all cursor-pointer group/sub ${selectedContentId === sub.id
-                                            ? 'border-blue-400 bg-white shadow-sm'
-                                            : 'border-transparent hover:bg-white hover:border-slate-200 active:scale-95'
-                                            }`}
-                                    >
-                                        <div className="flex items-center gap-3">
-                                            <span className="text-[10px] font-black text-slate-300">SUB</span>
-                                            <h4 className={`text-xs font-semibold ${selectedContentId === sub.id ? 'text-blue-800' : 'text-slate-500'}`}>
-                                                {sub.titulo}
-                                            </h4>
-                                        </div>
-                                        {contentAssignments[sub.id] && (
-                                            <div className="mt-1.5 flex flex-wrap gap-1">
-                                                {contentAssignments[sub.id].map((tag, i) => (
-                                                    <span key={i} className="text-[7px] font-black text-blue-500 bg-blue-50 px-1 py-0.5 rounded uppercase leading-none">
-                                                        {tag}
-                                                    </span>
-                                                ))}
+                                {getSubthemes(theme.id).map(sub => {
+                                    const isAssigned = !!contentAssignments[sub.id];
+                                    return (
+                                        <div
+                                            key={sub.id}
+                                            draggable
+                                            onDragStart={(e) => handleDragStart(e, sub.id)}
+                                            onClick={() => setSelectedContentId(selectedContentId === sub.id ? null : sub.id)}
+                                            className={`p-3 rounded-xl border transition-all cursor-pointer group/sub ${selectedContentId === sub.id
+                                                ? 'border-blue-400 bg-white shadow-sm'
+                                                : isAssigned
+                                                    ? 'border-blue-100 bg-blue-50/40 hover:bg-white hover:border-blue-300 active:scale-95'
+                                                    : 'border-transparent hover:bg-white hover:border-slate-200 active:scale-95'
+                                                }`}
+                                        >
+                                            <div className="flex items-center gap-3">
+                                                <span className="text-[10px] font-black text-slate-300">SUB</span>
+                                                <h4 className={`text-xs font-semibold ${selectedContentId === sub.id ? 'text-blue-800' : 'text-slate-500'}`}>
+                                                    {sub.titulo}
+                                                </h4>
+                                                {isAssigned && (
+                                                    <span className="ml-auto text-[8px] font-black text-blue-400 material-symbols-rounded" title="Asignado a una o más semanas">content_copy</span>
+                                                )}
                                             </div>
-                                        )}
-                                    </div>
-                                ))}
+                                            {contentAssignments[sub.id] && (
+                                                <div className="mt-1.5 flex flex-wrap gap-1">
+                                                    {contentAssignments[sub.id].map((tag, i) => (
+                                                        <span key={i} className="text-[7px] font-black text-blue-500 bg-blue-50 px-1 py-0.5 rounded uppercase leading-none">
+                                                            {tag}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </div>
+                                    );
+                                })}
                             </div>
                         </div>
                     ))}

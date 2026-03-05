@@ -1,0 +1,1455 @@
+﻿id_practica;nombre_practica;proposito;tipo;apto_para;descripcion_concreta;redactado;preguntas;ejemplo_inicial;ejemplo_primaria;ejemplo_secundaria;ejemplo_multigrado
+1;Caja misteriosa;Activacion;Sensorial;Grupo tímido o reservado, Grupo multigrado;Los estudiantes palpan un objeto oculto en una caja y describen lo que sienten para adivinarlo.;Los estudiantes palpan un objeto oculto en una caja y describen lo que sienten para adivinarlo.;¿Qué observan? ¿Qué les hace decir eso? ¿Qué más podríamos preguntarnos?;"Tema: Los animales de la granja. 
+
+Descripción: Escondemos una figura de un patito de goma. ""A ver, Valentina, mete la mano. ¿Es suave o duro? ¿Tiene patitas?""";"Tema: Adaptaciones (Biología). 
+
+Descripción: Introducimos una piña. ""Manuel, mete la mano con cuidado. ¿Qué textura sientes? ¿Es áspero o liso? ¿Tiene picos? ¿Podría ser algo que protege a una planta?""";"Tema: Materiales conductores (Física). 
+
+Descripción: Dentro de la caja, un cubo de metal y uno de madera. ""Sin mirar, toquen ambos. ¿Cuál se siente más frío? ¿Por qué creen que el metal siempre se siente más frío que la madera a temperatura ambiente?""";"Tema: Oficios y herramientas. 
+
+Descripción: El mayor palpa una herramienta (ej. martillo de juguete) y la describe: ""Tiene un mango y una parte pesada de metal"". Los pequeños escuchan y observan. Luego, los pequeños encuentran la imagen de esa herramienta en un libro."
+2;Sonido sorpresa;Activacion;Sensorial;Grupo numeroso (sonido amplificado);Reproducimos un sonido breve para que los estudiantes identifiquen su origen o el ambiente que sugiere.;Reproducimos un sonido breve para que los estudiantes identifiquen su origen o el ambiente que sugiere.;¿Qué escucharon? ¿Qué les hace decir eso? ¿Cómo lo saben? ¿Hay otra posibilidad?;"Tema: Medios de transporte. 
+
+Descripción: (Sonido de sirena de ambulancia). ""¿Qué es ese ruido tan fuerte? ¿Es un perro? ¿Es un carro? ¿A qué se parece?""";"Tema: La ciudad y el campo (Ciencias Sociales). 
+
+Descripción: (Sonido de un gallo cantando). ""¿Qué escuchamos? ¿En qué lugar de nuestro país creen que es más común escuchar esto al amanecer, en la ciudad o en el campo? ¿Por qué?""";"Tema: Historia - Revolución Industrial. 
+
+Descripción: (Sonido de un telar mecánico y un silbato de fábrica). ""¿Qué escuchan primero? ¿A qué ambiente les transporta ese sonido? ¿En qué época creen que era común escuchar esto en las ciudades? ¿Qué sensación les produce?""";"Tema: Ecosistemas. 
+
+Descripción: (Sonido de la selva: pájaros, monos, insectos). Los pequeños imitan a los animales que ""escuchan"". Los grandes listan los elementos del ecosistema y proponen una cadena alimenticia simple."
+3;Degustación a ciegas;Activacion;Sensorial;Grupo tímido o reservado, Grupo multigrado;Con los ojos vendados, prueban un alimento y describen sabores, texturas y posibles identidades.;Con los ojos vendados, prueban un alimento y describen sabores, texturas y posibles identidades.;¿Qué sabor predomina? ¿Dulce, salado, ácido? ¿Qué textura tiene? ¿Qué podría ser?;"Tema: Los sentidos - El gusto. 
+
+Descripción: ""Hoy vamos a ser catadores. Cierren los ojos y abran la boca. (Ofrecer un trocito de manzana). ¿Qué están comiendo? ¿Es dulce o ácido? ¿Es suave o crujiente?""";"Tema: Alimentos saludables (Ciencias). 
+
+Descripción: ""Con los ojos vendados, probarán diferentes alimentos. Deben clasificarlos en dos grupos: 'naturales' y 'procesados', explicando qué característica del sabor o textura los lleva a esa conclusión.""";"Tema: Química de los alimentos. 
+
+Descripción: ""Vendaremos sus ojos y probarán tres soluciones: agua con azúcar, agua con sal y agua con limón. A partir de la experiencia sensorial, deben inferir qué compuestos químicos (sacarosa, cloruro de sodio, ácido cítrico) están presentes.""";"Tema: Frutas y verduras. 
+
+Descripción: Los pequeños prueban y dicen si es dulce o ácido. Los grandes, además, describen la textura y posibles usos culinarios de ese alimento."
+4;Objeto misterioso;Activacion;Sensorial;Grupo tímido o reservado, Grupo multigrado;Mostramos un objeto real relacionado con el tema sin decir qué es ni para qué sirve.;Mostramos un objeto real relacionado con el tema sin decir qué es ni para qué sirve.;¿Qué será? ¿Para qué creen que se usa? ¿Quién lo habrá usado?;"Tema: El teléfono. 
+
+Descripción: (Mostrar un teléfono antiguo de disco). ""¿Alguien sabe qué es esto? ¿Cómo creen que funcionaba? ¿Para qué servía ese disco?""";"Tema: La electricidad. 
+
+Descripción: (Mostrar un foco incandescente viejo). ""¿Qué es? ¿Cómo creen que funciona? ¿Por qué ya no se usan tanto estos?""";"Tema: Historia - Comunicación. 
+
+Descripción: (Mostrar un telégrafo o imagen de uno). ""Observen este objeto. ¿Qué principio físico creen que utilizaba para comunicarse? ¿Cómo impactó en la sociedad de su época?""";"Tema: Objetos antiguos y modernos. 
+
+Descripción: (Mostrar un teléfono de disco). Los pequeños dicen lo que ven (un teléfono raro). Los grandes investigan mentalmente cómo funcionaba."
+5;Memes educativos;Activacion;Sensorial;Grupo numeroso;Presentamos un meme relacionado con el tema para generar humor y reflexión.;Presentamos un meme relacionado con el tema para generar humor y reflexión.;¿Por qué da risa? ¿Qué concepto está detrás del chiste?;"Tema: Rutinas diarias. 
+
+Descripción: (Meme de un gato durmiendo con texto: ""Yo los lunes""). ""¿Por qué da risa? ¿Cómo se sienten ustedes los lunes?""";"Tema: Sistema solar. 
+
+Descripción: (Meme de Plutón llorando con texto: ""Me sacaron del sistema solar""). ""¿Qué le pasó a Plutón? ¿Por qué ya no es considerado planeta?""";"Tema: Biología evolutiva. 
+
+Descripción: (Meme de una persona evolucionando de mono a humano y luego encorvado por el celular). ""¿Qué crítica hace este meme sobre nuestra evolución actual? ¿Qué concepto biológico utiliza?""";"Tema: Memes simples. 
+
+Descripción: (Meme de un niño con cara de asombro). Los pequeños imitan la cara. Los grandes explican qué significa la expresión."
+6;Canción;Activacion;Sensorial;Grupo numeroso (sonido amplificado);Reproducimos una canción (completa o fragmento) relacionada con el tema.;Reproducimos una canción (completa o fragmento) relacionada con el tema.;¿De qué habla la canción? ¿Qué les hace sentir? ¿Qué palabras nuevas escucharon?;"Tema: Los animales. 
+
+Descripción: (Canción ""La vaca Lola""). ""¿De qué animal habla? ¿Qué hace la vaca Lola?""";"Tema: Partes del cuerpo. 
+
+Descripción: (Canción ""Cabeza, hombros, rodillas y pies""). ""Vamos a cantar y a tocarnos las partes que dice la canción. ¡A ver quién sigue el ritmo!""";"Tema: Historia - Épocas históricas. 
+
+Descripción: (Fragmento de una canción de protesta de los años 70). ""Escuchen la letra. ¿Qué problemas sociales denuncia? ¿En qué contexto histórico creen que se escribió?""";"Tema: Canciones y sonidos. 
+
+Descripción: (Canción infantil). Los pequeños cantan y bailan. Los grandes identifican las palabras clave y las escriben."
+7;Poema o rima;Activacion;Sensorial;Grupo numeroso (sonido amplificado);Recitamos un poema corto o una rima que introduzca el tema.;Recitamos un poema corto o una rima que introduzca el tema.;¿Qué imágenes les vino a la mente? ¿Qué palabras les gustaron más?;"Tema: La luna. 
+
+Descripción: (Recitar ""La luna"" de Federico García Lorca, versión adaptada). ""La luna vino a la fragua con su polisón de nardos..."" ¿Cómo se imaginan la luna?""";"Tema: La primavera. 
+
+Descripción: (Poema corto sobre la primavera). ""Cierren los ojos mientras les leo. ¿Qué olores, colores y sonidos imaginan?""";"Tema: Literatura - Vanguardias. 
+
+Descripción: (Leer un poema de Vicente Huidobro, creador del creacionismo). ""Escuchen atentamente. ¿Qué imágenes poéticas les sorprenden? ¿Cómo juega el autor con el lenguaje?""";"Tema: Poemas cortos. 
+
+Descripción: Recitan una rima. Los pequeños repiten las palabras que riman. Los grandes crean una rima similar."
+8;Identificación de aromas;Activacion;Sensorial;Grupo tímido o reservado, Grupo multigrado;Ofrecemos recipientes con diferentes olores (especias, frutas, elementos de la naturaleza) para identificar.;Ofrecemos recipientes con diferentes olores (especias, frutas, elementos de la naturaleza) para identificar.;¿A qué les huele? ¿Qué recuerdo les trae ese olor? ¿Qué palabra lo describe mejor?;"Tema: El cuerpo - Los sentidos. 
+
+Descripción: (Frasco con algodón perfumado con esencia de vainilla). ""A ver, acérquense. ¿A qué huele? ¿Les gusta? ¿A qué les recuerda? ¿A galletas?""";"Tema: Historia - La ruta de las especias. 
+
+Descripción: ""Huelan estas muestras (canela, clavo, pimienta). ¿Por qué creen que estos aromas fueron tan valiosos hace siglos? ¿Qué imaginan que pensaba un europeo al oler esto por primera vez?""";"Tema: Química orgánica. 
+
+Descripción: ""Identifiquen estas cuatro muestras (vainilla, menta, limón, vinagre). Una vez identificadas, investiguemos rápidamente qué compuesto químico (vainillina, mentol, limoneno, ácido acético) es el responsable de ese aroma característico.""";"Tema: Plantas aromáticas. 
+
+Descripción: Los pequeños huelen e identifican (menta, hierbabuena, eucalipto). Los grandes explican para qué se usa cada una en medicina casera o cocina."
+9;Recorrido táctil;Activacion;Sensorial;Grupo tímido o reservado, Grupo multigrado;Colocamos diferentes texturas en un recorrido que los estudiantes tocan con los pies o las manos.;Colocamos diferentes texturas en un recorrido que los estudiantes tocan con los pies o las manos.;¿Cómo cambia la sensación al tocar esto? ¿Qué material imita esta textura?;"Tema: Texturas y materiales. 
+
+Descripción: ""Vamos a hacer un camino descalzos. Pasen por aquí (alfombra), luego por acá (tapete con piedras), y luego por este otro lado (plástico con burbujas). ¿Qué sintieron en cada parte?""";"Tema: Los ecosistemas. 
+
+Descripción: ""Este es el 'camino de los hábitats'. Aquí tocarán arena (desierto), luego musgo húmedo (bosque), luego piedras frías (río). Relacionen cada textura con un ecosistema.""";"Tema: Geología. 
+
+Descripción: ""Con los ojos cerrados, palparán diferentes muestras de rocas. Deben clasificarlas por su textura (granular, lisa, áspera) e intentar identificar cuáles podrían ser ígneas, sedimentarias o metamórficas.""";"Tema: Sentidos y clasificación. 
+
+Descripción: Los pequeños describen la sensación (suave, áspero, frío). Los grandes asocian cada textura con un material o ecosistema específico y lo escriben."
+10;Observación de imagen borrosa;Activacion;Sensorial;Grupo numeroso;Mostramos una imagen desenfocada o fragmentada para que intenten descubrir qué es.;Mostramos una imagen desenfocada o fragmentada para que intenten descubrir qué es.;¿Qué podría ser? ¿Qué detalles ven que les hace pensar eso? ¿Qué falta para estar seguros?;"Tema: Los animales. 
+
+Descripción: (Imagen borrosa de un elefante mostrando solo la trompa). ""¿Qué animal será esa cosa larga? ¿Es una serpiente? ¿Es la manguera del jardín? ¡Miren bien!""";"Tema: Instrumentos musicales. 
+
+Descripción: (Imagen borrosa de un violín, mostrando solo el clavijero). ""¿Qué parte de un instrumento musical será esto? ¿Para qué sirven esas piezas? ¿A qué familia pertenece?""";"Tema: Arte - Vanguardias. 
+
+Descripción: (Fragmento ampliado de ""Las Meninas"" de Velázquez, mostrando solo un detalle de un vestido). ""Observen esta textura pictórica. ¿Qué técnica creen que usó el artista? ¿Qué época podría ser? ¿Qué emoción transmite este fragmento?""";"Tema: Oficios y herramientas. 
+
+Descripción: (Imagen borrosa de un martillo). Los pequeños dicen lo que ven (un palo, una cosa gris). Los grandes infieren el oficio y lo explican."
+11;Exploración sensorial al aire libre;Activacion;Sensorial;Grupo tímido o reservado, Grupo multigrado;Salimos brevemente al entorno para observar, escuchar y oler el contexto cercano.;Salimos brevemente al entorno para observar, escuchar y oler el contexto cercano.;¿Qué ven que antes no habían notado? ¿Qué sonidos nuevos descubren? ¿A qué huele hoy?;"Tema: El colegio. 
+
+Descripción: ""Vamos a dar una vuelta por el patio. Miren el cielo, toquen el pasto, escuchen los pajaritos. ¿Qué cosas bonitas encontramos en nuestro colegio?""";"Tema: La fotosíntesis. 
+
+Descripción: ""Salgamos al jardín. Toquen las hojas, miren hacia el sol. ¿Por qué las hojas están orientadas así? ¿Qué creen que están 'buscando'?""";"Tema: Contaminación ambiental. 
+
+Descripción: ""Vamos a la calle por 5 minutos. En silencio, observen: ¿Qué fuentes de contaminación visual y auditiva identificamos? ¿Cómo afecta esto a quienes viven aquí?""";"Tema: La naturaleza. 
+
+Descripción: Salen al patio. Los pequeños recogen hojas. Los grandes explican de qué árbol cayeron y por qué cambian de color."
+12;Galería de imágenes;Activacion;Sensorial;Grupo numeroso;Colocamos imágenes en las paredes y los estudiantes caminan observándolas en silencio.;Colocamos imágenes en las paredes y los estudiantes caminan observándolas en silencio.;¿Qué imagen llamó más su atención? ¿Qué relación ven entre las imágenes?;"Tema: Los oficios. 
+
+Descripción: ""Vamos a caminar en silencio mirando las fotos de diferentes oficios que están en las paredes. Luego me dicen cuál les gustó más.""";"Tema: Paisajes geográficos. 
+
+Descripción: ""Recorran la galería de paisajes (montaña, playa, desierto, selva). Mientras observan, piensen: ¿En cuál les gustaría vivir? ¿Qué dificultades tendría cada lugar?""";"Tema: Arte - Fotografía documental. 
+
+Descripción: ""Observen en silencio esta serie de fotografías de Sebastião Salgado. No hablen aún. Solo dejen que las imágenes les hablen. Luego escriban una palabra que resuma lo que sintieron.""";"Tema: Imágenes y descripción. 
+
+Descripción: Recorren imágenes. Los pequeños señalan su favorita. Los mayores escriben por qué la eligieron."
+13;Narración o historia;Activacion;Sensorial;Grupo numeroso (sonido amplificado);Contamos una breve historia, anécdota o leyenda relacionada con el tema.;Contamos una breve historia, anécdota o leyenda relacionada con el tema.;¿Qué parte de la historia les gustó más? ¿Qué harían ustedes en esa situación?;"Tema: Valores - La honestidad. 
+
+Descripción: (Cuento breve de un niño que encuentra una moneda y la devuelve). ""¿Qué hizo el niño? ¿Ustedes qué habrían hecho?""";"Tema: La fundación de la ciudad. 
+
+Descripción: (Relato corto de la leyenda de la fundación). ""¿Qué personajes aparecen? ¿Qué parte creen que es verdad y cuál es leyenda?""";"Tema: Filosofía - El mito de la caverna. 
+
+Descripción: (Narrar el mito de la caverna de Platón con lenguaje accesible). ""¿Qué representa la caverna? ¿Y los prisioneros? ¿Y la luz exterior?""";"Tema: Cuentos. 
+
+Descripción: Cuentan una historia corta. Los pequeños dibujan al personaje principal. Los grandes escriben el título que le pondrían."
+14;Instrucción paradójica;Activacion;Sensorial;Grupo numeroso (sonido amplificado);Damos una instrucción imposible o absurda para generar reflexión.;Damos una instrucción imposible o absurda para generar reflexión.;¿Por qué no podemos hacerlo? ¿Qué nos falta?;"Tema: La imaginación. 
+
+Descripción: ""Vamos a dibujar un círculo cuadrado. ¿Pueden? ¿Por qué no? ¡Usen la imaginación!""";"Tema: Sonido. 
+
+Descripción: ""Vamos a escuchar el silencio absoluto por 10 segundos. ¿Pudieron? ¿Qué escucharon en realidad?""";"Tema: Física - Límites. 
+
+Descripción: ""Intenten, mentalmente, imaginar el infinito. ¿Pudieron? ¿Qué forma le dieron? ¿Por qué es tan difícil para nuestra mente?""";"Tema: Imaginación. 
+
+Descripción: ""Dibujen un perro volador."" Los pequeños dibujan lo que imaginan. Los grandes describen cómo sería ese perro."
+15;Pregunta al aire;Activacion;Sensorial;Grupo numeroso (sonido amplificado);Lanzamos una pregunta al grupo sin esperar respuesta inmediata, solo para que la piensen.;Lanzamos una pregunta al grupo sin esperar respuesta inmediata, solo para que la piensen.;(No se responde, solo se piensa);"Tema: El universo. 
+
+Descripción: ""¿Alguna vez han mirado las estrellas y se han preguntado qué hay más allá?""";"Tema: La muerte. 
+
+Descripción: (Pregunta para dejar resonando) ""¿Por qué los seres vivos tenemos que morir?""";"Tema: Existencia. 
+
+Descripción: (Pregunta filosófica para iniciar) ""¿Qué significa realmente 'existir'?""";"Tema: Preguntas simples. 
+
+Descripción: ""¿Por qué el cielo es azul?"" Los pequeños imaginan respuestas creativas. Los grandes proponen hipótesis."
+16;Cortometraje o videoclip;Activacion;Sensorial;Grupo numeroso;Proyectamos un video corto (1-3 min) que introduzca el tema de manera sugerente.;Proyectamos un video corto (1-3 min) que introduzca el tema de manera sugerente.;¿Qué escena recuerdan más? ¿Qué mensaje les dejó? ¿Qué preguntas les surgen?;"Tema: La amistad. 
+
+Descripción: (Video de 1 minuto de Toy Story, donde los juguetes se ayudan). ""¿Qué hicieron los juguetes? ¿Por qué creen que se ayudaron?""";"Tema: El ciclo del agua. 
+
+Descripción: (Video animado de 2 minutos sobre una gotita de agua que viaja). ""¿Por dónde viajó la gotita? ¿En qué estados del agua la vimos?""";"Tema: Cortometraje con valor social. 
+
+Descripción: (Ver ""Cuerdas"" - cortometraje sobre inclusión). ""Sin hablar aún, escriban en su cuaderno qué sintieron al verlo. Luego compartiremos emociones y reflexiones sobre la inclusión.""";"Tema: Videos temáticos cortos. 
+
+Descripción: Ven un video sobre animales. Los pequeños nombran los animales que vieron. Los grandes explican una característica de cada uno."
+17;Fotografía en primer plano;Activacion;Sensorial;Grupo numeroso;Mostramos un detalle ampliado de una imagen para que deduzcan el todo.;Mostramos un detalle ampliado de una imagen para que deduzcan el todo.;¿Qué parte será? ¿A qué objeto más grande pertenece?;"Tema: Partes del cuerpo. 
+
+Descripción: (Primer plano de un ojo). ""¿Qué parte del cuerpo será esto? ¿Para qué sirve?""";"Tema: Herramientas. 
+
+Descripción: (Primer plano de la punta de un destornillador). ""¿Qué herramienta será? ¿Para qué se usa esa parte?""";"Tema: Arte - Detalles en pintura. 
+
+Descripción: (Detalle de la mano en ""La Creación de Adán"" de Miguel Ángel). ""Observen este detalle. ¿Qué relación hay entre esos dedos? ¿Qué pintura famosa creen que es?""";"Tema: Objetos cotidianos. 
+
+Descripción: (Primer plano de un lápiz, mostrando la punta y la madera). Los pequeños dicen lo que ven (punto negro, madera). Los grandes adivinan el objeto completo."
+18;Adivinanza en cadena;Activacion;Lúdica;Grupo inquieto o disperso, Poco tiempo disponible, Después del recreo;Un estudiante piensa en algo relacionado con el tema y los demás hacen preguntas para adivinarlo.;Un estudiante piensa en algo relacionado con el tema y los demás hacen preguntas para adivinarlo.;¿Qué preguntas nos acercan más a la respuesta? ¿Cómo podemos clasificar lo que ya sabemos?;"Tema: Animales domésticos. 
+
+Descripción: ""Pensé en un animal que vive en las casas, tiene bigotes y dice 'miau'. ¿Qué preguntas me harían para adivinarlo?""";"Tema: Personajes históricos. 
+
+Descripción: ""Pensé en un personaje importante de nuestra historia. Pueden hacer preguntas de 'sí' o 'no' para descubrir quién es. Piensen bien sus preguntas para descartar muchos.""";"Tema: Conceptos científicos. 
+
+Descripción: ""Pensé en un concepto clave de la física. Solo pueden hacer preguntas de 'sí' o 'no'. Deben usar su conocimiento para formular preguntas estratégicas que los lleven a la respuesta (gravedad, energía, átomo...).""";"Tema: Animales. 
+
+Descripción: El docente piensa en un animal. Los pequeños preguntan: ""¿Vuela?"" Los mayores preguntan: ""¿Es mamífero?"" y toman nota de las pistas."
+19;Bingo de conceptos;Activacion;Lúdica;Grupo inquieto o disperso, Después del recreo;Los estudiantes tienen tarjetas con conceptos y deben marcar cuando el docente menciona uno relacionado.;Los estudiantes tienen tarjetas con conceptos y deben marcar cuando el docente menciona uno relacionado.;¿Qué palabra nueva escucharon? ¿Por qué creen que esa palabra pertenece a nuestro tema?;"Tema: La familia. 
+
+Descripción: ""En sus cartones tienen dibujos de miembros de la familia. Yo iré diciendo acciones: 'La persona que cocina', 'Quien nos lleva al colegio'. ¡A marcar!""";"Tema: Verbos (Lengua). 
+
+Descripción: ""En sus cartones tienen verbos en infinitivo. Yo leeré oraciones. Si el verbo que yo uso en la oración está en su cartón, márquenlo. ¡Gana quien complete una línea!""";"Tema: Revolución Francesa. 
+
+Descripción: ""Sus cartones tienen personajes, fechas y conceptos (Robespierre, 1789, Estados Generales). Yo narraré breves situaciones históricas. Si identifican el concepto, personaje o fecha, lo marcan.""";"Tema: Vocabulario común. 
+
+Descripción: Cartón con imágenes para pequeños, con palabras para grandes. El docente dice la palabra, los pequeños marcan la imagen, los grandes la palabra."
+20;Carrera de observación;Activacion;Lúdica;Grupo inquieto o disperso, Poco tiempo disponible, Después del recreo;En equipos, buscan objetos o imágenes escondidas en el aula siguiendo pistas.;En equipos, buscan objetos o imágenes escondidas en el aula siguiendo pistas.;¿Cómo organizaron la búsqueda? ¿Qué pista fue la más difícil? ¿Qué aprendieron en el camino?;"Tema: Los colores. 
+
+Descripción: ""Busquen por el salón 5 objetos de color rojo. ¿Listos? ¡A buscar! ¿Qué encontraron? ¿Dónde estaba el más escondido?""";"Tema: Figuras geométricas. 
+
+Descripción: ""Por equipos, deben encontrar en el aula: algo con forma de círculo, algo con forma de triángulo y algo con forma de rectángulo. ¡El primer equipo que traiga los tres objetos gana!""";"Tema: La célula. 
+
+Descripción: ""Por grupos, tienen 3 minutos para encontrar en el salón objetos que puedan servir como analogías de partes de la célula. (Ej: una bolsa transparente = membrana, una canica = núcleo, gelatina = citoplasma). Luego explicarán su elección.""";"Tema: Objetos y formas. 
+
+Descripción: Los pequeños buscan objetos por color o forma simple. Los mayores leen las pistas escritas y guían al equipo."
+21;El tingo tingo tango temático;Activacion;Lúdica;Grupo inquieto o disperso, Poco tiempo disponible, Después del recreo;Mientras suena música, pasan un objeto. Quien se queda con él responde una pregunta o realiza un reto.;Mientras suena música, pasan un objeto. Quien se queda con él responde una pregunta o realiza un reto.;¿Cómo te sentiste al quedar con el objeto? ¿Qué aprendiste con la pregunta que te tocó?;"Tema: Frutas y verduras. 
+
+Descripción: (Suena música, pasan una pelota). Quien se queda con ella dice el nombre de una fruta que le guste. ¡A participar todos!""";"Tema: Tablas de multiplicar. 
+
+Descripción: ""Mientras suena la canción, pasamos este marcador. Cuando pare la música, quien lo tiene debe responder rápido: '7 x 8'.""";"Tema: Literatura - Autores y obras. 
+
+Descripción: ""Pasan este libro. Al parar la música, deben mencionar una obra del autor que yo nombre. Si no saben, pueden pedir ayuda a un compañero.""";"Tema: Preguntas mixtas. 
+
+Descripción: Quien queda con el objeto responde según su nivel. Pequeños: nombran un color. Grandes: responden una pregunta de tabla o concepto."
+22;Estatuas musicales con variante;Activacion;Lúdica;Grupo inquieto o disperso, Poco tiempo disponible, Después del recreo;Bailan mientras suena la música. Al parar, deben quedarse quietos imitando algo relacionado con el tema.;Bailan mientras suena la música. Al parar, deben quedarse quietos imitando algo relacionado con el tema.;¿Por qué eligieron esa postura? ¿Qué están representando?;"Tema: Animales salvajes. 
+
+Descripción: ""Bailamos libremente... ¡y al parar la música, todos se convierten en estatuas de leones! ¡A rugir (pero en estático)!""";"Tema: Profesiones. 
+
+Descripción: ""Bailamos... ¡Alto! Ahora todos son estatuas de un oficio. ¡A ver si adivino qué están representando! (Unos fingen escribir en pizarrón, otros fingen cocinar).""";"Tema: Esculturas famosas. 
+
+Descripción: ""Bailan libremente. Al parar la música, deben convertirse en una estatua famosa que hayamos visto en clase (El Pensador, David, Venus). Sus compañeros deben adivinar cuál es.""";"Tema: Representación corporal. 
+
+Descripción: Todos bailan. Al parar, los pequeños imitan un animal (elefante). Los grandes imitan una profesión (médico). Los pequeños adivinan la profesión de los grandes."
+23;Juego rápido;Activacion;Lúdica;Grupo inquieto o disperso, Poco tiempo disponible, Después del recreo;Proponemos un juego breve y conocido que active la atención y la participación colectiva.;Proponemos un juego breve y conocido que active la atención y la participación colectiva.;¿Qué estrategia usaron? ¿Cómo podemos hacerlo más difícil/divertido?;"Tema: Las partes del cuerpo. 
+
+Descripción: ""Vamos a jugar a 'Simón dice'. ¡Simón dice que se toquen la cabeza! ¡Simón dice que levanten un pie! ¡A saltar! (sin decir Simón dice)... ¡Uy, me equivoqué, a ver si me siguen!""";"Tema: Sinónimos y antónimos (Lengua). 
+
+Descripción: ""Jugaremos al 'Alto' pero con una regla especial. En la columna de objetos, solo valen sinónimos de 'bonito'. ¿'Hermoso' sirve? ¡Correcto! Ahora en 'color', solo antónimos de 'claro'.""";"Tema: Clasificación de números (Matemáticas). 
+
+Descripción: ""Jugaremos 'Tierra, Mar, Aire' pero con números. Yo grito 'múltiplo de 3' y ustedes, antes de que cuente hasta 3, deben decir un número que cumpla. Si digo 'número primo', ¿cuál dicen?""";"Tema: Atención y reacción. 
+
+Descripción: ""Juguemos al 'Reino de los opuestos'"". El docente da una orden y los niños deben hacer lo contrario. (Ej: ""Toca tu cabeza"" -> ellos tocan sus pies). Los pequeños participan con acciones simples, los mayores con consignas complejas."
+24;Acertijo;Activacion;Cognitiva;Tema complejo o abstracto, Grupo pequeño (debate);Presentamos un enigma lógico o verbal para que los estudiantes lo resuelvan en grupo.;Presentamos un enigma lógico o verbal para que los estudiantes lo resuelvan en grupo.;¿Por dónde empezamos? ¿Están seguros? ¿Qué pasaría si...?;"Tema: Características de los objetos. 
+
+Descripción: ""Tengo patas pero no camino, tengo respaldo pero no me siento, y en las noches te ayudo a dormir. ¿Qué soy?"" (La cama).";"Tema: Ecuaciones simples (Matemáticas). 
+
+Descripción: ""Soy un número. Si me sumas 5 y luego me restas 3, obtienes 8. ¿Qué número soy? ¿Por dónde empezamos a resolver?""";"Tema: Biografías (Lengua/Historia). 
+
+Descripción: ""Nací en una familia humilde en Argentina, luché por la independencia de varios países, soy conocido como 'El Libertador' y un país lleva mi nombre. ¿Quién soy? (San Martín). ¿Qué pistas fueron claves?""";"Tema: Adivinanzas y resolución. 
+
+Descripción: Se presenta una adivinanza (la cama). Los pequeños dibujan la respuesta. Los mayores, además de responder, escriben otra adivinanza similar para los pequeños."
+25;Pregunta problematizadora;Activacion;Cognitiva;Tema complejo o abstracto, Grupo pequeño (debate);Lanzamos una pregunta que no tiene respuesta inmediata o única, generando debate inicial.;Lanzamos una pregunta que no tiene respuesta inmediata o única, generando debate inicial.;¿Qué opinan? ¿Alguien piensa diferente? ¿Qué necesitaríamos saber para responder mejor?;"Tema: El agua. 
+
+Descripción: ""¿Qué pasaría si un día despertamos y no sale agua de ninguna llave? ¿Cómo sería nuestro día?""";"Tema: La contaminación. 
+
+Descripción: ""Si tirar una bolsa plástica al río tarda 500 años en desaparecer, ¿dónde creen que están ahora las bolsas que se tiraron hace 100 años? ¿Qué problema vemos?""";"Tema: Ética y tecnología. 
+
+Descripción: ""Si pudiéramos crear una inteligencia artificial que tomara todas las decisiones del gobierno y eliminara la corrupción humana, ¿deberíamos hacerlo? ¿Qué ganaríamos y qué perderíamos?""";"Tema: Cuidado del ambiente. 
+
+Descripción: ""¿Por qué es importante no botar basura en el patio?"" Los pequeños responden con ideas simples. Los grandes profundizan en consecuencias a largo plazo."
+26;Frase incompleta;Activacion;Cognitiva;Tema complejo o abstracto, Grupo pequeño (debate);Presentamos el inicio de una frase para que los estudiantes la completen con sus ideas.;Presentamos el inicio de una frase para que los estudiantes la completen con sus ideas.;¿Quién quiere compartir cómo completó su frase? ¿Alguien la completó diferente?;"Tema: Los amigos. 
+
+Descripción: ""Un amigo es alguien que siempre..."" Completemos la frase cada uno en nuestra mente. ¿Quién quiere compartir?""";"Tema: La democracia. 
+
+Descripción: ""Completen en su cuaderno: 'La democracia funciona cuando...' Luego compartiremos algunas respuestas y veremos qué tienen en común.""";"Tema: Identidad cultural. 
+
+Descripción: ""Escriban en una palabra o frase corta cómo completarían: 'Ser de este país significa...' Reflexionaremos sobre las coincidencias y diferencias en sus respuestas.""";"Tema: Valores. 
+
+Descripción: ""La amistad es..."" Los pequeños dibujan lo que piensan. Los grandes escriben una frase y la leen."
+27;Asociación libre;Activacion;Cognitiva;Tema complejo o abstracto, Grupo pequeño (debate);Decimos una palabra central y los estudiantes dicen todo lo que se les viene a la mente.;Decimos una palabra central y los estudiantes dicen todo lo que se les viene a la mente.;¿Por qué creen que dijeron esas palabras? ¿Qué relación tienen con la palabra inicial?;"Tema: El mar. 
+
+Descripción: ""Yo digo 'mar' y ustedes dicen la primera palabra que se les ocurra. ¡Vamos! (agua, olas, peces, vacaciones, arena...)""";"Tema: El colegio. 
+
+Descripción: ""Yo digo 'escuela'. En una hoja, cada uno escribe todas las palabras que asocie en 1 minuto. Luego veremos cuáles se repiten más.""";"Tema: Globalización. 
+
+Descripción: ""Escriban individualmente todas las palabras que asocien con 'globalización'. Luego, en grupo, construiremos una red de conceptos y veremos las relaciones que establecieron.""";"Tema: La familia. 
+
+Descripción: Los pequeños dicen palabras (mamá, papá). Los grandes las escriben y agregan otras más complejas (abuelos, tíos, primos, convivencia)."
+28;Observación de imagen completa;Activacion;Cognitiva;Tema complejo o abstracto, Grupo pequeño (debate);Mostramos una imagen rica en detalles para que la describan y la interroguen.;Mostramos una imagen rica en detalles para que la describan y la interroguen.;¿Qué ven en la imagen? ¿Qué historia creen que cuenta? ¿Qué preguntas les genera?;"Tema: El campo. 
+
+Descripción: (Imagen de una granja con muchos animales y personas trabajando). ""Miren esta imagen. ¿Qué ven? ¿Qué está haciendo el señor? ¿Qué animales hay?""";"Tema: Derechos del niño. 
+
+Descripción: (Imagen de niños trabajando en lugar de ir a la escuela). ""Observen atentamente. ¿Qué ven? ¿Qué derecho de estos niños creen que no se está cumpliendo? ¿Por qué lo creen?""";"Tema: Historia - Conquista de América. 
+
+Descripción: (Imagen de un encuentro entre españoles e indígenas). ""Describan objetivamente qué ven. Luego, desde la perspectiva de cada grupo (españoles/indígenas), ¿qué estarían pensando y sintiendo en este momento?""";"Tema: Imágenes y descripción. 
+
+Descripción: (Imagen de un mercado). Los pequeños nombran los objetos que reconocen (frutas, personas). Los grandes describen la escena y las posibles interacciones."
+29;Dato curioso;Activacion;Cognitiva;Tema complejo o abstracto, Grupo pequeño (debate);Compartimos un hecho sorprendente o una estadística llamativa relacionada con el tema.;Compartimos un hecho sorprendente o una estadística llamativa relacionada con el tema.;¿Les sorprende? ¿Por qué creen que pasa eso? ¿Qué más les gustaría saber?;"Tema: Los insectos. 
+
+Descripción: ""¿Sabían que una hormiga puede cargar hasta 50 veces su propio peso? ¡Eso es como si un niño cargara un carro! ¿Cómo lo harán?""";"Tema: El sistema solar. 
+
+Descripción: ""¿Sabían que en Venus un día dura más que un año? ¿Cómo creen que es posible? ¿Qué implicaciones tendría eso?""";"Tema: Genética. 
+
+Descripción: ""Compartimos el 50% de nuestro ADN con un plátano. ¿Qué significa esto? ¿Cómo es posible que compartamos tanto material genético con algo tan diferente?""";"Tema: Animales sorprendentes. 
+
+Descripción: ""¿Sabían que el calamar gigante tiene ojos del tamaño de un plato?"" Los pequeños dibujan cómo se imaginan ese ojo. Los grandes investigan por qué necesitan ojos tan grandes."
+30;Imitación de movimientos;Activacion;Corporal;Grupo inquieto o disperso, Poco tiempo disponible, Inicio de jornada;Invitamos a imitar movimientos de animales o personas para conectar el cuerpo con el tema.;Invitamos a imitar movimientos de animales o personas para conectar el cuerpo con el tema.;¿Cómo se siente su cuerpo al hacer eso? ¿Qué músculos usaron?;"Tema: Animales de la selva. 
+
+Descripción: ""¡Vamos de safari! Caminemos despacio y muy sigilosos como jaguares... ¡Chist! Ahora estiremos el cuello para comer hojas como jirafas. ¿Qué animal será este que se arrastra?""";"Tema: Oficios (Ciencias Sociales). 
+
+Descripción: ""Vamos a adivinar oficios con mímica. Yo empezaré... (Imita a un panadero amasando). ¿Qué soy? ¿Qué movimientos hago? ¿Qué herramientas uso?""";"Tema: Deportes (Educación Física). 
+
+Descripción: ""En parejas, simularán en cámara lenta un movimiento deportivo: saque de tenis, lanzamiento de baloncesto. El compañero adivina el deporte y explica la física del movimiento (punto de apoyo, palanca).""";"Tema: Representación y vocabulario. 
+
+Descripción: El docente menciona un animal. Todos lo imitan. Los mayores escriben una oración describiendo cómo se mueve. Los pequeños nombran las partes del cuerpo que más usaron."
+31;Posturas corporales;Activacion;Corporal;Grupo inquieto o disperso, Poco tiempo disponible, Inicio de jornada;Adoptan posiciones que representan conceptos o estados de ánimo.;Adoptan posiciones que representan conceptos o estados de ánimo.;¿Qué sintieron en esa posición? ¿Por qué eligieron esa postura?;"Tema: Emociones. 
+
+Descripción: ""Vamos a poner el cuerpo contento. ¿Cómo se para alguien feliz? ¿Y ahora el cuerpo triste? ¿Cómo cambia?""";"Tema: La prehistoria. 
+
+Descripción: ""Vamos a representar la evolución humana. Agachen el cuerpo como si fueran Australopithecus. Ahora, poco a poco, vayan enderezándose hasta llegar al Homo Sapiens. ¿Cómo cambió la postura?""";"Tema: Escultura griega. 
+
+Descripción: ""Observen la imagen de una escultura griega clásica (El Discóbolo). Intenten adoptar esa misma postura. ¿Qué tensiones sienten en el cuerpo? ¿Qué expresa esa posición?""";"Tema: Estados de ánimo. 
+
+Descripción: ""Pónganse tristes."" ""Pónganse felices."" Los pequeños lo hacen. Los mayores describen qué cambia en el cuerpo al cambiar de ánimo."
+32;Saludo temático;Activacion;Corporal;Grupo inquieto o disperso, Poco tiempo disponible, Inicio de jornada;Al entrar al aula o iniciar la clase, se saludan de una manera especial relacionada con el tema.;Al entrar al aula o iniciar la clase, se saludan de una manera especial relacionada con el tema.;¿Cómo se sintieron con ese saludo? ¿Qué les hizo pensar?;"Tema: Animales. 
+
+Descripción: ""Hoy nos saludaremos como pingüinos: caminando con los brazos pegados y dando un 'pico' con la mano.""";"Tema: Países del mundo. 
+
+Descripción: ""Hoy nos saludaremos como en Francia, con un beso en cada mejilla (simulado). Busquen a un compañero y digan 'Bonjour'.""";"Tema: Historia - Antigua Roma. 
+
+Descripción: ""Al entrar, saluden como senadores romanos, con el brazo extendido y diciendo 'Ave' al cruzarse con un compañero durante el primer minuto de clase.""";"Tema: Saludos del mundo. 
+
+Descripción: Todos se saludan como en diferentes culturas. Los pequeños imitan, los grandes dicen el país correspondiente."
+33;El termómetro humano;Activacion;Corporal;Grupo inquieto o disperso, Poco tiempo disponible, Inicio de jornada;Se ubican en diferentes lugares del aula según su grado de acuerdo o conocimiento.;Se ubican en diferentes lugares del aula según su grado de acuerdo o conocimiento.;¿Por qué te ubicaste allí? ¿Alguien cambió de lugar al escuchar a otros?;"Tema: Gustos personales. 
+
+Descripción: ""Este lado del salón es 'me encanta', este otro 'no me gusta nada'. Yo digo: 'helado'. ¡Ubíquense según lo que sientan!""";"Tema: Creencias. 
+
+Descripción: ""Vamos a leer algunas afirmaciones. Si están muy de acuerdo, van a la ventana; si están muy en desacuerdo, van a la puerta. Afirmación: 'Los perros son mejores mascotas que los gatos'.""";"Tema: Debate ético. 
+
+Descripción: ""Vamos a ubicarnos en una línea imaginaria. Extremo izquierdo: 'Totalmente de acuerdo'. Extremo derecho: 'Totalmente en desacuerdo'. Afirmación: 'La tecnología nos hace más libres'. Ubíquense y defiendan su posición.""";"Tema: Gustos y preferencias. 
+
+Descripción: ""¿Les gusta la sopa?"" Se ubican en un lado (sí) u otro (no). Los pequeños cuentan cuántos hay en cada lado. Los grandes registran los datos."
+34;Representación congelada;Activacion;Corporal;Grupo inquieto o disperso, Poco tiempo disponible, Inicio de jornada;En grupos, crean una imagen estática (escultura colectiva) que representa un concepto.;En grupos, crean una imagen estática (escultura colectiva) que representa un concepto.;¿Qué están representando? ¿Por qué eligieron esas posiciones?;"Tema: La familia. 
+
+Descripción: ""En grupos de 3, van a hacer una estatua de una familia. Pueden ser padres, hijos, abuelos. ¡A congelarse!""";"Tema: Ecosistemas. 
+
+Descripción: ""Cada grupo representa un ecosistema congelado. Unos serán el árbol, otros el río, otros los animales. Al contar hasta 3, ¡todos cobran vida y se mueven como en su ecosistema!""";"Tema: Obras de arte famosas. 
+
+Descripción: ""Cada grupo deberá recrear una pintura famosa como una 'foto viva' congelada. Deben estudiar la posición, la mirada y la relación entre personajes. Luego, los demás adivinarán qué obra es.""";"Tema: Escenas cotidianas. 
+
+Descripción: Grupos representan una escena (el desayuno, el recreo). Los pequeños participan con acciones simples. Los grandes diseñan la escena y asignan roles."
+35;Caminata con propósito;Activacion;Corporal;Grupo inquieto o disperso, Poco tiempo disponible, Inicio de jornada;Caminan por el aula mientras piensan en una pregunta, y al detenerse comparten.;Caminan por el aula mientras piensan en una pregunta, y al detenerse comparten.;¿Qué pensaban mientras caminaban? ¿A qué conclusión llegaron?;"Tema: Preguntas personales. 
+
+Descripción: ""Vamos a caminar despacio por el salón mientras piensan: '¿Cuál es su comida favorita?' Cuando yo aplauda, se sientan y le dicen a su compañero lo que pensaron.""";"Tema: Solución de problemas. 
+
+Descripción: ""Caminen en silencio mientras piensan cómo resolverían este problema: 'Si tienes 12 caramelos y los quieres repartir entre 4 amigos, ¿cuántos le das a cada uno?' Al aplauso, siéntense y compartan.""";"Tema: Filosofía. 
+
+Descripción: ""Caminen lentamente por el aula mientras reflexionan: '¿Qué significa ser libre?' Concéntrense en sus propias ideas. Al escuchar la campana, siéntense y escriban una palabra que sintetice su reflexión.""";"Tema: Preguntas para todos. 
+
+Descripción: Caminan pensando una pregunta. Los pequeños responden con dibujo o palabra. Los grandes responden con frase completa."
+36;El espejo;Activacion;Corporal;Grupo inquieto o disperso, Poco tiempo disponible, Inicio de jornada;En parejas, uno hace movimientos lentos y el otro los imita como si fuera su reflejo.;En parejas, uno hace movimientos lentos y el otro los imita como si fuera su reflejo.;¿Qué sintieron al ser el espejo? ¿Fue fácil o difícil seguir el ritmo?;"Tema: Coordinación. 
+
+Descripción: ""En parejas, uno será la persona y el otro el espejo. Muévanse despacio para que el espejo los pueda seguir. ¡Vamos a intentarlo!""";"Tema: Simetría (Matemáticas). 
+
+Descripción: ""Van a representar la simetría. Uno hace una figura con su cuerpo. Su compañero, como espejo, debe hacer la figura simétrica. ¿Qué ocurre si levanto la mano derecha?""";"Tema: Comunicación no verbal. 
+
+Descripción: ""En parejas, van a comunicar emociones solo con gestos. Uno hace una expresión facial, el otro debe imitarla exactamente. Luego, intercambien roles. ¿Qué emociones fueron más fáciles de imitar?""";"Tema: Coordinación y atención. 
+
+Descripción: En pareja de un pequeño y un grande. El grande hace movimientos lentos, el pequeño imita. Luego cambian."
+37;Check-in emocional;Activacion;Emocional;Inicio de jornada;Cada estudiante expresa brevemente cómo llega a clase (emoción, energía).;Cada estudiante expresa brevemente cómo llega a clase (emoción, energía).;¿Cómo están hoy? ¿Qué necesitan para poder aprender?;"Tema: Reconocimiento emocional. 
+
+Descripción: (Mostrar caritas de emociones). ""Señalen cómo se sienten hoy: ¿contentos, cansados, tristes?""";"Tema: Autoconocimiento. 
+
+Descripción: ""Del 1 al 5, ¿cómo está su energía hoy para aprender? Levanten los dedos. ¿Alguien quiere compartir por qué?""";"Tema: Inteligencia emocional. 
+
+Descripción: ""En una palabra, digan cómo se sienten hoy. Luego, en parejas, compartan brevemente por qué. Aprendamos a nombrar nuestras emociones.""";"Tema: Emociones. 
+
+Descripción: Muestran con caritas cómo se sienten. Los pequeños eligen la carita. Los grandes explican por qué se sienten así."
+38;Frase del día;Activacion;Emocional;Inicio de jornada;Escribimos una frase motivadora o reflexiva en el pizarrón para iniciar la jornada.;Escribimos una frase motivadora o reflexiva en el pizarrón para iniciar la jornada.;¿Qué les hace pensar esta frase? ¿Cómo la aplicarían hoy?;"Tema: Motivación. 
+
+Descripción: (Frase: ""Hoy va a ser un gran día""). ""¿Qué cosas buenas pueden pasar hoy?""";"Tema: Esfuerzo. 
+
+Descripción: (Frase: ""El éxito es la suma de pequeños esfuerzos repetidos día tras día""). ""¿Qué significa para ustedes esta frase?""";"Tema: Pensamiento crítico. 
+
+Descripción: (Frase: ""Piensa por ti mismo""). ""¿Por qué será importante pensar por uno mismo? ¿Cuándo es más difícil hacerlo?""";"Tema: Frases simples. 
+
+Descripción: (Frase: ""Compartir es bueno""). Los pequeños dibujan algo que compartieron. Los grandes escriben por qué es bueno compartir."
+39;Música de ambiente;Activacion;Emocional;Inicio de jornada;Ponemos música de fondo mientras los estudiantes ingresan y se preparan.;Ponemos música de fondo mientras los estudiantes ingresan y se preparan.;¿Cómo les hace sentir esta música? ¿Para qué tipo de trabajo nos prepara?;"Tema: Clima emocional. 
+
+Descripción: (Música alegre infantil). ""¿Cómo nos hace sentir esta música? ¿Nos da energía?""";"Tema: Concentración. 
+
+Descripción: (Música instrumental suave). ""Esta música nos va a ayudar a concentrarnos hoy. Escúchenla mientras se preparan.""";"Tema: Análisis musical. 
+
+Descripción: (Música clásica - Mozart). ""Escuchen esta pieza. ¿Qué emociones les transmite? ¿Qué instrumentos identifican? ¿Por qué creen que se dice que esta música ayuda a estudiar?""";"Tema: Música y emociones. 
+
+Descripción: Escuchan música. Los pequeños bailan o se mueven. Los grandes identifican si es música alegre o triste."
+40;Lluvia de ideas;Recueracion de contenido;Verbales Orales;;Los estudiantes dicen libremente todo lo que saben sobre un tema mientras el docente anota en el pizarrón.;Los estudiantes dicen libremente todo lo que saben sobre un tema mientras el docente anota en el pizarrón.;¿Qué saben sobre...? ¿Qué más? ¿Alguien quiere agregar algo diferente?;"Tema: Los medios de transporte. 
+
+Descripción: ""Vamos a decir todos los medios de transporte que conozcamos. ¡Yo empiezo! Carro... ¿Qué más?""";"Tema: Los animales vertebrados. 
+
+Descripción: ""En 2 minutos, digamos todos los animales que tengan columna vertebral que se nos ocurran. Yo voy anotando en el tablero.""";"Tema: La Segunda Guerra Mundial. 
+
+Descripción: ""Lluvia de ideas: ¿Qué palabras, fechas, personajes o eventos asocian con la Segunda Guerra Mundial? Todo vale, lo anotamos.""";"Tema: Animales. 
+
+Descripción: Los pequeños nombran animales. Los grandes los clasifican en domésticos y salvajes mientras el docente anota."
+41;Preguntas exploratorias;Recueracion de contenido;Verbales Orales;;El docente formula preguntas abiertas para indagar conocimientos específicos.;El docente formula preguntas abiertas para indagar conocimientos específicos.;¿Qué entienden por...? ¿Cómo explicarían...? ¿Qué saben acerca de...?;"Tema: La familia. 
+
+Descripción: ""¿Quiénes conforman una familia? ¿Todas las familias son iguales?""";"Tema: La fotosíntesis. 
+
+Descripción: ""¿Qué creen que le pasa a una planta si la dejamos en un armario oscuro por varias semanas? ¿Por qué?""";"Tema: Democracia. 
+
+Descripción: ""Cuando escuchan la palabra 'democracia', ¿qué ideas les vienen a la mente? ¿Cómo la definirían con sus propias palabras?""";"Tema: Alimentos. 
+
+Descripción: ""¿Qué alimentos son saludables?"" Los pequeños nombran frutas. Los grandes explican por qué son saludables."
+42;Conversatorio dirigido;Recueracion de contenido;Verbales Orales;;Diálogo guiado donde los estudiantes comparten lo que saben de manera estructurada.;Diálogo guiado donde los estudiantes comparten lo que saben de manera estructurada.;¿Alguien quiere compartir lo que sabe? ¿Quién tiene una idea diferente?;"Tema: Las profesiones. 
+
+Descripción: ""Hablemos de lo que hacen nuestros papás. ¿En qué trabajan? ¿Qué saben de ese trabajo?""";"Tema: La Independencia. 
+
+Descripción: ""Conversemos sobre lo que saben de la Independencia de nuestro país. ¿Qué personajes conocen? ¿Qué recuerdan de lo que han escuchado?""";"Tema: Redes sociales. 
+
+Descripción: ""Hablemos sobre las redes sociales que usan. ¿Qué saben de sus beneficios y sus riesgos? Compartamos experiencias.""";"Tema: Oficios. 
+
+Descripción: Los pequeños dicen oficios que conocen. Los grandes describen en qué consiste cada uno."
+43;Entrevista entre pares;Recueracion de contenido;Verbales Orales;;En parejas, se hacen preguntas sobre el tema y luego comparten lo que descubrieron.;En parejas, se hacen preguntas sobre el tema y luego comparten lo que descubrieron.;¿Qué te contó tu compañero? ¿Coincidían sus saberes?;"Tema: Los juegos tradicionales. 
+
+Descripción: ""Pregúntenle a su compañero: ¿A qué jugaban tus papás cuando eran niños? Luego me cuentan.""";"Tema: La alimentación. 
+
+Descripción: ""En parejas, pregúntense: ¿Qué comidas típicas conocen de nuestra región? Anoten las que no sabían.""";"Tema: Tradiciones culturales. 
+
+Descripción: ""Entrevisten a su compañero sobre las tradiciones de su familia o región. ¿Qué festividades celebran? ¿Cómo las celebran?""";"Tema: Juegos. 
+
+Descripción: Los pequeños preguntan: ""¿A qué jugabas?"" Los grandes responden y luego explican el juego."
+44;Ronda de saberes;Recueracion de contenido;Verbales Orales;;Por turnos, cada estudiante menciona algo que sabe sobre el tema (puede ser con un objeto que pasa).;Por turnos, cada estudiante menciona algo que sabe sobre el tema (puede ser con un objeto que pasa).;¿Qué te gustaría compartir hoy? ¿Alguien más sabe algo sobre eso?;"Tema: El agua. 
+
+Descripción: ""Vamos pasando esta botella de agua. Quien la recibe dice un lugar donde encontramos agua.""";"Tema: Figuras geométricas. 
+
+Descripción: ""Pasamos esta figura. Cada uno dice un objeto del salón que tenga esa forma.""";"Tema: Literatura. 
+
+Descripción: ""Pasamos este libro. Cada uno menciona un libro que haya leído o una historia que conozca. Puede ser cuento, novela, leyenda.""";"Tema: Animales. 
+
+Descripción: Pasan una pelota. Los pequeños dicen un animal. Los grandes dicen si es vertebrado o invertebrado."
+45;Relato o anécdota;Recueracion de contenido;Verbales Orales;;Los estudiantes cuentan experiencias personales relacionadas con el tema.;Los estudiantes cuentan experiencias personales relacionadas con el tema.;¿Alguien ha vivido algo parecido? ¿Qué pasó?;"Tema: El médico. 
+
+Descripción: ""¿Alguna vez han ido al médico? ¿Qué les hicieron? ¿Cómo se sintieron?""";"Tema: Los volcanes. 
+
+Descripción: ""¿Alguien ha visto un volcán en persona o en videos? ¿Qué recuerdan de esa experiencia?""";"Tema: Migración. 
+
+Descripción: ""¿Alguien en su familia ha tenido que migrar a otra ciudad o país? Si se sienten cómodos compartiendo, ¿cómo fue esa experiencia?""";"Tema: Paseos familiares. 
+
+Descripción: Los pequeños cuentan a dónde fueron de paseo. Los grandes ubican ese lugar en el mapa."
+46;Palabra generadora;Recueracion de contenido;Verbales Orales;;Se dice una palabra clave y los estudiantes expresan todo lo que les sugiere.;Se dice una palabra clave y los estudiantes expresan todo lo que les sugiere.;¿Qué les viene a la mente con esta palabra? ¿Por qué?;"Tema: La amistad. 
+
+Descripción: ""Yo digo 'amigo'. ¿Qué se les viene a la cabeza?""";"Tema: La selva. 
+
+Descripción: ""Yo digo 'selva'. ¿Qué palabras, colores, sonidos, olores imaginan?""";"Tema: Libertad. 
+
+Descripción: ""Yo digo 'libertad'. En una palabra o frase corta, ¿qué significa para ustedes? Luego compartimos.""";"Tema: La playa. 
+
+Descripción: Los pequeños dicen palabras (mar, arena). Los grandes forman frases con esas palabras."
+47;Completa la frase;Recueracion de contenido;Verbales Orales;;El docente dice una frase incompleta y los estudiantes la terminan.;El docente dice una frase incompleta y los estudiantes la terminan.;"""La lluvia sirve para..."" ¿Cómo lo completarían?";"Tema: El sol. 
+
+Descripción: ""El sol nos da..."" ¿Qué nos da el sol?""";"Tema: Los árboles. 
+
+Descripción: ""Los árboles son importantes porque..."" Completemos.""";"Tema: La tecnología. 
+
+Descripción: ""La tecnología ha cambiado nuestras vidas porque antes..."" Completen la frase.""";"Tema: El agua. 
+
+Descripción: ""El agua sirve para..."" Los pequeños dicen usos cotidianos. Los grandes mencionan usos en la industria."
+48;Mesa redonda de saberes;Recueracion de contenido;Grupales Colaborativas;;Grupos pequeños discuten lo que saben y luego un relator comparte con toda la clase.;Grupos pequeños discuten lo que saben y luego un relator comparte con toda la clase.;¿A qué conclusiones llegaron en el grupo? ¿Hubo diferencias?;"Tema: Los oficios. 
+
+Descripción: ""En grupos, hablen sobre los oficios que conocen. Luego un compañero cuenta lo que hablaron.""";"Tema: El sistema solar. 
+
+Descripción: ""En grupos, hagan una lista de todo lo que saben sobre los planetas. Luego comparamos las listas.""";"Tema: Globalización. 
+
+Descripción: ""En grupos, discutan: ¿Qué saben sobre la globalización? ¿Qué aspectos positivos y negativos identifican? Luego compartimos.""";"Tema: Profesiones. 
+
+Descripción: Grupo mixto: los pequeños dibujan profesiones, los grandes escriben sus funciones. Luego comparten."
+49;1-2-4 (Estructura cooperativa);Recueracion de contenido;Grupales Colaborativas;;Piensan individualmente, luego en pares, luego en grupo de 4, y comparten.;Piensan individualmente, luego en pares, luego en grupo de 4, y comparten.;Individual: piensa. Pares: compartan. Grupo: acuerden.;"Tema: Los colores. 
+
+Descripción: ""1: Piensa en tu color favorito. 2: Dile a tu compañero cuál es. 4: En grupo, vean cuál es el color que más se repite.""";"Tema: Las plantas. 
+
+Descripción: ""1: Piensa en lo que las plantas necesitan para vivir. 2: Comparte con tu compañero. 4: Hagan una lista común.""";"Tema: Democracia. 
+
+Descripción: ""1: Piensa en una característica de la democracia. 2: Compartan y complementen. 4: Construyan una definición colectiva.""";"Tema: Animales. 
+
+Descripción: 1: Piensa un animal. 2: Compartan. 4: Clasifíquenlos en domésticos y salvajes (los grandes ayudan a los pequeños)."
+50;Folio giratorio;Recueracion de contenido;Grupales Colaborativas;;Un papel va pasando por el grupo y cada uno escribe lo que sabe.;Un papel va pasando por el grupo y cada uno escribe lo que sabe.;¿Qué más podemos agregar? ¿Alguien tiene algo diferente?;"Tema: Frutas. 
+
+Descripción: ""Este papel va pasando. Cada uno escribe el nombre de una fruta que le guste.""";"Tema: Verbos. 
+
+Descripción: ""En esta hoja, cada uno escribe un verbo que recuerde. Cuando pase por todos, veremos cuántos tenemos.""";"Tema: Conceptos de física. 
+
+Descripción: ""Esta hoja va rotando. Cada uno escribe un concepto de física que recuerde (fuerza, energía, movimiento...). Luego los organizaremos.""";"Tema: Alimentos. 
+
+Descripción: Los pequeños dibujan alimentos. Los grandes escriben sus nombres. El folio gira y todos aportan."
+51;Cadena de preguntas;Recueracion de contenido;Grupales Colaborativas;;Un estudiante responde y luego hace una pregunta al siguiente.;Un estudiante responde y luego hace una pregunta al siguiente.;¿Qué pregunta le harías a tu compañero?;"Tema: Los números. 
+
+Descripción: ""Yo pregunto: ¿Cuántos años tienes? El que responde, le pregunta al compañero de al lado: ¿Cuántos hermanos tienes?""";"Tema: Tablas de multiplicar. 
+
+Descripción: ""Yo: 3x4. El que responde (12) le pregunta al siguiente: 5x6. Así sucesivamente.""";"Tema: Fechas históricas. 
+
+Descripción: ""Yo: ¿En qué año se descubrió América? El que responde (1492) pregunta al siguiente: ¿En qué año fue la Independencia?""";"Tema: Preguntas variadas. 
+
+Descripción: Preguntas adaptadas: a los pequeños se les pregunta por colores, a los grandes por operaciones."
+52;Expertos por grupos;Recueracion de contenido;Grupales Colaborativas;;Cada grupo se especializa en un subtema y luego comparte.;Cada grupo se especializa en un subtema y luego comparte.;¿Qué descubrieron en su grupo? ¿Qué pueden enseñarnos?;"Tema: Animales. 
+
+Descripción: ""Grupo 1: animales de la granja. Grupo 2: animales de la selva. Cada grupo cuenta lo que sabe de esos animales.""";"Tema: Regiones naturales. 
+
+Descripción: ""Cada grupo investiga (con lo que sabe) una región: costa, sierra, selva. Luego comparten características.""";"Tema: Corrientes literarias. 
+
+Descripción: ""Cada grupo recupera lo que sabe sobre un movimiento: Romanticismo, Realismo, Modernismo. Luego exponen.""";"Tema: Animales por hábitat. 
+
+Descripción: Grupo 1 (pequeños) dibujan animales de la granja. Grupo 2 (grandes) escriben características de esos animales. Luego intercambian."
+53;Ficha de saberes previos;Recueracion de contenido;Escritas;;Hoja con preguntas abiertas que responden individualmente.;Hoja con preguntas abiertas que responden individualmente.;Responde lo que sepas, no importa si no estás seguro.;"Tema: Mi cuerpo. 
+
+Descripción: Hoja con un dibujo del cuerpo para señalar partes: ""Señala la cabeza, las manos, los pies.""";"Tema: Fracciones. 
+
+Descripción: ""¿Qué es una fracción? ¿Has visto fracciones en la vida diaria? ¿Dónde? Dibuja un ejemplo.""";"Tema: Célula. 
+
+Descripción: ""Dibuja una célula con las partes que recuerdes. Escribe lo que sepas sobre sus funciones.""";"Tema: Partes del cuerpo. 
+
+Descripción: Ficha con dibujo: los pequeños señalan partes básicas, los grandes escriben funciones."
+54;Listado inicial;Recueracion de contenido;Escritas;;Escriben todo lo que saben sobre un tema en forma de lista.;Escriben todo lo que saben sobre un tema en forma de lista.;Escribe todas las palabras que asocies con...;"Tema: La Navidad. 
+
+Descripción: ""Escribe todo lo que se te ocurra sobre la Navidad: palabras, personas, cosas.""";"Tema: El agua. 
+
+Descripción: ""Haz una lista de todos los usos del agua que se te ocurran.""";"Tema: Revolución Francesa. 
+
+Descripción: ""Escribe una lista de palabras, fechas, personajes y conceptos que asocies con la Revolución Francesa.""";"Tema: La Navidad. 
+
+Descripción: Los pequeños dibujan elementos navideños. Los grandes escriben listas de tradiciones."
+55;Respuesta a pregunta abierta;Recueracion de contenido;Escritas;;Responden por escrito una pregunta que invita a desarrollar ideas.;Responden por escrito una pregunta que invita a desarrollar ideas.;Explica con tus palabras: ¿Qué es...?;"Tema: La amistad. 
+
+Descripción: ""Dibuja a tu mejor amigo y escribe por qué es tu amigo.""";"Tema: El reciclaje. 
+
+Descripción: ""Explica con tus palabras qué es reciclar y por qué es importante.""";"Tema: Identidad. 
+
+Descripción: ""¿Qué significa para ti la palabra 'identidad'? ¿Qué elementos crees que construyen la identidad de una persona?""";"Tema: Amistad. 
+
+Descripción: Los pequeños dibujan a un amigo. Los grandes escriben qué valores representa la amistad."
+56;Frases incompletas;Recueracion de contenido;Escritas;;Completar oraciones que el docente entrega en una hoja.;Completar oraciones que el docente entrega en una hoja.;"""Cuando pienso en... recuerdo...""";"Tema: La familia. 
+
+Descripción: ""Mi mamá se llama... Mi papá se llama... En mi familia también viven...""";"Tema: Vacaciones. 
+
+Descripción: ""Lo que más me gusta de las vacaciones es... En mis vacaciones pasadas yo...""";"Tema: Proyecto de vida. 
+
+Descripción: ""En cinco años me veo... Para lograrlo necesito... Mis mayores fortalezas son...""";"Tema: Familia. 
+
+Descripción: Frases simples para pequeños, más complejas para grandes en la misma hoja."
+57;Preguntas que tengo;Recueracion de contenido;Escritas;;Escriben no lo que saben, sino lo que les gustaría saber (activa también la motivación).;Escriben no lo que saben, sino lo que les gustaría saber (activa también la motivación).;¿Qué te gustaría aprender sobre...? ¿Qué preguntas tienes?;"Tema: Los dinosaurios. 
+
+Descripción: ""Dibuja una pregunta que tengas sobre los dinosaurios.""";"Tema: El universo. 
+
+Descripción: ""Escribe tres preguntas que te gustaría responder sobre el universo.""";"Tema: Filosofía. 
+
+Descripción: ""Escribe las preguntas fundamentales que te haces sobre la vida, el ser humano o el conocimiento.""";"Tema: Animales. 
+
+Descripción: Los pequeños dibujan una pregunta (¿por qué el elefante tiene trompa?). Los grandes la escriben y tratan de responder."
+58;Cuaderno viajero de saberes;Recueracion de contenido;Escritas;;Un cuaderno que pasa por las casas y cada familia aporta saberes.;Un cuaderno que pasa por las casas y cada familia aporta saberes.;En familia, escriban lo que saben sobre...;"Tema: Recetas familiares. 
+
+Descripción: ""El cuaderno viajero va a cada casa. Con ayuda de la familia, escriban una receta que les guste.""";"Tema: Historias familiares. 
+
+Descripción: ""En el cuaderno viajero, escriban una historia o anécdota familiar interesante que quieran compartir.""";"Tema: Saberes ancestrales. 
+
+Descripción: ""Investiguen con sus familias sobre algún saber tradicional (medicina natural, artesanía, creencias) y escríbanlo en el cuaderno.""";"Tema: Recetas. 
+
+Descripción: Los pequeños dibujan el plato. Los grandes escriben la receta con ayuda de la familia."
+59;Mapa mental inicial;Recueracion de contenido;Gráficas Visuales;;En el centro del tablero o papel, escriben el tema y alrededor dibujan o escriben asociaciones.;En el centro del tablero o papel, escriben el tema y alrededor dibujan o escriben asociaciones.;¿Qué ramas podemos agregar? ¿Cómo conectamos estas ideas?;"Tema: La casa. 
+
+Descripción: ""En el centro dibujamos una casa. Alrededor, ustedes me dicen qué hay en una casa (puertas, ventanas, habitaciones) y yo lo dibujo.""";"Tema: La ciudad. 
+
+Descripción: ""Hacemos un mapa mental de la ciudad. En el centro 'Ciudad', alrededor vamos poniendo: lugares, personas, transportes, problemas.""";"Tema: Globalización. 
+
+Descripción: ""Construyamos un mapa mental sobre globalización. En el centro la palabra, alrededor: economía, cultura, tecnología, medio ambiente, etc.""";"Tema: La escuela. 
+
+Descripción: Mapa mental colectivo. Los pequeños dibujan elementos (salones, patio). Los grandes escriben conceptos (aprendizaje, convivencia)."
+60;Constelación de ideas;Recueracion de contenido;Gráficas Visuales;;Como un mapa mental pero más libre, sin jerarquías, solo ideas conectadas.;Como un mapa mental pero más libre, sin jerarquías, solo ideas conectadas.;¿Qué ideas se conectan? ¿Podemos unir algunas?;"Tema: Juguetes. 
+
+Descripción: ""Escribimos 'juguetes' en el centro y alrededor vamos poniendo todos los juguetes que se nos ocurran, conectándolos con líneas.""";"Tema: Deportes. 
+
+Descripción: ""Hagamos una constelación de deportes. En el centro 'deportes', alrededor todos los que conozcan, y conecten los que se parezcan.""";"Tema: Filosofía. 
+
+Descripción: ""Constelación de ideas sobre 'conocimiento'. ¿Qué conceptos, filósofos, preguntas asociamos? Conecten libremente.""";"Tema: Juguetes. 
+
+Descripción: Los pequeños dibujan juguetes alrededor. Los grandes escriben sus nombres y los conectan."
+61;Dibujo libre;Recueracion de contenido;Gráficas Visuales;;Expresan mediante dibujo lo que saben sobre un tema.;Expresan mediante dibujo lo que saben sobre un tema.;Dibuja lo que sabes sobre...;"Tema: La playa. 
+
+Descripción: ""Dibujen lo que más les gusta de la playa.""";"Tema: Ecosistemas. 
+
+Descripción: ""Dibuja un ecosistema que conozcas e identifica sus elementos (animales, plantas, agua, etc.).""";"Tema: Célula. 
+
+Descripción: ""Dibuja una célula con las partes que recuerdes y escribe sus posibles funciones.""";"Tema: La playa. 
+
+Descripción: Todos dibujan. Los pequeños muestran su dibujo. Los grandes explican qué ecosistema es y sus características."
+62;Collage de saberes;Recueracion de contenido;Gráficas Visuales;;Recortan y pegan imágenes que representan lo que saben.;Recortan y pegan imágenes que representan lo que saben.;Busquen imágenes que representen lo que saben sobre...;"Tema: Alimentos. 
+
+Descripción: ""Recorten de revistas alimentos que les gusten y péguenlos en una hoja.""";"Tema: Medios de comunicación. 
+
+Descripción: ""Hagan un collage con imágenes de diferentes medios de comunicación que conozcan.""";"Tema: Problemas ambientales. 
+
+Descripción: ""En grupos, hagan un collage que represente los principales problemas ambientales que conocen y sus causas.""";"Tema: Alimentos. 
+
+Descripción: Los pequeños recortan alimentos. Los grandes los clasifican en saludables y no saludables."
+63;Cartelera colectiva;Recueracion de contenido;Gráficas Visuales;;En una cartelera grande, todos aportan dibujos, palabras, recortes.;En una cartelera grande, todos aportan dibujos, palabras, recortes.;Todos pueden venir a pegar o dibujar algo.;"Tema: Los animales. 
+
+Descripción: ""Tenemos esta cartelera grande. Cada uno puede dibujar o pegar el animal que más le guste.""";"Tema: Nuestra comunidad. 
+
+Descripción: ""Vamos a construir entre todos una cartelera sobre nuestra comunidad: lugares, personas, tradiciones.""";"Tema: Derechos humanos. 
+
+Descripción: ""Construyamos una cartelera colectiva sobre derechos humanos. Cada grupo aporta un derecho con imagen y texto.""";"Tema: La comunidad. 
+
+Descripción: Cartelera común. Los pequeños dibujan lugares. Los grandes escriben sus nombres y funciones."
+64;Línea de tiempo de saberes;Recueracion de contenido;Gráficas Visuales;;Ubican en una línea eventos o conocimientos que tienen sobre un tema.;Ubican en una línea eventos o conocimientos que tienen sobre un tema.;¿Qué pasó primero? ¿Y después?;"Tema: Mi vida. 
+
+Descripción: ""Dibujen una línea y pongan: cuándo nacieron, cuándo empezaron el colegio, ahora.""";"Tema: Historia personal. 
+
+Descripción: ""Hagan una línea de tiempo de su vida con los eventos más importantes que recuerden.""";"Tema: Historia universal. 
+
+Descripción: ""Construyan una línea de tiempo con los eventos históricos que recuerden, ubicándolos aproximadamente en la época correcta.""";"Tema: Historia familiar. 
+
+Descripción: Línea de tiempo: los pequeños dibujan eventos (cuando nací). Los grandes escriben fechas y eventos familiares."
+65;Diagrama de Venn inicial;Recueracion de contenido;Gráficas Visuales;;Comparan dos conceptos usando círculos que se intersectan.;Comparan dos conceptos usando círculos que se intersectan.;¿Qué tienen en común? ¿Qué es diferente?;"Tema: Perros y gatos. 
+
+Descripción: ""En un círculo lo de perros, en otro lo de gatos. En el medio lo que tienen igual.""";"Tema: Ciudad y campo. 
+
+Descripción: ""Comparen la ciudad y el campo. ¿Qué tiene cada uno? ¿Qué tienen en común?""";"Tema: Democracia y dictadura. 
+
+Descripción: ""Construyan un diagrama de Venn comparando democracia y dictadura: características únicas y comunes.""";"Tema: Animales domésticos y salvajes. 
+
+Descripción: Los pequeños dibujan animales en cada lado. Los grandes escriben características en el centro."
+66;Juego de preguntas (Quiz);Recueracion de contenido;Lúdicas;;Juego rápido de preguntas con puntos o competencia amable.;Juego rápido de preguntas con puntos o competencia amable.;¿Quién sabe la respuesta? Siguiente pregunta...;"Tema: Colores. 
+
+Descripción: ""¿De qué color es el cielo? ¿Y el pasto? ¿Y el sol?""";"Tema: Tablas de multiplicar. 
+
+Descripción: ""Juguemos a la 'guerra de tablas'. Por equipos, voy preguntando y el que responde gana un punto.""";"Tema: Cultura general. 
+
+Descripción: ""Quiz rápido por equipos: capital de Francia, autor de El Quijote, año de la Independencia...""";"Tema: Preguntas variadas. 
+
+Descripción: Preguntas a los pequeños: colores, números. A los grandes: operaciones, fechas. Todos suman para su equipo."
+67;Bingo de saberes;Recueracion de contenido;Lúdicas;;Tarjetas con conceptos, el docente dice definiciones y marcan.;Tarjetas con conceptos, el docente dice definiciones y marcan.;Tengan sus cartones. Voy diciendo descripciones.;"Tema: Animales. 
+
+Descripción: ""Cartón con dibujos de animales. Yo digo: 'Hace guau' y ustedes marcan al perro.""";"Tema: Figuras geométricas. 
+
+Descripción: ""Cartón con figuras. Yo digo: 'Tiene tres lados' y marcan el triángulo.""";"Tema: Personajes históricos. 
+
+Descripción: ""Cartón con personajes. Yo digo: 'Fue el libertador de varios países sudamericanos' y marcan a Bolívar o San Martín.""";"Tema: Animales. 
+
+Descripción: Cartón con imágenes para pequeños, con palabras para grandes. El docente describe, todos marcan."
+68;Adivinanzas;Recueracion de contenido;Lúdicas;;Presentan adivinanzas cuyas respuestas son conceptos del tema.;Presentan adivinanzas cuyas respuestas son conceptos del tema.;"A ver si adivinan: ""Blanca por dentro, verde por fuera, si quieres que te lo diga, espera."" (la pera)";"Tema: Frutas. 
+
+Descripción: ""Oro parece, plata no es. ¿Qué es?"" (el plátano)";"Tema: Oficios. 
+
+Descripción: ""Lleva casco y uniforme, apaga el fuego con manguera. ¿Quién es?"" (bombero)";"Tema: Conceptos científicos. 
+
+Descripción: ""No tiene carga, pero está en el núcleo. Sin mí no habría identidad del átomo. ¿Qué soy?"" (neutrón)";"Tema: Adivinanzas. 
+
+Descripción: Adivinanzas simples para pequeños, complejas para grandes. Todos participan."
+69;Sopa de letras;Recueracion de contenido;Lúdicas;;Encuentran palabras relacionadas con el tema en una sopa de letras.;Encuentran palabras relacionadas con el tema en una sopa de letras.;Busquen las palabras de la lista en la sopa.;"Tema: Colores. 
+
+Descripción: ""Encuentren en la sopa los nombres de los colores.""";"Tema: Partes del cuerpo. 
+
+Descripción: ""Busquen en la sopa las partes del cuerpo que aparecen en la lista.""";"Tema: Elementos químicos. 
+
+Descripción: ""Encuentren en la sopa los nombres de 10 elementos de la tabla periódica.""";"Tema: Vocabulario básico. 
+
+Descripción: Sopa con imágenes para pequeños (encuentran la palabra que corresponde a la imagen) y lista para grandes."
+70;Crucigrama;Recueracion de contenido;Lúdicas;;Resuelven un crucigrama con conceptos del tema.;Resuelven un crucigrama con conceptos del tema.;Completen el crucigrama con lo que saben.;"Tema: Animales. 
+
+Descripción: ""Crucigrama con dibujos: el dibujo de un perro, escribir perro.""";"Tema: Verbos. 
+
+Descripción: ""Crucigrama con definiciones: 'Acción de comer en pasado'.""";"Tema: Historia. 
+
+Descripción: ""Crucigrama con personajes, fechas y conceptos históricos.""";"Tema: Palabras simples. 
+
+Descripción: Crucigrama con dibujos para pequeños, con definiciones para grandes."
+71;Memoria (pares);Recueracion de contenido;Lúdicas;;Tarjetas para emparejar conceptos con definiciones o imágenes.;Tarjetas para emparejar conceptos con definiciones o imágenes.;Encuentren la pareja de cada concepto.;"Tema: Animales y sonidos. 
+
+Descripción: ""Emparejen el dibujo del animal con el sonido que hace.""";"Tema: Capitales y países. 
+
+Descripción: ""Emparejen cada país con su capital.""";"Tema: Autores y obras. 
+
+Descripción: ""Emparejen cada autor con su obra más conocida.""";"Tema: Animales. 
+
+Descripción: Tarjetas: imagen para pequeños, palabra para grandes. Todos ayudan a emparejar."
+72;¿Quién soy?;Recueracion de contenido;Lúdicas;;Tarjetas en la frente o en la espalda con un concepto, hacen preguntas para adivinar.;Tarjetas en la frente o en la espalda con un concepto, hacen preguntas para adivinar.;Haz preguntas de sí o no para adivinar qué eres.;"Tema: Animales. 
+
+Descripción: ""Tarjeta en la frente con animal. Preguntan: ¿Vivo en la selva? ¿Soy grande?""";"Tema: Personajes históricos. 
+
+Descripción: ""Tarjeta en la espalda con personaje. Por turnos preguntan: ¿Fui militar? ¿Nací en este país?""";"Tema: Conceptos científicos. 
+
+Descripción: ""Tarjeta con concepto (gravedad, átomo, fotosíntesis). Preguntan para adivinar: ¿Es un proceso? ¿Es una fuerza?""";"Tema: Animales y personajes. 
+
+Descripción: Tarjetas con imágenes para pequeños, con palabras para grandes. Juego en parejas mixtas."
+73;La maleta viajera;Recueracion de contenido;Lúdicas;;Una maleta con objetos relacionados llega al aula, los estudiantes exploran y comentan.;Una maleta con objetos relacionados llega al aula, los estudiantes exploran y comentan.;¿Qué habrá en la maleta? ¿Para qué sirve esto?;"Tema: Oficios. 
+
+Descripción: ""Maleta con herramientas: cuchara de palo, martillo de juguete, tijeras. ¿De quién será cada una?""";"Tema: Historia. 
+
+Descripción: ""Maleta con objetos antiguos: teléfono de disco, monedas viejas, una carta. ¿Qué saben de estos objetos?""";"Tema: Arqueología. 
+
+Descripción: ""Maleta con 'restos arqueológicos' (réplicas). Como arqueólogos, ¿qué pueden inferir de la cultura que usó estos objetos?""";"Tema: Objetos cotidianos. 
+
+Descripción: Maleta con objetos. Los pequeños los nombran. Los grandes explican para qué sirven y cómo han cambiado."
+74;Ubicación en el espacio;Recueracion de contenido;Corporales Kinestésicas;;Se ubican en diferentes lugares según su nivel de conocimiento.;Se ubican en diferentes lugares según su nivel de conocimiento.;"Si sabes mucho sobre el tema, ve a la ventana; si sabes poco, a la puerta.";"Tema: Animales. 
+
+Descripción: ""Si tienen mascota en casa, van a la derecha. Si no tienen, a la izquierda.""";"Tema: Fracciones. 
+
+Descripción: ""Si sabes sumar fracciones, ve al fondo; si no, quédate aquí; si estás en medio, al centro.""";"Tema: Filosofía. 
+
+Descripción: ""Ubíquense en una línea según cuánto creen saber sobre filosofía: 0 (nada) a 10 (mucho). Observemos cómo se distribuyen.""";"Tema: Conteo. 
+
+Descripción: ""Si sabes contar hasta 10, aquí. Si sabes hasta 20, allá."" Todos se ubican y cuentan."
+75;Posturas corporales;Recueracion de contenido;Corporales Kinestésicas;;Adoptan posturas que representan conceptos.;Adoptan posturas que representan conceptos.;Muestra con tu cuerpo: ¿cómo es...?;"Tema: Animales. 
+
+Descripción: ""Muestren con su cuerpo un animal. ¡A ver si adivino cuál es!""";"Tema: Emociones. 
+
+Descripción: ""Muestren con el cuerpo cómo es una persona que está: contenta, triste, enojada, cansada.""";"Tema: Esculturas famosas. 
+
+Descripción: ""Representen con su cuerpo una escultura famosa (El Pensador, David, La Venus). Sus compañeros adivinan.""";"Tema: Animales. 
+
+Descripción: Todos representan animales. Los pequeños imitan, los grandes adivinan y dicen características."
+76;Representación congelada;Recueracion de contenido;Corporales Kinestésicas;;En grupos, crean una imagen estática de un concepto.;En grupos, crean una imagen estática de un concepto.;En grupo, hagan una estatua que represente...;"Tema: La familia. 
+
+Descripción: ""En grupos, hagan una estatua de una familia. Unos serán papá, mamá, hijos.""";"Tema: La escuela. 
+
+Descripción: ""Representen una escena congelada de la escuela: en clase, en el recreo, en el comedor.""";"Tema: Eventos históricos. 
+
+Descripción: ""Representen una escena congelada de un evento histórico (la firma de la Independencia, la llegada de los españoles).""";"Tema: Escenas cotidianas. 
+
+Descripción: Grupo mixto: los pequeños hacen acciones simples, los grandes dirigen la escena."
+77;Caminata de saberes;Recueracion de contenido;Corporales Kinestésicas;;Caminan por el aula y al encontrarse con alguien, comparten un saber.;Caminan por el aula y al encontrarse con alguien, comparten un saber.;Camina y cuando te cruces con alguien, comparte algo que sepas.;"Tema: Colores favoritos. 
+
+Descripción: ""Caminen y cuando se crucen, digan su color favorito.""";"Tema: Comidas típicas. 
+
+Descripción: ""Caminen y cuando se encuentren, díganse una comida típica que conozcan.""";"Tema: Conceptos. 
+
+Descripción: ""Caminen. Al encontrarse, compartan un concepto relacionado con el tema y una breve explicación.""";"Tema: Saberes compartidos. 
+
+Descripción: Pequeños y grandes se encuentran. Pequeños dicen una palabra. Grandes la explican."
+78;Las cuatro esquinas;Recueracion de contenido;Corporales Kinestésicas;;Cada esquina tiene una opción, se ubican según su respuesta y explican.;Cada esquina tiene una opción, se ubican según su respuesta y explican.;Ve a la esquina que representa tu respuesta. ¿Por qué elegiste esa?;"Tema: Mascotas. 
+
+Descripción: ""Esquina 1: perro. Esquina 2: gato. Esquina 3: pez. Esquina 4: otra. ¿Cuál es tu mascota favorita?""";"Tema: Estaciones. 
+
+Descripción: ""¿Cuál es tu estación favorita? Ve a la esquina que la representa (verano, invierno, primavera, otoño).""";"Tema: Corrientes de opinión. 
+
+Descripción: ""Frente a esta afirmación: 'La tecnología nos hace más libres'. Esquina 1: totalmente de acuerdo. Esquina 2: de acuerdo. Esquina 3: en desacuerdo. Esquina 4: totalmente en desacuerdo.""";"Tema: Gustos. 
+
+Descripción: Esquinas con imágenes. Los pequeños se ubican. Los grandes explican su elección y ayudan a los pequeños a ubicarse."
+79;El semáforo;Recueracion de contenido;Corporales Kinestésicas;;Tarjetas verdes (sé mucho), amarillas (sé algo), rojas (sé poco) que levantan.;Tarjetas verdes (sé mucho), amarillas (sé algo), rojas (sé poco) que levantan.;Levanten verde si saben mucho, amarilla si algo, roja si poco.;"Tema: Los números. 
+
+Descripción: ""¿Quién sabe contar hasta 10? Levanten verde. ¿Hasta 5? Amarilla. ¿Menos? Roja.""";"Tema: Multiplicaciones. 
+
+Descripción: ""¿Cómo se sienten con las tablas de multiplicar? Verde: las sé todas. Amarilla: me sé algunas. Roja: me cuesta trabajo.""";"Tema: Historia universal. 
+
+Descripción: ""Autoevalúen su conocimiento sobre historia universal. Verde: sé mucho. Amarilla: sé algo. Roja: sé muy poco.""";"Tema: Autoevaluación. 
+
+Descripción: Todos levantan colores según su percepción. Los grandes ayudan a los pequeños a entender la pregunta."
+80;Encuesta digital rápida;Recueracion de contenido;Tecnológicas Digitales;;Usan celulares o tablets para responder una encuesta en tiempo real.;Usan celulares o tablets para responder una encuesta en tiempo real.;Entren al enlace y respondan la pregunta.;"Tema: Preferencias. 
+
+Descripción: ""En sus tablets, escojan su fruta favorita: 🍎 🍌 🍊 🍇""";"Tema: Conocimientos. 
+
+Descripción: ""Respondan en Mentimeter: ¿Qué saben sobre el ciclo del agua?""";"Tema: Opiniones. 
+
+Descripción: ""Accedan a la encuesta y respondan: ¿Cuál creen que es el principal problema ambiental actual? (nube de palabras)""";"Tema: Preferencias. 
+
+Descripción: Los pequeños usan emojis. Los grandes escriben respuestas. Los resultados se ven en tiempo real."
+81;Pizarra colaborativa virtual;Recueracion de contenido;Tecnológicas Digitales;;Escriben en una pizarra digital compartida (Padlet, Jamboard).;Escriben en una pizarra digital compartida (Padlet, Jamboard).;Escriban en la pizarra lo que saben sobre el tema.;"Tema: Animales. 
+
+Descripción: ""En el Padlet, cada uno pega la imagen de su animal favorito.""";"Tema: Ecosistemas. 
+
+Descripción: ""En el Jamboard, escriban o peguen imágenes de los ecosistemas que conocen.""";"Tema: Corrientes literarias. 
+
+Descripción: ""En el mural colaborativo, cada grupo aporta características de la corriente literaria que investigó.""";"Tema: Vocabulario. 
+
+Descripción: Pizarra compartida. Los pequeños pegan imágenes. Los grandes escriben palabras."
+82;Nube de palabras;Recueracion de contenido;Tecnológicas Digitales;;Generan una nube con las palabras que más se repiten al mencionar el tema.;Generan una nube con las palabras que más se repiten al mencionar el tema.;Digan palabras asociadas al tema y formaremos una nube.;"Tema: Vacaciones. 
+
+Descripción: ""Digan palabras de vacaciones y hacemos una nube en la tablet.""";"Tema: Colombia. 
+
+Descripción: ""En Mentimeter, escriban palabras que representen a Colombia. Formaremos una nube.""";"Tema: Globalización. 
+
+Descripción: ""Accedan a la herramienta y escriban tres palabras que asocien con globalización. Veremos las más repetidas.""";"Tema: Palabras. 
+
+Descripción: Los pequeños dicen palabras. Los grandes las escriben en la app. Todos ven la nube."
+83;Video individual rápido;Recueracion de contenido;Tecnológicas Digitales;;Graban un video corto (1 min) diciendo lo que saben.;Graban un video corto (1 min) diciendo lo que saben.;Graba un video de 1 minuto explicando lo que sabes.;"Tema: Mi mascota. 
+
+Descripción: ""Grábate contando cómo se llama tu mascota y qué le gusta hacer.""";"Tema: Mi fin de semana. 
+
+Descripción: ""Graben un video corto contando qué hicieron el fin de semana.""";"Tema: Concepto. 
+
+Descripción: ""Graben un video de 1 minuto explicando con sus palabras qué entienden por 'democracia'.""";"Tema: Presentaciones. 
+
+Descripción: Los pequeños se presentan. Los grandes explican un tema. Todos se graban."
+84;Foro virtual previo;Recueracion de contenido;Tecnológicas Digitales;;Antes de la clase, participan en un foro sobre el tema.;Antes de la clase, participan en un foro sobre el tema.;Entren al foro y respondan: ¿Qué saben sobre...?;"Tema: Fin de semana. 
+
+Descripción: ""En el grupo de WhatsApp, cuenten qué hicieron el fin de semana.""";"Tema: Tema nuevo. 
+
+Descripción: ""En el foro de Classroom, escriban: ¿Qué saben sobre los animales invertebrados?""";"Tema: Debate. 
+
+Descripción: ""En el foro, respondan: ¿Qué opinan sobre el uso de redes sociales en adolescentes? Argumenten.""";"Tema: Pregunta inicial. 
+
+Descripción: Los pequeños responden con audio. Los grandes con texto. Todos participan antes de clase."
+85;Prueba diagnóstica escrita;Recueracion de contenido;Evaluativas Diagnósticas;;Cuestionario formal para identificar conocimientos previos.;Cuestionario formal para identificar conocimientos previos.;Responde las preguntas con honestidad. No es para nota.;"Tema: Números. 
+
+Descripción: Hoja con dibujos: ""¿Cuántos hay?""";"Tema: Operaciones. 
+
+Descripción: ""Resuelve estas sumas y restas. No importa si no sabes todas.""";"Tema: Evaluación diagnóstica. 
+
+Descripción: ""Cuestionario de 10 preguntas sobre conceptos básicos de química. Responde lo que sepas.""";"Tema: Diagnóstico. 
+
+Descripción: Prueba con secciones: dibujos para pequeños, preguntas escritas para grandes."
+86;K-W-L (Lo que sé - lo que quiero saber - lo que aprendí);Recueracion de contenido;Evaluativas Diagnósticas;;Completan las dos primeras columnas: lo que sé y lo que quiero saber.;Completan las dos primeras columnas: lo que sé y lo que quiero saber.;¿Qué sabes? ¿Qué quieres saber?;"Tema: Dinosaurios. 
+
+Descripción: ""Dibuja o escribe: ¿Qué sabes de dinosaurios? ¿Qué quieres saber?""";"Tema: La luz. 
+
+Descripción: ""Completa: Lo que sé sobre la luz. Lo que quiero saber sobre la luz.""";"Tema: Filosofía. 
+
+Descripción: ""Formato K-W-L: Lo que sé sobre filosofía, lo que quiero saber, y al final lo que aprendí.""";"Tema: Tema nuevo. 
+
+Descripción: Los pequeños dibujan lo que saben y lo que quieren saber. Los grandes escriben."
+87;Inventario de conceptos;Recueracion de contenido;Evaluativas Diagnósticas;;Lista de conceptos para que marquen si los conocen, los han oído o no los conocen.;Lista de conceptos para que marquen si los conocen, los han oído o no los conocen.;Marca: ✅ lo conozco, ⚠️ lo he oído, ❌ no lo conozco.;"Tema: Animales. 
+
+Descripción: ""Lista con dibujos: marcar los que conocen.""";"Tema: Geometría. 
+
+Descripción: ""Lista de figuras: triángulo, cuadrado, círculo, rombo, trapecio. Marca según conozcas.""";"Tema: Química. 
+
+Descripción: ""Inventario de conceptos: átomo, molécula, elemento, compuesto, mezcla. Marca tu nivel.""";"Tema: Conceptos. 
+
+Descripción: Lista con imágenes para pequeños, con palabras para grandes. Todos marcan."
+88;Mapa conceptual inicial;Recueracion de contenido;Evaluativas Diagnósticas;;Construyen un mapa con lo que saben, sin haber estudiado el tema.;Construyen un mapa con lo que saben, sin haber estudiado el tema.;Haz un mapa con lo que sabes sobre el tema.;"Tema: Mi casa. 
+
+Descripción: ""Dibuja tu casa y las personas que viven.""";"Tema: El cuerpo humano. 
+
+Descripción: ""Dibuja un mapa con las partes del cuerpo que conozcas y cómo se relacionan.""";"Tema: Ecología. 
+
+Descripción: ""Construye un mapa conceptual con lo que sabes sobre ecología: ecosistemas, cadenas, problemas ambientales.""";"Tema: Familia. 
+
+Descripción: Mapa: los pequeños dibujan personas, los grandes escriben relaciones (hijo de, hermano de)."
+89;Preguntas de opción múltiple;Recueracion de contenido;Evaluativas Diagnósticas;;Responden preguntas con opciones para identificar nivel.;Responden preguntas con opciones para identificar nivel.;Elige la opción correcta según lo que sepas.;"Tema: Colores. 
+
+Descripción: ""¿De qué color es el plátano? a) Rojo b) Amarillo c) Verde""";"Tema: Capitales. 
+
+Descripción: ""La capital de Colombia es: a) Medellín b) Bogotá c) Cali""";"Tema: Historia. 
+
+Descripción: ""La Revolución Francesa ocurrió en: a) 1492 b) 1789 c) 1810""";"Tema: Preguntas variadas. 
+
+Descripción: Preguntas con imágenes para pequeños, con texto para grandes."
+90;Dibujo con etiquetas;Recueracion de contenido;Evaluativas Diagnósticas;;Dibujan y etiquetan partes o elementos según su conocimiento.;Dibujan y etiquetan partes o elementos según su conocimiento.;Dibuja y escribe los nombres que conozcas.;"Tema: La casa. 
+
+Descripción: ""Dibuja una casa y escribe las partes que conozcas.""";"Tema: La planta. 
+
+Descripción: ""Dibuja una planta y etiqueta sus partes (raíz, tallo, hojas, flor).""";"Tema: La célula. 
+
+Descripción: ""Dibuja una célula animal e identifica las partes que conozcas con sus nombres.""";"Tema: Partes del cuerpo. 
+
+Descripción: Silueta humana. Los pequeños señalan y nombran oralmente. Los grandes escriben las etiquetas."
+91;Anécdotas de vida;Conexion;Personales;;Los estudiantes cuentan brevemente alguna experiencia personal relacionada con el tema.;Los estudiantes cuentan brevemente alguna experiencia personal relacionada con el tema.;¿Alguna vez les ha pasado algo parecido? ¿Qué recuerdan de esa experiencia?;"Tema: Mascotas. 
+
+Descripción: ""¿Alguien tiene mascota en casa? ¿Cómo se llama? ¿Qué hace?""";"Tema: Paseos familiares. 
+
+Descripción: ""¿Han ido de paseo con su familia? ¿A dónde? ¿Qué fue lo que más les gustó?""";"Tema: Migración. 
+
+Descripción: ""¿Alguien en su familia ha tenido que mudarse a otra ciudad o país? Si se sienten cómodos, ¿quieren compartir cómo fue esa experiencia?""";"Tema: Mascotas. 
+
+Descripción: Los pequeños cuentan cómo se llama su mascota. Los grandes cuentan alguna anécdota con ella."
+92;Recuerdos significativos;Conexion;Personales;;Se evoca un recuerdo específico relacionado con el tema, con detalles sensoriales y emocionales.;Se evoca un recuerdo específico relacionado con el tema, con detalles sensoriales y emocionales.;¿Recuerdan la primera vez que...? ¿Cómo se sintieron? ¿Qué vieron, olieron, escucharon?;"Tema: La playa. 
+
+Descripción: ""¿Recuerdan la primera vez que fueron a la playa? ¿Qué sintieron al ver el mar?""";"Tema: Aprendizajes. 
+
+Descripción: ""¿Recuerdan cómo aprendieron a andar en bicicleta? ¿Fue fácil? ¿Quién les enseñó?""";"Tema: Logros personales. 
+
+Descripción: ""Piensen en un logro que les haya costado esfuerzo alcanzar. ¿Cómo se sintieron cuando lo lograron? ¿Qué aprendieron de ese proceso?""";"Tema: Recuerdos. 
+
+Descripción: ""¿Recuerdan su primer juguete favorito?"" Los pequeños dibujan, los grandes describen."
+93;Gustos y preferencias;Conexion;Personales;;Se indaga sobre lo que les gusta, disgusta, interesa o llama la atención.;Se indaga sobre lo que les gusta, disgusta, interesa o llama la atención.;¿Qué les gusta hacer en su tiempo libre? ¿Qué cosas no les gustan?;"Tema: Comidas. 
+
+Descripción: ""¿Cuál es su comida favorita? ¿Y la que menos les gusta?""";"Tema: Deportes. 
+
+Descripción: ""¿Qué deportes les gusta practicar o ver? ¿Por qué?""";"Tema: Música. 
+
+Descripción: ""¿Qué tipo de música escuchan? ¿Qué artistas o bandas les gustan? ¿Qué les transmiten sus letras?""";"Tema: Gustos. 
+
+Descripción: Todos dibujan o escriben su comida favorita. Luego comparan."
+94;Miedos y deseos;Conexion;Personales;;Se exploran temores y anhelos para conectar con aspectos emocionales profundos.;Se exploran temores y anhelos para conectar con aspectos emocionales profundos.;¿Qué cosas les dan miedo? ¿Qué les gustaría mucho que pasara?;"Tema: Miedos. 
+
+Descripción: ""¿A qué le tienen miedo? ¿A la oscuridad? ¿A los monstruos?""";"Tema: Emociones. 
+
+Descripción: ""¿Qué cosas les dan alegría? ¿Qué cosas les dan tristeza? ¿Cómo se siente cada emoción?""";"Tema: Proyecto de vida. 
+
+Descripción: ""¿Cómo se imaginan en 10 años? ¿Qué les gustaría haber logrado? ¿Qué miedos tienen sobre el futuro?""";"Tema: Emociones. 
+
+Descripción: Dibujan algo que les da alegría. Luego algo que les da miedo. Comparten quien quiera."
+95;Preguntas personales;Conexion;Personales;;Se formulan preguntas que invitan a la introspección y conexión con uno mismo.;Se formulan preguntas que invitan a la introspección y conexión con uno mismo.;¿Cómo se sienten cuando...? ¿Qué piensan acerca de...?;"Tema: Amistad. 
+
+Descripción: ""¿Cómo se sienten cuando juegan con sus amigos?""";"Tema: Identidad. 
+
+Descripción: ""¿Qué es lo que más les gusta de ustedes mismos?""";"Tema: Ética. 
+
+Descripción: ""¿Qué harían si vieran que alguien está siendo injusto con un compañero? ¿Por qué?""";"Tema: Sentimientos. 
+
+Descripción: ""¿Cómo se sienten cuando están en el colegio?"" Los pequeños señalan caritas, los grandes explican."
+96;Historias familiares;Conexion;Familiares;;Se recuperan relatos, anécdotas o tradiciones de las familias.;Se recuperan relatos, anécdotas o tradiciones de las familias.;¿Qué les cuentan sus abuelos? ¿Qué historias se cuentan en su familia?;"Tema: La familia. 
+
+Descripción: ""¿Cómo se llaman sus papás? ¿Y sus abuelitos?""";"Tema: Tradiciones. 
+
+Descripción: ""¿Qué celebraciones especiales tienen en su familia? ¿Cómo las celebran?""";"Tema: Historia local. 
+
+Descripción: ""¿Qué historias les han contado sus abuelos sobre cómo era antes nuestro pueblo o ciudad? ¿Qué ha cambiado?""";"Tema: Familia. 
+
+Descripción: Árbol genealógico simple. Pequeños dibujan a su familia. Grandes escriben nombres y relaciones."
+97;Saberes familiares;Conexion;Familiares;;Conocimientos que tienen las familias (oficios, recetas, remedios caseros, etc.).;Conocimientos que tienen las familias (oficios, recetas, remedios caseros, etc.).;¿Qué saben hacer las personas de su familia? ¿Qué les han enseñado?;"Tema: Oficios. 
+
+Descripción: ""¿En qué trabajan sus papás? ¿Qué hacen?""";"Tema: Cocina. 
+
+Descripción: ""¿Qué platos especiales preparan en su casa? ¿Quién los prepara?""";"Tema: Saberes ancestrales. 
+
+Descripción: ""¿En su familia usan algún remedio casero para enfermedades? ¿Qué plantas medicinales conocen? ¿Cómo las preparan?""";"Tema: Oficios. 
+
+Descripción: Los pequeños dicen el trabajo de sus papás. Los grandes explican en qué consiste."
+98;Fotos familiares;Conexion;Familiares;;Traen o describen fotografías de eventos familiares relevantes.;Traen o describen fotografías de eventos familiares relevantes.;¿Qué recuerdan de ese día? ¿Quiénes aparecen en la foto?;"Tema: Celebraciones. 
+
+Descripción: ""¿Tienen fotos de sus cumpleaños? ¿Cómo celebran?""";"Tema: La familia. 
+
+Descripción: ""Si trajeron una foto familiar, muéstrenla y cuenten quiénes son.""";"Tema: Memoria histórica. 
+
+Descripción: ""Traigan o describan una foto familiar antigua. ¿Qué época representa? ¿Qué cambios ven con la actualidad?""";"Tema: Fotos. 
+
+Descripción: Todos comparten una foto o recuerdo. Pequeños señalan personas, grandes cuentan historias."
+99;Objetos familiares;Conexion;Familiares;;Objetos significativos que las familias conservan y tienen historia.;Objetos significativos que las familias conservan y tienen historia.;¿Qué objeto importante tiene su familia? ¿Qué historia guarda?;"Tema: La casa. 
+
+Descripción: ""¿Tienen un juguete favorito en casa? ¿Cuál?""";"Tema: Historia familiar. 
+
+Descripción: ""¿Hay algún objeto antiguo en su casa que haya sido de sus abuelos? ¿Cuál es su historia?""";"Tema: Patrimonio cultural. 
+
+Descripción: ""¿Qué objetos familiares consideran parte de su patrimonio? ¿Por qué son valiosos para ustedes?""";"Tema: Objetos queridos. 
+
+Descripción: Todos traen o dibujan un objeto especial. Pequeños muestran, grandes cuentan su historia."
+100;Consejos familiares;Conexion;Familiares;;Refranes, dichos, enseñanzas que transmiten las familias.;Refranes, dichos, enseñanzas que transmiten las familias.;¿Qué refranes usan en casa? ¿Qué consejos les dan sus abuelos?;"Tema: Consejos. 
+
+Descripción: ""¿Qué les dicen sus papás cuando se van a dormir?""";"Tema: Sabiduría popular. 
+
+Descripción: ""¿Conocen algún refrán que use su familia? Por ejemplo: 'Al que madruga, Dios le ayuda'. ¿Qué significa?""";"Tema: Filosofía popular. 
+
+Descripción: ""Recopilen refranes o dichos de su familia. Analicemos: ¿Qué valores transmiten? ¿Qué visión del mundo reflejan?""";"Tema: Dichos. 
+
+Descripción: Comparten dichos. Pequeños los dibujan, grandes explican su significado."
+101;Rutinas diarias;Conexion;Cotidianas;;Actividades que realizan todos los días en su vida cotidiana.;Actividades que realizan todos los días en su vida cotidiana.;¿Qué hacen desde que se levantan hasta que llegan al colegio?;"Tema: La mañana. 
+
+Descripción: ""¿Qué hacen cuando se levantan? ¿Desayunan? ¿Se bañan?""";"Tema: El día. 
+
+Descripción: ""Cuéntense en parejas cómo es un día normal en su vida, desde que se levantan hasta que se acuestan.""";"Tema: Organización del tiempo. 
+
+Descripción: ""Registren su rutina diaria durante una semana. Luego analizaremos cómo organizamos nuestro tiempo y qué priorizamos.""";"Tema: Rutinas. 
+
+Descripción: Dibujan su rutina. Pequeños: desayuno, juego. Grandes: horarios, actividades."
+102;Situaciones del barrio;Conexion;Cotidianas;;Lo que observan, viven o escuchan en su entorno cercano.;Lo que observan, viven o escuchan en su entorno cercano.;¿Qué pasa en su barrio? ¿Qué lugares hay cerca?;"Tema: El barrio. 
+
+Descripción: ""¿Qué hay cerca de su casa? ¿Una tienda? ¿Un parque?""";"Tema: La comunidad. 
+
+Descripción: ""¿Qué problemas ven en su barrio? ¿Basura? ¿Ruido? ¿Falta de espacios?""";"Tema: Problemas urbanos. 
+
+Descripción: ""Investiguen un problema de su barrio o comunidad. ¿A qué se debe? ¿Cómo afecta? ¿Qué soluciones podrían proponer?""";"Tema: El barrio. 
+
+Descripción: Mapa del barrio. Pequeños dibujan su casa. Grandes dibujan lugares y escriben nombres."
+103;Problemas cotidianos;Conexion;Cotidianas;;Situaciones problemáticas que enfrentan en su día a día.;Situaciones problemáticas que enfrentan en su día a día.;¿Qué cosas son difíciles o complicadas en su vida diaria?;"Tema: Dificultades. 
+
+Descripción: ""¿Qué es lo más difícil para ustedes en el colegio?""";"Tema: Solución de problemas. 
+
+Descripción: ""¿Qué problemas tienen en casa que les gustaría resolver? ¿Cómo podrían hacerlo?""";"Tema: Matemáticas aplicadas. 
+
+Descripción: ""Piensen en un problema cotidiano que requiera matemáticas para resolverse (presupuesto, medidas, tiempo). ¿Cómo lo abordan?""";"Tema: Problemas. 
+
+Descripción: Problemas comunes: ""¿Cómo repartir equitativamente?"" Pequeños reparten objetos, grandes hacen cálculos."
+104;Objetos cotidianos;Conexion;Cotidianas;;Cosas que usan a diario y que pueden relacionarse con el tema.;Cosas que usan a diario y que pueden relacionarse con el tema.;¿Qué objetos usan todos los días? ¿Para qué sirven?;"Tema: Útiles escolares. 
+
+Descripción: ""¿Qué llevan en su cartuchera? ¿Para qué sirve cada cosa?""";"Tema: Materiales. 
+
+Descripción: ""Observen los objetos que hay en el salón. ¿De qué materiales están hechos? (plástico, madera, metal)""";"Tema: Tecnología. 
+
+Descripción: ""Hagan una lista de los objetos tecnológicos que usan en un día. ¿Cómo serían sus vidas sin ellos?""";"Tema: Objetos. 
+
+Descripción: Traen un objeto cotidiano. Pequeños dicen su nombre. Grandes explican su función y material."
+105;Fiestas y celebraciones locales;Conexion;Comunitarias;;Festividades propias de su comunidad o región.;Festividades propias de su comunidad o región.;¿Qué fiestas celebran en su pueblo? ¿Cómo las celebran?;"Tema: Celebraciones. 
+
+Descripción: ""¿Qué celebran en su casa en diciembre?""";"Tema: Tradiciones. 
+
+Descripción: ""¿Qué fiestas tradicionales hay en nuestra región? ¿Han participado?""";"Tema: Identidad cultural. 
+
+Descripción: ""Investiguen el origen de una fiesta tradicional de nuestra región. ¿Qué significado tiene? ¿Cómo ha cambiado con el tiempo?""";"Tema: Fiestas. 
+
+Descripción: Dibujan su fiesta favorita. Pequeños: lo que ven. Grandes: lo que significa."
+106;Personajes del barrio;Conexion;Comunitarias;;Personas conocidas en la comunidad que pueden ser referentes.;Personas conocidas en la comunidad que pueden ser referentes.;¿A quiénes conocen en el barrio? ¿Quién es importante allí?;"Tema: Oficios. 
+
+Descripción: ""¿Conocen al señor de la tienda? ¿Qué hace?""";"Tema: Líderes comunitarios. 
+
+Descripción: ""¿Hay alguna persona en el barrio que ayude a los demás? ¿Quién es? ¿Qué hace?""";"Tema: Liderazgo social. 
+
+Descripción: ""Identifiquen un líder comunitario en su barrio. Entrevístenlo sobre su labor y los problemas de la comunidad.""";"Tema: Personajes. 
+
+Descripción: Dibujan a alguien del barrio. Pequeños: cómo es. Grandes: qué hace por la comunidad."
+107;Espacios significativos;Conexion;Comunitarias;;Lugares del barrio o ciudad que tienen valor para ellos.;Lugares del barrio o ciudad que tienen valor para ellos.;¿Cuál es su lugar favorito del barrio? ¿Por qué?;"Tema: Lugares. 
+
+Descripción: ""¿Dónde les gusta jugar cerca de su casa?""";"Tema: La ciudad. 
+
+Descripción: ""¿Qué lugares de nuestra ciudad conocen? ¿Cuál les gusta más y por qué?""";"Tema: Urbanismo. 
+
+Descripción: ""Analicen un espacio público de su barrio. ¿Cómo es? ¿Quién lo usa? ¿Qué podría mejorarse?""";"Tema: Lugares. 
+
+Descripción: Mapa de lugares favoritos. Pequeños dibujan el parque. Grandes escriben por qué les gusta."
+108;Comidas típicas;Conexion;Culturales;;Platos tradicionales de su región o familia.;Platos tradicionales de su región o familia.;¿Qué comidas típicas preparan en su casa? ¿Cuál es su favorita?;"Tema: Alimentos. 
+
+Descripción: ""¿Qué les gusta comer en las fiestas?""";"Tema: Cultura alimentaria. 
+
+Descripción: ""¿Qué platos típicos de nuestra región conocen? ¿Alguien sabe preparar alguno?""";"Tema: Identidad y alimentación. 
+
+Descripción: ""Investiguen el origen de un plato típico de nuestra región. ¿Qué ingredientes lo caracterizan? ¿Qué historia tiene?""";"Tema: Comidas. 
+
+Descripción: Dibujan su comida favorita. Pequeños: la dibujan. Grandes: escriben la receta."
+109;Música y bailes;Conexion;Culturales;;Expresiones musicales y dancísticas de su entorno.;Expresiones musicales y dancísticas de su entorno.;¿Qué música les gusta? ¿Bailan en casa?;"Tema: Música. 
+
+Descripción: ""¿Les gusta bailar? ¿Qué canciones?""";"Tema: Folclor. 
+
+Descripción: ""¿Qué ritmos o bailes típicos de nuestra región conocen? ¿Los han bailado?""";"Tema: Música e identidad. 
+
+Descripción: ""Analicen una canción representativa de nuestra cultura. ¿Qué dice su letra? ¿Qué instrumentos usa? ¿Qué expresa?""";"Tema: Música. 
+
+Descripción: Escuchan música. Pequeños bailan. Grandes identifican el ritmo y su origen."
+110;Juegos tradicionales;Conexion;Culturales;;Juegos que han aprendido en su comunidad o familia.;Juegos que han aprendido en su comunidad o familia.;¿A qué juegan en la calle o en la casa?;"Tema: Juegos. 
+
+Descripción: ""¿A qué juegan con sus amigos en el recreo?""";"Tema: Tradiciones lúdicas. 
+
+Descripción: ""¿Qué juegos tradicionales conocen? (la lleva, escondite, golosa). ¿Cómo se juegan?""";"Tema: Patrimonio cultural inmaterial. 
+
+Descripción: ""Investiguen juegos tradicionales de nuestra región. ¿Cómo se juegan? ¿Qué valores o habilidades desarrollan?""";"Tema: Juegos. 
+
+Descripción: Enseñan un juego. Pequeños aprenden a jugar. Grandes explican las reglas."
+111;Cuentos y leyendas;Conexion;Culturales;;Relatos tradicionales de su comunidad.;Relatos tradicionales de su comunidad.;¿Qué cuentos o historias les cuentan en casa?;"Tema: Cuentos. 
+
+Descripción: ""¿Qué cuentos les gusta que les lean?""";"Tema: Leyendas locales. 
+
+Descripción: ""¿Conocen alguna leyenda de nuestra región? ¿Alguien se la ha contado?""";"Tema: Tradición oral. 
+
+Descripción: ""Recopilen leyendas o cuentos tradicionales de su comunidad. Analicen su origen y su significado cultural.""";"Tema: Cuentos. 
+
+Descripción: Cuentan una leyenda. Pequeños dibujan al personaje. Grandes identifican la enseñanza."
+112;Series y películas;Conexion;Mediáticas;;Programas audiovisuales que ven habitualmente.;Programas audiovisuales que ven habitualmente.;¿Qué programas de TV o películas les gustan?;"Tema: Personajes. 
+
+Descripción: ""¿Cuál es su personaje favorito de dibujos animados?""";"Tema: Valores. 
+
+Descripción: ""En la película que más les gusta, ¿qué valores tienen los personajes?""";"Tema: Análisis crítico de medios. 
+
+Descripción: ""Analicen una serie o película actual. ¿Qué mensajes transmite? ¿Qué estereotipos reproduce o cuestiona?""";"Tema: Personajes. 
+
+Descripción: Dibujan su personaje favorito. Pequeños: cómo es. Grandes: qué valores representa."
+113;Redes sociales;Conexion;Mediáticas;;Plataformas que usan y contenidos que consumen.;Plataformas que usan y contenidos que consumen.;¿Qué redes sociales usan? ¿Qué ven en ellas?;(No aplica en inicial);(Usar con precaución en primaria);"Tema: Influencia digital. 
+
+Descripción: ""¿Qué influencers siguen? ¿Por qué les gustan? ¿Qué opinan sobre el impacto de las redes en la vida real?""";"Tema: Redes. 
+
+Descripción: Los grandes comparten experiencias sobre redes. Los pequeños escuchan y preguntan."
+114;Videojuegos;Conexion;Mediáticas;;Juegos digitales que conocen y juegan.;Juegos digitales que conocen y juegan.;¿A qué videojuegos juegan? ¿De qué tratan?;(No aplica en inicial);"Tema: Videojuegos. 
+
+Descripción: ""¿Qué videojuegos conocen? ¿Cuál es su favorito y por qué?""";"Tema: Narrativa y gamificación. 
+
+Descripción: ""Analicen la narrativa de un videojuego. ¿Qué historia cuenta? ¿Cómo se relaciona con temas como la identidad, la moral, la superación?""";"Tema: Videojuegos. 
+
+Descripción: Los grandes explican sus videojuegos favoritos. Los pequeños dibujan los personajes."
+115;Noticias;Conexion;Mediáticas;;Información sobre actualidad que han escuchado o visto.;Información sobre actualidad que han escuchado o visto.;¿Qué ha pasado en el mundo últimamente?;"Tema: Actualidad. 
+
+Descripción: ""¿Qué noticias han escuchado en casa?""";"Tema: Noticias. 
+
+Descripción: ""¿Qué noticia les ha llamado la atención esta semana? ¿Por qué?""";"Tema: Análisis de medios. 
+
+Descripción: ""Traigan una noticia actual relacionada con nuestro tema. Analicen la fuente, el enfoque, los datos.""";"Tema: Noticias. 
+
+Descripción: Noticia común para todos. Pequeños dibujan lo que entendieron. Grandes la resumen y analizan."
+116;Juegos del recreo;Conexion;Lúdicas;;Juegos que practican en los momentos de descanso.;Juegos que practican en los momentos de descanso.;¿A qué juegan en el recreo? ¿Cómo se juega?;"Tema: Juegos. 
+
+Descripción: ""¿Con quién juegan en el recreo? ¿A qué?""";"Tema: Recreo. 
+
+Descripción: ""Vamos a listar todos los juegos que jugamos en el recreo. ¿Cuál es el más popular?""";"Tema: Sociología del juego. 
+
+Descripción: ""Observen los juegos del recreo durante una semana. ¿Qué roles aparecen? ¿Qué dinámicas sociales se repiten?""";"Tema: Juegos. 
+
+Descripción: Juegan todos juntos. Pequeños aprenden juegos de grandes. Grandes enseñan."
+117;Juguetes favoritos;Conexion;Lúdicas;;Objetos de juego que tienen en casa.;Objetos de juego que tienen en casa.;¿Cuál es su juguete favorito? ¿Cómo es?;"Tema: Juguetes. 
+
+Descripción: ""¿Qué juguete les gusta más? ¿Con cuál duermen?""";"Tema: Preferencias. 
+
+Descripción: ""Traigan o dibujen su juguete favorito y expliquen por qué les gusta tanto.""";"Tema: Industria cultural. 
+
+Descripción: ""Analicen cómo la publicidad influye en la elección de juguetes. ¿Qué estrategias usan para que los niños quieran comprarlos?""";"Tema: Juguetes. 
+
+Descripción: Traen o dibujan juguetes. Pequeños muestran. Grandes explican cómo han cambiado los juguetes."
+118;Deportes que practican;Conexion;Lúdicas;;Actividades deportivas que realizan.;Actividades deportivas que realizan.;¿Hacen algún deporte? ¿Cuál les gusta?;"Tema: Deportes. 
+
+Descripción: ""¿Les gusta correr? ¿Jugar a la pelota?""";"Tema: Actividad física. 
+
+Descripción: ""¿Qué deportes practican? ¿En qué lugares? ¿Con quién?""";"Tema: Rendimiento deportivo. 
+
+Descripción: ""Si practican un deporte, ¿qué aspectos físicos y mentales consideran más importantes para mejorar?""";"Tema: Deportes. 
+
+Descripción: Juegan un partido. Pequeños participan. Grandes organizan y aplican reglas."
+119;Experiencias en otras clases;Conexion;Escolares;;Conexión con lo aprendido en otras áreas o grados.;Conexión con lo aprendido en otras áreas o grados.;¿Han visto esto en otra clase? ¿Qué recuerdan?;"Tema: Colores. 
+
+Descripción: ""¿En qué otra clase han usado los colores?""";"Tema: Matemáticas. 
+
+Descripción: ""¿Dónde más han usado las sumas? ¿En ciencias? ¿En sociales?""";"Tema: Interdisciplinariedad. 
+
+Descripción: ""¿Cómo se relaciona este tema con lo que vieron en historia? ¿Y con lengua? ¿Pueden encontrar conexiones?""";"Tema: Conexiones. 
+
+Descripción: Todos recuerdan temas de otras clases. Pequeños dibujan, grandes explican relaciones."
+120;Proyectos anteriores;Conexion;Escolares;;Trabajos o proyectos realizados previamente.;Trabajos o proyectos realizados previamente.;¿Qué proyectos han hecho antes? ¿De qué trataban?;"Tema: Recuerdos. 
+
+Descripción: ""¿Se acuerdan del proyecto de los animales que hicimos?""";"Tema: Continuidad. 
+
+Descripción: ""El año pasado hicimos un proyecto sobre la huerta. ¿Qué aprendimos que nos pueda servir ahora?""";"Tema: Investigación. 
+
+Descripción: ""Retomen una investigación anterior y vean cómo los nuevos conceptos les permiten profundizarla o cuestionarla.""";"Tema: Proyectos. 
+
+Descripción: Recuerdan un proyecto común. Pequeños muestran sus trabajos anteriores. Grandes reflexionan sobre lo aprendido."
+121;Salidas pedagógicas;Conexion;Escolares;;Visitas o excursiones realizadas.;Visitas o excursiones realizadas.;¿A dónde han ido de paseo con el colegio?;"Tema: Paseos. 
+
+Descripción: ""¿Han ido de paseo con el colegio? ¿A dónde?""";"Tema: Salidas. 
+
+Descripción: ""Recuerden la salida al museo. ¿Qué fue lo que más les llamó la atención?""";"Tema: Trabajo de campo. 
+
+Descripción: ""Basados en nuestra salida al humedal, ¿qué conceptos ecológicos podemos identificar en ese ecosistema?""";"Tema: Salidas. 
+
+Descripción: Recuerdan una salida. Pequeños dibujan lo que vieron. Grandes analizan desde el tema actual."
+122;Profesores anteriores;Conexion;Escolares;;Experiencias con otros docentes que puedan ser referentes.;Experiencias con otros docentes que puedan ser referentes.;¿Qué otros profesores les han enseñado cosas parecidas?;"Tema: Profesores. 
+
+Descripción: ""¿Qué otra profesora les ha hablado de esto?""";"Tema: Aprendizajes. 
+
+Descripción: ""¿Qué aprendieron con la profesora del año pasado que les haya gustado mucho?""";"Tema: Trayectoria escolar. 
+
+Descripción: ""¿Qué profesor o profesora ha marcado su forma de ver esta materia? ¿Por qué?""";"Tema: Recuerdos. 
+
+Descripción: Recuerdan a un profesor. Pequeños dibujan. Grandes escriben qué aprendieron."
+123;Trabajos familiares;Conexion;Laborales (Secundaria);;Oficios y profesiones de las familias.;Oficios y profesiones de las familias.;¿En qué trabajan las personas de tu familia?;(No aplica);(Introducción simple);"Tema: Mundo laboral. 
+
+Descripción: ""¿En qué trabajan los miembros de tu familia? ¿Qué oficios o profesiones conoces de cerca?""";"Tema: Oficios. 
+
+Descripción: Los grandes explican los trabajos de sus familias. Los pequeños dibujan esos oficios."
+124;Experiencia laboral propia;Conexion;Laborales (Secundaria);;Si trabajan o han trabajado (estudiantes mayores).;Si trabajan o han trabajado (estudiantes mayores).;¿Alguien tiene experiencia laboral? ¿En qué?;(No aplica);(No aplica);"Tema: Experiencia laboral. 
+
+Descripción: ""Quienes tengan experiencia laboral, ¿cómo se relaciona con lo que estamos viendo? ¿Qué aprendizajes les ha dejado?""";(Solo si aplica)
+125;Prácticas o pasantías;Conexion;Laborales (Secundaria);;Experiencias formativas en empresas o instituciones.;Experiencias formativas en empresas o instituciones.;(No aplica);(No aplica);"Tema: Prácticas. 
+
+Descripción: ""¿Alguien ha hecho prácticas? ¿Qué aprendieron allí que podamos conectar con este tema?""";(Solo si aplica);
+126;Diálogo generacional;Conexion;Integradas (varios tipos);;Conversación entre diferentes edades (niños, jóvenes, adultos) sobre un tema.;Conversación entre diferentes edades (niños, jóvenes, adultos) sobre un tema.;¿Cómo vivían esto los abuelos? ¿Cómo lo viven ustedes?;"Tema: Juegos. 
+
+Descripción: ""Pregúntenle a sus abuelos a qué jugaban cuando eran niños. Luego nos cuentan.""";"Tema: Escuela. 
+
+Descripción: ""Entrevisten a sus padres o abuelos sobre cómo era la escuela en su época. ¿Qué cosas han cambiado?""";"Tema: Cambio social. 
+
+Descripción: ""Investiguen cómo ha cambiado la vida de las mujeres en las últimas generaciones a través de entrevistas familiares.""";"Tema: Diálogo. 
+
+Descripción: Todos comparten lo que aprendieron de sus familias. Pequeños cuentan anécdotas, grandes analizan cambios."
+127;Objeto que habla;Conexion;Integradas (varios tipos);;Traen un objeto significativo y cuentan su historia.;Traen un objeto significativo y cuentan su historia.;Traigan algo que tenga una historia para ustedes.;"Tema: Mis cosas. 
+
+Descripción: ""Traigan su juguete favorito y cuenten por qué les gusta.""";"Tema: Objetos con historia. 
+
+Descripción: ""Traigan un objeto que tenga una historia familiar y cuéntenla.""";"Tema: Memoria material. 
+
+Descripción: ""Traigan un objeto que represente algo importante de su identidad. Analicemos cómo los objetos cuentan historias.""";"Tema: Objetos. 
+
+Descripción: Todos traen un objeto. Pequeños muestran. Grandes cuentan su historia."
+128;Foto-narración;Conexion;Integradas (varios tipos);;Una fotografía personal da lugar a una narración.;Una fotografía personal da lugar a una narración.;Traigan una foto y cuenten qué historia hay detrás.;"Tema: Fotos. 
+
+Descripción: ""Traigan una foto de cuando eran bebés. Muéstrenla y digan quiénes salen.""";"Tema: Recuerdos. 
+
+Descripción: ""Traigan una foto de un momento feliz y cuenten qué pasó ese día.""";"Tema: Narrativa visual. 
+
+Descripción: ""Seleccionen una foto significativa. Escriban un relato sobre lo que muestra y lo que no muestra.""";"Tema: Fotos. 
+
+Descripción: Todos traen una foto. Pequeños señalan personas. Grandes narran la historia."
+129;Línea de vida personal;Conexion;Integradas (varios tipos);;Construyen una línea de tiempo con eventos importantes de su vida.;Construyen una línea de tiempo con eventos importantes de su vida.;¿Qué eventos importantes han marcado tu vida?;"Tema: Mi historia. 
+
+Descripción: ""Dibujen su vida: cuándo nacieron, cuándo empezaron el colegio, ahora.""";"Tema: Historia personal. 
+
+Descripción: ""Hagan una línea de vida con los momentos más importantes que recuerden.""";"Tema: Narrativa e identidad. 
+
+Descripción: ""Construyan su línea de vida e identifiquen eventos que hayan influido en quiénes son hoy. ¿Qué aprendizajes les dejaron?""";"Tema: Mi vida. 
+
+Descripción: Línea de vida. Pequeños dibujan eventos. Grandes escriben fechas y descripciones."
+130;Mapa personal;Conexion;Integradas (varios tipos);;Dibujan un mapa de los lugares importantes para ellos.;Dibujan un mapa de los lugares importantes para ellos.;¿Qué lugares son importantes en tu vida?;"Tema: Mis lugares. 
+
+Descripción: ""Dibujen su casa y los lugares cerca que les gustan.""";"Tema: Mi territorio. 
+
+Descripción: ""Dibujen un mapa de su barrio con los lugares importantes para ustedes.""";"Tema: Geografía personal. 
+
+Descripción: ""Construyan un mapa de sus lugares significativos. ¿Qué representan? ¿Cómo han cambiado con el tiempo?""";"Tema: Lugares. 
+
+Descripción: Mapa común. Pequeños dibujan sus casas. Grandes dibujan calles y lugares."
+131;Problema a resolver;Motivacion;Por Desafío;;Se presenta una situación problemática que los estudiantes deben resolver, activando su necesidad de encontrar soluciones.;Se presenta una situación problemática que los estudiantes deben resolver, activando su necesidad de encontrar soluciones.;¿Cómo podríamos solucionar esto? ¿Qué necesitamos saber para resolverlo?;"Tema: Compartir. 
+
+Descripción: ""Tenemos un solo juguete y dos niños que quieren jugar. ¿Cómo hacemos para que ambos jueguen sin pelearse?""";"Tema: Reparto equitativo (Matemáticas). 
+
+Descripción: ""Tenemos 24 galletas para repartir entre 8 niños. ¿Cuántas le tocan a cada uno? ¿Cómo podemos averiguarlo sin que nadie se queje?""";"Tema: Escasez (Economía). 
+
+Descripción: ""Una comunidad tiene recursos limitados de agua. Deben decidir cómo distribuirla entre agricultura, consumo humano y turismo. ¿Qué criterios usarían? ¿Qué necesitan saber para decidir?""";"Tema: Reparto. 
+
+Descripción: Los pequeños reparten objetos concretos. Los grandes calculan y justifican el reparto. El desafío es común, la solución por niveles."
+132;Misión o reto;Motivacion;Por Desafío;;Se enmarca el aprendizaje como una misión especial que deben cumplir (detectives, exploradores, científicos).;Se enmarca el aprendizaje como una misión especial que deben cumplir (detectives, exploradores, científicos).;¿Aceptan la misión? ¿Qué necesitaremos para cumplirla?;"Tema: Los colores. 
+
+Descripción: ""Hoy seremos detectives de colores. Nuestra misión es encontrar todos los objetos rojos del salón. ¿Listos?""";"Tema: El cuerpo humano. 
+
+Descripción: ""Misión: Somos médicos exploradores y debemos descubrir cómo funciona el corazón por dentro. ¿Aceptan el reto?""";"Tema: Química. 
+
+Descripción: ""Misión: Un laboratorio necesita identificar sustancias desconocidas. Ustedes serán los científicos encargados. ¿Qué técnicas de identificación química deberán aprender?""";"Tema: Exploración. 
+
+Descripción: Misión común: ""Exploradores de la naturaleza"". Los pequeños buscan hojas, los grandes identifican árboles. Todos tienen rol en la misión."
+133;Enigma o misterio;Motivacion;Por Desafío;;Se plantea un misterio que deberán resolver a lo largo de la clase o unidad.;Se plantea un misterio que deberán resolver a lo largo de la clase o unidad.;¿Qué explicación podría tener? ¿Qué pistas tenemos?;"Tema: Animales. 
+
+Descripción: ""Aparecieron huellas en el patio del colegio. ¿De qué animal serán? ¿Cómo podemos descubrirlo?""";"Tema: La desaparición de los dinosaurios. 
+
+Descripción: ""Hace millones de años, los dinosaurios desaparecieron. Es uno de los mayores misterios de la historia. ¿Qué teorías creen que existen? Hoy investigaremos como paleontólogos.""";"Tema: Literatura policial. 
+
+Descripción: ""Se ha cometido un crimen en la mansión. Ustedes son los detectives. Deberán analizar las pistas, las coartadas y los móviles. ¿Quién es el culpable?""";"Tema: Misterio adaptado. 
+
+Descripción: Misterio visual para todos: ¿Qué animal dejó estas huellas? Los pequeños comparan con imágenes, los grandes investigan características."
+134;Competencia amistosa;Motivacion;Por Desafío;;Se propone un juego o competencia por equipos con reglas claras y justas.;Se propone un juego o competencia por equipos con reglas claras y justas.;¿Cómo podemos ganar? ¿Qué necesitamos saber para ser los mejores?;"Tema: Vocabulario. 
+
+Descripción: ""Vamos a jugar por equipos: el equipo que diga más palabras que empiecen con 'A' gana un punto.""";"Tema: Tablas de multiplicar. 
+
+Descripción: ""Juguemos 'Batalla de tablas'. Dos equipos. Yo pregunto y el que responde primero gana punto. ¿Preparados?""";"Tema: Fechas históricas. 
+
+Descripción: ""Torneo de preguntas históricas. Cada equipo tiene 10 segundos para responder. Si aciertan, avanzan. Si no, el otro equipo puede robar.""";"Tema: Preguntas variadas. 
+
+Descripción: Equipos mixtos. Preguntas para pequeños (colores, números) y para grandes (fechas, conceptos). Todos suman."
+135;Escape room educativo;Motivacion;Por Desafío;;"Deben resolver una serie de acertijos para ""escapar"" o lograr un objetivo.";"Deben resolver una serie de acertijos para ""escapar"" o lograr un objetivo.";¿Qué pista encontramos? ¿Cómo se relaciona con la siguiente?;"Tema: Números. 
+
+Descripción: ""El cofre está cerrado con un candado de 3 números. Para abrirlo, deben encontrar las pistas escondidas en el salón.""";"Tema: Operaciones básicas. 
+
+Descripción: ""Estamos atrapados en el laboratorio. Para salir, deben resolver 5 acertijos matemáticos. Cada respuesta da un número para el candado final.""";"Tema: Química o Física. 
+
+Descripción: ""Escape room sobre la tabla periódica. Para abrir cada caja, deben resolver acertijos sobre elementos, símbolos y propiedades.""";"Tema: Búsqueda de tesoro. 
+
+Descripción: Pistas visuales para pequeños (siguen dibujos). Pistas escritas para grandes (leen y guían). Todos participan en la búsqueda."
+136;Problema real cercano;Motivacion;Por Utilidad;;Se presenta un problema de la vida cotidiana que afecta a los estudiantes o su comunidad.;Se presenta un problema de la vida cotidiana que afecta a los estudiantes o su comunidad.;¿Esto nos pasa en la vida real? ¿Cómo podríamos mejorarlo?;"Tema: El aseo. 
+
+Descripción: ""A veces el baño del colegio queda sucio. ¿Cómo podríamos organizarnos para mantenerlo limpio entre todos?""";"Tema: Reciclaje. 
+
+Descripción: ""En el recreo se genera mucha basura. ¿Qué podríamos hacer para reducir, reciclar o reutilizar? Necesitamos un plan.""";"Tema: Convivencia escolar. 
+
+Descripción: ""Hemos tenido conflictos en el aula últimamente. ¿Qué estrategias de resolución de conflictos podríamos aprender para mejorar la convivencia?""";"Tema: Cuidado del entorno. 
+
+Descripción: Problema común: la basura en el patio. Los pequeños recogen y clasifican. Los grandes diseñan campaña de concientización."
+137;Aplicación práctica futura;Motivacion;Por Utilidad;;Se muestra cómo lo que aprenderán les servirá en situaciones futuras (estudios, trabajo, vida diaria).;Se muestra cómo lo que aprenderán les servirá en situaciones futuras (estudios, trabajo, vida diaria).;¿Para qué creen que sirve esto en la vida? ¿Dónde lo usarán?;"Tema: Leer y escribir. 
+
+Descripción: ""Cuando sean grandes, van a necesitar leer cuentos a sus hijos, escribir mensajes, hacer listas. Aprender a leer y escribir les abrirá muchas puertas.""";"Tema: Fracciones. 
+
+Descripción: ""Cuando cocinen con sus familias, necesitarán fracciones para medir ingredientes: media taza, un cuarto de kilo. ¿Quién cocina en casa?""";"Tema: Interés compuesto (Matemáticas financieras). 
+
+Descripción: ""Cuando tengan su primer trabajo y ahorren para un objetivo (universidad, viaje, casa), el interés compuesto hará crecer su dinero. ¿Quieren saber cómo funciona?""";"Tema: Lectura y escritura. 
+
+Descripción: ""¿Para qué sirve leer?"" Los pequeños: ""para leer cuentos"". Los grandes: ""para estudiar, trabajar, informarse"". Todos ven la utilidad a su nivel."
+138;Proyecto con sentido social;Motivacion;Por Utilidad;;El aprendizaje se orienta a ayudar a otros o mejorar algo en la comunidad.;El aprendizaje se orienta a ayudar a otros o mejorar algo en la comunidad.;¿Cómo podemos ayudar con lo que aprendamos? ¿Quién se beneficiará?;"Tema: Empatía. 
+
+Descripción: ""Vamos a aprender a hacer tarjetas de cariño para regalar a los abuelitos de un hogar cercano. ¿Les gustaría hacerlos felices?""";"Tema: Textos instructivos. 
+
+Descripción: ""Vamos a aprender a escribir instrucciones claras para hacer manualidades, y luego enseñaremos a los niños de primero a hacer sus propios juguetes.""";"Tema: Educación ambiental. 
+
+Descripción: ""Vamos a investigar sobre la contaminación del río cercano y luego diseñaremos una campaña de concientización para la comunidad. ¿Qué necesitamos saber?""";"Tema: Ayuda a otros. 
+
+Descripción: Proyecto común: hacer tarjetas para un hogar. Los pequeños dibujan, los grandes escriben mensajes. Todos contribuyen."
+139;Demostración práctica inicial;Motivacion;Por Utilidad;;Se muestra un resultado impresionante o útil que se podrá lograr al final.;Se muestra un resultado impresionante o útil que se podrá lograr al final.;¿Les gustaría aprender a hacer esto? ¿Se imaginan lograrlo?;"Tema: Mezclas de colores. 
+
+Descripción: (Mezcla pintura azul y amarilla, obtiene verde). ""¡Miren! ¿Quieren aprender a hacer nuevos colores como los magos?""";"Tema: Electricidad. 
+
+Descripción: (Enciende un foco con una pila y cables). ""¿Cómo creen que la luz se enciende sin enchufe? Vamos a descubrirlo.""";"Tema: Reacciones químicas. 
+
+Descripción: (Experimento de vinagre y bicarbonato). ""¿Qué acaba de pasar? Esa efervescencia es una reacción química. Hoy aprenderemos a explicar y controlar estas reacciones.""";"Tema: Experimentos. 
+
+Descripción: Experimento visual para todos (volcán de bicarbonato). Los pequeños se asombran, los grandes buscan explicación."
+140;Visita o testimonio;Motivacion;Por Utilidad;;Alguien externo (profesional, experto, persona con experiencia) cuenta por qué ese conocimiento es importante.;Alguien externo (profesional, experto, persona con experiencia) cuenta por qué ese conocimiento es importante.;¿Qué les preguntarían? ¿Qué quieren saber de su experiencia?;"Tema: Profesiones. 
+
+Descripción: ""Hoy nos visita un bombero. ¿Qué quieren preguntarle sobre su trabajo?""";"Tema: Cuidado dental. 
+
+Descripción: ""Viene un odontólogo a contarnos cómo cuida los dientes. Preparen preguntas.""";"Tema: Orientación vocacional. 
+
+Descripción: ""Vienen exalumnos a contar cómo les ha servido lo que aprendieron en esta materia en sus estudios superiores y trabajos.""";"Tema: Profesiones. 
+
+Descripción: Visita de un bombero. Los pequeños preguntan por el camión, los grandes por la preparación profesional."
+141;Pregunta intrigante;Motivacion;Por Curiosidad;;Se lanza una pregunta que despierta asombro y no tiene respuesta obvia.;Se lanza una pregunta que despierta asombro y no tiene respuesta obvia.;¿Qué creen? ¿Cómo explicarían eso? ¿Por qué será?;"Tema: La lluvia. 
+
+Descripción: ""¿Por qué llueve? ¿De dónde sale tanta agua?""";"Tema: El arcoíris. 
+
+Descripción: ""¿Por qué el arcoíris tiene colores y siempre en el mismo orden? ¿Alguien sabe?""";"Tema: Física cuántica (divulgación). 
+
+Descripción: ""¿Sabían que un átomo es 99.9% espacio vacío? Entonces, ¿por qué las cosas son sólidas? ¿Cómo es posible?""";"Tema: Fenómenos naturales. 
+
+Descripción: ""¿Por qué el cielo es azul?"" Los pequeños: ""porque Dios lo pintó"". Los grandes: hipótesis. La pregunta intriga a todos."
+142;Dato sorprendente;Motivacion;Por Curiosidad;;Se comparte un hecho insólito, curioso o estadístico que rompe expectativas.;Se comparte un hecho insólito, curioso o estadístico que rompe expectativas.;¿Les parece increíble? ¿Cómo creen que es posible?;"Tema: Animales. 
+
+Descripción: ""¿Sabían que las hormigas pueden cargar hasta 50 veces su peso? ¡Como si ustedes cargaran un carro!""";"Tema: El cuerpo humano. 
+
+Descripción: ""¿Sabían que el estómago renueva su capa de mucosa cada semana para no digerirse a sí mismo? ¡Increíble!""";"Tema: Astronomía. 
+
+Descripción: ""¿Sabían que existe una estrella tan grande que si la pusiéramos donde está el Sol, su superficie llegaría hasta Saturno? ¿Cómo se llama? ¿Cómo la estudian?""";"Tema: Curiosidades animales. 
+
+Descripción: Dato: ""El calamar gigante tiene ojos del tamaño de un plato"". Los pequeños dibujan, los grandes investigan por qué."
+143;Fenómeno observable;Motivacion;Por Curiosidad;;Se muestra algo que ocurre y no tiene explicación inmediata para los estudiantes.;Se muestra algo que ocurre y no tiene explicación inmediata para los estudiantes.;¿Qué acaba de pasar? ¿Por qué creen que sucedió eso?;"Tema: Flotabilidad. 
+
+Descripción: (Pone una piedra en agua → se hunde. Un corcho → flota). ""¿Por qué unas cosas flotan y otras no?""";"Tema: Electricidad estática. 
+
+Descripción: (Frota un globo en el cabello y lo acerca a papelitos, estos saltan). ""¿Cómo es posible que el globo atraiga el papel sin tocarlo?""";"Tema: Física - Presión atmosférica. 
+
+Descripción: (Experimento del huevo entrando en una botella con fuego). ""¿Qué fuerza empujó el huevo hacia adentro? ¿Dónde estaba esa fuerza antes?""";"Tema: Experimentos simples. 
+
+Descripción: Experimento de flotabilidad. Los pequeños prueban objetos, los grandes explican el principio de densidad."
+144;Objeto misterioso;Motivacion;Por Curiosidad;;Se muestra un objeto extraño o desconocido para que especulen sobre su origen y función.;Se muestra un objeto extraño o desconocido para que especulen sobre su origen y función.;¿Qué será? ¿Para qué servirá? ¿De dónde vendrá?;"Tema: Oficios antiguos. 
+
+Descripción: (Muestra una plancha antigua de carbón). ""¿Alguien sabe qué es esto? ¿Para qué se usaba?""";"Tema: Historia. 
+
+Descripción: (Muestra una piedra de moler). ""Esto lo usaban nuestros antepasados. ¿Para qué creen que servía? ¿Cómo funcionaba?""";"Tema: Arqueología. 
+
+Descripción: (Réplica de una herramienta precolombina). ""Este objeto fue encontrado en una excavación. Como arqueólogos, ¿qué pueden inferir sobre la cultura que lo creó?""";"Tema: Objetos antiguos. 
+
+Descripción: Objeto común (molino de mano). Los pequeños lo tocan, los grandes explican su función histórica."
+145;Imagen intrigante;Motivacion;Por Curiosidad;;Fotografía o ilustración que muestra algo que no se explica por sí mismo.;Fotografía o ilustración que muestra algo que no se explica por sí mismo.;¿Qué está pasando aquí? ¿Qué ven que les hace decir eso?;"Tema: Animales. 
+
+Descripción: (Foto de un camaleón cambiando de color). ""¿Qué le pasa a este animal? ¿Por qué cambia de color?""";"Tema: Naturaleza. 
+
+Descripción: (Foto de un desierto florido). ""¿Cómo es posible que un desierto, donde casi no llueve, se llene de flores?""";"Tema: Física - Ilusiones ópticas. 
+
+Descripción: (Imagen de una ilusión óptica famosa). ""Miren esta imagen. ¿Qué ven? ¿Y ahora? ¿Por qué nuestro cerebro ve cosas que no están?""";"Tema: Imágenes sorprendentes. 
+
+Descripción: Imagen de un camaleón. Los pequeños describen colores, los grandes explican la función del camaleón."
+146;Producto final atractivo;Motivacion;Por Creación;;Se muestra o describe el producto interesante que crearán al final.;Se muestra o describe el producto interesante que crearán al final.;¿Les gustaría aprender a hacer esto? ¿Se imaginan creando algo así?;"Tema: Manualidades. 
+
+Descripción: (Muestra un títere de calcetín terminado). ""¿Quieren aprender a hacer sus propios títeres para jugar?""";"Tema: Escritura. 
+
+Descripción: ""Al final de esta unidad, cada uno habrá escrito su propio cuento ilustrado. Lo leeremos en familia. ¿Les gusta la idea?""";"Tema: Robótica. 
+
+Descripción: (Muestra un robot simple hecho con Arduino). ""Al final del proyecto, cada grupo habrá construido un robot que sigue líneas. ¿Se animan al desafío?""";"Tema: Manualidades. 
+
+Descripción: Producto final común: títeres. Los pequeños decoran, los grandes cosen y arman. Todos participan."
+147;Exposición o muestra;Motivacion;Por Creación;;Saber que su trabajo será expuesto o mostrado a otros (familias, otros cursos).;Saber que su trabajo será expuesto o mostrado a otros (familias, otros cursos).;¿Qué les gustaría mostrar a sus familias? ¿Cómo quieren que los vean?;"Tema: Dibujo. 
+
+Descripción: ""Vamos a hacer dibujos tan bonitos que los pondremos en la pared para que todos los vean.""";"Tema: Experimentos. 
+
+Descripción: ""Haremos una feria de ciencias al final del mes. Cada grupo presentará su experimento a los padres y otros cursos.""";"Tema: Proyectos de investigación. 
+
+Descripción: ""Realizaremos una investigación sobre problemas ambientales locales y presentaremos nuestros hallazgos en un foro abierto a la comunidad.""";"Tema: Exposición. 
+
+Descripción: Todos preparan algo para la exposición familiar. Pequeños: dibujos. Grandes: maquetas o escritos. Todos expondrán."
+148;Publicación real;Motivacion;Por Creación;;Su trabajo tendrá un medio de publicación real (periódico mural, blog, redes).;Su trabajo tendrá un medio de publicación real (periódico mural, blog, redes).;¿Quieren que otros vean lo que hacemos? ¿Dónde podríamos publicarlo?;"Tema: Escritura. 
+
+Descripción: ""Escribiremos cartas para los niños de otro grado y las entregaremos en persona.""";"Tema: Periódico escolar. 
+
+Descripción: ""Vamos a crear una sección en el periódico mural del colegio con nuestras noticias y creaciones. Todo el colegio las leerá.""";"Tema: Blog o redes. 
+
+Descripción: ""Crearemos un blog con nuestros análisis literarios. Lo compartiremos con otros colegios y recibiremos comentarios.""";"Tema: Publicación común. 
+
+Descripción: Periódico mural. Los pequeños aportan dibujos, los grandes escriben artículos. Todos firman."
+149;Regalo o aporte;Motivacion;Por Creación;;Lo que aprendan se convertirá en un regalo para alguien (familia, otro curso, comunidad).;Lo que aprendan se convertirá en un regalo para alguien (familia, otro curso, comunidad).;¿A quién le gustaría regalarle lo que hagan?;"Tema: Manualidades. 
+
+Descripción: ""Vamos a hacer un regalo para el Día de la Madre. Algo hecho con nuestras propias manos.""";"Tema: Poesía. 
+
+Descripción: ""Escribiremos poemas para los abuelitos de un hogar cercano. Los visitaremos para leerlos y alegrarles el día.""";"Tema: Música. 
+
+Descripción: ""Prepararemos una presentación musical para la celebración del Día del Niño en un hospital. Nuestra música puede alegrar a otros.""";"Tema: Regalos. 
+
+Descripción: Tarjetas para el Día de la Madre. Los pequeños dibujan, los grandes escriben mensajes. Todos regalan."
+150;Concurso creativo;Motivacion;Por Creación;;Participarán en un concurso donde se premiará la creatividad y el esfuerzo.;Participarán en un concurso donde se premiará la creatividad y el esfuerzo.;¿Qué podríamos crear para sorprender al jurado?;"Tema: Dibujo. 
+
+Descripción: ""Vamos a participar en el concurso de dibujo del Día del Niño. El mejor dibujo de la clase irá a la final.""";"Tema: Cuentos. 
+
+Descripción: ""Concurso de cuentos cortos sobre el medio ambiente. Los mejores se publicarán en la revista escolar.""";"Tema: Innovación. 
+
+Descripción: ""Concurso de proyectos de innovación escolar. El proyecto ganador representará al colegio en la feria distrital.""";"Tema: Concurso adaptado. 
+
+Descripción: Concurso de dibujo y cuento. Los pequeños dibujan, los grandes escriben. Categorías separadas."
+151;Torneo por equipos;Motivacion;Por Competencia;;Competencia organizada con fases, puntuación y premio simbólico.;Competencia organizada con fases, puntuación y premio simbólico.;¿Cómo organizarán su equipo? ¿Qué estrategia usarán?;"Tema: Conteo. 
+
+Descripción: ""Dos equipos. Voy mostrando dibujos con objetos. El equipo que diga primero cuántos hay, gana punto.""";"Tema: Geografía. 
+
+Descripción: ""Torneo de capitales. Cada ronda, pregunto una capital. El equipo que acierta avanza. Final en la próxima clase.""";"Tema: Historia. 
+
+Descripción: ""Torneo de preguntas históricas por equipos. Habrá eliminatorias, semifinales y final. El equipo ganador tendrá puntos extras.""";"Tema: Torneo mixto. 
+
+Descripción: Equipos con pequeños y grandes. Preguntas de diferentes niveles. Todos aportan a su equipo."
+152;Ranking de avance;Motivacion;Por Competencia;;Se lleva un registro público del progreso individual o grupal (sin humillar, solo motivando).;Se lleva un registro público del progreso individual o grupal (sin humillar, solo motivando).;¿Quién mejoró hoy? ¿Qué equipo avanzó más?;"Tema: Lectura. 
+
+Descripción: ""Vamos a tener un 'termómetro de lectura'. Cada libro que leamos, subimos la temperatura.""";"Tema: Tablas. 
+
+Descripción: ""Cada vez que aprendas una tabla nueva, pondremos una estrella en tu gráfico de avance.""";"Tema: Proyecto. 
+
+Descripción: ""Tablero de avance del proyecto. Cada hito cumplido (investigación, diseño, prototipo) se marca. Vemos quién va adelante.""";"Tema: Avance común. 
+
+Descripción: Gráfico colectivo. Todos aportan. Los pequeños ven su avance en imágenes, los grandes en números."
+153;Logros o insignias;Motivacion;Por Competencia;;Se obtienen reconocimientos simbólicos al alcanzar ciertos logros.;Se obtienen reconocimientos simbólicos al alcanzar ciertos logros.;¿Qué logro quieres obtener hoy? ¿Qué insignia te gustaría ganar?;"Tema: Hábitos. 
+
+Descripción: ""El que hoy se coma toda la comida, gana la insignia del 'súper come todo'.""";"Tema: Matemáticas. 
+
+Descripción: ""Insignia del 'multiplicador experto' para quien complete todas las tablas. Insignia del 'resuelve problemas' para quien resuelva 10 problemas.""";"Tema: Investigación. 
+
+Descripción: ""Insignias: 'Detective de fuentes' (por encontrar información confiable), 'Analista crítico' (por buen análisis), 'Comunicador efectivo' (por buena exposición).""";"Tema: Logros para todos. 
+
+Descripción: Insignias por nivel. Pequeños: ""Ayudante"", ""Compartidor"". Grandes: ""Investigador"", ""Escritor""."
+154;Modelo cercano;Motivacion;Por Identificación;;Alguien similar a ellos (edad, contexto) que ha logrado algo con ese conocimiento.;Alguien similar a ellos (edad, contexto) que ha logrado algo con ese conocimiento.;¿Cómo creen que lo logró? ¿Qué habrá hecho para llegar hasta ahí?;"Tema: Lectura. 
+
+Descripción: ""Juanito, del otro salón, ya lee cuentos solo. ¿Creen que ustedes también pueden?""";"Tema: Deportes. 
+
+Descripción: ""Mariana, una estudiante de nuestro colegio, ganó una competencia de matemáticas. Ella dice que lo que más le gusta son los desafíos.""";"Tema: Emprendimiento. 
+
+Descripción: ""Carlos, un exalumno, creó su propia empresa de tecnología a los 22 años. Dice que lo que aprendió en esta materia fue clave. Vamos a ver una entrevista.""";"Tema: Ejemplos cercanos. 
+
+Descripción: Mostrar un niño de la comunidad que sabe leer. Los pequeños quieren imitarlo, los grandes ven que es posible."
+155;Personaje inspirador;Motivacion;Por Identificación;;Figura conocida (real o ficticia) que representa valores relacionados con el aprendizaje.;Figura conocida (real o ficticia) que representa valores relacionados con el aprendizaje.;¿Qué admiran de este personaje? ¿Qué podemos aprender de él o ella?;"Tema: Esfuerzo. 
+
+Descripción: ""¿Conocen a la Hormiguita? Trabaja mucho para guardar comida. Así debemos esforzarnos nosotros.""";"Tema: Superación. 
+
+Descripción: ""Stephen Hawking fue un científico famoso que a pesar de su enfermedad, nunca dejó de preguntarse cómo funciona el universo.""";"Tema: Liderazgo. 
+
+Descripción: ""Malala Yousafzai arriesgó su vida por defender la educación de las niñas. ¿Qué podemos aprender de su historia?""";"Tema: Personajes variados. 
+
+Descripción: Personaje inspirador para todos. Pequeños dibujan, grandes escriben qué aprenden de él/ella."
+156;Historia personal del docente;Motivacion;Por Identificación;;El docente comparte su propia experiencia con el tema.;El docente comparte su propia experiencia con el tema.;Cuando yo era pequeño, también me preguntaba... ¿A ustedes les pasa?;"Tema: Miedo. 
+
+Descripción: ""Cuando yo era pequeño, le tenía miedo a la oscuridad. Pero un día descubrí algo que me ayudó...""";"Tema: Dificultades. 
+
+Descripción: ""A mí también se me dificultaban las fracciones. Pero un día encontré un truco que me ayudó. ¿Quieren que les cuente?""";"Tema: Vocación. 
+
+Descripción: ""Yo elegí ser profesor porque un día, en el colegio, un maestro me hizo amar esta materia. Les quiero contar esa historia.""";"Tema: Conexión personal. 
+
+Descripción: El docente cuenta una historia personal. Todos escuchan. Los pequeños dibujan la historia, los grandes reflexionan."
+157;Referentes culturales juveniles;Motivacion;Por Identificación;;Se conecta con personajes, canciones, memes o situaciones de la cultura juvenil.;Se conecta con personajes, canciones, memes o situaciones de la cultura juvenil.;¿Conocen esto? ¿Qué relación puede tener con nuestro tema?;"Tema: Emociones. 
+
+Descripción: ""¿Conocen a 'Intensamente'? ¿Qué emociones aparecen en la película?""";"Tema: Valores. 
+
+Descripción: ""En Spider-Man, el tío Ben dice: 'Un gran poder conlleva una gran responsabilidad'. ¿Qué significa eso para nosotros?""";"Tema: Física. 
+
+Descripción: ""En la película 'Interestelar', viajan a través de un agujero de gusano. ¿Qué dice la ciencia real sobre esto? ¿Es posible?""";"Tema: Cultura popular. 
+
+Descripción: Personaje conocido por todos (Peppa Pig, Spider-Man). Los pequeños dibujan, los grandes analizan valores o conceptos."
+158;Problema detectado en el aula;Motivacion;Por Necesidad Real;;Situación concreta que están viviendo y requiere solución.;Situación concreta que están viviendo y requiere solución.;¿Cómo podríamos solucionar esto entre todos?;"Tema: Convivencia. 
+
+Descripción: ""Últimamente hay peleas en el recreo. Necesitamos aprender formas de resolver conflictos sin pelear.""";"Tema: Organización. 
+
+Descripción: ""Perdemos mucho tiempo recogiendo materiales. ¿Podemos aprender formas de organizarnos mejor?""";"Tema: Comunicación. 
+
+Descripción: ""Hay malentendidos frecuentes en los trabajos en grupo. Vamos a aprender técnicas de comunicación asertiva para mejorar.""";"Tema: Necesidad común. 
+
+Descripción: Problema: peleas en el recreo. Todos participan en buscar soluciones según su edad."
+159;Emergencia o urgencia contextual;Motivacion;Por Necesidad Real;;Situación externa que afecta a la comunidad y requiere conocimiento.;Situación externa que afecta a la comunidad y requiere conocimiento.;¿Qué podemos hacer nosotros? ¿Cómo podemos ayudar?;"Tema: Cuidado. 
+
+Descripción: ""Hay un compañero enfermo en el hospital. ¿Qué podemos aprender para hacerle sentir mejor?""";"Tema: Desastre natural. 
+
+Descripción: ""Hubo una inundación cerca. Necesitamos aprender qué hacer en emergencias para estar preparados.""";"Tema: Salud pública. 
+
+Descripción: ""Hay una epidemia de dengue en la región. Necesitamos investigar cómo se transmite, cómo prevenirlo y cómo informar a la comunidad.""";"Tema: Emergencia. 
+
+Descripción: Emergencia común (ej. inundación). Los pequeños aprenden números de emergencia, los grandes diseñan plan de prevención."
+160;Pregunta existencial;Motivacion;Por Necesidad Real;;Pregunta profunda sobre la vida, la muerte, el sentido, que conecta con lo humano.;Pregunta profunda sobre la vida, la muerte, el sentido, que conecta con lo humano.;¿Alguna vez se han preguntado...? ¿Qué creen ustedes?;"Tema: Cuidado. 
+
+Descripción: ""¿Por qué tenemos que cuidar a los abuelitos?""";"Tema: Muerte. 
+
+Descripción: ""¿Alguna vez han perdido a una mascota? ¿Por qué duele? ¿Qué pasa cuando algo muere?""";"Tema: Filosofía. 
+
+Descripción: ""¿Qué sentido tiene la vida? ¿Para qué estamos aquí? Preguntas que la humanidad siempre se ha hecho.""";"Tema: Preguntas profundas. 
+
+Descripción: Pregunta común: ""¿Por qué existen los sueños?"" Pequeños: cuentan sus sueños. Grandes: buscan explicaciones."
+161;Falso dilema;Motivacion;Por Identificación;;Se plantea una situación de elección imposible que genera discusión y necesidad de saber más.;Se plantea una situación de elección imposible que genera discusión y necesidad de saber más.;¿Qué elegirían? ¿Por qué? ¿Qué necesitarían saber para decidir mejor?;"Tema: Preferencias. 
+
+Descripción: ""¿Qué es mejor: ser muy fuerte o muy rápido? ¿Por qué?""";"Tema: Dilema ético simple. 
+
+Descripción: ""Encuentras una billetera en la calle con dinero. ¿Te la quedas o la devuelves? ¿Qué harías?""";"Tema: Dilema bioético. 
+
+Descripción: ""Si pudieras curar una enfermedad, pero solo una, ¿curarías el cáncer o el Alzheimer? ¿En qué te basas para decidir?""";"Tema: Dilemas simples. 
+
+Descripción: ""¿Es mejor tener un perro o un gato?"" Pequeños: eligen por gusto. Grandes: argumentan con razones."
+162;Video emotivo;Motivacion;Por Emoción;;Cortometraje o video que genera conexión emocional con el tema.;Cortometraje o video que genera conexión emocional con el tema.;¿Qué sintieron? ¿Qué parte les llegó al corazón?;"Tema: Amistad. 
+
+Descripción: (Video de animales ayudándose). ""¿Qué sintieron al ver cómo se ayudaban?""";"Tema: Inclusión. 
+
+Descripción: (Cortometraje ""Cuerdas""). ""Sin hablar aún, escriban en una palabra lo que sintieron.""";"Tema: Valores. 
+
+Descripción: (Discurso de Steve Jobs en Stanford). ""Escuchen con atención. ¿Qué mensaje les deja? ¿Cómo aplica a sus vidas?""";"Tema: Emociones. 
+
+Descripción: Video emotivo para todos. Pequeños dibujan lo que sintieron. Grandes escriben una reflexión."
+163;Música evocadora;Motivacion;Por Emoción;;Canción que conecta emocionalmente con el tema.;Canción que conecta emocionalmente con el tema.;¿Qué les hace sentir esta música? ¿Qué les recuerda?;"Tema: Alegría. 
+
+Descripción: (Música alegre). ""¿Cómo nos sentimos con esta música? ¿Qué ganas nos dan?""";"Tema: Identidad. 
+
+Descripción: (Canción folclórica regional). ""¿Qué sienten al escuchar esta canción? ¿A qué les suena?""";"Tema: Épocas históricas. 
+
+Descripción: (Canción de protesta de los 70). ""Escuchen la letra. ¿Qué emociones transmite? ¿Qué contexto histórico refleja?""";"Tema: Música. 
+
+Descripción: Todos escuchan. Pequeños bailan o dibujan. Grandes analizan letra y contexto."
+164;Clima de aula positivo;Motivacion;Por Emoción;;Ambiente de confianza y respeto donde el error es permitido.;Ambiente de confianza y respeto donde el error es permitido.;Aquí podemos equivocarnos, así aprendemos.;"Tema: Confianza. 
+
+Descripción: ""Todos podemos equivocarnos. Lo importante es intentarlo.""";"Tema: Participación. 
+
+Descripción: ""No tengan miedo de responder. Aquí nadie se burla, todos aprendemos.""";"Tema: Debate respetuoso. 
+
+Descripción: ""Podemos tener opiniones diferentes. Lo importante es escuchar y argumentar con respeto.""";"Tema: Clima seguro. 
+
+Descripción: Normas de respeto construidas entre todos. Pequeños y grandes las conocen y las practican."

@@ -47,6 +47,7 @@ export interface StepDesignPhaseProps {
     setHoveredComplement: (val: any) => void;
     catalogoComplementos: any[];
     addStrategicObjective: () => void;
+    removeStrategicObjective: (index: number) => void;
     generateAIObjective: () => void;
     manualObjective: any;
     setManualObjective: (val: any) => void;
@@ -112,6 +113,7 @@ export function StepDesignPhase({
     setHoveredComplement,
     catalogoComplementos,
     addStrategicObjective,
+    removeStrategicObjective,
     generateAIObjective,
     manualObjective,
     setManualObjective,
@@ -184,6 +186,7 @@ export function StepDesignPhase({
                     setHoveredComplement={setHoveredComplement}
                     catalogoComplementos={catalogoComplementos}
                     addStrategicObjective={addStrategicObjective}
+                    removeStrategicObjective={removeStrategicObjective}
                     generateAIObjective={generateAIObjective}
                     manualObjective={manualObjective}
                     setManualObjective={setManualObjective}

@@ -104,7 +104,9 @@ export function usePlanningController(areaId: string) {
         const contentItemsToUpdate: { id: number; titulo: string }[] = [{ id: contentId, titulo: selectedContent.titulo }];
 
         if (!selectedContent.padre_id) {
-            const subthemes = userContents.filter((c: UserContent) => c.padre_id === contentId && !plannedContentIds.has(c.id));
+            // Incluir todos los subtemas del padre, incluso los ya planificados en otras semanas.
+            // El guard de duplicado en la misma semana lo maneja existingIds en el optimistic update.
+            const subthemes = userContents.filter((c: UserContent) => c.padre_id === contentId);
             subthemes.forEach((sub: UserContent) => {
                 idsToAssign.push(sub.id);
                 contentItemsToUpdate.push({ id: sub.id, titulo: sub.titulo });
